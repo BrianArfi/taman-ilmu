@@ -1,5 +1,6 @@
 /* 21 Tangkap Hijaiyah. Arkade: huruf hijaiyah dalam gelembung jatuh, anak menggeser keranjang untuk menangkapnya.
-   TK: 3 babak, tiap babak satu huruf target (tangkap 3 kali). SD: tangkap huruf berurutan, bar waktu 60 detik.
+   TK: 3 babak, tiap babak satu huruf target (tangkap 3 kali). SD: tangkap huruf berurutan, bar waktu 75 detik;
+   kalau dua target lolos, huruf berikutnya disorot dan condong pelan ke keranjang (bantuan, pola yang sama dengan TK).
    Gerak gelembung dan keranjang lewat ctx.loop + translate3d. Geser: seret di area permainan, tombol panah, atau papan ketik. */
 (function () {
   const { h, rand, pick, shuffle, sample } = TI;
@@ -205,7 +206,7 @@ ${P} .tg-go { flex: 1 1 0; max-width: 280px; min-height: 72px; font-size: 2.3rem
       let urutanSD = [], idxSD = 0, awalSD = null;
       let selesaiBabak = null;
       const TOTAL = TK ? 9 : 8;
-      const WAKTU_SD = 60;
+      const WAKTU_SD = 75;
       let sisaWaktu = WAKTU_SD;
 
       const detikJatuh = TK ? 3.0 : 2.9;
@@ -376,10 +377,13 @@ ${P} .tg-go { flex: 1 1 0; max-width: 280px; min-height: 72px; font-size: 2.3rem
         for (const b of bubbles.slice()) {
           b.y += b.vy * dt;
           if (b.state === 'jatuh') {
-            // TK: huruf target condong sedikit ke keranjang (bantuan halus untuk anak kecil)
-            if (TK && b.L.no === target.no && b.y > H * 0.12 && b.y < bTop - size * 0.4) {
-              const dx = px - b.x;
-              if (Math.abs(dx) < W * 0.6) { const kuat = (targetLolos >= 2 ? 440 : 140) * dt; b.x += kurung(dx, -kuat, kuat); }
+            // TK: huruf target selalu condong halus ke keranjang; SD: baru condong setelah dua target lolos
+            if (b.L.no === target.no && b.y > H * 0.12 && b.y < bTop - size * 0.4) {
+              const kuat = TK ? (targetLolos >= 2 ? 440 : 140) : targetLolos >= 2 ? 440 : 0;
+              if (kuat) {
+                const dx = px - b.x;
+                if (Math.abs(dx) < W * 0.6) { b.x += kurung(dx, -kuat * dt, kuat * dt); }
+              }
             }
             gambarBubble(b);
             b.el.classList.toggle('is-hint', petunjuk && b.L.no === target.no);
@@ -388,7 +392,14 @@ ${P} .tg-go { flex: 1 1 0; max-width: 280px; min-height: 72px; font-size: 2.3rem
             if (dasar >= bTop + 8 && tengahY <= bTop + bh * 0.6 && Math.abs(b.cx - px) <= bw / 2 + size * 0.12) { tangkap(b); continue; }
             if (tengahY > bTop + bh * 0.6) {
               b.state = 'lolos'; // lewat keranjang: memudar pelan
-              if (b.L.no === target.no) { umpanTargetLewat++; targetLolos++; }
+              if (b.L.no === target.no) {
+                umpanTargetLewat++; targetLolos++;
+                if (!TK && targetLolos >= 2 && !petunjuk && idxSD < TOTAL) {
+                  petunjuk = true; // sama seperti dua kali salah menangkap: huruf berikutnya terbuka
+                  panelSD(false, true);
+                  ctx.say('Petunjuk: huruf berikutnya adalah ' + urutanSD[idxSD].nama);
+                }
+              }
             }
           } else if (b.state === 'lolos') {
             b.op -= dt * 2.4;
