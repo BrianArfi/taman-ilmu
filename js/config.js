@@ -2,5 +2,6 @@
    dan otomatis mati saat dibuka dari file:// (uji otomatis tidak memanggil jaringan). */
 window.TI_CONFIG = {
   BOARD_URL: 'https://taman-ilmu.43-134-70-149.sslip.io',
+  SITE_URL: 'https://brianarfi.github.io/taman-ilmu/',
   BOARD_ON: true,
 };

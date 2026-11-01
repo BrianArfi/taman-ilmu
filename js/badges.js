@@ -74,24 +74,30 @@
   // ---------- toast ----------
   const queue = [];
   let showing = false;
-  function queueToast(ids) {
-    queue.push(...ids);
+  // Toast umum: dipakai lencana dan fitur lain (mis. bonus berbagi di share.js).
+  function toast(icon, text, bold) {
+    queue.push({ icon, text, bold });
     if (!showing) nextToast();
   }
   function nextToast() {
-    const id = queue.shift();
-    if (!id) { showing = false; return; }
+    const item = queue.shift();
+    if (!item) { showing = false; return; }
     showing = true;
-    const d = DEFS.find((x) => x.id === id);
-    if (!d || document.hidden) { nextToast(); return; }
+    if (document.hidden) { nextToast(); return; }
     const el = TI.h('div', { class: 'ti-toast pop-in', role: 'status' },
-      TI.h('span', { class: 'ti-toast-ic', 'aria-hidden': 'true' }, d.icon),
-      TI.h('span', null, 'Lencana baru: ', TI.h('b', null, d.name)));
+      TI.h('span', { class: 'ti-toast-ic', 'aria-hidden': 'true' }, item.icon),
+      TI.h('span', null, item.text, item.bold ? TI.h('b', null, item.bold) : null));
     document.body.append(el);
     setTimeout(() => {
       el.classList.add('is-out');
       setTimeout(() => { el.remove(); nextToast(); }, 160);
     }, 2600);
+  }
+  function queueToast(ids) {
+    for (const id of ids) {
+      const d = DEFS.find((x) => x.id === id);
+      if (d) toast(d.icon, 'Lencana baru: ', d.name);
+    }
   }
 
   // ---------- layar #/lencana ----------
@@ -107,7 +113,8 @@
           TI.h('span', { class: 'badge-ic', 'aria-hidden': 'true' }, when ? d.icon : '🔒'),
           TI.h('b', { class: 'badge-name' }, d.name),
           TI.h('span', { class: 'badge-how' }, d.how),
-          TI.h('span', { class: 'badge-when' }, when ? 'Didapat ' + when : 'Belum terkumpul'));
+          TI.h('span', { class: 'badge-when' }, when ? 'Didapat ' + when : 'Belum terkumpul'),
+          when && TI.Share ? TI.h('button', { type: 'button', class: 'badge-share', 'aria-label': 'Bagikan lencana ' + d.name, onclick: () => TI.Share.badge(d) }, '📣 Bagikan') : null);
       })));
     return app;
   }
@@ -119,6 +126,7 @@
     return { icons, more: Math.max(0, ids.length - k), total: DEFS.length };
   }
 
+  TI.toast = toast;
   TI.Badges = { DEFS, evaluate, grant, render, teaserIcons };
   TI.VIEWS = TI.VIEWS || {};
   TI.VIEWS.lencana = render;

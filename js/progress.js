@@ -197,6 +197,21 @@
     return { stars, plays, full, byCat };
   }
 
+  // Bonus berbagi: +5 XP sekali sehari. Anak semangat mengajak teman,
+  // tapi gak bisa farming XP dengan mengulang.
+  function onShare() {
+    const st = TI.state;
+    const dk = dayKey();
+    const s = (st.share = st.share || {});
+    if (s.last === dk) return { xp: 0, levelUp: false, level: st.profile.level };
+    s.last = dk;
+    st.profile.xp += 5;
+    const lv = levelOf(st.profile.xp);
+    const levelUp = lv > st.profile.level;
+    st.profile.level = lv;
+    return { xp: 5, levelUp, level: lv };
+  }
+
   function init() {
     const st = TI.state;
     if (!st.profile) st.profile = { nama: 'Bintang ' + (10 + Math.floor(Math.random() * 90)), playerId: '', xp: 0, level: 1, badges: {}, namaChanged: false, seenNama: false, createdAt: dayKey() };
@@ -208,6 +223,7 @@
         });
     }
     st.profile.level = levelOf(st.profile.xp || 0);
+    if (!st.share) st.share = {};
     ensureWeekly();
     pruneDayLog();
     TI.Badges && TI.Badges.evaluate(true, true); // beri lencana lama secara senyap saat buka pertama
@@ -244,7 +260,7 @@
   TI.Progression = {
     XP_LEVELS, LEVEL_NAMES, levelOf, levelInfo, dayKey, weekKey, nextWeekStart,
     challengeGame, ensureWeekly, unlockedSet, reqText, tier, cleanName, nameValid,
-    onFinish, totals, init,
+    onFinish, totals, onShare, init,
   };
   TI.VIEWS = TI.VIEWS || {};
   TI.VIEWS.nama = nameScreen;

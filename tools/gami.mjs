@@ -101,6 +101,7 @@ async function makePage(v1 = {}) {
         wkNow: TI.Progression.weekKey(), wxp: TI.state.weekly.xp.tk,
         unlocked: [...TI.Progression.unlockedSet()],
         chip: document.querySelector('.xp-chip') && document.querySelector('.xp-chip').textContent,
+        acts: document.querySelectorAll('.result-actions > *').length,
       };
     });
     check('finish: bintang v2 === v1', r.s1 === r.s2 && r.s1 >= 1, `(s=${r.s1})`);
@@ -109,6 +110,7 @@ async function makePage(v1 = {}) {
     // rantai: bintang di hijaiyah membuka wudhu (slot ke-2); rukun baru terbuka setelah wudhu dapat bintang
     check('finish: wudhu terbuka, rukun masih dikunci', r.unlocked.includes('wudhu') && !r.unlocked.includes('rukun'));
     check('finish: chip XP tampil di layar hasil', !!r.chip && /\+\d+ XP/.test(r.chip), `(${r.chip})`);
+    check('finish: hasil punya 3 tombol (lagi, bagikan, pilih)', r.acts === 3, `(${r.acts})`);
   }
   check('main: tanpa error JS', page.errors.length === 0, page.errors.join(' | '));
   await ctx.close();
@@ -258,6 +260,58 @@ if (process.env.PLIVE === '1') {
   }));
   // papan kosong itu sah: fetch sukses ditandai status bersih + ada baris atau pesan kosong
   check('papan live: fetch sukses', r.status === '' && (r.rows > 0 || r.empty), `(rows=${r.rows}, status=${r.status})`);
+  await ctx.close();
+}
+
+// 12. Berbagi: bonus +5 XP sekali sehari, link ajakan, teks skor, tombol lencana
+{
+  const { ctx, page } = await makePage();
+  await page.goto(url);
+  const r = await page.evaluate(() => {
+    const a = TI.Progression.onShare();
+    const b = TI.Progression.onShare();
+    return {
+      aXp: a.xp, bXp: b.xp, lvlA: a.level,
+      url: TI.Share.inviteURL(),
+      teks: TI.Share.teksScore(TI.games[0], 3, true, 2),
+      judul: TI.games[0].title,
+      adaShare: !!(TI.Share && TI.Share.scoreResult && TI.Share.badge && TI.Share.invite),
+    };
+  });
+  check('bagikan: modul Share lengkap', r.adaShare);
+  check('bagikan: bonus +5 sekali sehari', r.aXp === 5 && r.bXp === 0, `(a=${r.aXp},b=${r.bXp})`);
+  check('bagikan: link ajakan berformat', /taman-ilmu\/\?ajak=.+/.test(r.url), `(${r.url})`);
+  check('bagikan: teks skor ada bintang, judul, link', r.teks.includes('⭐') && r.teks.includes(r.judul) && r.teks.includes('taman-ilmu'));
+  // lencana yang terkumpul dapat tombol Bagikan di layar #/lencana
+  await page.evaluate(() => { TI.Badges.grant('bintang-pertama'); });
+  await page.evaluate(() => { location.hash = '#/lencana'; });
+  await page.waitForSelector('.badge-grid');
+  const b = await page.evaluate(() => ({
+    earned: document.querySelectorAll('.badge-card.is-earned').length,
+    share: document.querySelectorAll('.badge-share').length,
+  }));
+  check('bagikan: kartu lencana dapat tombol Bagikan', b.earned >= 1 && b.share === b.earned, `(earned=${b.earned}, share=${b.share})`);
+  check('bagikan: tanpa error JS', page.errors.length === 0, page.errors.join(' | '));
+  await ctx.close();
+}
+
+// 13. Ajakan: banner ?ajak=Nama muncul di beranda, tombol ajak ada, tutup tersimpan
+{
+  const { ctx, page } = await makePage();
+  await page.goto(url + '?ajak=Budi');
+  await page.waitForSelector('.grid');
+  let r = await page.evaluate(() => ({
+    banner: !!document.querySelector('.ajak-banner'),
+    nama: (document.querySelector('.ajak-txt b') || {}).textContent,
+    btn: !!document.querySelector('.ajak-btn'),
+  }));
+  check('ajak: banner Budi tampil di beranda', r.banner && r.nama === 'Budi');
+  check('ajak: tombol Ajak teman main ada di footer', r.btn);
+  await page.click('.ajak-banner .nama-later');
+  await page.waitForSelector('.grid');
+  r = await page.evaluate(() => ({ banner: !!document.querySelector('.ajak-banner'), seen: TI.state.ajakSeen }));
+  check('ajak: tutup tersimpan, banner gak muncul lagi', !r.banner && r.seen === 'Budi');
+  check('ajak: tanpa error JS', page.errors.length === 0, page.errors.join(' | '));
   await ctx.close();
 }
 
