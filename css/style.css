@@ -1,6 +1,7 @@
 /* Taman Ilmu. Gerak ikut aturan app-motion (Emil Kowalski): ease-out, UI di bawah 300 ms,
    scale mulai 0.95, hanya transform/opacity, reduced motion = lebih lembut. */
 :root {
+  color-scheme: only light; /* satu tema terang yang dirancang; auto-dark browser dimatikan lewat ini */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-pop: cubic-bezier(0.34, 1.4, 0.64, 1);
