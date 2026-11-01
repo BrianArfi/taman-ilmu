@@ -10,6 +10,12 @@ Buka https://brianarfi.github.io/taman-ilmu/ (atau klik dua kali `index.html` un
 - Tombol 🔇 di beranda mematikan semua suara. Escape atau tombol ← kembali ke menu.
 - Tidak ada musik, hanya efek suara pendek. Tidak ada gambar wajah atau mata.
 
+## Level, lencana, papan juara
+
+Anak naik level (Kecambah sampai Penjaga Taman) dari XP: menyelesaikan game, memperbaiki rekor bintang, dan rajin main tiap hari. Game terkunci terbuka berantai setelah game sebelumnya di kategori yang sama dapat bintang, jadi ada tantangan yang bisa dikejar. Ada 16 lencana, tantangan pekan yang berotasi, dan bonus semangat harian.
+
+Papan juara (tombol 🏆) punya dua mode: **Pekan Ini** (reset tiap Senin) dan **Sepanjang Waktu**, dipisah TK dan SD. Butuh internet; tanpa internet semua game tetap jalan penuh. Nama di papan cuma panggilan 2-16 huruf (boleh emoji bintang dan sejenisnya), tanpa nama asli; papan tidak minta akun dan hanya menyimpan ID acak di browser.
+
 ## Isi (50 game)
 
 | Agama Islam (15) | Matematika (15) | Sains (13) | Logika (7) |
@@ -32,10 +38,11 @@ Buka https://brianarfi.github.io/taman-ilmu/ (atau klik dua kali `index.html` un
 
 ## Struktur
 
-- `index.html` memuat `js/pron.js` (kamus ucapan), `js/core.js` (menu, suara, bintang, helper kuis), lalu `games/NN-id.js`.
+- `index.html` memuat `js/pron.js` (kamus ucapan), `js/core.js` (menu, suara, bintang, helper kuis), `js/progress.js` + `js/badges.js` + `js/board.js` (gamifikasi dan papan juara, kontraknya di `SPEC.md` bagian 8), lalu `games/NN-id.js`.
 - `css/style.css` gaya bersama dan token gerak (aturan app-motion).
 - `SPEC.md` kontrak pembuatan game plus seluruh bank soal. Konten agama hanya dari sini.
 - `tools/smoke.mjs` uji otomatis: `node tools/smoke.mjs --phone --max=300` membuka semua game di TK dan SD (tablet dan HP), main acak sampai selesai, catat error, simpan screenshot di `tools/shots/`.
+- `tools/gami.mjs` uji gamifikasi: migrasi data lama, XP, unlock, tantangan pekan, lencana, anti-farming, papan offline.
 - `tools/ui.mjs` uji tombol menu: jenjang, suara, tab, kembali, Escape, Main Lagi, bintang tersimpan.
 - `tools/sheet.mjs tk` (atau `sd`, `tk-hp`, `sd-mid`, ...) menggabungkan screenshot semua game jadi satu gambar untuk dicek sekilas.
 

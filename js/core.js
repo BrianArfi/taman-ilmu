@@ -4,7 +4,8 @@
 (function () {
   'use strict';
 
-  const STORE = 'tamanIlmu.v1';
+  const STORE = 'tamanIlmu.v1'; // mirror: tetap ditulis supaya uji otomatis dan cache tab lama tetap kebaca
+  const STORE2 = 'tamanIlmu.v2'; // state gamifikasi penuh (XP, plays, profil, pekan, streak)
   const CATS = {
     islam: { label: 'Agama Islam', icon: '🕌', color: '#0e9f6e' },
     mat: { label: 'Matematika', icon: '🔢', color: '#2f6fed' },
@@ -14,11 +15,43 @@
   const LEVELS = { tk: 'TK (4-6 tahun)', sd: 'SD (7-12 tahun)' };
 
   const state = loadState();
+  // Migrasi sekali jalan: v1 (bintang saja) jadi v2 (plus XP, plays, profil, pekan).
+  // Bintang lama utuh dan langsung dihitung jadi XP (10 per bintang + 15 per selesai).
   function loadState() {
-    const base = { level: 'tk', sound: true, tab: 'semua', stars: {} };
-    try { return Object.assign(base, JSON.parse(localStorage.getItem(STORE) || '{}')); } catch (e) { return base; }
+    try {
+      const raw = localStorage.getItem(STORE2);
+      if (raw) { const s = JSON.parse(raw); if (s && s.v === 2) return s; }
+    } catch (e) { /* lanjut migrasi */ }
+    let v1 = {};
+    try { v1 = JSON.parse(localStorage.getItem(STORE) || '{}') || {}; } catch (e) { v1 = {}; }
+    let xp = 0;
+    const plays = {};
+    const stars = v1.stars || {};
+    for (const gid in stars) for (const jen in stars[gid]) {
+      const s = stars[gid][jen] || 0;
+      if (s > 0) { xp += 10 * s + 15; (plays[gid] = plays[gid] || {})[jen] = 1; }
+    }
+    return {
+      v: 2,
+      level: v1.level === 'sd' ? 'sd' : 'tk',
+      sound: v1.sound !== false,
+      tab: v1.tab || 'semua',
+      stars, plays,
+      profile: {
+        nama: 'Bintang ' + (10 + Math.floor(Math.random() * 90)),
+        playerId: '',
+        xp, level: 1, badges: {}, namaChanged: false, seenNama: false,
+        createdAt: new Date(Date.now() + 7 * 3600 * 1000).toISOString().slice(0, 10),
+      },
+      dayLog: {}, streak: { last: null, count: 0 }, weekly: null,
+    };
   }
-  function saveState() { try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) { /* mode privat */ } }
+  function saveState() {
+    try {
+      localStorage.setItem(STORE2, JSON.stringify(state));
+      localStorage.setItem(STORE, JSON.stringify({ level: state.level, sound: state.sound, tab: state.tab, stars: state.stars }));
+    } catch (e) { /* mode privat */ }
+  }
 
   const games = [];
   const TI = (window.TI = { games, CATS, LEVELS, state });
@@ -177,7 +210,7 @@
     menang: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, i * 0.09, 0.22, 'sine', 0.14)),
   };
   function sfx(name) { if (!state.sound) return; try { (SFX[name] || SFX.tap)(); } catch (e) { /* audio diblokir */ } }
-  TI.say = say; TI.sfx = sfx; TI.speechText = speechText;
+  TI.say = say; TI.sfx = sfx; TI.speechText = speechText; TI.save = saveState;
 
   // ---------- registrasi ----------
   TI.register = function (def) {
@@ -193,10 +226,25 @@
   let current = null; // sesi game aktif
 
   function route() {
+    const vm = location.hash.match(/^#\/(papan|lencana|nama)$/);
+    if (vm && TI.VIEWS && TI.VIEWS[vm[1]]) { closeGame(); TI.VIEWS[vm[1]](); return; }
     const m = location.hash.match(/^#\/main\/([\w-]+)/);
     const g = m && byId(m[1]);
     if (g) openGame(g); else showHome();
   }
+
+  // Kerangka layar dalam (#/papan #/lencana #/nama). Dipakai modul lewat TI.page(...).
+  TI.page = function (title, sub, ...kids) {
+    document.title = title + ' · Taman Ilmu';
+    const app = root();
+    app.replaceChildren();
+    app.append(
+      h('header', { class: 'page-head' },
+        h('a', { class: 'icon-btn back', href: '#/', 'aria-label': 'Kembali ke menu', onclick: () => sfx('tap') }, '←'),
+        h('div', { class: 'page-title' }, h('h2', null, title), sub ? h('p', null, sub) : null)),
+      ...kids);
+    return app;
+  };
 
   // ---------- beranda ----------
   function totalStars() {
@@ -206,6 +254,18 @@
     const w = h('span', { class: 'stars ' + (cls || ''), 'aria-label': n + ' dari 3 bintang' });
     for (let i = 0; i < 3; i++) w.append(h('span', { class: 'star' + (i < n ? ' is-on' : '') }, '★'));
     return w;
+  }
+  // pips kemahiran: 4 berlian kecil, terisi sesuai tier (0 baru, 1 perunggu, 2 perak, 3 emas, 4 jago)
+  function pips(t) {
+    const w = h('span', { class: 'pips', 'aria-label': 'Kemahiran ' + t + ' dari 4' });
+    for (let i = 0; i < 4; i++) w.append(h('i', { class: i < t ? 'is-on' : '' }));
+    return w;
+  }
+  let lastUnlocked = null; // baseline unlock tiap sesi: kartu yang baru terbuka dapat animasi pop
+  let freshSfxAt = 0;
+  function sfxOnce(name) {
+    const t = Date.now();
+    if (t - freshSfxAt > 700) { freshSfxAt = t; sfx(name); }
   }
   function showHome() {
     closeGame();
@@ -230,6 +290,44 @@
         soundBtn,
         h('div', { class: 'star-total', title: 'Bintang terkumpul' }, h('span', { class: 'star is-on' }, '★'), ' ', totalStars(), h('small', null, ' / ' + games.length * 3))));
 
+    // strip pemain: level + XP + nama + lencana + papan juara
+    const Pr = TI.Progression;
+    const prof = state.profile;
+    const info = Pr.levelInfo(prof.xp || 0);
+    const frac = Math.max(0, Math.min(1, info.maxed ? 1 : ((prof.xp || 0) - info.base) / (info.next - info.base)));
+    const CIRC = 2 * Math.PI * 17;
+    const ring = svg('svg', { class: 'lvl-ring', viewBox: '0 0 44 44', 'aria-hidden': 'true' },
+      svg('circle', { cx: 22, cy: 22, r: 17, class: 'ring-bg' }),
+      svg('circle', { cx: 22, cy: 22, r: 17, class: 'ring-fg', transform: 'rotate(-90 22 22)', style: 'stroke-dasharray:' + CIRC.toFixed(1) + ';stroke-dashoffset:' + (CIRC * (1 - frac)).toFixed(1) }),
+      svg('text', { x: 22, y: 27, 'text-anchor': 'middle', class: 'ring-n', text: info.level }));
+    const tea = TI.Badges.teaserIcons(3);
+    const strip = h('div', { class: 'player-strip pop-in' },
+      h('button', { type: 'button', class: 'strip-lvl', 'aria-label': 'Ganti nama panggilan', onclick: () => { sfx('tap'); location.hash = '#/nama'; } },
+        ring,
+        h('span', { class: 'strip-meta' },
+          h('b', null, 'Lv ' + info.level + ' ' + info.name),
+          h('span', { class: 'strip-nama' }, prof.nama || ''))),
+      h('div', { class: 'strip-mid' },
+        h('div', { class: 'xp-bar', role: 'progressbar', 'aria-label': 'XP pemain', 'aria-valuenow': String(prof.xp || 0), 'aria-valuemax': String(info.next) },
+          h('i', { class: 'xp-fill', style: { transform: 'scaleX(' + frac + ')' } })),
+        h('span', { class: 'xp-txt' }, (prof.xp || 0) + ' / ' + info.next + ' XP'),
+        h('button', { type: 'button', class: 'strip-badges', 'aria-label': 'Lihat lencana', onclick: () => { sfx('tap'); location.hash = '#/lencana'; } },
+          tea.icons.map((ic) => h('span', { class: 'tea-ic', 'aria-hidden': 'true' }, ic)),
+          h('span', { class: 'strip-more' }, tea.icons.length ? '+' + tea.more + ' lagi' : '0 / ' + tea.total))),
+      h('a', { class: 'ti-btn strip-board', href: '#/papan', onclick: () => sfx('tap') }, '🏆 Papan'));
+
+    // tantangan pekan (rotasi deterministik, reset tiap Senin WIB)
+    const ch = Pr.challengeGame();
+    const chDone = !!(state.weekly && state.weekly.weekKey === Pr.weekKey() && state.weekly.tantanganDone);
+    const tantangan = ch ? h('div', { class: 'tantangan' + (chDone ? ' is-done' : '') },
+      h('span', { class: 'tan-icon', 'aria-hidden': 'true' }, ch.icon || '🎯'),
+      h('div', { class: 'tan-body' },
+        h('b', null, 'Tantangan Pekan Ini: ' + ch.title),
+        h('span', { class: 'tan-note' }, 'Raih 2 bintang di game ini untuk +40 XP')),
+      chDone ? h('span', { class: 'tan-done' }, '✓ Selesai')
+        : h('a', { class: 'ti-btn tan-go', href: '#/main/' + ch.id, onclick: () => sfx('tap') }, 'Main'))
+      : null;
+
     const tabs = [['semua', 'Semua', '✨'], ...Object.entries(CATS).map(([k, c]) => [k, c.label, c.icon])];
     const nav = h('nav', { class: 'tabs', 'aria-label': 'Kategori' }, tabs.map(([k, label, ic]) => h('button', {
       type: 'button', class: 'tab', 'aria-pressed': String(state.tab === k),
@@ -237,29 +335,68 @@
     }, h('span', { 'aria-hidden': 'true' }, ic), ' ', label,
       h('span', { class: 'tab-n' }, k === 'semua' ? games.length : games.filter((g) => g.cat === k).length))));
 
+    // banner nama hanya pemain baru: inline di beranda, bukan modal
+    const banner = prof.seenNama ? null : h('div', { class: 'nama-banner pop-in' },
+      h('span', { class: 'nama-banner-txt' }, 'Siapa namamu? Pilih nama panggilan biar tampil di papan juara.'),
+      h('a', { class: 'ti-btn nama-btn', href: '#/nama', onclick: () => sfx('tap') }, 'Pilih Nama'),
+      h('button', { type: 'button', class: 'nama-later', 'aria-label': 'Nanti saja', onclick: () => { prof.seenNama = true; saveState(); showHome(); } }, 'Nanti'));
+
     const list = games.filter((g) => state.tab === 'semua' || g.cat === state.tab);
+    const unlocked = Pr.unlockedSet();
+    const freshOpen = [];
+    if (lastUnlocked) for (const id of unlocked) if (!lastUnlocked.has(id)) freshOpen.push(id);
+    lastUnlocked = unlocked;
     const grid = h('section', { class: 'grid', 'aria-label': 'Daftar game' });
     list.forEach((g, i) => {
       const c = catOf(g);
+      const open = unlocked.has(g.id);
       const best = (state.stars[g.id] || {})[state.level] || 0;
       const arabicIcon = /[؀-ۿ]/.test(g.icon || '');
-      grid.append(h('a', {
-        class: 'card', href: '#/main/' + g.id, style: '--c:' + c.color + ';--i:' + i,
-        onclick: () => sfx('tap'),
-      },
-      h('span', { class: 'card-icon' + (arabicIcon ? ' ti-arabic' : ''), 'aria-hidden': 'true' }, g.icon || c.icon),
-      h('span', { class: 'card-body' },
-        h('span', { class: 'card-cat' }, c.label),
-        h('span', { class: 'card-title' }, g.title),
-        h('span', { class: 'card-desc' }, g.desc || '')),
-      starRow(best, 'card-stars')));
+      if (open) {
+        const isNew = freshOpen.includes(g.id);
+        if (isNew) sfxOnce('benar');
+        grid.append(h('a', {
+          class: 'card' + (isNew ? ' pop-new' : ''), href: '#/main/' + g.id, style: '--c:' + c.color + ';--i:' + i,
+          onclick: () => sfx('tap'),
+        },
+        h('span', { class: 'card-icon' + (arabicIcon ? ' ti-arabic' : ''), 'aria-hidden': 'true' }, g.icon || c.icon),
+        h('span', { class: 'card-body' },
+          h('span', { class: 'card-cat' }, c.label),
+          h('span', { class: 'card-title' }, g.title),
+          h('span', { class: 'card-desc' }, g.desc || '')),
+        h('span', { class: 'card-foot' }, pips(Pr.tier(g.id, state.level)),
+          h('span', { class: 'card-best', 'aria-label': 'Bintang terbaik di jenjang ini' }, best ? '★' + best : ''))));
+      } else {
+        const req = Pr.reqText(g);
+        grid.append(h('button', {
+          type: 'button', class: 'card is-locked', style: '--c:' + c.color + ';--i:' + i,
+          'aria-label': g.title + ', terkunci. ' + req,
+          onclick: (ev) => {
+            sfx('salah');
+            say(req);
+            const el = ev.currentTarget;
+            el.classList.remove('is-shake'); void el.offsetWidth; el.classList.add('is-shake');
+          },
+        },
+        h('span', { class: 'card-icon is-dim' + (arabicIcon ? ' ti-arabic' : ''), 'aria-hidden': 'true' }, g.icon || c.icon),
+        h('span', { class: 'card-body' },
+          h('span', { class: 'card-cat' }, c.label),
+          h('span', { class: 'card-title' }, g.title),
+          h('span', { class: 'card-desc' }, g.desc || '')),
+        h('span', { class: 'card-lock', 'aria-hidden': 'true' }, '🔒'),
+        h('span', { class: 'card-req' }, req)));
+      }
     });
     if (!list.length) grid.append(h('p', { class: 'empty' }, 'Belum ada game di kategori ini.'));
 
-    app.append(head,
+    app.append(head, strip);
+    if (tantangan) app.append(tantangan);
+    app.append(
       h('p', { class: 'level-note' }, 'Jenjang: ', h('b', null, LEVELS[state.level]), '. Soal menyesuaikan jenjang ini.'),
-      nav, grid,
-      h('footer', { class: 'home-foot' }, 'Dibuat untuk anak-anak. Tanpa iklan, tanpa internet.'));
+      nav);
+    if (banner) app.append(banner);
+    app.append(grid,
+      h('footer', { class: 'home-foot' }, 'Dibuat untuk anak-anak. Tanpa iklan. Papan juara butuh internet, sisanya main offline.'));
   }
 
   // ---------- layar game ----------
@@ -699,16 +836,21 @@
         const stars = opts.stars != null ? Math.max(1, Math.min(3, opts.stars))
           : ctx.mistakes === 0 ? 3 : ctx.mistakes <= Math.max(1, Math.round(tot * 0.34)) ? 2 : 1;
         const rec = state.stars[game.id] || (state.stars[game.id] = {});
-        const isBest = stars > (rec[level] || 0);
-        if (isBest) { rec[level] = stars; saveState(); }
-        showResult(ctx, stars, opts, els);
+        const prevBest = rec[level] || 0;
+        const isBest = stars > prevBest;
+        if (isBest) { rec[level] = stars; }
+        let gain = null;
+        try { gain = TI.Progression ? TI.Progression.onFinish(game, level, stars, prevBest) : null; } catch (e) { console.error('Gamifikasi gagal', e); }
+        saveState();
+        try { if (TI.Board && TI.Board.report) TI.Board.report(level); } catch (e) { /* papan gagal diam saja */ }
+        showResult(ctx, stars, opts, els, gain);
       },
     };
     return ctx;
   }
 
   // ---------- layar hasil (jarang terjadi, di sini tempat perayaan) ----------
-  function showResult(ctx, stars, opts, els) {
+  function showResult(ctx, stars, opts, els, gain) {
     const msg = opts.message || (stars === 3 ? 'Masya Allah, hebat sekali!' : stars === 2 ? 'Bagus! Ayo main lagi biar dapat 3 bintang.' : 'Terus berlatih ya, kamu pasti bisa!');
     const big = h('div', { class: 'result-stars' });
     for (let i = 0; i < 3; i++) big.append(h('span', { class: 'rstar' + (i < stars ? ' is-on' : ''), style: '--i:' + i }, '★'));
@@ -717,6 +859,9 @@
     const dlg = h('div', { class: 'result', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Hasil' },
       h('div', { class: 'result-card' },
         big,
+        gain && gain.xp > 0 ? h('p', { class: 'xp-chip pop-in' }, '+' + gain.xp + ' XP') : null,
+        gain && gain.levelUp ? h('p', { class: 'level-up pop-in' }, 'Naik ke Level ' + gain.level + '!') : null,
+        gain && gain.challengeDone ? h('p', { class: 'challenge-done pop-in' }, 'Tantangan pekan selesai!') : null,
         h('h2', null, msg),
         opts.lesson ? h('p', { class: 'result-lesson' }, h('b', null, 'Pelajaran hari ini: '), opts.lesson) : null,
         h('div', { class: 'result-actions' }, again, menu)));

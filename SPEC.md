@@ -645,3 +645,16 @@ Pengenalan coding. Peta grid jalan (TK 4x4, SD 6x6) dengan mobil (SVG tampak ata
 - Level DITULIS TANGAN di file (data grid) dan sudah dicek ada solusinya.
 - 💡 Bantu: hapus perintah sampai sisa awalan yang benar, lalu tambah satu perintah benar (solusi terpendek BFS); ketuk ke-3 = program terisi lengkap dan langsung dijalankan. 3 kali menabrak di satu level = Bantu otomatis menjalankan solusi, lalu lanjut.
 - lesson: "Komputer mengikuti perintah satu per satu. Program yang urut dan teliti membuat mobil sampai tujuan."
+
+## 8. Gamifikasi (JS, bukan tugas game)
+
+Semua progres anak dihitung otomatis dari `ctx.finish()`; **game tidak perlu memanggil apa pun**. Modul: `js/config.js` (URL papan), `js/progress.js` (mesin), `js/badges.js` (lencana), `js/board.js` (papan juara). State pemain di `localStorage["tamanIlmu.v2"]`; `tamanIlmu.v1` tetap ditulis sebagai mirror (masa depan uji lama, dibaca `ui.mjs`).
+
+- **XP**: +15 selesai pertama kali per (game, jenjang) + 10 per bintang saat rekor naik + bonus harian turun 2,2,2,1,1,0 per game per hari WIB (anti farming) + 40 tantangan pekan (2+ bintang di game tantangan, sekali per pekan).
+- **Level** (12, tematik taman): Kecambah, Tunas, Semai, Sulur, Pohon Kecil, Rimbun, Berbunga, Mekar, Berbuah, Panen Raya, Taman Indah, Penjaga Taman. Ambang: 0, 60, 160, 320, 560, 900, 1350, 1900, 2600, 3500, 4600, 5800 XP. Level 14 membuka semua taman (taman terpanjang 15 game).
+- **Unlock**: 2 game pertama tiap kategori terbuka; sisanya terbuka kalau game sebelumnya di kategori yang sama sudah dapat 1+ bintang (rantai ketat) ATAU `level + 1` tercapai. Kartu terkunci menampilkan cara membukanya.
+- **Mastery** per (game, jenjang): 0 baru, 1 perunggu (1 bintang), 2 perak (2), 3 emas (3), 4 berlian (3 bintang + 5x main).
+- **Pekan ISO (WIB)**: counter pekan (XP, bintang, main) reset tiap Senin 00:00 WIB; game tantangan rotasi deterministik sama untuk semua anak.
+- **Lencana** (16): otomatis dari evaluasi state; toast saat baru didapat; daftar di `#/lencana` beserta teaser yang belum.
+- **Papan juara** (`#/papan`): mode Pekan Ini (reset Senin) dan Sepanjang Waktu, per jenjang TK/SD. Backend: `TI_CONFIG.BOARD_URL` (service SQLite di 43.134.70.149 via `taman-ilmu.43-134-70-149.sslip.io`; nanti ganti host ke `taman-ilmu.agentic-pm.ai` kalau A record sudah dibuat). Kirim skor fire-and-forget setelah hasil, 1 kali ulang. `file://` tidak pernah fetch (main offline tetap penuh); data papan terakhir di-cache di `localStorage["tamanIlmu.board"]`. Nama panggilan 2-16 karakter di `#/nama`, tanpa nama asli.
+- Uji: `node tools/gami.mjs` (30 cek: migrasi v1, XP, unlock, tantangan, lencana, anti-farm, papan offline). `PLIVE=1` menambah cek papan live (butuh versi baru sudah ter-deploy).

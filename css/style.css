@@ -148,6 +148,166 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
 .empty { color: var(--muted); }
 .home-foot { margin: 26px 0 10px; text-align: center; color: var(--muted); font-size: 0.85rem; }
 
+/* ---------- strip pemain (level, XP, nama, lencana, papan) ---------- */
+.player-strip {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  margin-top: 10px; padding: 10px 14px;
+  border-radius: var(--radius); background: var(--card); box-shadow: 0 5px 0 var(--shadow);
+}
+.strip-lvl {
+  display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 4px 10px 4px 4px;
+  border: 0; border-radius: 999px; background: transparent; cursor: pointer; text-align: left;
+  transition: transform var(--dur-press) var(--ease-out);
+}
+.strip-lvl:active { transform: scale(0.96); }
+.lvl-ring { width: 52px; height: 52px; flex: none; }
+.ring-bg { fill: none; stroke: var(--line); stroke-width: 5; }
+.ring-fg { fill: none; stroke: var(--good); stroke-width: 5; stroke-linecap: round; }
+.ring-n { font-size: 19px; font-weight: 800; fill: var(--ink); font-family: var(--font); }
+.strip-meta { display: grid; line-height: 1.15; }
+.strip-meta b { font-size: 0.98rem; }
+.strip-nama { color: var(--muted); font-size: 0.9rem; max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.strip-mid { display: grid; gap: 4px; flex: 1 1 200px; min-width: 170px; }
+.xp-bar { height: 14px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.xp-fill {
+  display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #0e9f6e, #37c186);
+  transform-origin: left center; transform: scaleX(0);
+  transition: transform var(--dur-ui-max) var(--ease-out);
+}
+.xp-txt { color: var(--muted); font-size: 0.82rem; font-weight: 700; }
+.strip-badges {
+  display: inline-flex; align-items: center; gap: 4px; margin-top: 2px; padding: 4px 10px;
+  justify-self: start; border: 0; border-radius: 999px; background: #fff4cc; cursor: pointer;
+  font-size: 0.95rem; font-weight: 800; box-shadow: 0 3px 0 #ecd9a0;
+  transition: transform var(--dur-press) var(--ease-out);
+}
+.strip-badges:active { transform: scale(0.96); }
+.strip-badges .tea-ic { font-size: 1.05rem; line-height: 1; }
+.strip-more { color: #9a6b00; font-size: 0.82rem; }
+.strip-board { min-height: 52px; padding: 8px 20px; font-size: 1.05rem; flex: none; }
+
+/* ---------- kartu tantangan pekan ---------- */
+.tantangan {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-top: 10px; padding: 10px 14px;
+  border-radius: var(--radius); background: #fff4cc; border: 2px dashed #f2c94c;
+}
+.tantangan.is-done { background: var(--good-bg); border-color: var(--good); }
+.tan-icon { font-size: 2rem; line-height: 1; }
+.tan-body { display: grid; gap: 1px; flex: 1 1 220px; }
+.tan-body b { font-size: 1.02rem; }
+.tan-note { color: var(--muted); font-size: 0.88rem; }
+.tan-done { font-weight: 800; color: var(--good); animation: ti-pop 240ms var(--ease-pop); }
+.tan-go { min-height: 48px; padding: 6px 20px; font-size: 1rem; }
+
+/* ---------- banner nama pertama kali ---------- */
+.nama-banner {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin: 0 0 14px; padding: 12px 16px;
+  border-radius: var(--radius); background: var(--good-bg); border: 2px solid var(--good);
+}
+.nama-banner-txt { flex: 1 1 260px; font-weight: 700; }
+.nama-btn { min-height: 48px; padding: 6px 20px; font-size: 1rem; }
+.nama-later {
+  border: 0; background: transparent; color: var(--muted); cursor: pointer;
+  font-weight: 700; text-decoration: underline; padding: 8px;
+}
+
+/* ---------- kartu game: pips kemahiran dan terkunci ---------- */
+.card-foot { position: absolute; right: 14px; bottom: 6px; display: inline-flex; align-items: center; gap: 8px; }
+.pips { display: inline-flex; gap: 3px; }
+.pips i { width: 9px; height: 9px; background: #e6dfcf; transform: rotate(45deg) scale(0.85); border-radius: 2px; }
+.pips i.is-on { background: var(--c); }
+.card-best { font-size: 0.85rem; color: var(--muted); font-weight: 800; }
+.card.is-locked { cursor: pointer; border-top-color: var(--line); }
+.card.is-locked .card-icon.is-dim { filter: grayscale(1); opacity: 0.55; }
+.card.is-locked .card-title { color: var(--muted); }
+.card.is-locked .card-desc { visibility: hidden; }
+.card-lock { position: absolute; top: 10px; right: 12px; font-size: 1rem; }
+.card-req {
+  position: absolute; left: 14px; right: 40px; bottom: 6px;
+  color: var(--muted); font-size: 0.78rem; font-weight: 700;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: right;
+}
+.card.is-shake { animation: ti-shake var(--dur-ui-max) var(--ease-in-out); }
+.card.pop-new { animation: ti-pop 240ms var(--ease-pop); }
+
+/* ---------- layar dalam (papan, lencana, nama) ---------- */
+.page-head { display: flex; align-items: center; gap: 12px; padding: 6px 2px 14px; }
+.page-title h2 { margin: 0; font-size: clamp(1.4rem, 4vw, 1.9rem); line-height: 1.1; }
+.page-title p { margin: 3px 0 0; color: var(--muted); font-size: 0.92rem; }
+
+/* papan juara */
+.board-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+.board-status { min-height: 26px; margin: 0 2px 8px; color: var(--muted); font-size: 0.95rem; }
+.board-rows { display: grid; gap: 8px; }
+.board-row {
+  display: flex; align-items: center; gap: 12px; padding: 10px 16px;
+  border-radius: 18px; background: var(--card); box-shadow: 0 3px 0 var(--shadow);
+}
+.board-row.is-top { background: #fffdf4; }
+.board-row.is-me { background: var(--good-bg); border: 2px solid var(--good); padding: 8px 14px; }
+.board-rank { flex: none; min-width: 40px; text-align: center; font-weight: 800; font-size: 1.15rem; }
+.board-name { flex: 1; min-width: 0; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.board-xp { flex: none; font-weight: 800; color: var(--good); }
+.board-stars { flex: none; color: var(--muted); font-weight: 700; font-size: 0.95rem; }
+.board-empty, .board-note { margin: 8px 2px; color: var(--muted); font-size: 0.95rem; }
+
+/* lencana */
+.badge-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); }
+.badge-card {
+  display: grid; gap: 2px; padding: 14px; border-radius: var(--radius);
+  background: var(--card); box-shadow: 0 5px 0 var(--shadow);
+}
+.badge-card.is-earned { border-top: 6px solid var(--sun); }
+.badge-ic { font-size: 2.1rem; line-height: 1.2; }
+.badge-name { font-size: 1.05rem; }
+.badge-how { color: var(--muted); font-size: 0.88rem; }
+.badge-when { color: #9a6b00; font-size: 0.8rem; font-weight: 700; }
+.badge-card:not(.is-earned) .badge-ic { filter: grayscale(1); opacity: 0.5; }
+.badge-card:not(.is-earned) .badge-name { color: var(--muted); }
+
+/* ganti nama */
+.name-box {
+  display: grid; gap: 14px; justify-items: center; max-width: 460px;
+  padding: 20px 16px; border-radius: var(--radius); background: var(--card); box-shadow: 0 5px 0 var(--shadow);
+}
+.name-input {
+  width: 100%; min-height: 60px; padding: 8px 18px; text-align: center;
+  border: 3px solid var(--line); border-radius: 18px; font-size: 1.4rem; font-weight: 800;
+}
+.name-input:focus { outline: none; border-color: var(--good); }
+.name-emoji { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.name-emoji-btn {
+  width: 52px; height: 52px; border: 0; border-radius: 16px; background: #fff4cc;
+  box-shadow: 0 3px 0 #ecd9a0; font-size: 1.5rem; cursor: pointer;
+  transition: transform var(--dur-press) var(--ease-out);
+}
+.name-emoji-btn:active { transform: scale(0.92); }
+.name-err { min-height: 24px; margin: 0; color: var(--bad); font-weight: 700; font-size: 0.95rem; }
+
+/* ---------- hasil: chip XP, naik level, tantangan ---------- */
+.xp-chip {
+  margin: 2px 0 0; display: inline-block; align-self: center; padding: 4px 18px;
+  border-radius: 999px; background: var(--good-bg); color: var(--good); font-weight: 800; font-size: 1.2rem;
+}
+.result-card { display: flex; flex-direction: column; align-items: center; }
+.level-up { margin: 6px 0 0; font-weight: 800; color: var(--good); font-size: 1.15rem; }
+.challenge-done { margin: 4px 0 0; font-weight: 800; color: #9a6b00; font-size: 1rem; }
+
+/* ---------- toast lencana ---------- */
+.ti-toast {
+  position: fixed; left: 50%; bottom: max(18px, env(safe-area-inset-bottom)); z-index: 60;
+  display: flex; align-items: center; gap: 10px; padding: 12px 20px;
+  border-radius: 999px; background: var(--ink); color: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25); font-size: 1.05rem;
+  transform: translateX(-50%);
+  animation: ti-toast-in var(--dur-modal) var(--ease-out);
+}
+.ti-toast-ic { font-size: 1.5rem; }
+.ti-toast.is-out { opacity: 0; transition: opacity var(--dur-exit) ease; }
+@keyframes ti-toast-in { from { opacity: 0; transform: translateX(-50%) translateY(14px); } }
+
 /* ---------- layar main ---------- */
 .play { display: grid; grid-template-rows: auto auto 1fr; min-height: calc(100dvh - 28px); gap: 10px; position: relative; }
 .play-head { display: flex; align-items: center; gap: 10px; }
@@ -318,6 +478,7 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
   }
-  .pop-in, .ti-slot.is-filled, .result-card, .rstar.is-on { animation-name: ti-fade !important; animation-delay: 0s !important; }
-  .choice.is-wrong, .choice.is-correct, .choice.is-hint { animation: none !important; }
+  .pop-in, .pop-new, .ti-slot.is-filled, .result-card, .rstar.is-on, .tan-done,
+  .ti-toast, .xp-chip, .level-up, .challenge-done { animation-name: ti-fade !important; animation-delay: 0s !important; }
+  .choice.is-wrong, .choice.is-correct, .choice.is-hint, .card.is-shake { animation: none !important; }
 }
