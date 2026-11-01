@@ -253,9 +253,11 @@ if (process.env.PLIVE === '1') {
   await page.waitForTimeout(3500);
   const r = await page.evaluate(() => ({
     rows: document.querySelectorAll('.board-row').length,
+    empty: !!document.querySelector('.board-empty'),
     status: (document.querySelector('.board-status') || {}).textContent || '',
   }));
-  check('papan live: baris tampil', r.rows > 0 && r.status === '', `(rows=${r.rows}, status=${r.status})`);
+  // papan kosong itu sah: fetch sukses ditandai status bersih + ada baris atau pesan kosong
+  check('papan live: fetch sukses', r.status === '' && (r.rows > 0 || r.empty), `(rows=${r.rows}, status=${r.status})`);
   await ctx.close();
 }
 
