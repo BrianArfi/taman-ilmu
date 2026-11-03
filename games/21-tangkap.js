@@ -10,8 +10,9 @@
     ['ا', 'Alif'], ['ب', 'Ba'], ['ت', 'Ta'], ['ث', 'Tsa'], ['ج', 'Jim'], ['ح', 'Ha'], ['خ', 'Kho'],
     ['د', 'Dal'], ['ذ', 'Dzal'], ['ر', 'Ro'], ['ز', 'Zai'], ['س', 'Sin'], ['ش', 'Syin'], ['ص', 'Shod'],
     ['ض', 'Dhod'], ['ط', 'Tho'], ['ظ', 'Zho'], ['ع', "'Ain"], ['غ', 'Ghoin'], ['ف', 'Fa'], ['ق', 'Qof'],
-    ['ك', 'Kaf'], ['ل', 'Lam'], ['م', 'Mim'], ['ن', 'Nun'], ['و', 'Wau'], ['ه', 'Ha'], ['ي', 'Ya'],
+    ['ك', 'Kaf'], ['ل', 'Lam'], ['م', 'Mim'], ['ن', 'Nun'], ['و', 'Wau'], ['ه', "Ha'"], ['ي', 'Ya'],
   ].map(([ar, nama], i) => ({ ar, nama, no: i + 1 }));
+  const grup = (x) => (x.nama === "Ha'" ? 'Ha' : x.nama);
 
   // Huruf yang bentuknya mirip (beda titik saja). Di TK pengecoh diambil dari keluarga lain supaya adil.
   const KELUARGA = ['ا', 'بتث', 'جحخ', 'دذ', 'رز', 'سش', 'صض', 'طظ', 'عغ', 'فق', 'ك', 'ل', 'م', 'ن', 'و', 'ه', 'ي'];
@@ -241,7 +242,7 @@ ${P} .tg-go { flex: 1 1 0; max-width: 280px; min-height: 72px; font-size: 2.3rem
       function adaTargetDiLayar() { return bubbles.some((b) => b.L.no === target.no && b.state === 'jatuh'); }
       function pengecoh() {
         const pakai = new Set(bubbles.filter((b) => b.state === 'jatuh').map((b) => b.L.no));
-        let pool = HURUF.filter((x) => x.nama !== target.nama && x.no !== target.no && !pakai.has(x.no));
+        let pool = HURUF.filter((x) => grup(x) !== grup(target) && x.no !== target.no && !pakai.has(x.no));
         if (TK) {
           const fam = keluargaDari(target.ar);
           const beda = pool.filter((x) => keluargaDari(x.ar) !== fam);
@@ -441,7 +442,7 @@ ${P} .tg-go { flex: 1 1 0; max-width: 280px; min-height: 72px; font-size: 2.3rem
         const calon = shuffle(HURUF);
         for (const x of calon) {
           if (pakai.length >= 3) break;
-          if (pakai.some((y) => y.nama === x.nama)) continue; // ح dan ه tidak dalam satu sesi
+          if (pakai.some((y) => grup(y) === grup(x))) continue; // ح dan ه tidak dalam satu sesi
           pakai.push(x);
         }
         return pakai;

@@ -7,12 +7,13 @@
     ['ا', 'Alif'], ['ب', 'Ba'], ['ت', 'Ta'], ['ث', 'Tsa'], ['ج', 'Jim'], ['ح', 'Ha'], ['خ', 'Kho'],
     ['د', 'Dal'], ['ذ', 'Dzal'], ['ر', 'Ro'], ['ز', 'Zai'], ['س', 'Sin'], ['ش', 'Syin'], ['ص', 'Shod'],
     ['ض', 'Dhod'], ['ط', 'Tho'], ['ظ', 'Zho'], ['ع', "'Ain"], ['غ', 'Ghoin'], ['ف', 'Fa'], ['ق', 'Qof'],
-    ['ك', 'Kaf'], ['ل', 'Lam'], ['م', 'Mim'], ['ن', 'Nun'], ['و', 'Wau'], ['ه', 'Ha'], ['ي', 'Ya'],
+    ['ك', 'Kaf'], ['ل', 'Lam'], ['م', 'Mim'], ['ن', 'Nun'], ['و', 'Wau'], ['ه', "Ha'"], ['ي', 'Ya'],
   ].map(([ar, nama], i) => ({ ar, nama, no: i + 1 }));
 
+  const grup = (x) => (x.nama === "Ha'" ? 'Ha' : x.nama);
   // Pengecoh: nama berbeda dari jawaban (otomatis menyingkirkan pasangan ح / ه).
   function pengecoh(target, n) {
-    return sample(HURUF.filter((x) => x.nama !== target.nama), n);
+    return sample(HURUF.filter((x) => grup(x) !== grup(target)), n);
   }
   const hurufNode = (x) => h('span', { class: 'ti-arabic' }, x.ar);
 
