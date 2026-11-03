@@ -162,11 +162,26 @@
   }
   if ('speechSynthesis' in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
 
-  function say(text, opts = {}) {
-    if (!state.sound || !('speechSynthesis' in window)) return Promise.resolve();
+  // Rekaman suara asli untuk nama huruf hijaiyah (menggantikan suara mesin). Tambah nama di sini saat rekamannya masuk.
+  const REKAMAN = { Alif: 'alif', Ba: 'ba', Ta: 'ta' };
+  const recRe = new RegExp('(?<![\\p{L}\\p{N}\'])(' + Object.keys(REKAMAN).join('|') + ')(?![\\p{L}\\p{N}])', 'gu');
+  const clips = {};
+  let playing = null;
+  function playClip(key) {
+    return new Promise((res) => {
+      const a = clips[key] || (clips[key] = new Audio('audio/hijaiyah/' + REKAMAN[key] + '.mp3'));
+      playing = a;
+      a.currentTime = 0;
+      const done = () => { a.onended = a.onerror = null; res(); };
+      a.onended = a.onerror = done;
+      const p = a.play();
+      if (p && p.catch) p.catch(done);
+      setTimeout(done, 3000);
+    });
+  }
+  function speakTTS(text, opts) {
     const t = speechText(text);
     if (!t) return Promise.resolve();
-    speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(t);
     u.lang = voice ? voice.lang : 'id-ID';
     if (voice) u.voice = voice;
@@ -178,7 +193,37 @@
       setTimeout(res, 2000 + t.length * 90);
     });
   }
-  function hush() { if ('speechSynthesis' in window) speechSynthesis.cancel(); }
+  let sayToken = 0;
+  function say(text, opts = {}) {
+    if (!state.sound) return Promise.resolve();
+    const raw = String(text == null ? '' : text);
+    const ttsOk = 'speechSynthesis' in window;
+    if (ttsOk) speechSynthesis.cancel();
+    if (playing) { playing.pause(); playing = null; }
+    const token = ++sayToken;
+    const parts = [];
+    let last = 0, m;
+    recRe.lastIndex = 0;
+    while ((m = recRe.exec(raw))) {
+      if (m.index > last) parts.push({ t: raw.slice(last, m.index) });
+      parts.push({ k: m[1] });
+      last = m.index + m[0].length;
+    }
+    if (last < raw.length) parts.push({ t: raw.slice(last) });
+    if (!parts.length) return Promise.resolve();
+    return (async () => {
+      for (const p of parts) {
+        if (token !== sayToken) return;
+        if (p.k) await playClip(p.k);
+        else if (ttsOk) await speakTTS(p.t, opts);
+      }
+    })();
+  }
+  function hush() {
+    sayToken++;
+    if (playing) { playing.pause(); playing = null; }
+    if ('speechSynthesis' in window) speechSynthesis.cancel();
+  }
 
   // ---------- efek suara (WebAudio, tanpa file, tanpa musik) ----------
   let ac = null;
