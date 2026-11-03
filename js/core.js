@@ -163,7 +163,7 @@
   if ('speechSynthesis' in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
 
   // Rekaman suara asli untuk nama huruf hijaiyah (menggantikan suara mesin). Tambah nama di sini saat rekamannya masuk.
-  const REKAMAN = { Alif: 'alif', Ba: 'ba', Ta: 'ta' };
+  const REKAMAN = { Alif: 'alif', Ba: 'ba', Ta: 'ta', Tsa: 'tsa', Jim: 'jim', Ha: 'ha', Kho: 'kho', Dal: 'dal', Dzal: 'dzal' };
   const recRe = new RegExp('(?<![\\p{L}\\p{N}\'])(' + Object.keys(REKAMAN).join('|') + ')(?![\\p{L}\\p{N}])', 'gu');
   const clips = {};
   let playing = null;
