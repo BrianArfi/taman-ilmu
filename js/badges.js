@@ -1,4 +1,4 @@
-/* Taman Ilmu: lencana (16), layar #/lencana, dan toast lencana baru.
+/* Taman Ilmu: lencana (18), layar #/lencana, dan toast lencana baru.
    Semua ikon benda atau tumbuhan, tanpa wajah dan tanpa mata (aturan SPEC bagian 3). */
 (function () {
   'use strict';
@@ -14,13 +14,13 @@
       test: (t) => Object.keys(TI.CATS).some((c) => { const m = t.byCat[c] || {}; return TI.games.filter((g) => g.cat === c).every((g) => m[g.id]); }) },
     { id: 'jelajah-taman', icon: '🧭', name: 'Jelajah Taman', how: 'Main minimal satu game di setiap taman',
       test: (t) => Object.keys(TI.CATS).every((c) => TI.games.some((g) => g.cat === c && t.byCat[g.cat] && t.byCat[g.cat][g.id])) },
-    { id: 'hafizh-kecil', icon: '📖', name: 'Hafizh Kecil', how: 'Selesaikan 15 game Agama Islam',
+    { id: 'hafizh-kecil', icon: '📖', name: 'Hafizh Kecil', how: 'Selesaikan semua game Agama Islam',
       test: (t) => TI.games.filter((g) => g.cat === 'islam').every((g) => t.byCat.islam && t.byCat.islam[g.id]) },
-    { id: 'ahli-angka', icon: '🔢', name: 'Ahli Angka', how: 'Selesaikan 15 game Matematika',
+    { id: 'ahli-angka', icon: '🔢', name: 'Ahli Angka', how: 'Selesaikan semua game Matematika',
       test: (t) => TI.games.filter((g) => g.cat === 'mat').every((g) => t.byCat.mat && t.byCat.mat[g.id]) },
-    { id: 'ahli-sains', icon: '🔬', name: 'Ahli Sains', how: 'Selesaikan 13 game Sains',
+    { id: 'ahli-sains', icon: '🔬', name: 'Ahli Sains', how: 'Selesaikan semua game Sains',
       test: (t) => TI.games.filter((g) => g.cat === 'sains').every((g) => t.byCat.sains && t.byCat.sains[g.id]) },
-    { id: 'pemikir-cilik', icon: '🧩', name: 'Pemikir Cilik', how: 'Selesaikan 7 game Logika',
+    { id: 'pemikir-cilik', icon: '🧩', name: 'Pemikir Cilik', how: 'Selesaikan semua game Logika',
       test: (t) => TI.games.filter((g) => g.cat === 'logika').every((g) => t.byCat.logika && t.byCat.logika[g.id]) },
     { id: 'bintang-100', icon: '💯', name: 'Bintang Seratus', how: 'Kumpulkan 100 bintang',
       test: (t) => t.stars >= 100 },
@@ -35,6 +35,10 @@
     { id: 'tantangan-tuntas', icon: '🎯', name: 'Tantangan Tuntas', how: 'Selesaikan tantangan pekan ini',
       test: (t, st) => !!(st.weekly && st.weekly.tantanganDone) },
     { id: 'juara-pekan', icon: '🏆', name: 'Juara Pekan', how: 'Masuk 10 besar papan pekan ini', board: true },
+    { id: 'gratis-harian', icon: '🎁', name: 'Pemburu Gratisan', how: 'Selesaikan Game Gratis Hari Ini',
+      test: (t, st) => !!(st.dailyFree && st.dailyFree.doneDay) },
+    { id: 'pamer-kartu', icon: '🖼️', name: 'Tukang Pamer', how: 'Bagikan kartu pamer ke teman',
+      test: (t, st) => !!(st.share && st.share.cardAt) },
     { id: 'penjaga-taman', icon: '🌳', name: 'Penjaga Taman', how: 'Capai level 12',
       test: (t, st) => (st.profile.level || 1) >= 12 },
   ];

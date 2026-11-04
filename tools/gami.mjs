@@ -39,12 +39,16 @@ async function makePage(v1 = {}) {
   const r = await page.evaluate(() => ({
     xp: TI.state.profile.xp, nama: TI.state.profile.nama, pid: !!TI.state.profile.playerId,
     unlocked: TI.Progression.unlockedSet().size,
+    base: TI.Progression.baseUnlocked().size,
+    free: TI.Progression.dailyFree(),
+    freeCard: !!document.querySelector('.free-card'),
+    promo: !!document.querySelector('.promo-banner'),
     strip: !!document.querySelector('.player-strip'), tantangan: !!document.querySelector('.tantangan'),
     banner: !!document.querySelector('.nama-banner'), xpBar: !!document.querySelector('.xp-bar'),
   }));
   check('pemain baru: v2 terbentuk, xp 0', r.xp === 0 && r.nama && r.pid);
-  check('pemain baru: 8 game terbuka', r.unlocked === 8, `(${r.unlocked})`);
-  check('beranda: strip + tantangan + banner nama', r.strip && r.tantangan && r.banner && r.xpBar);
+  check('pemain baru: 8 jalur biasa + 1 gratis harian', r.base === 8 && r.unlocked === 9 && !!r.free, `(base=${r.base},total=${r.unlocked},free=${r.free})`);
+  check('beranda: strip + tantangan + nama + gratis + promo', r.strip && r.tantangan && r.banner && r.xpBar && r.freeCard && r.promo);
   check('pemain baru: tanpa error JS', page.errors.length === 0, page.errors.join(' | '));
   await ctx.close();
 }
@@ -100,6 +104,7 @@ async function makePage(v1 = {}) {
         s1, s2, plays: TI.state.plays.hijaiyah.tk, wk: TI.state.weekly.weekKey,
         wkNow: TI.Progression.weekKey(), wxp: TI.state.weekly.xp.tk,
         unlocked: [...TI.Progression.unlockedSet()],
+        free: TI.Progression.dailyFree(),
         chip: document.querySelector('.xp-chip') && document.querySelector('.xp-chip').textContent,
         acts: document.querySelectorAll('.result-actions > *').length,
       };
@@ -108,9 +113,9 @@ async function makePage(v1 = {}) {
     check('finish: plays + weekly.weekKey', r.plays === 1 && r.wk === r.wkNow);
     check('finish: xp formula 15+10s+2', r.wxp === 15 + 10 * r.s1 + 2, `(weekly=${r.wxp})`);
     // rantai: bintang di hijaiyah membuka wudhu (slot ke-2); rukun baru terbuka setelah wudhu dapat bintang
-    check('finish: wudhu terbuka, rukun masih dikunci', r.unlocked.includes('wudhu') && !r.unlocked.includes('rukun'));
+    check('finish: wudhu terbuka, rukun dikunci (kecuali gratis hari ini)', r.unlocked.includes('wudhu') && (!r.unlocked.includes('rukun') || r.free === 'rukun'));
     check('finish: chip XP tampil di layar hasil', !!r.chip && /\+\d+ XP/.test(r.chip), `(${r.chip})`);
-    check('finish: hasil punya 3 tombol (lagi, bagikan, pilih)', r.acts === 3, `(${r.acts})`);
+    check('finish: hasil punya 5 tombol (lagi, bagikan, tantang, kartu, pilih)', r.acts === 5, `(${r.acts})`);
   }
   check('main: tanpa error JS', page.errors.length === 0, page.errors.join(' | '));
   await ctx.close();
@@ -130,17 +135,19 @@ async function makePage(v1 = {}) {
       for (const cat in byCat) byCat[cat].forEach((id, i) => { if (i + 1 <= 2 || i + 1 <= lv + 1) out.add(id); });
       return out.size;
     };
-    const l1 = [...TI.Progression.unlockedSet()];
+    const l1 = [...TI.Progression.baseUnlocked()];
     TI.state.profile.level = 1;
     const exact8 = l1.length === 8 && l1.includes('hijaiyah') && l1.includes('sudoku') && !l1.includes('mobil');
-    // taman terpanjang 15 game: level path membuka semua saat level 14 (k <= 15)
-    TI.state.profile.level = 14;
-    const l14 = TI.Progression.unlockedSet().size === TI.games.length;
-    return { n1: atLevel(1), n5: atLevel(5), exact8, l14 };
+    // taman terpanjang 27 game: jalur level membuka semua saat level 30 (k <= 31)
+    TI.state.profile.level = 30;
+    const l30 = TI.Progression.baseUnlocked().size === TI.games.length;
+    TI.state.profile.level = 1; const tot1 = TI.Progression.unlockedSet().size;
+    return { n1: atLevel(1), n5: atLevel(5), exact8, l30, tot1 };
   });
-  check('unlock: level 1 tepat 8 game', r.exact8 && r.n1 === 8, `(n1=${r.n1})`);
+  check('unlock: level 1 jalur biasa tepat 8 game', r.exact8 && r.n1 === 8, `(n1=${r.n1})`);
+  check('unlock: level 1 total 9 dengan gratis harian', r.tot1 === 9, `(tot=${r.tot1})`);
   check('unlock: level 5 tepat 24 game', r.n5 === 24, `(n5=${r.n5})`);
-  check('unlock: level 14 buka semua', r.l14);
+  check('unlock: level 30 buka semua', r.l30);
   await ctx.close();
 }
 
@@ -193,7 +200,7 @@ async function makePage(v1 = {}) {
   const r = await page.evaluate(() => {
     const s = {};
     for (const g of TI.games) s[g.id] = { tk: g.cat === 'islam' ? 1 : 3 };
-    TI.state.stars = s; // islam 15 + mat 45 + sains 39 + logika 21 = 120 bintang
+    TI.state.stars = s; // semua game terisi: islam 1, sisanya 3 (total ikut jumlah game)
     TI.state.streak = { last: TI.Progression.dayKey(), count: 3 };
     const fresh = TI.Badges.evaluate(false); // hitung saja, jangan catat
     const stamped = Object.keys(TI.state.profile.badges).length;
@@ -276,9 +283,11 @@ if (process.env.PLIVE === '1') {
       teks: TI.Share.teksScore(TI.games[0], 3, true, 2),
       judul: TI.games[0].title,
       adaShare: !!(TI.Share && TI.Share.scoreResult && TI.Share.badge && TI.Share.invite),
+      adaViral: !!(TI.Share.challenge && TI.Share.card && TI.Share.streak && TI.Share.parseChallenge),
     };
   });
   check('bagikan: modul Share lengkap', r.adaShare);
+  check('bagikan: tantang + kartu + streak ada', r.adaViral);
   check('bagikan: bonus +5 sekali sehari', r.aXp === 5 && r.bXp === 0, `(a=${r.aXp},b=${r.bXp})`);
   check('bagikan: link ajakan berformat', /taman-ilmu\/\?ajak=.+/.test(r.url), `(${r.url})`);
   check('bagikan: teks skor ada bintang, judul, link', r.teks.includes('⭐') && r.teks.includes(r.judul) && r.teks.includes('taman-ilmu'));
@@ -312,6 +321,88 @@ if (process.env.PLIVE === '1') {
   r = await page.evaluate(() => ({ banner: !!document.querySelector('.ajak-banner'), seen: TI.state.ajakSeen }));
   check('ajak: tutup tersimpan, banner gak muncul lagi', !r.banner && r.seen === 'Budi');
   check('ajak: tanpa error JS', page.errors.length === 0, page.errors.join(' | '));
+  await ctx.close();
+}
+
+// 14. Gratis harian: stabil sehari, terbuka, kartu tampil, kartu bertanda
+{
+  const { ctx, page } = await makePage();
+  await page.goto(url);
+  await page.waitForSelector('.grid');
+  const r = await page.evaluate(() => {
+    const a = TI.Progression.dailyFree();
+    const b = TI.Progression.dailyFree();
+    const info = TI.Progression.dailyFreeInfo();
+    return { a, b, same: a === b, inGames: TI.games.some((g) => g.id === a),
+      unlocked: TI.Progression.unlockedSet().has(a),
+      card: !!document.querySelector('.free-card'),
+      marked: !!document.querySelector('.card.is-free'),
+      infoNew: info && info.isNew };
+  });
+  check('gratis: stabil sehari dan id sah', r.same && r.inGames, `(${r.a})`);
+  check('gratis: terbuka + kartu + tanda', r.unlocked && r.card && r.marked && r.infoNew);
+  check('gratis: tanpa error JS', page.errors.length === 0, page.errors.join(' | '));
+  await ctx.close();
+}
+
+// 15. Promo: banner tampil, tutup sampai besok, #/kelas jalan
+{
+  const { ctx, page } = await makePage();
+  await page.goto(url);
+  await page.waitForSelector('.grid');
+  let r = await page.evaluate(() => ({ banner: !!document.querySelector('.promo-banner'), cta: (document.querySelector('.promo-go') || {}).textContent }));
+  check('promo: banner tampil di atas', r.banner && !!r.cta, `(${r.cta})`);
+  await page.click('.promo-x');
+  r = await page.evaluate(() => ({ banner: !!document.querySelector('.promo-banner') }));
+  check('promo: tutup menghilangkan', !r.banner);
+  await page.goto(url + '#/kelas');
+  await page.waitForSelector('.kelas-hero');
+  r = await page.evaluate(() => ({ daftar: !!document.querySelector('.kelas-cta') }));
+  check('promo: halaman kelas tampil', r.daftar);
+  check('promo: tanpa error JS', page.errors.length === 0, page.errors.join(' | '));
+  await ctx.close();
+}
+
+// 16. Statistik: main tercatat, #/statistik tampil
+{
+  const { ctx, page } = await makePage();
+  await page.goto(url);
+  await page.waitForSelector('.grid');
+  await page.goto(url + '#/main/hijaiyah');
+  await page.waitForSelector('#stage');
+  let done = false;
+  for (let i = 0; i < 300 && !done; i++) {
+    done = await page.evaluate(() => !!document.querySelector('.result'));
+    if (!done) {
+      await page.evaluate(() => {
+        const vis = (el) => { const r = el.getBoundingClientRect(); return r.width > 4 && r.height > 4; };
+        const b = [...document.querySelectorAll('#stage button:not([disabled]):not([aria-disabled="true"])')].filter(vis);
+        if (b.length) b[Math.floor(Math.random() * b.length)].dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+      });
+      await page.waitForTimeout(80);
+    }
+  }
+  const r = await page.evaluate(() => { const m = TI.Stats.summary(); return { plays: m.plays, finishes: m.finishes, visits: m.visits }; });
+  check('stats: main tercatat', r.plays >= 1 && r.finishes >= 1 && r.visits >= 1, JSON.stringify(r));
+  await page.goto(url + '#/statistik');
+  await page.waitForSelector('.stat-grid');
+  const s = await page.evaluate(() => document.querySelectorAll('.stat-card').length);
+  check('stats: dashboard tampil 8 kartu', s === 8, `(${s})`);
+  check('stats: tanpa error JS', page.errors.length === 0, page.errors.join(' | '));
+  await ctx.close();
+}
+
+// 17. Tantangan: banner ?tantang tampil, terima membuka game
+{
+  const { ctx, page } = await makePage();
+  await page.goto(url + '?tantang=hijaiyah&skor=3&dari=Budi');
+  await page.waitForSelector('.grid');
+  let r = await page.evaluate(() => ({ banner: !!document.querySelector('.tantang-banner'), txt: (document.querySelector('.tantang-txt') || {}).textContent || '' }));
+  check('tantang: banner Budi tampil', r.banner && r.txt.includes('Budi') && r.txt.includes('3 bintang'));
+  await page.click('.tantang-go');
+  await page.waitForSelector('#stage');
+  check('tantang: terima membuka game', /#\/main\/hijaiyah/.test(page.url()));
+  check('tantang: tanpa error JS', page.errors.length === 0, page.errors.join(' | '));
   await ctx.close();
 }
 

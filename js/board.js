@@ -90,6 +90,7 @@
   }
 
   function render() {
+    try { if (TI.Stats) TI.Stats.track('board_view', {}); } catch (e) { /* abaikan */ }
     const P = TI.Progression;
     const mySeq = ++seq;
     jen = TI.state.level === 'sd' ? 'sd' : 'tk';

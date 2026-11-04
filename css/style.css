@@ -151,7 +151,7 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
 .ajak-btn { display: inline-flex; align-items: center; gap: 6px; border: 2px solid var(--line); border-radius: 999px; background: var(--card); padding: 8px 18px; font: inherit; font-weight: 800; color: var(--ink); cursor: pointer; box-shadow: 0 3px 0 var(--shadow); transition: transform var(--dur-press) var(--ease-out); }
 .ajak-btn:active { transform: scale(0.96); }
 .ajak-banner { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 0 0 10px; padding: 12px 16px; border-radius: var(--radius); background: #fff4cc; border: 2px solid #f2c94c; }
-.ajak-txt { flex: 1 1 260px; font-weight: 700; }
+.ajak-txt { flex: 1 1 260px; min-width: 0; font-weight: 700; }
 .badge-share { margin-top: 6px; border: 0; border-radius: 999px; background: #fff4cc; cursor: pointer; padding: 6px 14px; font: inherit; font-size: 0.85rem; font-weight: 800; color: #9a6b00; box-shadow: 0 3px 0 #ecd9a0; transition: transform var(--dur-press) var(--ease-out); }
 .badge-share:active { transform: scale(0.96); }
 
@@ -201,7 +201,7 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
 }
 .tantangan.is-done { background: var(--good-bg); border-color: var(--good); }
 .tan-icon { font-size: 2rem; line-height: 1; }
-.tan-body { display: grid; gap: 1px; flex: 1 1 220px; }
+.tan-body { display: grid; gap: 1px; flex: 1 1 220px; min-width: 0; }
 .tan-body b { font-size: 1.02rem; }
 .tan-note { color: var(--muted); font-size: 0.88rem; }
 .tan-done { font-weight: 800; color: var(--good); animation: ti-pop 240ms var(--ease-pop); }
@@ -213,7 +213,7 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
   margin: 0 0 14px; padding: 12px 16px;
   border-radius: var(--radius); background: var(--good-bg); border: 2px solid var(--good);
 }
-.nama-banner-txt { flex: 1 1 260px; font-weight: 700; }
+.nama-banner-txt { flex: 1 1 260px; min-width: 0; font-weight: 700; }
 .nama-btn { min-height: 48px; padding: 6px 20px; font-size: 1rem; }
 .nama-later {
   border: 0; background: transparent; color: var(--muted); cursor: pointer;
@@ -489,3 +489,67 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
   .ti-toast, .xp-chip, .level-up, .challenge-done { animation-name: ti-fade !important; animation-delay: 0s !important; }
   .choice.is-wrong, .choice.is-correct, .choice.is-hint, .card.is-shake { animation: none !important; }
 }
+
+/* ---------- banner promosi ---------- */
+.promo-banner {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 10px; padding: 12px 16px;
+  border-radius: var(--radius); background: linear-gradient(120deg, #2f6fed, #9b4dde); color: #fff;
+  box-shadow: 0 5px 0 #1e3f8f;
+}
+.promo-icon { font-size: 2.2rem; line-height: 1; }
+.promo-body { display: grid; gap: 1px; flex: 1 1 220px; min-width: 0; }
+.promo-body b { font-size: 1.1rem; }
+.promo-txt { font-size: 0.92rem; opacity: 0.92; }
+.promo-go { min-height: 48px; padding: 6px 20px; font-size: 1rem; background: #ffc93c; color: #2b2d42; box-shadow: 0 5px 0 #b78a00; }
+.promo-x { border: 0; background: rgba(255, 255, 255, 0.2); color: #fff; width: 44px; height: 44px; border-radius: 14px; font-size: 1.1rem; cursor: pointer; transition: transform var(--dur-press) var(--ease-out); }
+.promo-x:active { transform: scale(0.92); }
+
+/* ---------- kartu gratis harian ---------- */
+.free-card {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-top: 10px; padding: 10px 14px;
+  border-radius: var(--radius); background: #e7f9ef; border: 2px solid var(--good);
+}
+.free-icon { font-size: 2.2rem; line-height: 1; }
+.free-body { display: grid; gap: 1px; flex: 1 1 220px; min-width: 0; }
+.free-body b { font-size: 1.02rem; }
+.free-note { color: var(--muted); font-size: 0.88rem; }
+.free-go { min-height: 48px; padding: 6px 20px; font-size: 1rem; }
+.card.is-free { border-top-color: var(--good); }
+.card.is-free::after {
+  content: '🎁 Hari ini'; position: absolute; top: 8px; right: 10px;
+  font-size: 0.72rem; font-weight: 800; color: var(--good);
+}
+
+/* ---------- banner tantangan teman ---------- */
+.tantang-banner {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin: 0 0 10px; padding: 12px 16px;
+  border-radius: var(--radius); background: #ffe9e9; border: 2px solid #ff6b6b;
+}
+.tantang-txt { flex: 1 1 260px; min-width: 0; font-weight: 700; }
+.tantang-go { min-height: 48px; padding: 6px 20px; font-size: 1rem; }
+
+/* ---------- footer ---------- */
+.foot-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.foot-link { border: 0; background: none; color: var(--muted); font-weight: 700; font-size: 0.9rem; text-decoration: underline; cursor: pointer; padding: 6px; }
+
+/* ---------- statistik ---------- */
+.stat-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); margin-bottom: 6px; }
+.stat-card { display: grid; gap: 2px; justify-items: center; padding: 12px 8px; border-radius: 18px; background: var(--card); box-shadow: 0 3px 0 var(--shadow); }
+.stat-card b { font-size: 1.5rem; }
+.stat-card span { color: var(--muted); font-size: 0.82rem; font-weight: 700; text-align: center; }
+.stat-h { margin: 18px 2px 8px; font-size: 1.1rem; }
+.stat-week { display: flex; gap: 6px; }
+.stat-day { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--card); box-shadow: 0 3px 0 var(--shadow); color: var(--muted); font-weight: 800; font-size: 0.85rem; }
+.stat-day.is-on { background: var(--good-bg); color: var(--good); }
+.stat-top { margin: 0; padding-left: 24px; display: grid; gap: 4px; font-weight: 700; }
+
+/* ---------- halaman kelas ---------- */
+.kelas-hero { display: grid; gap: 12px; justify-items: center; text-align: center; max-width: 640px; padding: 24px 20px; border-radius: var(--radius); background: var(--card); box-shadow: 0 5px 0 var(--shadow); }
+.kelas-icon { font-size: 3.5rem; line-height: 1; }
+.kelas-lead { margin: 0; font-size: 1.15rem; line-height: 1.5; }
+.kelas-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; text-align: left; font-size: 1.05rem; }
+.kelas-cta { margin-top: 6px; }
+.kelas-note { margin: 0; color: var(--muted); font-size: 0.9rem; }

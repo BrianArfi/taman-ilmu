@@ -1,0 +1,65 @@
+/* 60 Urut Kisah Nabi. ctx.order peristiwa penting sirah Nabi Muhammad
+   Shallallahu 'alaihi wa sallam: Lahir di Mekah, Wahyu pertama di Gua Hira,
+   Isra Mikraj, Hijrah ke Madinah, Fathu Mekah. */
+(function () {
+  const { h, shuffle, sample } = TI;
+
+  const SEMUA = [
+    { label: 'Lahir di Mekah', icon: '🏠' },
+    { label: 'Wahyu pertama di Gua Hira', icon: '📖' },
+    { label: 'Isra Mikraj', icon: '🌙' },
+    { label: 'Hijrah ke Madinah', icon: '🗺️' },
+    { label: 'Fathu Mekah', icon: '🕋' },
+  ];
+  const SALAWAT = "Nabi Muhammad Shallallahu 'alaihi wa sallam";
+
+  const P = '.play[data-game="sirah-urut"]';
+  const CSS = `
+${P} .su-order .choice { min-height: 64px; font-size: 1.1rem; }
+${P} .su-kuis .choice { min-height: 64px; }`;
+
+  TI.register({
+    id: 'sirah-urut',
+    title: 'Urut Kisah Nabi',
+    cat: 'islam',
+    icon: '📆',
+    desc: 'Urutkan peristiwa penting sirah Nabi Muhammad.',
+    async start(ctx) {
+      TI.style('sirah-urut', CSS);
+      const TK = ctx.isTK;
+      const items = TK ? [SEMUA[0], SEMUA[1], SEMUA[3], SEMUA[4]] : SEMUA;
+
+      ctx.ask('Urutkan kisah ' + SALAWAT + ' dari yang paling awal!');
+      const w = h('div', { class: 'su-order' });
+      ctx.el.append(w);
+      await ctx.order({ items, guide: TK ? 'always' : 'after-wrong', into: w });
+      if (!ctx.alive) return;
+      ctx.note(SALAWAT + ' lahir di Mekah, menerima wahyu di Gua Hira, lalu hijrah ke Madinah.', { title: 'Masya Allah!' });
+      await ctx.next();
+      if (!ctx.alive) return;
+
+      if (!TK) {
+        const kuis = [
+          { q: SALAWAT + ' lahir di kota?', a: 'Makkah', x: ['Madinah', 'Thaif'] },
+          { q: 'Wahyu pertama turun kepada beliau di gua?', a: 'Gua Hira', x: ['Gua Tsur', 'Gua Kahfi'] },
+        ];
+        await ctx.series(kuis, async (s) => {
+          ctx.ask(s.q);
+          const wadah = h('div', { class: 'su-kuis' });
+          ctx.el.append(wadah);
+          await ctx.choose({
+            options: shuffle([s.a, ...s.x]),
+            answer: s.a,
+            into: wadah,
+            layout: 'is-col',
+          });
+        }, {
+          lesson: SALAWAT + ' lahir di Mekah dan berjuang menyebarkan Islam sampai Fathu Mekah.',
+        });
+        return;
+      }
+
+      ctx.finish({ lesson: SALAWAT + ' lahir di Mekah dan berjuang menyebarkan Islam sampai Fathu Mekah.' });
+    },
+  });
+})();

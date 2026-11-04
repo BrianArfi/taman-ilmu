@@ -651,11 +651,70 @@ Pengenalan coding. Peta grid jalan (TK 4x4, SD 6x6) dengan mobil (SVG tampak ata
 Semua progres anak dihitung otomatis dari `ctx.finish()`; **game tidak perlu memanggil apa pun**. Modul: `js/config.js` (URL papan), `js/progress.js` (mesin), `js/badges.js` (lencana), `js/board.js` (papan juara). State pemain di `localStorage["tamanIlmu.v2"]`; `tamanIlmu.v1` tetap ditulis sebagai mirror (masa depan uji lama, dibaca `ui.mjs`).
 
 - **XP**: +15 selesai pertama kali per (game, jenjang) + 10 per bintang saat rekor naik + bonus harian turun 2,2,2,1,1,0 per game per hari WIB (anti farming) + 40 tantangan pekan (2+ bintang di game tantangan, sekali per pekan).
-- **Level** (12, tematik taman): Kecambah, Tunas, Semai, Sulur, Pohon Kecil, Rimbun, Berbunga, Mekar, Berbuah, Panen Raya, Taman Indah, Penjaga Taman. Ambang: 0, 60, 160, 320, 560, 900, 1350, 1900, 2600, 3500, 4600, 5800 XP. Level 14 membuka semua taman (taman terpanjang 15 game).
-- **Unlock**: 2 game pertama tiap kategori terbuka; sisanya terbuka kalau game sebelumnya di kategori yang sama sudah dapat 1+ bintang (rantai ketat) ATAU `level + 1` tercapai. Kartu terkunci menampilkan cara membukanya.
+- **Level** (12, tematik taman): Kecambah, Tunas, Semai, Sulur, Pohon Kecil, Rimbun, Berbunga, Mekar, Berbuah, Panen Raya, Taman Indah, Penjaga Taman. Ambang: 0, 60, 160, 320, 560, 900, 1350, 1900, 2600, 3500, 4600, 5800 XP. Jalur level membuka sampai 13 game per taman di level 12; sisanya lewat rantai bintang.
+- **Unlock**: 2 game pertama tiap kategori terbuka; sisanya terbuka kalau game sebelumnya di kategori yang sama sudah dapat 1+ bintang (rantai ketat) ATAU `level + 1` tercapai. Kartu terkunci menampilkan cara membukanya. Ditambah **Game Gratis Hari Ini**: tiap hari WIB satu game terkunci dibuka acak tanpa syarat (pilihan global sama untuk semua anak; diganti satu game terkunci acak miliknya kalau pilihan global sudah terbuka; stabil sehari penuh, tersimpan di `state.dailyFree`).
 - **Mastery** per (game, jenjang): 0 baru, 1 perunggu (1 bintang), 2 perak (2), 3 emas (3), 4 berlian (3 bintang + 5x main).
 - **Pekan ISO (WIB)**: counter pekan (XP, bintang, main) reset tiap Senin 00:00 WIB; game tantangan rotasi deterministik sama untuk semua anak.
-- **Lencana** (16): otomatis dari evaluasi state; toast saat baru didapat; daftar di `#/lencana` beserta teaser yang belum. Lencana yang sudah didapat punya tombol Bagikan.
-- **Berbagi** (`js/share.js`): satu gerbang `TI.Share` untuk semua tombol bagikan (Web Share API di HP, salin clipboard di desktop). Ada di layar hasil (`📣 Bagikan`), kartu lencana, dan tombol `📣 Ajak teman main` di footer beranda. Teks yang dibagikan selalu ditutup link undangan `SITE_URL?ajak=<nama panggilan>`; penerima melihat banner sapaan di beranda (sekali per nama, bisa ditutup, tersimpan di `state.ajakSeen`). Berbagi pertama tiap hari WIB memberi +5 XP lewat `Progression.onShare()` (anti farming, tanpa efek streak). Batal membagikan tidak memberi apa pun. Nama yang dibagikan cuma panggilan, tanpa data lain.
+- **Lencana** (18): otomatis dari evaluasi state; toast saat baru didapat; daftar di `#/lencana` beserta teaser yang belum. Lencana yang sudah didapat punya tombol Bagikan. Termasuk Pemburu Gratisan (selesaikan Game Gratis Hari Ini) dan Tukang Pamer (bagikan kartu pamer).
+- **Berbagi** (`js/share.js`): satu gerbang `TI.Share` untuk semua tombol bagikan (Web Share API di HP, salin clipboard di desktop). Ada di layar hasil (`📣 Bagikan`), kartu lencana, dan tombol `📣 Ajak teman main` di footer beranda. Teks yang dibagikan selalu ditutup link undangan `SITE_URL?ajak=<nama panggilan>`; penerima melihat banner sapaan di beranda (sekali per nama, bisa ditutup, tersimpan di `state.ajakSeen`). Berbagi pertama tiap hari WIB memberi +5 XP lewat `Progression.onShare()` (anti farming, tanpa efek streak). Batal membagikan tidak memberi apa pun. Nama yang dibagikan cuma panggilan, tanpa data lain. Layar hasil juga punya Tantang (link `?tantang=gid&skor&dari`, penerima melihat banner tantangan di beranda) dan Kartu (gambar skor 1080x1350 untuk status WA/IG, Web Share file kalau bisa, kalau tidak diunduh + teks tersalin); footer beranda punya Pamer Rajin (rentetan hari main).
 - **Papan juara** (`#/papan`): mode Pekan Ini (reset Senin) dan Sepanjang Waktu, per jenjang TK/SD. Backend: `TI_CONFIG.BOARD_URL` (service SQLite di 43.134.70.149 via `taman-ilmu.43-134-70-149.sslip.io`; nanti ganti host ke `taman-ilmu.agentic-pm.ai` kalau A record sudah dibuat). Kirim skor fire-and-forget setelah hasil, 1 kali ulang. `file://` tidak pernah fetch (main offline tetap penuh); data papan terakhir di-cache di `localStorage["tamanIlmu.board"]`. Nama panggilan 2-16 karakter di `#/nama`, tanpa nama asli.
-- Uji: `node tools/gami.mjs` (40 cek: migrasi v1, XP, unlock, tantangan, lencana, anti-farm, papan offline, berbagi, banner ajakan). `PLIVE=1` menambah cek papan live (butuh versi baru sudah ter-deploy).
+- Uji: `node tools/gami.mjs` (migrasi, XP, unlock, gratis harian, tantangan, lencana, anti-farm, papan offline, berbagi, tantang, promo, statistik, banner ajakan). `PLIVE=1` menambah cek papan live (butuh versi baru sudah ter-deploy).
+- **Promo** (`js/promo.js`, daftar di `TI_CONFIG.PROMOS`): banner di atas beranda, berputar tiap hari, bisa ditutup (berlaku sampai besok). Tayang dan klik tercatat di statistik. Isi awal: kelas Bikin Game Sendiri, landing di `#/kelas`, tombol Daftar membuka `TI_CONFIG.KELAS_URL` (kosong = "segera dibuka").
+- **Statistik** (`js/analytics.js`, `localStorage["tamanIlmu.stats.v1"]`): kunjungan, hari aktif, main, selesai, rata-rata bintang, bagikan, main gratis harian, tayang/klik promo, 5 game teratas, aktif 7 hari. Dashboard `#/statistik` jalan offline. Kalau `STATS_ON` dan online, ringkasan anonim dikirim ke `BOARD_URL + '/stats'` (POST `{player_id, week_key, visits, days_active, plays, finishes, stars, shares, per_game, client_time}`, best-effort, no-cors text/plain tanpa preflight); kirim dan angka global dari `GET /stats/summary` (`{visitors, plays, finishes, shares}`) hanya dicoba kalau `STATS_UP` true.
+
+## 9. Gelombang 3: game 51-100
+
+50 game tambahan yang lebih seru (dibuat 4 Nov 2026, pola gelombang 2: desain di file masing-masing). Aturan konten gelombang 3: fakta agama PAKAI ULANG dari bank SPEC bagian 6 atau file game gelombang 1-2 (tulis sumbernya di komentar); tidak ada teks Arab baru kecuali huruf hijaiyah tunggal yang sudah ada di SPEC.
+
+| No | id | Judul | cat | ikon | Mekanik singkat |
+|---|---|---|---|---|---|
+| 51 | asma-buru | Buru Asmaul Husna | islam | 🏷️ | Arcade tangkap nama yang artinya cocok |
+| 52 | tertib-shalat | Tertib Gerakan Shalat | islam | 📿 | Urutan gerakan + kuis rakaat |
+| 53 | kisah-clue | Tebak Nabi dari Petunjuk | islam | 🗞️ | 3 petunjuk, tebak nabi |
+| 54 | zakat-fitrah | Takar Zakat Fitrah | islam | 🍚 | Takar cup beras sampai pas |
+| 55 | puasa-sehari | Sehari Berpuasa | islam | 🌅 | Urutan sahur-buka + pilah batal/tidak |
+| 56 | lari-masjid | Lari ke Masjid | islam | 🛣️ | Auto-runner lompat, kumpul bintang |
+| 57 | doa-pasang | Pasangan Doa | islam | 💌 | Memory doa sehari-hari |
+| 58 | jam-shalat | Kapan Shalatnya | islam | 🌤️ | Cocokkan shalat dengan langit |
+| 59 | sedekah-warung | Warung Sedekah | islam | 🏪 | Bayar pas + sisihkan sedekah |
+| 60 | sirah-urut | Urut Kisah Nabi | islam | 📆 | Urutan 5 peristiwa sirah |
+| 61 | halal-pilah | Halal atau Haram | islam | 🍽️ | Pilah makanan dan perbuatan |
+| 62 | tabung-infaq | Tabung Infaq | islam | 🏺 | Tangkap koin + hitung total |
+| 63 | balap-kali | Balap Kali-kali | mat | 🏁 | Balapan jawab perkalian |
+| 64 | pizza-pecahan | Pizza Pecahan | mat | 🍕 | Seret juring ke piring target |
+| 65 | pola-menara | Menara Pola | mat | 🗼 | Susun balok ikut pola warna |
+| 66 | kembalian-kilat | Kembalian Kilat | mat | 💸 | Kembalian pas tercepat |
+| 67 | buru-bentuk | Buru Bentuk | mat | 🔍 | Cari bentuk di keramaian |
+| 68 | tebak-berat | Tebak Berat | mat | 🎒 | Banding + estimasi kubus satuan |
+| 69 | lompat-bintang | Lompat Bintang | mat | ⭐ | Ketuk kelipatan berurutan |
+| 70 | bagi-permen | Bagi Permen | mat | 🍬 | Bagi rata ke toples (pembagian) |
+| 71 | jam-cocok | Jam Cocok | mat | 🕰️ | Analog lawan digital |
+| 72 | sortir-bangun | Sortir Bangun | mat | 🗳️ | Sortir ke keranjang jumlah sisi |
+| 73 | toples-tebak | Toples Tebakan | mat | 🫙 | Estimasi isi toples |
+| 74 | belah-buah | Belah Buah Hitung | mat | 🍉 | Belah hanya jawaban benar |
+| 75 | pancing-magnet | Pancing Magnet | sains | 🎣 | Pancing timing benda logam |
+| 76 | roket-air | Roket Air | sains | 🚀 | Pompa + lepas di zona hijau |
+| 77 | tebak-bayang | Tebak Bayangan | sains | 🕯️ | Tebak benda dari siluet |
+| 78 | rumah-makhluk | Rumah Makhluk | sains | 🏕️ | Sortir ke habitat (tanpa wajah) |
+| 79 | baju-cuaca | Koper Cuaca | sains | 🧥 | Isi koper sesuai cuaca |
+| 80 | tubuhku | Tubuhku | sains | 🖐️ | Tempel bagian tubuh (tanpa wajah) |
+| 81 | tebak-bunyi | Tebak Bunyi | sains | 🎺 | Pilah tinggi/rendah, cepat/lambat |
+| 82 | daur-hidup | Daur Hidup Kacang | sains | 🌾 | Urutan biji sampai berbuah |
+| 83 | mendarat-bulan | Mendarat di Bulan | sains | 🌕 | Lunar-lander rem tepat |
+| 84 | katrol | Katrol dan Tuas | sains | ⚙️ | Pilih alat + tuas seimbang |
+| 85 | sambung-pipa | Sambung Pipa | sains | 🚰 | Putar pipa sampai mengalir |
+| 86 | penunjuk-arah | Penunjuk Arah | sains | 🌐 | Kompas 4/8 arah |
+| 87 | siang-malam | Siang atau Malam | sains | 🌗 | Pilah kegiatan + putar bumi |
+| 88 | kode-warna | Tebak Kode Warna | logika | 🎛️ | Mastermind junior |
+| 89 | labirin-es | Labirin Es | logika | ⛸️ | Meluncur sampai dinding |
+| 90 | tangram | Tangram Rumah | logika | 🏠 | Susun keping jadi bangun |
+| 91 | parkir | Parkir Pintar | logika | 🚙 | Geser mobil keluarkan bintang |
+| 92 | balik-ingat | Balik dan Ingat | logika | 🔄 | Ingat kartu berkedip |
+| 93 | cermin-pola | Cermin Pola | logika | ◑ | Lengkapi simetri cermin |
+| 94 | sambung-kabel | Sambung Kabel | logika | 🔌 | Flow tanpa bersinggungan |
+| 95 | teka-teki | Teka-teki Siapa | logika | ❔ | Einstein junior 2-3 rumah |
+| 96 | balok-pas | Balok yang Pas | logika | 📦 | Pilih balok pas ke lubang |
+| 97 | pola-angka | Pola Angka | logika | 🔟 | Lanjutkan barisan |
+| 98 | lawan-kata | Lawan Kata | logika | 🌡️ | Memory lawan kata |
+| 99 | beda-satu | Mana yang Beda | logika | 🍒 | Odd-one-out cepat |
+| 100 | raja-taman | Raja Taman | logika | 🏆 | Final 10 soal campuran, 3 nyawa |

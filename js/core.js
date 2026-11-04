@@ -227,7 +227,7 @@
   let current = null; // sesi game aktif
 
   function route() {
-    const vm = location.hash.match(/^#\/(papan|lencana|nama)$/);
+    const vm = location.hash.match(/^#\/(papan|lencana|nama|kelas|statistik)$/);
     if (vm && TI.VIEWS && TI.VIEWS[vm[1]]) { closeGame(); TI.VIEWS[vm[1]](); return; }
     const m = location.hash.match(/^#\/main\/([\w-]+)/);
     const g = m && byId(m[1]);
@@ -271,8 +271,10 @@
   function showHome() {
     closeGame();
     document.title = 'Taman Ilmu';
+    try { if (TI.Stats) TI.Stats.track('home', {}); } catch (e) { /* abaikan */ }
     const app = root();
     app.replaceChildren();
+    const promo = TI.Promo ? TI.Promo.banner() : null;
     const lvlBtn = (id, label) => h('button', {
       type: 'button', class: 'seg-btn', 'aria-pressed': String(state.level === id),
       onclick: () => { state.level = id; saveState(); sfx('tap'); showHome(); },
@@ -353,6 +355,25 @@
 
     const list = games.filter((g) => state.tab === 'semua' || g.cat === state.tab);
     const unlocked = Pr.unlockedSet();
+    const freeInfo = Pr.dailyFreeInfo ? Pr.dailyFreeInfo() : null;
+    const freeCard = freeInfo && freeInfo.isNew ? h('div', { class: 'free-card pop-in' },
+      h('span', { class: 'free-icon', 'aria-hidden': 'true' }, freeInfo.game.icon || '🎁'),
+      h('div', { class: 'free-body' },
+        h('b', null, 'Game Gratis Hari Ini: ' + freeInfo.game.title),
+        h('span', { class: 'free-note' }, 'Terbuka hari ini saja, besok ganti game lain. Selesaikan untuk lencana Pemburu Gratisan.')),
+      h('a', { class: 'ti-btn free-go', href: '#/main/' + freeInfo.gid, onclick: () => sfx('tap') }, 'Main Gratis')) : null;
+    let tantangBanner = null;
+    try {
+      const tc = TI.Share ? TI.Share.parseChallenge() : null;
+      if (tc && state.tantangSeen !== tc.key) {
+        tantangBanner = h('div', { class: 'tantang-banner pop-in', role: 'status' },
+          h('span', { class: 'tantang-txt' }, '🔥 ', h('b', null, tc.dari), ' menantangmu di ' + tc.game.title +
+            ' (' + tc.skor + ' bintang)! Berani terima?'),
+          h('a', { class: 'ti-btn tantang-go', href: '#/main/' + tc.game.id, onclick: () => sfx('tap') }, 'Terima'),
+          h('button', { type: 'button', class: 'nama-later', 'aria-label': 'Tutup',
+            onclick: () => { state.tantangSeen = tc.key; saveState(); showHome(); } }, 'Tutup'));
+      }
+    } catch (e) { /* abaikan */ }
     const freshOpen = [];
     if (lastUnlocked) for (const id of unlocked) if (!lastUnlocked.has(id)) freshOpen.push(id);
     lastUnlocked = unlocked;
@@ -360,13 +381,14 @@
     list.forEach((g, i) => {
       const c = catOf(g);
       const open = unlocked.has(g.id);
+      const isFree = !!(freeInfo && g.id === freeInfo.gid && freeInfo.isNew);
       const best = (state.stars[g.id] || {})[state.level] || 0;
       const arabicIcon = /[؀-ۿ]/.test(g.icon || '');
       if (open) {
         const isNew = freshOpen.includes(g.id);
         if (isNew) sfxOnce('benar');
         grid.append(h('a', {
-          class: 'card' + (isNew ? ' pop-new' : ''), href: '#/main/' + g.id, style: '--c:' + c.color + ';--i:' + i,
+          class: 'card' + (isNew ? ' pop-new' : '') + (isFree ? ' is-free' : ''), href: '#/main/' + g.id, style: '--c:' + c.color + ';--i:' + i,
           onclick: () => sfx('tap'),
         },
         h('span', { class: 'card-icon' + (arabicIcon ? ' ti-arabic' : ''), 'aria-hidden': 'true' }, g.icon || c.icon),
@@ -399,16 +421,22 @@
     });
     if (!list.length) grid.append(h('p', { class: 'empty' }, 'Belum ada game di kategori ini.'));
 
+    if (promo) app.append(promo);
     app.append(head, strip);
     if (tantangan) app.append(tantangan);
+    if (freeCard) app.append(freeCard);
     app.append(
       h('p', { class: 'level-note' }, 'Jenjang: ', h('b', null, LEVELS[state.level]), '. Soal menyesuaikan jenjang ini.'),
       nav);
     if (banner) app.append(banner);
     if (ajakBanner) app.append(ajakBanner);
+    if (tantangBanner) app.append(tantangBanner);
     app.append(grid,
       h('footer', { class: 'home-foot' },
         h('button', { type: 'button', class: 'ajak-btn', 'aria-label': 'Ajak teman main Taman Ilmu', onclick: () => { sfx('tap'); if (TI.Share) TI.Share.invite(); } }, '📣 Ajak teman main'),
+        h('div', { class: 'foot-links' },
+          h('a', { class: 'foot-link', href: '#/statistik', onclick: () => sfx('tap') }, '📊 Statistik'),
+          h('button', { type: 'button', class: 'foot-link', onclick: () => { sfx('tap'); if (TI.Share) TI.Share.streak(); } }, '🔥 Pamer Rajin')),
         h('span', null, 'Dibuat untuk anak-anak. Tanpa iklan. Papan juara butuh internet, sisanya main offline.')));
   }
 
@@ -449,6 +477,7 @@
     const ctx = makeCtx(g, level, { stage, promptText, bar, shell, session });
     session.ctx = ctx;
     current = session;
+    try { if (TI.Stats) TI.Stats.track('game_start', { gid: g.id, jen: level, free: !!(TI.Progression && TI.Progression.dailyFree && TI.Progression.dailyFree() === g.id) }); } catch (e) { /* abaikan */ }
 
     try {
       const ret = g.start(ctx);
@@ -856,6 +885,7 @@
         try { gain = TI.Progression ? TI.Progression.onFinish(game, level, stars, prevBest) : null; } catch (e) { console.error('Gamifikasi gagal', e); }
         saveState();
         try { if (TI.Board && TI.Board.report) TI.Board.report(level); } catch (e) { /* papan gagal diam saja */ }
+        try { if (TI.Stats) TI.Stats.track('game_finish', { gid: game.id, jen: level, stars }); } catch (e) { /* abaikan */ }
         showResult(ctx, stars, opts, els, gain);
       },
     };
@@ -869,6 +899,8 @@
     for (let i = 0; i < 3; i++) big.append(h('span', { class: 'rstar' + (i < stars ? ' is-on' : ''), style: '--i:' + i }, '★'));
     const again = h('button', { type: 'button', class: 'ti-btn', onclick: () => { sfx('tap'); openGame(ctx.game); } }, 'Main Lagi');
     const share = TI.Share ? h('button', { type: 'button', class: 'ti-btn', onclick: () => TI.Share.scoreResult(ctx.game, stars, gain) }, '📣 Bagikan') : null;
+    const tantang = TI.Share ? h('button', { type: 'button', class: 'ti-btn', onclick: () => TI.Share.challenge(ctx.game, stars) }, '🏆 Tantang') : null;
+    const kartu = TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost', onclick: () => TI.Share.card(ctx.game, stars) }, '🖼️ Kartu') : null;
     const menu = h('a', { class: 'ti-btn is-ghost', href: '#/', onclick: () => sfx('tap') }, 'Pilih Game');
     const dlg = h('div', { class: 'result', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Hasil' },
       h('div', { class: 'result-card' },
@@ -878,7 +910,7 @@
         gain && gain.challengeDone ? h('p', { class: 'challenge-done pop-in' }, 'Tantangan pekan selesai!') : null,
         h('h2', null, msg),
         opts.lesson ? h('p', { class: 'result-lesson' }, h('b', null, 'Pelajaran hari ini: '), opts.lesson) : null,
-        h('div', { class: 'result-actions' }, again, share, menu)));
+        h('div', { class: 'result-actions' }, again, share, tantang, kartu, menu)));
     els.shell.append(dlg);
     again.focus({ preventScroll: true });
     // Perayaan penuh untuk 2-3 bintang; 1 bintang (mis. kalah balapan) cukup disemangati.
