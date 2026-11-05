@@ -1,4 +1,4 @@
-/* 44 Sudoku Mini. TK: kotak 3x3 dengan 3 bentuk. SD: kotak 4x4 dengan angka 1-4 dan empat kotak kecil 2x2.
+/* 44 Sudoku Mini. TK: kotak 3x3 dengan 3 bentuk. SD: kotak 4x4 dengan angka 1-4 dan empat kotak kecil 2x2. Tiga babak, tiap babak naik isinya.
    Puzzle dibuat dari solusi dasar yang diacak (tukar simbol, baris, kolom), lalu sel dikosongkan acak, dicek supaya hanya punya satu jawaban.
    Menang = semua terisi dan tidak ada yang bentrok (cek aturan), bukan dicocokkan dengan satu kunci jawaban. */
 (function () {
@@ -145,12 +145,12 @@
         const { sol, grid } = makePuzzle(N, empties[idx]);
         const given = grid.map((r) => r.map((v) => v >= 0));
         const filledAtStart = given.flat().filter(Boolean).length;
-        let sel = null, helps = 0, busy = false, solved = false;
+        let sel = null, bantuan = 0, busy = false, solved = false;
         const cellEl = [];
 
         ctx.ask(idx === 0
           ? 'Isi kotak yang kosong! ' + RULE
-          : (isTK ? 'Puzzle ' + (idx + 1) + '. Isi semua kotak. Jangan ada bentuk yang sama di satu baris atau kolom.' : 'Puzzle ' + (idx + 1) + '. Isi semua kotak dengan angka 1 sampai 4.'));
+          : (isTK ? 'Babak ' + (idx + 1) + '. Isi semua kotak. Jangan ada bentuk yang sama di satu baris atau kolom.' : 'Babak ' + (idx + 1) + '. Isi semua kotak dengan angka 1 sampai 4.'));
 
         // ----- papan -----
         const board = h('div', { class: 'sd-board', style: '--n:' + N + ';--bw:' + (isTK ? 330 : 380) + 'px', 'aria-label': 'Papan sudoku' });
@@ -284,8 +284,8 @@
         }
         help.addEventListener('click', () => {
           if (busy || solved) return;
-          helps++; ctx.mistakes++;
-          if (helps >= 3) { autoFill(); return; }
+          bantuan++; ctx.mistakes++;
+          if (bantuan >= 3) { autoFill(); return; }
           const k = fixOne();
           if (k < 0) return;
           const [r, c] = cr(k);
@@ -316,7 +316,7 @@
         for (let i = 0; i < total && ctx.alive; i++) {
           ctx.progress(i, total);
           ctx.clear();
-          await playPuzzle(i);
+          await playPuzzle(i); if (i < total - 1 && ctx.alive) ctx.correct(null, { say: 'Bagus! Terus naik ke babak ' + (i + 2) + '!' });
         }
         if (!ctx.alive) return;
         ctx.progress(total, total);

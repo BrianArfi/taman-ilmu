@@ -1,6 +1,7 @@
 /* 69 Lompat Bintang. Garis bilangan bintang bernomor, ketuk kelipatan N berurutan.
    Bintang jebakan: salah dihitung wrong lalu lanjut (bintang yang pasti salah dinonaktifkan).
-   TK: kelipatan 2 sampai 10 dan 12. SD: kelipatan 3, 4, 5 bergantian sampai 30. */
+   TK: kelipatan 2 sampai 10 dan 12. SD: kelipatan 3, 4, 5 bergantian sampai 30.
+   SD urut lompatan 5, 4, 3 (gampang dulu). Antar ronde ada pujian naik. */
 (function () {
   const { h } = TI;
 
@@ -31,7 +32,7 @@
       TI.style('lompat-bintang', CSS);
       const ronde = ctx.isTK
         ? [{ n: 2, maks: 10 }, { n: 2, maks: 12 }]
-        : [{ n: 3, maks: 30 }, { n: 4, maks: 28 }, { n: 5, maks: 30 }];
+        : [{ n: 5, maks: 30 }, { n: 4, maks: 28 }, { n: 3, maks: 30 }];
 
       const totalLompat = ronde.reduce((s, r) => s + Math.floor(r.maks / r.n), 0);
       let sudah = 0;
@@ -92,6 +93,7 @@
         while (pos < target.length && ctx.alive) await ctx.wait(300);
         if (!ctx.alive) return;
         await ctx.wait(300);
+        if (r < ronde.length - 1) ctx.correct(null, { say: ctx.isTK ? 'Bagus! Terus naik lebih jauh!' : 'Bagus! Terus naik ke lompatan ' + ronde[r + 1].n + '!' });
         ctx.clear();
       }
       ctx.finish({ lesson: 'Kelipatan adalah hasil lompatan yang sama besar. Kelipatan 2: 2, 4, 6, 8, 10.' });

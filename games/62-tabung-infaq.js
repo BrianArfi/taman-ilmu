@@ -1,5 +1,6 @@
 /* 62 Tabung Infaq. Arkade: geser celengan untuk menangkap koin jatuh, lalu hitung total.
-   Ronde tetap (TK 6 koin lambat, SD 12 item + batu yang mengurangi). Diakhiri tebakan total. */
+   Ronde tetap (TK 6 koin lambat, SD 12 item + batu yang mengurangi). Diakhiri tebakan total.
+   Babak 2 di tengah permainan: item jatuh lebih cepat. */
 (function () {
   const { h, rand, numChoices } = TI;
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -67,7 +68,7 @@
       const nKoin = TK ? 6 : 12;
       for (let i = 0; i < nKoin; i++) jatuh.push({ koin: true, v: i % 2 ? 1000 : 500 });
       if (!TK) { jatuh.splice(3, 0, { koin: false }); jatuh.splice(7, 0, { koin: false }); jatuh.splice(10, 0, { koin: false }); }
-      const cepat = TK ? 210 : 270; // px per detik
+      let cepat = TK ? 210 : 270; // px per detik, naik di babak 2
       const jeda = TK ? 1.0 : 0.55; // detik antar item, boleh tumpang di layar
 
       ctx.ask('Geser celengannya! Tangkap koin, hindari batu!', { speak: false });
@@ -106,12 +107,17 @@
         } else a.el.remove();
         selesai++; segarkan(); ctx.progress(selesai, jatuh.length);
       }
-      let idx = 0, rampung = false;
+      let idx = 0, rampung = false, babak2 = false;
       ctx.loop((dt) => {
         if (!ctx.alive || rampung) return false;
         if (idx < jatuh.length) {
           tJeda -= dt;
           if (tJeda <= 0) { luncurkan(jatuh[idx]); idx++; tJeda = jeda; }
+        }
+        if (!babak2 && idx >= Math.ceil(jatuh.length / 2)) {
+          babak2 = true;
+          cepat *= 1.25;
+          ctx.correct(null, { say: 'Bagus! Babak 2, kecepatan naik!' });
         }
         const kx = frac * (W - 64) + 32;
         aktif.slice().forEach((a) => {

@@ -155,11 +155,11 @@
 
       const tk = ctx.isTK;
       let tasks;
-      if (tk) tasks = TK_Q.map((q) => ({ kind: 'tk', q }));
-      else tasks = [{ kind: 'order' }, ...SD_FACTS.map((q) => ({ kind: 'fact', q }))];
+      if (tk) tasks = TK_Q.map((q) => ({ kind: 'tk', q, sulit: ['matahari', 'bumi', 'bulan'].includes(q.ans) ? 0 : 1 })).sort((a, b) => a.sulit - b.sulit); // gampang dulu
+      else { const f = SD_FACTS.map((q) => ({ kind: 'fact', q, sulit: q.ans === 'mars' || q.ans === 'jupiter' ? 0 : typeof q.ans === 'number' ? 2 : 1 })); f.sort((a, b) => a.sulit - b.sulit); tasks = [...f, { kind: 'order' }]; } // fakta dulu lalu urutkan
       tasks.push({ kind: 'orrery' });
 
-      ctx.series(tasks, async (task) => {
+      let ke = 0; ctx.series(tasks, async (task) => { ke++; if (ke === 3) ctx.correct(null, { say: tk ? 'Bagus! Setengah jalan!' : 'Bagus! Terus naik ke yang sulit.' });
         if (task.kind === 'tk') {
           const q = task.q;
           ctx.ask(q.text);
@@ -171,7 +171,7 @@
           });
         } else if (task.kind === 'order') {
           ctx.ask('Urutkan planet dari yang paling dekat dengan Matahari!');
-          ctx.el.append(h('div', { class: 'ta-sunrow' }, planet('matahari', 1), h('span', null, 'Matahari'), h('span', { 'aria-hidden': 'true' }, '➜ makin jauh')));
+          ctx.el.append(h('div', { class: 'ta-sunrow pop-in' }, planet('matahari', 1), h('span', null, 'Matahari'), h('span', { 'aria-hidden': 'true' }, '➜ makin jauh'))); ctx.sfx('pop');
           await ctx.order({
             items: ORDER.map((id) => ({ label: PL[id].name, say: PL[id].name, node: planet(id) })),
             guide: 'after-wrong', label: 'Planet',
@@ -196,7 +196,7 @@
           ctx.ask('Lihat! Planet-planet beredar mengelilingi Matahari.');
           const orr = buildOrrery(ctx);
           ctx.el.append(orr.box);
-          orr.start();
+          orr.start(); ctx.sfx('pop');
           if (tk) ctx.note('Ada 8 planet yang mengelilingi Matahari. Bumi adalah planet ketiga, rumah kita.');
           else {
             ctx.note('Allah berfirman: Matahari dan bulan beredar menurut perhitungan. (QS Ar-Rahman ayat 5)', { title: 'Renungan', speak: false });

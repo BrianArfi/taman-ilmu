@@ -1,4 +1,5 @@
-/* 99 Mana yang Beda. 9 gambar tampil, 1 beda. Ketuk yang beda secepatnya. Semua emoji tanpa wajah. */
+/* 99 Mana yang Beda. 9 gambar tampil, 1 beda. Ketuk yang beda secepatnya. Semua emoji tanpa wajah.
+   Urut gampang dulu (warna dan arah, lalu yang mirip dan jumlah). */
 (function () {
   const { h, shuffle } = TI;
 
@@ -15,12 +16,12 @@
 
   // [mayoritas, yang beda]. Semua tanpa wajah dan mata.
   const TK = [
-    ['🍎', '🍏'], ['🟢', '🟡'], ['⬆️', '⬇️'], ['🔺', '🔻'],
-    ['⭐', '🌙'], ['🍒', '🍇'], ['⚽', '🏀'], ['🥛', '🧃'],
+    ['⬆️', '⬇️', 0], ['🟢', '🟡', 0], ['⭐', '🌙', 0], ['⚽', '🏀', 1],
+    ['🍎', '🍏', 1], ['🔺', '🔻', 1], ['🥛', '🧃', 1], ['🍒', '🍇', 2],
   ];
   const SD = [
-    ['🟥', '🟧'], ['🟦', '🟪'], ['⭐', '🌟'], ['🍇', '🫐'], ['⬆️', '↗️'],
-    ['🍏', '🍐'], ['🍒', '🍒🍒'], ['🟢', '🟩'], ['🍋', '🍌'], ['🔵', '🟣'],
+    ['🟥', '🟧', 1], ['🟦', '🟪', 1], ['🍏', '🍐', 1], ['🍋', '🍌', 1], ['🔵', '🟣', 1],
+    ['⭐', '🌟', 2], ['🍇', '🫐', 2], ['⬆️', '↗️', 2], ['🟢', '🟩', 2], ['🍒', '🍒🍒', 3],
   ];
 
   TI.register({
@@ -32,13 +33,15 @@
     start(ctx) {
       TI.style('beda-satu', CSS);
       const tk = ctx.isTK;
-      const ronde = tk ? TK : SD;
+      const ronde = (tk ? TK : SD).slice();
+      ronde.sort((a, b) => a[2] - b[2]); // gampang dulu
       const total = ronde.length;
       let mulaiSemua = 0;
 
       const main = async () => {
         mulaiSemua = Date.now();
         for (let i = 0; i < total && ctx.alive; i++) {
+          if (i === Math.floor(total / 2)) ctx.correct(null, { say: 'Bagus! Setengah jalan!' });
           ctx.progress(i, total);
           ctx.clear();
           await satu(i);
