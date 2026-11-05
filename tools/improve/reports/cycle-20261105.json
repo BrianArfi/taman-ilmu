@@ -1,0 +1,68 @@
+{
+ "date": "20261105",
+ "version": "improve-v1.0",
+ "rows": [
+  {
+   "id": "hitung",
+   "title": "Ayo Berhitung",
+   "cat": "mat",
+   "file": "08-hitung.js",
+   "static100": 71,
+   "dyn100": 99,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 44,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 84,
+   "cls": "B",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
+   "id": "halal-pilah",
+   "title": "Halal atau Haram",
+   "cat": "islam",
+   "file": "61-halal-pilah.js",
+   "static100": 71,
+   "dyn100": 99,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 47,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 84,
+   "cls": "B",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sfx cuma 1x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "id": "buru-bentuk",
+   "title": "Buru Bentuk",
+   "cat": "mat",
+   "file": "67-buru-bentuk.js",
+   "static100": 86,
+   "dyn100": 99,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 34,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 92,
+   "cls": "A",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sesi 3 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  }
+ ]
+}

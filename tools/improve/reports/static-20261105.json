@@ -1,0 +1,2249 @@
+{
+ "date": "20261105",
+ "version": "improve-v1.2",
+ "games": [
+  {
+   "file": "97-pola-angka.js",
+   "id": "pola-angka",
+   "title": "Pola Angka",
+   "cat": "logika",
+   "bytes": 3958,
+   "soal": 4,
+   "sig": {
+    "aksi": 0,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 43,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "07-adab.js",
+   "id": "adab",
+   "title": "Ucapan & Adab Baik",
+   "cat": "islam",
+   "bytes": 5910,
+   "soal": 8,
+   "sig": {
+    "aksi": 0,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 50,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "96-balok-pas.js",
+   "id": "balok-pas",
+   "title": "Balok yang Pas",
+   "cat": "logika",
+   "bytes": 4808,
+   "soal": 6,
+   "sig": {
+    "aksi": 0,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 50,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "10-banding.js",
+   "id": "banding",
+   "title": "Lebih Besar, Lebih Kecil",
+   "cat": "mat",
+   "bytes": 10840,
+   "soal": null,
+   "sig": {
+    "aksi": 0,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 50,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "26-bangun.js",
+   "id": "bangun",
+   "title": "Bangun Masjid",
+   "cat": "islam",
+   "bytes": 19340,
+   "soal": 8,
+   "sig": {
+    "aksi": 1,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 1
+   },
+   "static100": 50,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "01-hijaiyah.js",
+   "id": "hijaiyah",
+   "title": "Tebak Huruf Hijaiyah",
+   "cat": "islam",
+   "bytes": 2418,
+   "soal": 8,
+   "sig": {
+    "aksi": 0,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 50,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "71-jam-cocok.js",
+   "id": "jam-cocok",
+   "title": "Jam Cocok",
+   "cat": "mat",
+   "bytes": 5791,
+   "soal": 8,
+   "sig": {
+    "aksi": 0,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 50,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "58-jam-shalat.js",
+   "id": "jam-shalat",
+   "title": "Kapan Shalatnya",
+   "cat": "islam",
+   "bytes": 6008,
+   "soal": 5,
+   "sig": {
+    "aksi": 1,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 50,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "78-rumah-makhluk.js",
+   "id": "rumah-makhluk",
+   "title": "Rumah Makhluk",
+   "cat": "sains",
+   "bytes": 6403,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 50,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "60-sirah-urut.js",
+   "id": "sirah-urut",
+   "title": "Urut Kisah Nabi",
+   "cat": "islam",
+   "bytes": 2350,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 50,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "72-sortir-bangun.js",
+   "id": "sortir-bangun",
+   "title": "Sortir Bangun",
+   "cat": "mat",
+   "bytes": 4090,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 50,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "77-tebak-bayang.js",
+   "id": "tebak-bayang",
+   "title": "Tebak Bayangan",
+   "cat": "sains",
+   "bytes": 4400,
+   "soal": 6,
+   "sig": {
+    "aksi": 0,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 50,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "68-tebak-berat.js",
+   "id": "tebak-berat",
+   "title": "Tebak Berat",
+   "cat": "mat",
+   "bytes": 4835,
+   "soal": 3,
+   "sig": {
+    "aksi": 0,
+    "feedback": 0,
+    "ramp": 1,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 50,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "95-teka-teki.js",
+   "id": "teka-teki",
+   "title": "Teka-teki Siapa",
+   "cat": "logika",
+   "bytes": 5165,
+   "soal": null,
+   "sig": {
+    "aksi": 0,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 50,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "52-tertib-shalat.js",
+   "id": "tertib-shalat",
+   "title": "Tertib Gerakan Shalat",
+   "cat": "islam",
+   "bytes": 3217,
+   "soal": 3,
+   "sig": {
+    "aksi": 1,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 50,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "73-toples-tebak.js",
+   "id": "toples-tebak",
+   "title": "Toples Tebakan",
+   "cat": "mat",
+   "bytes": 4855,
+   "soal": 6,
+   "sig": {
+    "aksi": 0,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 50,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "82-daur-hidup.js",
+   "id": "daur-hidup",
+   "title": "Daur Hidup Kacang",
+   "cat": "sains",
+   "bytes": 4740,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 0,
+    "ramp": 1,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 57,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "13-jam.js",
+   "id": "jam",
+   "title": "Jam Berapa?",
+   "cat": "mat",
+   "bytes": 9178,
+   "soal": 8,
+   "sig": {
+    "aksi": 0,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 57,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "06-kartu.js",
+   "id": "kartu",
+   "title": "Kartu Pasangan",
+   "cat": "islam",
+   "bytes": 14323,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 0,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 57,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
+   "file": "53-kisah-clue.js",
+   "id": "kisah-clue",
+   "title": "Tebak Nabi dari Petunjuk",
+   "cat": "islam",
+   "bytes": 5583,
+   "soal": 8,
+   "sig": {
+    "aksi": 0,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 57,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "56-lari-masjid.js",
+   "id": "lari-masjid",
+   "title": "Lari ke Masjid",
+   "cat": "islam",
+   "bytes": 9022,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 1,
+    "ramp": 0,
+    "failsoft": 0,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 57,
+   "sug": [
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
+   "file": "05-nabi.js",
+   "id": "nabi",
+   "title": "Kuis Kisah Nabi",
+   "cat": "islam",
+   "bytes": 6358,
+   "soal": 8,
+   "sig": {
+    "aksi": 0,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 57,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "86-penunjuk-arah.js",
+   "id": "penunjuk-arah",
+   "title": "Penunjuk Arah",
+   "cat": "sains",
+   "bytes": 5747,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 1,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 57,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "55-puasa-sehari.js",
+   "id": "puasa-sehari",
+   "title": "Sehari Berpuasa",
+   "cat": "islam",
+   "bytes": 3573,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 57,
+   "sug": [
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "100-raja-taman.js",
+   "id": "raja-taman",
+   "title": "Raja Taman",
+   "cat": "logika",
+   "bytes": 7377,
+   "soal": 10,
+   "sig": {
+    "aksi": 0,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 57,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "99-beda-satu.js",
+   "id": "beda-satu",
+   "title": "Mana yang Beda",
+   "cat": "logika",
+   "bytes": 4527,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 1,
+    "ramp": 1,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "93-cermin-pola.js",
+   "id": "cermin-pola",
+   "title": "Cermin Pola",
+   "cat": "logika",
+   "bytes": 6355,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "09-gelembung.js",
+   "id": "gelembung",
+   "title": "Pecah Gelembung",
+   "cat": "mat",
+   "bytes": 15253,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 1,
+    "ramp": 1,
+    "failsoft": 0,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "35-grafik.js",
+   "id": "grafik",
+   "title": "Panen Buah & Grafik",
+   "cat": "mat",
+   "bytes": 15261,
+   "soal": 3,
+   "sig": {
+    "aksi": 1,
+    "feedback": 1,
+    "ramp": 1,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "69-lompat-bintang.js",
+   "id": "lompat-bintang",
+   "title": "Lompat Bintang",
+   "cat": "mat",
+   "bytes": 5051,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 1,
+    "ramp": 1,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "75-pancing-magnet.js",
+   "id": "pancing-magnet",
+   "title": "Pancing Magnet",
+   "cat": "sains",
+   "bytes": 9258,
+   "soal": 4,
+   "sig": {
+    "aksi": 2,
+    "feedback": 1,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
+   "file": "91-parkir.js",
+   "id": "parkir",
+   "title": "Parkir Pintar",
+   "cat": "logika",
+   "bytes": 14698,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "11-pola.js",
+   "id": "pola",
+   "title": "Lanjutkan Pola",
+   "cat": "mat",
+   "bytes": 11368,
+   "soal": 7,
+   "sig": {
+    "aksi": 0,
+    "feedback": 0,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "03-rukun.js",
+   "id": "rukun",
+   "title": "Rukun Islam & Iman",
+   "cat": "islam",
+   "bytes": 5338,
+   "soal": 3,
+   "sig": {
+    "aksi": 2,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "94-sambung-kabel.js",
+   "id": "sambung-kabel",
+   "title": "Sambung Kabel",
+   "cat": "logika",
+   "bytes": 11869,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "04-shalat.js",
+   "id": "shalat",
+   "title": "Shalat 5 Waktu",
+   "cat": "islam",
+   "bytes": 10893,
+   "soal": 3,
+   "sig": {
+    "aksi": 1,
+    "feedback": 0,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "87-siang-malam.js",
+   "id": "siang-malam",
+   "title": "Siang atau Malam",
+   "cat": "sains",
+   "bytes": 5920,
+   "soal": 6,
+   "sig": {
+    "aksi": 2,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "sfx cuma 1x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "44-sudoku.js",
+   "id": "sudoku",
+   "title": "Sudoku Mini",
+   "cat": "logika",
+   "bytes": 16379,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "62-tabung-infaq.js",
+   "id": "tabung-infaq",
+   "title": "Tabung Infaq",
+   "cat": "islam",
+   "bytes": 8289,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 1,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
+   "file": "20-tatasurya.js",
+   "id": "tatasurya",
+   "title": "Jelajah Tata Surya",
+   "cat": "sains",
+   "bytes": 14974,
+   "soal": 3,
+   "sig": {
+    "aksi": 2,
+    "feedback": 0,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "02-wudhu.js",
+   "id": "wudhu",
+   "title": "Urutan Wudhu",
+   "cat": "islam",
+   "bytes": 5665,
+   "soal": 5,
+   "sig": {
+    "aksi": 1,
+    "feedback": 0,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "16-apung.js",
+   "id": "apung",
+   "title": "Tenggelam atau Terapung",
+   "cat": "sains",
+   "bytes": 13862,
+   "soal": 3,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "79-baju-cuaca.js",
+   "id": "baju-cuaca",
+   "title": "Koper Cuaca",
+   "cat": "sains",
+   "bytes": 5161,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 1,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "sfx cuma 1x: bunyikan tiap aksi berhasil/gagal",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "92-balik-ingat.js",
+   "id": "balik-ingat",
+   "title": "Balik dan Ingat",
+   "cat": "logika",
+   "bytes": 5839,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "12-bentuk.js",
+   "id": "bentuk",
+   "title": "Kenal Bentuk",
+   "cat": "mat",
+   "bytes": 13253,
+   "soal": 5,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "sesi 5 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "57-doa-pasang.js",
+   "id": "doa-pasang",
+   "title": "Pasangan Doa",
+   "cat": "islam",
+   "bytes": 7289,
+   "soal": 6,
+   "sig": {
+    "aksi": 1,
+    "feedback": 0,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "45-geser.js",
+   "id": "geser",
+   "title": "Geser Angka",
+   "cat": "logika",
+   "bytes": 13556,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "23-haji.js",
+   "id": "haji",
+   "title": "haji",
+   "cat": "islam",
+   "bytes": 23449,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "61-halal-pilah.js",
+   "id": "halal-pilah",
+   "title": "Halal atau Haram",
+   "cat": "islam",
+   "bytes": 3175,
+   "soal": 3,
+   "sig": {
+    "aksi": 1,
+    "feedback": 0,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sfx cuma 1x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "08-hitung.js",
+   "id": "hitung",
+   "title": "Ayo Berhitung",
+   "cat": "mat",
+   "bytes": 9831,
+   "soal": 4,
+   "sig": {
+    "aksi": 1,
+    "feedback": 1,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
+   "file": "88-kode-warna.js",
+   "id": "kode-warna",
+   "title": "Tebak Kode Warna",
+   "cat": "logika",
+   "bytes": 8982,
+   "soal": 4,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
+   "file": "89-labirin-es.js",
+   "id": "labirin-es",
+   "title": "Labirin Es",
+   "cat": "logika",
+   "bytes": 9752,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "98-lawan-kata.js",
+   "id": "lawan-kata",
+   "title": "Lawan Kata",
+   "cat": "logika",
+   "bytes": 6600,
+   "soal": 6,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "37-listrik.js",
+   "id": "listrik",
+   "title": "Rangkaian Listrik",
+   "cat": "sains",
+   "bytes": 28424,
+   "soal": 2,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 0,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut",
+    "sesi 2 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "17-magnet.js",
+   "id": "magnet",
+   "title": "Ajaib Magnet",
+   "cat": "sains",
+   "bytes": 14448,
+   "soal": 4,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "sesi 4 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "65-pola-menara.js",
+   "id": "pola-menara",
+   "title": "Menara Pola",
+   "cat": "mat",
+   "bytes": 6562,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 1,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "24-puzzle.js",
+   "id": "puzzle",
+   "title": "Puzzle Masjid",
+   "cat": "islam",
+   "bytes": 22713,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 1,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "76-roket-air.js",
+   "id": "roket-air",
+   "title": "Roket Air",
+   "cat": "sains",
+   "bytes": 8372,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
+   "file": "85-sambung-pipa.js",
+   "id": "sambung-pipa",
+   "title": "Sambung Pipa",
+   "cat": "sains",
+   "bytes": 9679,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 1,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "90-tangram.js",
+   "id": "tangram",
+   "title": "Tangram Rumah",
+   "cat": "logika",
+   "bytes": 9921,
+   "soal": 3,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "sesi 3 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "81-tebak-bunyi.js",
+   "id": "tebak-bunyi",
+   "title": "Tebak Bunyi",
+   "cat": "sains",
+   "bytes": 4974,
+   "soal": 10,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "80-tubuhku.js",
+   "id": "tubuhku",
+   "title": "Tubuhku",
+   "cat": "sains",
+   "bytes": 5371,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 0,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "sfx cuma 1x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "63-balap-kali.js",
+   "id": "balap-kali",
+   "title": "Balap Kali-kali",
+   "cat": "mat",
+   "bytes": 9062,
+   "soal": 10,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "38-bayangan.js",
+   "id": "bayangan",
+   "title": "Cahaya & Bayangan",
+   "cat": "sains",
+   "bytes": 24758,
+   "soal": 7,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "46-beda.js",
+   "id": "beda",
+   "title": "Cari Perbedaan",
+   "cat": "logika",
+   "bytes": 22401,
+   "soal": 3,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "sesi 3 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "74-belah-buah.js",
+   "id": "belah-buah",
+   "title": "Belah Buah Hitung",
+   "cat": "mat",
+   "bytes": 7964,
+   "soal": 5,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "sesi 5 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "41-hujan.js",
+   "id": "hujan",
+   "title": "Siklus Air & Cuaca",
+   "cat": "sains",
+   "bytes": 19279,
+   "soal": 6,
+   "sig": {
+    "aksi": 2,
+    "feedback": 0,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "47-ingat.js",
+   "id": "ingat",
+   "title": "Ingat Urutan",
+   "cat": "logika",
+   "bytes": 9817,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "18-lempar.js",
+   "id": "lempar",
+   "title": "Lempar Tepat",
+   "cat": "sains",
+   "bytes": 23285,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
+   "file": "31-menara.js",
+   "id": "menara",
+   "title": "Menara Balok",
+   "cat": "mat",
+   "bytes": 21960,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "64-pizza-pecahan.js",
+   "id": "pizza-pecahan",
+   "title": "Pizza Pecahan",
+   "cat": "mat",
+   "bytes": 7807,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
+   "file": "33-rahasia.js",
+   "id": "rahasia",
+   "title": "Angka Rahasia",
+   "cat": "mat",
+   "bytes": 13759,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 1,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal"
+   ]
+  },
+  {
+   "file": "59-sedekah-warung.js",
+   "id": "sedekah-warung",
+   "title": "Warung Sedekah",
+   "cat": "islam",
+   "bytes": 14972,
+   "soal": 3,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "sesi 3 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "48-susun.js",
+   "id": "susun",
+   "title": "Susun Bentuk",
+   "cat": "logika",
+   "bytes": 21959,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "42-tanam.js",
+   "id": "tanam",
+   "title": "Ayo Menanam",
+   "cat": "sains",
+   "bytes": 28977,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "15-timbangan.js",
+   "id": "timbangan",
+   "title": "Timbangan Seimbang",
+   "cat": "sains",
+   "bytes": 17526,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
+   "file": "36-ukur.js",
+   "id": "ukur",
+   "title": "Ayo Mengukur",
+   "cat": "mat",
+   "bytes": 28077,
+   "soal": 3,
+   "sig": {
+    "aksi": 2,
+    "feedback": 1,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "14-warung.js",
+   "id": "warung",
+   "title": "Warung Jujur",
+   "cat": "mat",
+   "bytes": 16694,
+   "soal": 5,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "sesi 5 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "19-wujud.js",
+   "id": "wujud",
+   "title": "Es, Air, Uap",
+   "cat": "sains",
+   "bytes": 18056,
+   "soal": 2,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 0,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
+    "sesi 2 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "54-zakat-fitrah.js",
+   "id": "zakat-fitrah",
+   "title": "Takar Zakat Fitrah",
+   "cat": "islam",
+   "bytes": 5585,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "32-balapan.js",
+   "id": "balapan",
+   "title": "Balapan Hitung",
+   "cat": "mat",
+   "bytes": 17515,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "67-buru-bentuk.js",
+   "id": "buru-bentuk",
+   "title": "Buru Bentuk",
+   "cat": "mat",
+   "bytes": 8581,
+   "soal": 3,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "sesi 3 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "34-domino.js",
+   "id": "domino",
+   "title": "Domino Hitung",
+   "cat": "mat",
+   "bytes": 14947,
+   "soal": 4,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
+    "sesi 4 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "49-hanoi.js",
+   "id": "hanoi",
+   "title": "Menara Hanoi",
+   "cat": "logika",
+   "bytes": 14767,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "file": "84-katrol.js",
+   "id": "katrol",
+   "title": "Katrol dan Tuas",
+   "cat": "sains",
+   "bytes": 7776,
+   "soal": 4,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "sesi 4 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "66-kembalian-kilat.js",
+   "id": "kembalian-kilat",
+   "title": "Kembalian Kilat",
+   "cat": "mat",
+   "bytes": 8153,
+   "soal": 5,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
+    "sesi 5 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "22-labirin.js",
+   "id": "labirin",
+   "title": "Labirin ke Masjid",
+   "cat": "islam",
+   "bytes": 24249,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "43-laser.js",
+   "id": "laser",
+   "title": "Cermin Ajaib",
+   "cat": "sains",
+   "bytes": 17895,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "29-loncat.js",
+   "id": "loncat",
+   "title": "Loncat Angka",
+   "cat": "mat",
+   "bytes": 21230,
+   "soal": 8,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "83-mendarat-bulan.js",
+   "id": "mendarat-bulan",
+   "title": "Mendarat di Bulan",
+   "cat": "sains",
+   "bytes": 10031,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "50-mobil.js",
+   "id": "mobil",
+   "title": "Mobil Pintar",
+   "cat": "logika",
+   "bytes": 24449,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "file": "21-tangkap.js",
+   "id": "tangkap",
+   "title": "Tangkap Hijaiyah",
+   "cat": "islam",
+   "bytes": 27649,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
+   "file": "39-warna.js",
+   "id": "warna",
+   "title": "Lab Warna & Pelangi",
+   "cat": "sains",
+   "bytes": 22148,
+   "soal": 3,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut",
+    "sesi 3 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "51-asma-buru.js",
+   "id": "asma-buru",
+   "title": "Buru Asmaul Husna",
+   "cat": "islam",
+   "bytes": 6575,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": []
+  },
+  {
+   "file": "70-bagi-permen.js",
+   "id": "bagi-permen",
+   "title": "Bagi Permen",
+   "cat": "mat",
+   "bytes": 9456,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": []
+  },
+  {
+   "file": "40-gesekan.js",
+   "id": "gesekan",
+   "title": "Luncur Kotak",
+   "cat": "sains",
+   "bytes": 26285,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": []
+  },
+  {
+   "file": "28-hijriah.js",
+   "id": "hijriah",
+   "title": "Kereta Bulan Hijriah",
+   "cat": "islam",
+   "bytes": 18951,
+   "soal": 4,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": [
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
+    "sesi 4 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "27-kiblat.js",
+   "id": "kiblat",
+   "title": "Arah Kiblat",
+   "cat": "islam",
+   "bytes": 14862,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": [
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
+   "file": "30-martabak.js",
+   "id": "martabak",
+   "title": "Bagi Martabak",
+   "cat": "mat",
+   "bytes": 20539,
+   "soal": 5,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": [
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
+    "sesi 5 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "25-surat.js",
+   "id": "surat",
+   "title": "Surat Pendek",
+   "cat": "islam",
+   "bytes": 16775,
+   "soal": 4,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": [
+    "sesi 4 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  }
+ ]
+}
