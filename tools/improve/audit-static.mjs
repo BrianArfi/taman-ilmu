@@ -16,7 +16,9 @@ const count = (src, re) => (src.match(re) || []).length;
 
 function audit(file) {
   const src = fs.readFileSync(path.join(gamesDir, file), 'utf8');
-  const reg = src.slice(src.indexOf('TI.register('), src.indexOf('TI.register(') + 600);
+  const ri = src.indexOf('TI.register(');
+  const rs = src.indexOf('start(ctx)', ri);
+  const reg = src.slice(ri, rs > ri ? rs : ri + 350);
   const id = (reg.match(/id:\s*'([^']+)'/) || [])[1] || file.replace(/^\d+-|\.js$/g, '');
   const title = (reg.match(/title:\s*'([^']+)'/) || [])[1] || id;
   const cat = (reg.match(/cat:\s*'([^']+)'/) || [])[1] || '?';
@@ -57,7 +59,8 @@ function audit(file) {
   const bantu = has(src, /Bantu|ti-help|💡/);
   const gagal3 = has(src, /(gagal|salah|bantu|miss).{0,12}3|attempt|kesempatan|tunjuk|cara benar|jawaban benar.{0,30}lanjut/i);
   sig.failsoft = (bantu ? 1 : 0) + (gagal3 ? 1 : 0);
-  const isPuzzle = has(src, /puzzle|labirin|susun|teka|kode|hanoi|parkir|kabel|tangram|geser|sudoku/i);
+  // Puzzle = dilihat dari judul/deskripsi register, bukan kata di komentar kode.
+  const isPuzzle = /puzzle|labirin|susun|teka|kode|hanoi|parkir|kabel|tangram|geser|sudoku/i.test(reg);
   // Primitif guided-retry (tidak bisa macet): pilih/susun/pilah/pasang selalu bisa selesai.
   if (has(src, /ctx\.choose|ctx\.sort|ctx\.order|ctx\.place/)) sig.failsoft = Math.min(2, sig.failsoft + 1);
   if (!isPuzzle && has(src, /retry|coba lagi|main lagi|ulangi|ulang\b/i)) sig.failsoft = Math.min(2, sig.failsoft + 1);
@@ -71,7 +74,7 @@ function audit(file) {
   const nums = struct.length ? struct : textN;
   const soal = nums.length ? Math.max(...nums) : null;
   sig.sesi = soal === null ? 1 : (soal >= 6 && soal <= 10 ? 2 : soal >= 3 && soal <= 12 ? 1 : 0);
-  if (soal !== null && (soal < 6 || soal > 10)) sug.push(`sesi ${soal} soal: ideal 6-10 soal (2-4 menit)`);
+  if (soal !== null && (soal < 3 || soal > 12)) sug.push(`sesi ${soal} soal: ideal 6-10 soal (2-4 menit)`);
 
   // 6. Dukungan TK: cabang isTK, pilihan dibacakan, titik/dots
   const tkHits = ['ctx.isTK', 'isTK', 'speakLabel', 'TI.dots', 'dots(', 'guide:'].filter((k) => src.includes(k));
@@ -94,7 +97,7 @@ function audit(file) {
 const files = fs.readdirSync(gamesDir).filter((f) => f.endsWith('.js')).sort();
 const rows = files.map(audit).sort((a, b) => a.static100 - b.static100 || a.id.localeCompare(b.id));
 const d = new Date(Date.now() + 7 * 3600 * 1000).toISOString().slice(0, 10).replaceAll('-', '');
-const out = { date: d, version: 'improve-v1.2', games: rows };
+const out = { date: d, version: 'improve-v1.4', games: rows };
 fs.writeFileSync(path.join(outDir, `static-${d}.json`), JSON.stringify(out, null, 1));
 
 const cls = (s) => (s >= 85 ? 'A' : s >= 70 ? 'B' : s >= 50 ? 'C' : 'D');

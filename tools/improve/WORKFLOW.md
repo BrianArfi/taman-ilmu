@@ -43,8 +43,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
    perubahan apa pun di teks/fakta agama = **gerbang ustadz** (tahan, minta
    review ustadz/guru TPA sebelum push, lalu kabari grup keluarga).
 4. **Gerak SPEC 4**: motion-lint 0 error untuk file yang diubah.
-5. **Deploy = push ke main**: tidak pernah push tanpa kata "gas" dari Brian.
-   Commit lokal bebas (reversibel), push tidak.
+5. **Deploy = push ke main**: standing gas dari Brian (5 Nov 2026) buat
+   tiap siklus yang lolos gerbang 1-4. Tiap push dicatat di laporan siklus
+   (commit + cek live). Tanpa standing gas, push nunggu kata "gas".
 
 ## Kadensi
 
@@ -57,7 +58,15 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 ## Riwayat versi
 
 - **Siklus 1 (5 Nov 2026)**: hitung 72→84, buru-bentuk 73→92, halal-pilah
-  72→84. Detail: `reports/cycle-20261105.md`.
+  72→84. Detail: `reports/cycle-20261105.md`. Push + live terverifikasi.
+  Standing gas buat siklus berikut.
+- **Siklus 2 (5 Nov 2026)**: pola-angka 69→88, balok-pas 73→88, banding
+  73→92, rumah-makhluk 72→84, sirah-urut 73→88. D0 tercapai.
+  Detail: `reports/cycle-20261105-s2.md`.
+- **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
+  (bukan kata di komentar); fail-soft hitung order/sort/place.
+- **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar
+  kode tidak ikut); saran sesi cuma kalau di luar 3-12.
 - **v1.2 (5 Nov 2026)**: sfx hitung correct/wrong; ramp kenal sort komparator +
   array ronde menanjak; fail-soft kenal ctx.choose dan hitungan bantu ke-3.
 - **v1.1 (5 Nov 2026)**: id dibaca dari blok TI.register; aksi hitung tombol

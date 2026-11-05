@@ -3,15 +3,15 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "hitung",
-   "title": "Ayo Berhitung",
-   "cat": "mat",
-   "file": "08-hitung.js",
+   "id": "rumah-makhluk",
+   "title": "Rumah Makhluk",
+   "cat": "sains",
+   "file": "78-rumah-makhluk.js",
    "static100": 71,
    "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 44,
+   "avgActions": 52,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
@@ -19,49 +19,89 @@
    "cls": "B",
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
-    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {
-   "id": "halal-pilah",
-   "title": "Halal atau Haram",
+   "id": "pola-angka",
+   "title": "Pola Angka",
+   "cat": "logika",
+   "file": "97-pola-angka.js",
+   "static100": 79,
+   "dyn100": 99,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 51,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 88,
+   "cls": "A",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut",
+    "sesi 4 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "id": "balok-pas",
+   "title": "Balok yang Pas",
+   "cat": "logika",
+   "file": "96-balok-pas.js",
+   "static100": 79,
+   "dyn100": 100,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 15,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 88,
+   "cls": "A",
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "id": "sirah-urut",
+   "title": "Urut Kisah Nabi",
    "cat": "islam",
-   "file": "61-halal-pilah.js",
-   "static100": 71,
-   "dyn100": 99,
+   "file": "60-sirah-urut.js",
+   "static100": 79,
+   "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 47,
+   "avgActions": 14,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 84,
-   "cls": "B",
+   "fun": 88,
+   "cls": "A",
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton",
-    "sfx cuma 1x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {
-   "id": "buru-bentuk",
-   "title": "Buru Bentuk",
+   "id": "banding",
+   "title": "Lebih Besar, Lebih Kecil",
    "cat": "mat",
-   "file": "67-buru-bentuk.js",
+   "file": "10-banding.js",
    "static100": 86,
-   "dyn100": 99,
+   "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 34,
+   "avgActions": 16,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
    "fun": 92,
    "cls": "A",
    "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "sesi 3 soal: ideal 6-10 soal (2-4 menit)"
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
    ]
   }
  ]
