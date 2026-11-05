@@ -26,98 +26,6 @@
    ]
   },
   {
-   "file": "06-kartu.js",
-   "id": "kartu",
-   "title": "Kartu Pasangan",
-   "cat": "islam",
-   "bytes": 14323,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 0,
-    "failsoft": 0,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 57,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "53-kisah-clue.js",
-   "id": "kisah-clue",
-   "title": "Tebak Nabi dari Petunjuk",
-   "cat": "islam",
-   "bytes": 5583,
-   "soal": 8,
-   "sig": {
-    "aksi": 0,
-    "feedback": 0,
-    "ramp": 0,
-    "failsoft": 2,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 57,
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
-   ]
-  },
-  {
-   "file": "56-lari-masjid.js",
-   "id": "lari-masjid",
-   "title": "Lari ke Masjid",
-   "cat": "islam",
-   "bytes": 9022,
-   "soal": null,
-   "sig": {
-    "aksi": 2,
-    "feedback": 1,
-    "ramp": 0,
-    "failsoft": 0,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 57,
-   "sug": [
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "55-puasa-sehari.js",
-   "id": "puasa-sehari",
-   "title": "Sehari Berpuasa",
-   "cat": "islam",
-   "bytes": 3573,
-   "soal": null,
-   "sig": {
-    "aksi": 2,
-    "feedback": 0,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 57,
-   "sug": [
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
    "file": "99-beda-satu.js",
    "id": "beda-satu",
    "title": "Mana yang Beda",
@@ -186,6 +94,28 @@
    ]
   },
   {
+   "file": "06-kartu.js",
+   "id": "kartu",
+   "title": "Kartu Pasangan",
+   "cat": "islam",
+   "bytes": 14672,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 64,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
    "file": "69-lompat-bintang.js",
    "id": "lompat-bintang",
    "title": "Lompat Bintang",
@@ -229,29 +159,6 @@
     "tambah variasi aksi kedua biar tidak monoton",
     "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "11-pola.js",
-   "id": "pola",
-   "title": "Lanjutkan Pola",
-   "cat": "mat",
-   "bytes": 11368,
-   "soal": 7,
-   "sig": {
-    "aksi": 0,
-    "feedback": 0,
-    "ramp": 1,
-    "failsoft": 2,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 64,
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
    ]
   },
   {
@@ -1847,6 +1754,27 @@
    ]
   },
   {
+   "file": "53-kisah-clue.js",
+   "id": "kisah-clue",
+   "title": "Tebak Nabi dari Petunjuk",
+   "cat": "islam",
+   "bytes": 6141,
+   "soal": 8,
+   "sig": {
+    "aksi": 0,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
+   ]
+  },
+  {
    "file": "22-labirin.js",
    "id": "labirin",
    "title": "Labirin ke Masjid",
@@ -1866,6 +1794,25 @@
    "sug": [
     "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
    ]
+  },
+  {
+   "file": "56-lari-masjid.js",
+   "id": "lari-masjid",
+   "title": "Lari ke Masjid",
+   "cat": "islam",
+   "bytes": 9767,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": []
   },
   {
    "file": "29-loncat.js",
@@ -1949,6 +1896,49 @@
    "static100": 86,
    "sug": [
     "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
+   ]
+  },
+  {
+   "file": "11-pola.js",
+   "id": "pola",
+   "title": "Lanjutkan Pola",
+   "cat": "mat",
+   "bytes": 11714,
+   "soal": 7,
+   "sig": {
+    "aksi": 0,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "55-puasa-sehari.js",
+   "id": "puasa-sehari",
+   "title": "Sehari Berpuasa",
+   "cat": "islam",
+   "bytes": 3861,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {

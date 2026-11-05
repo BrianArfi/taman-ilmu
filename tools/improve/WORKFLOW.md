@@ -72,6 +72,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 5 (5 Nov 2026)**: daur-hidup 76→88, jam 76→92, raja-taman
   76→84, nabi 76→92, penunjuk-arah 76→88.
   Detail: `reports/cycle-20261105-s5.md`.
+- **Siklus 6 (5 Nov 2026)**: kartu 76→80, kisah-clue 76→92,
+  lari-masjid 75→91, puasa-sehari 76→92, pola 80→92.
+  Detail: `reports/cycle-20261105-s6.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar
