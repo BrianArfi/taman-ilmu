@@ -78,7 +78,7 @@
       async function catatan(teks) {
         ctx.clear();
         ctx.ask('Hebat! Urutan wudhu sudah benar.', { speak: false });
-        ctx.note(teks);
+        ctx.sfx('pop'); ctx.note(teks);
         await ctx.next();
       }
 
@@ -86,7 +86,7 @@
         ctx.ask('Ketuk langkah wudhu sesuai urutan!');
         await ctx.order({ items: LANGKAH.slice(0, 5), guide: 'after-wrong', label: 'Langkah', onStep: (n) => maju(n) });
         ctx.clear();
-        ctx.ask('Bagus! Sekarang lima langkah berikutnya.');
+        ctx.correct(null, { say: 'Bagus! Terus naik ke lima langkah akhir.' }); ctx.ask('Bagus! Sekarang lima langkah berikutnya.');
         await ctx.order({ items: LANGKAH.slice(5), guide: 'after-wrong', label: 'Langkah', start: 6, onStep: (n) => maju(5 + n) });
         await catatan(CATATAN_TK);
         await soalGambar('Wudhu memakai apa?', [
@@ -98,10 +98,10 @@
         ], 'Shalat');
       } else {
         ctx.ask('Urutkan 10 langkah wudhu dari awal sampai akhir!');
-        await ctx.order({ items: LANGKAH, guide: 'never', label: 'Langkah', onStep: (n) => maju(n) });
-        await catatan(CATATAN_SD);
+        await ctx.order({ items: LANGKAH, guide: 'after-wrong', label: 'Langkah', onStep: (n) => maju(n) });
+        await catatan(CATATAN_SD); ctx.correct(null, { say: 'Bagus! Urutan selesai!' });
         // 3 soal "Setelah X, langkah berikutnya?"
-        const awal = sample([0, 1, 2, 3, 4, 5, 6, 7, 8], 3);
+        const awal = sample([0, 1, 2, 3, 4, 5, 6, 7, 8], 3).sort((a, b) => a - b); // langkah awal dulu
         for (let k = 0; k < awal.length; k++) {
           const i = awal[k];
           if (!ctx.alive) return;

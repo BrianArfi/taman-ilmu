@@ -1,5 +1,5 @@
 /* 09 Pecah Gelembung. Arkade: gelembung berisi angka naik pelan dari bawah, anak memecahkan yang benar.
-   Gerak gelembung lewat ctx.loop + translate3d (bukan top/left). Satu sesi = 10 jawaban benar. */
+   Gerak gelembung lewat ctx.loop + translate3d (bukan top/left). Satu sesi = 10 jawaban benar. Babak 2 di tengah: lebih cepat. Tiap 3x salah permainan melambat. */
 (function () {
   const { h, rand, shuffle, sample } = TI;
 
@@ -121,7 +121,7 @@
       const maxSize = ctx.isTK ? 96 : 84;
       const targets = ctx.isTK ? targetTK() : targetSD();
 
-      let tIdx = 0, target = targets[0], selesai = 0, berhenti = false;
+      let tIdx = 0, target = targets[0], selesai = 0, berhenti = false, babak2 = false, gagal = 0;
       let W = 0, H = 0, lane = 0, size = minSize, amp = 0, waktu = 0, tanpaBenar = 0, ukurTerakhir = 0;
 
       const panel = h('div', { class: 'ti-panel gel-panel', 'aria-hidden': 'true' });
@@ -168,7 +168,7 @@
         b.el.style.setProperty('--bc', b.warna);
       }
       function kecepatan() {
-        return H * (ctx.isTK ? 0.12 : 0.17) * (reduced ? 0.55 : 1) * (0.95 + Math.random() * 0.1);
+        return H * (ctx.isTK ? 0.12 : 0.17) * (reduced ? 0.55 : 1) * (0.95 + Math.random() * 0.1) * (babak2 ? 1.25 : 1);
       }
       function munculLagi(b, paksaBenar) {
         const lain = bubbles.filter((o) => o !== b && !o.popped);
@@ -207,7 +207,7 @@
           b.popped = true;
           ctx.sfx('pop');
           meledak(b);
-          selesai++;
+          selesai++; gagal = 0; if (!babak2 && selesai >= 5) { babak2 = true; for (const x of bubbles) x.speed *= 1.25; ctx.correct(null, { say: 'Bagus! Babak 2, lebih cepat!' }); }
           ctx.progress(selesai, TOTAL);
           if (selesai >= TOTAL) {
             berhenti = true;
@@ -223,7 +223,7 @@
           ctx.after(260, () => { if (!berhenti) munculLagi(b, true); });
         } else {
           const itu = ctx.isTK ? 'Itu angka ' + kata(b.value) + '. Cari angka ' + kata(target.res) + '.' : false;
-          ctx.wrong(b.el, { say: itu });
+          if (++gagal >= 3) { gagal = 0; for (const x of bubbles) x.speed *= 0.7; ctx.say('Santai saja, pelan-pelan.'); } ctx.wrong(b.el, { say: itu });
         }
       }
 

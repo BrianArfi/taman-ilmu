@@ -1,5 +1,6 @@
 /* 87 Siang atau Malam. Pilah kegiatan ke keranjang SIANG vs MALAM (ctx.sort),
-   lalu putar bumi mini dengan slider untuk melihat siang dan malam berganti. */
+   lalu putar bumi mini dengan slider untuk melihat siang dan malam berganti.
+   Urut gampang dulu (sahur belakangan). Batas siang-malam berbunyi. */
 (function () {
   const { h, shuffle } = TI;
 
@@ -38,10 +39,14 @@
     start(ctx) {
       TI.style('siang-malam', CSS);
       const items = shuffle(ctx.isTK ? KEGIATAN.slice(0, 6).map((k) => ({ ...k })) : KEGIATAN.map((k) => ({ ...k })));
+      const SULIT = { 'Pergi ke sekolah': 0, 'Makan siang': 0, 'Bermain bola': 0, 'Tidur malam': 0, 'Melihat bintang': 0, 'Makan malam': 0, 'Bermain layangan': 1, 'Menjemur baju': 1, 'Membaca sebelum tidur': 1, 'Makan sahur': 2 };
+      items.forEach((k) => { k.sulit = SULIT[k.label] ?? 1; });
+      items.sort((a, b) => a.sulit - b.sulit);
       // Pastikan campur siang dan malam.
       if (!items.some((x) => x.bin === 'siang')) items[0] = { ...KEGIATAN[0] };
       return (async () => {
         ctx.ask('Kegiatan ini waktunya kapan? Ketuk keranjang Siang atau Malam.');
+        ctx.sfx('pop');
         await ctx.sort({
           items: items.map((k) => ({
             label: k.label, bin: k.bin,
@@ -49,7 +54,10 @@
             why: ctx.isTK ? undefined : k.why,
           })),
           bins: BINS,
-          onStep: (done, total) => ctx.progress(done, total + 1),
+          onStep: (done, total) => {
+            ctx.progress(done, total + 1);
+            if (done === Math.ceil(total / 2)) ctx.correct(null, { say: 'Bagus! Terus naik ke yang sulit.' });
+          },
         });
         if (!ctx.alive) return;
         await putarBumi(ctx, items.length);
@@ -71,13 +79,14 @@
           + '<g><circle cx="52" cy="40" r="22" fill="#ffd23f"/><circle cx="250" cy="40" r="16" fill="#f4f1de"/><circle cx="244" cy="35" r="13" fill="#0a1030"/></g>'
           + '<g class="sm-spin"><circle cx="150" cy="95" r="46" fill="#2f8fe0"/><path d="M150 49 A46 46 0 0 1 150 141 Z" fill="#12325e"/><path d="M120 80 Q135 70 150 78 Q165 86 160 100 Q150 112 135 106 Q122 100 120 80 Z" fill="#4caf6d"/><circle cx="150" cy="95" r="46" fill="none" stroke="#fff" stroke-width="3"/><circle class="sm-kota" cx="150" cy="62" r="6" fill="#ffd23f" stroke="#7a4d00" stroke-width="2"/></g>'
           + '<text x="150" y="162" text-anchor="middle" font-size="14" font-weight="800" fill="#fff" class="sm-teks">Kotamu: SIANG</text>';
-        const board = h('div', { class: 'sm-board' }, svgEl);
+        const board = h('div', { class: 'sm-board pop-in' }, svgEl);
         const cap = h('p', { class: 'sm-cap', 'aria-live': 'polite' }, 'Kotamu terang: siang hari.');
         const slider = h('input', { type: 'range', class: 'ti-slider', min: 0, max: 360, step: 5, value: 0, 'aria-label': 'Putar bumi' });
         const lanjut = h('button', { type: 'button', class: 'ti-btn' }, 'Lanjut ➜');
         const spin = svgEl.querySelector('.sm-spin');
         const teks = svgEl.querySelector('.sm-teks');
         const kota = svgEl.querySelector('.sm-kota');
+        let terakhirSiang = true;
         slider.addEventListener('input', () => {
           const deg = +slider.value;
           spin.style.transition = 'transform 150ms var(--ease-out)';
@@ -87,6 +96,7 @@
           const siang = (deg % 360) < 180;
           teks.textContent = siang ? 'Kotamu: SIANG' : 'Kotamu: MALAM';
           cap.textContent = siang ? 'Kotamu terang: siang hari.' : 'Kotamu gelap: malam hari.';
+          if (siang !== terakhirSiang) { terakhirSiang = siang; ctx.sfx('pop'); }
           kota.setAttribute('fill', siang ? '#ffd23f' : '#9aa3b5');
         });
         ctx.el.append(board, cap, slider, lanjut);

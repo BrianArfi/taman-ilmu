@@ -69,12 +69,12 @@
       if (ctx.isTK) {
         // Rukun Islam dengan petunjuk suara di tiap langkah. Tunggu soal selesai dibacakan dulu
         // supaya suaranya tidak terpotong oleh petunjuk langkah pertama.
-        await ctx.ask('Ketuk gambar rukun Islam sesuai urutan!');
+        await ctx.ask('Tahap 1: ketuk gambar rukun Islam sesuai urutan!'); ctx.sfx('pop');
         if (!ctx.alive) return;
         await ctx.order({ items: ISLAM, guide: 'always', label: 'Rukun Islam', onStep: (n) => maju(n) });
 
         ctx.clear();
-        ctx.ask('Ada berapa rukun Islam?');
+        ctx.correct(null, { say: 'Bagus! Terus naik ke kuis.' }); ctx.ask('Tahap 2: ada berapa rukun Islam?');
         ctx.el.append(h('div', { class: 'ti-card rk-kartu pop-in' }, h('div', { class: 'rk-ikon', 'aria-hidden': 'true' }, ISLAM.map((x) => h('span', null, x.icon)))));
         await ctx.choose({
           options: [4, 5, 6].map((n) => ({ node: angka(n), value: n, say: String(n), aria: n + ' rukun', cls: 'is-big' })),
@@ -83,7 +83,7 @@
         maju(6);
 
         ctx.clear();
-        ctx.ask('Puasa wajib di bulan apa?');
+        ctx.ask('Tahap 3: puasa wajib di bulan apa?');
         ctx.el.append(h('div', { class: 'ti-card rk-kartu pop-in' }, h('p', { class: 'rk-bulan', 'aria-hidden': 'true' }, '🌙')));
         await ctx.choose({
           options: shuffle(['Ramadhan', 'Syawal', 'Muharram']).map((t) => ({ label: t, value: t })),
@@ -91,16 +91,16 @@
           layout: 'is-col',
         });
       } else {
-        ctx.ask('Urutkan Rukun Islam dari yang pertama!');
+        ctx.ask('Tahap 1: urutkan Rukun Islam dari yang pertama!'); ctx.sfx('pop');
         await ctx.order({ items: ISLAM, guide: 'after-wrong', label: 'Rukun Islam', onStep: (n) => maju(n) });
 
         ctx.clear();
-        ctx.ask('Sekarang urutkan Rukun Iman!');
+        ctx.correct(null, { say: 'Bagus! Terus naik ke Rukun Iman.' }); ctx.ask('Tahap 2: sekarang urutkan Rukun Iman!');
         await ctx.order({ items: IMAN, guide: 'after-wrong', label: 'Rukun Iman', onStep: (n) => maju(5 + n) });
 
         // Pilah 6 kartu campuran: 3 Rukun Islam + 3 Rukun Iman.
         ctx.clear();
-        ctx.ask('Ini Rukun Islam atau Rukun Iman? Ketuk keranjangnya!');
+        ctx.ask('Tahap 3: ini Rukun Islam atau Rukun Iman? Ketuk keranjangnya!');
         const kartu = shuffle([
           ...sample(ISLAM, 3).map((x) => ({ ...x, bin: 'islam', hint: petunjuk.islam })),
           ...sample(IMAN, 3).map((x) => ({ ...x, bin: 'iman', hint: petunjuk.iman })),
@@ -112,7 +112,7 @@
         });
 
         ctx.clear();
-        ctx.ask('Ada berapa rukun Iman?');
+        ctx.ask('Tahap 4: ada berapa rukun Iman?');
         await ctx.choose({ options: [4, 5, 6, 7], answer: 6 });
       }
       if (!ctx.alive) return;

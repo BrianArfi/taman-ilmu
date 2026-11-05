@@ -140,7 +140,7 @@
     ctx.ask(teks, { say: ucap });
     const isi = [];
     ids.forEach((id, i) => { if (i && tambah) isi.push(h('span', { class: 'sk-plus', 'aria-hidden': 'true' }, '+')); isi.push(kecil(byId(id))); });
-    ctx.el.append(h('div', { class: 'ti-card sk-baris pop-in' }, isi));
+    ctx.el.append(h('div', { class: 'ti-card sk-baris pop-in' }, isi)); ctx.sfx('pop');
     await ctx.choose({ options: numChoices(jawab, 4, min, max).sort((a, b) => a - b), answer: jawab });
   }
 
@@ -164,18 +164,18 @@
       } else {
         const [r1, r2] = sample(SHALAT, 2);
         const [l1, l2] = sample(SHALAT, 2);
-        soal = shuffle([
+        soal = [ // urut gampang dulu: kenali, hitung, lalu urutkan
           () => langitKeNama(ctx, l1, 4),
           () => namaKeLangit(ctx, l2),
           () => soalRakaat(ctx, r1),
           () => soalRakaat(ctx, r2),
-          () => urutkan(ctx),
           () => soalHitung(ctx, 'Rakaat Subuh + Maghrib = ?', 'Rakaat Subuh ditambah Maghrib sama dengan berapa?', ['subuh', 'maghrib'], 5, 3, 10),
           () => soalHitung(ctx, 'Rakaat Zuhur + Ashar = ?', 'Rakaat Zuhur ditambah Ashar sama dengan berapa?', ['zuhur', 'ashar'], 8, 5, 12),
           () => soalHitung(ctx, 'Berapa jumlah rakaat shalat wajib dalam sehari?', null, SHALAT.map((s) => s.id), 17, 13, 22, false),
-        ]);
+          () => urutkan(ctx),
+        ];
       }
-      return ctx.series(soal, (jalankan) => jalankan(), { lesson: LESSON });
+      return ctx.series(soal, (jalankan, i) => { if (i === 3) ctx.correct(null, { say: ctx.isTK ? 'Bagus! Setengah jalan!' : 'Bagus! Terus naik ke yang sulit.' }); ctx.sfx('pop'); return jalankan(); }, { lesson: LESSON });
     },
   });
 })();
