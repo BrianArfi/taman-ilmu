@@ -3,23 +3,23 @@
 Diurut dari skor Fun terbawah. Skor = statis + smoke + engagement anak.
 Kelas: A 85+, B 70-84, C 50-69, D <50. Gerbang: smoke OK, skor tidak turun, SPEC 3-4, ustadz untuk teks agama, push hanya dengan "gas".
 
-## A 88 — Shalat 5 Waktu (`shalat`, islam)
-- Bukti: statis 79 · smoke 100 (selesai 4/4, rerata 26 aksi) · engagement: belum ada data
+## A 88 — Mana yang Beda (`beda-satu`, logika)
+- Bukti: statis 79 · smoke 99 (selesai 4/4, rerata 53 aksi) · engagement: belum ada data
 - Saran: tambah variasi aksi kedua biar tidak monoton
+
+## A 88 — Lompat Bintang (`lompat-bintang`, mat)
+- Bukti: statis 79 · smoke 98 (selesai 4/4, rerata 103 aksi) · engagement: belum ada data
+- Saran: tambah variasi aksi kedua biar tidak monoton
+
+## A 92 — Tabung Infaq (`tabung-infaq`, islam)
+- Bukti: statis 86 · smoke 99 (selesai 4/4, rerata 80 aksi) · engagement: belum ada data
 - Saran: setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut
 
-## A 92 — Urutan Wudhu (`wudhu`, islam)
-- Bukti: statis 86 · smoke 99 (selesai 4/4, rerata 56 aksi) · engagement: belum ada data
+## A 92 — Sudoku Mini (`sudoku`, logika)
+- Bukti: statis 86 · smoke 99 (selesai 4/4, rerata 78 aksi) · engagement: belum ada data
 - Saran: tambah variasi aksi kedua biar tidak monoton
-- Saran: game puzzle wajib punya tombol Bantu (SPEC 7.1)
 
-## A 92 — Pecah Gelembung (`gelembung`, mat)
-- Bukti: statis 86 · smoke 99 (selesai 4/4, rerata 50 aksi) · engagement: belum ada data
-
-## A 96 — Rukun Islam & Iman (`rukun`, islam)
-- Bukti: statis 93 · smoke 99 (selesai 4/4, rerata 32 aksi) · engagement: belum ada data
-
-## A 96 — Siang atau Malam (`siang-malam`, sains)
-- Bukti: statis 93 · smoke 99 (selesai 4/4, rerata 52 aksi) · engagement: belum ada data
+## A 96 — Jelajah Tata Surya (`tatasurya`, sains)
+- Bukti: statis 93 · smoke 100 (selesai 4/4, rerata 30 aksi) · engagement: belum ada data
 - Saran: setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut
 

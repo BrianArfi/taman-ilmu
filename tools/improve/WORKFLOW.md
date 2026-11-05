@@ -78,6 +78,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 7 (5 Nov 2026)**: rukun 80→96, wudhu 80→92, shalat 80→88,
   siang-malam 80→96, gelembung 80→92.
   Detail: `reports/cycle-20261105-s7.md`.
+- **Siklus 8 (5 Nov 2026)**: beda-satu 80→88, lompat-bintang 79→88,
+  tabung-infaq 80→92, tatasurya 80→96, sudoku 79→92.
+  Detail: `reports/cycle-20261105-s8.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar

@@ -26,29 +26,6 @@
    ]
   },
   {
-   "file": "99-beda-satu.js",
-   "id": "beda-satu",
-   "title": "Mana yang Beda",
-   "cat": "logika",
-   "bytes": 4527,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 1,
-    "ramp": 1,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 64,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
    "file": "93-cermin-pola.js",
    "id": "cermin-pola",
    "title": "Cermin Pola",
@@ -89,29 +66,6 @@
    "static100": 64,
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
-   "file": "69-lompat-bintang.js",
-   "id": "lompat-bintang",
-   "title": "Lompat Bintang",
-   "cat": "mat",
-   "bytes": 5051,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 1,
-    "ramp": 1,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 64,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
     "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
    ]
   },
@@ -159,75 +113,6 @@
     "tambah variasi aksi kedua biar tidak monoton",
     "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "44-sudoku.js",
-   "id": "sudoku",
-   "title": "Sudoku Mini",
-   "cat": "logika",
-   "bytes": 16379,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 64,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "62-tabung-infaq.js",
-   "id": "tabung-infaq",
-   "title": "Tabung Infaq",
-   "cat": "islam",
-   "bytes": 8289,
-   "soal": null,
-   "sig": {
-    "aksi": 2,
-    "feedback": 1,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 64,
-   "sug": [
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "20-tatasurya.js",
-   "id": "tatasurya",
-   "title": "Jelajah Tata Surya",
-   "cat": "sains",
-   "bytes": 14974,
-   "soal": 3,
-   "sig": {
-    "aksi": 2,
-    "feedback": 0,
-    "ramp": 0,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 64,
-   "sug": [
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
    ]
   },
   {
@@ -901,6 +786,27 @@
    ]
   },
   {
+   "file": "99-beda-satu.js",
+   "id": "beda-satu",
+   "title": "Mana yang Beda",
+   "cat": "logika",
+   "bytes": 4920,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
    "file": "74-belah-buah.js",
    "id": "belah-buah",
    "title": "Belah Buah Hitung",
@@ -1097,6 +1003,27 @@
    "static100": 79,
    "sug": [
     "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "69-lompat-bintang.js",
+   "id": "lompat-bintang",
+   "title": "Lompat Bintang",
+   "cat": "mat",
+   "bytes": 5390,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
    ]
   },
   {
@@ -1868,6 +1795,48 @@
    ]
   },
   {
+   "file": "44-sudoku.js",
+   "id": "sudoku",
+   "title": "Sudoku Mini",
+   "cat": "logika",
+   "bytes": 16526,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "file": "62-tabung-infaq.js",
+   "id": "tabung-infaq",
+   "title": "Tabung Infaq",
+   "cat": "islam",
+   "bytes": 8719,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
    "file": "21-tangkap.js",
    "id": "tangkap",
    "title": "Tangkap Hijaiyah",
@@ -2165,6 +2134,27 @@
    },
    "static100": 93,
    "sug": []
+  },
+  {
+   "file": "20-tatasurya.js",
+   "id": "tatasurya",
+   "title": "Jelajah Tata Surya",
+   "cat": "sains",
+   "bytes": 15422,
+   "soal": 3,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
   }
  ]
 }
