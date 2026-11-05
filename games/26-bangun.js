@@ -225,7 +225,7 @@
         if (reduced) {
           g.style.opacity = '0';
           return new Promise((res) => {
-            requestAnimationFrame(() => { g.style.transition = 'opacity 220ms ease'; g.style.opacity = '1'; });
+            ctx.after(16, () => { g.style.transition = 'opacity 220ms ease'; g.style.opacity = '1'; });
             ctx.sfx(p.sfx);
             ctx.after(260, res);
           });
@@ -275,12 +275,12 @@
       // TK: 8 dari soal TK. SD: 8 dari semua, soal TK (lebih mudah) lebih dulu supaya makin menantang.
       let soal;
       if (ctx.isTK) soal = sample(BANK.filter((x) => x.tk), 8);
-      else soal = sample(BANK, 8).sort((a, b) => (b.tk ? 1 : 0) - (a.tk ? 1 : 0));
+      else soal = sample(BANK, 8).sort((a, b) => (a.tk ? 0 : 1) - (b.tk ? 0 : 1)); // soal TK dulu
 
       return ctx.series(soal, async (q, i) => {
         ctx.el.append(panggung.el);
         panggung.ghost(i);
-        ctx.ask(q.q);
+        if (i === 4) ctx.correct(null, { say: ctx.isTK ? 'Bagus! Setengah jalan!' : 'Bagus! Terus naik ke yang sulit.' }); ctx.ask(q.q);
         const opsi = shuffle([q.a, ...q.w]).map((v) => {
           if (typeof v === 'number') {
             return ctx.isTK ? { node: angka(v), value: v, say: String(v), aria: v + ' ', cls: 'is-big' } : { label: String(v), value: v };

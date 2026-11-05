@@ -1,4 +1,6 @@
-/* 71 Jam Cocok. Cocokkan jam analog dengan jam digital. */
+/* 71 Jam Cocok. Cocokkan jam analog dengan jam digital.
+   SD urut gampang dulu (tepat, setengah, seperempat). Jawaban terungkap
+   sebagai digital + pujian tengah jalan. */
 (function () {
   const { h, svg, shuffle, sample, rand, pick } = TI;
 
@@ -69,6 +71,7 @@
       h('span', null, h('i', { style: 'background:#2f6fed' }), 'Jarum pendek: jam'),
       h('span', null, h('i', { style: 'background:#e5484d' }), 'Jarum panjang: menit'));
     ctx.el.append(h('div', { class: 'ti-card jc-kartu pop-in' }, jam, legenda));
+    ctx.sfx('pop');
     const opsi = shuffle([[j, m], ...pengecoh(j, m, nOpsi - 1, pool)]);
     await ctx.choose({
       options: opsi.map(([a, b]) => ({
@@ -77,6 +80,9 @@
       answer: digital(j, m),
       layout: 'is-grid2',
     });
+    ctx.el.append(h('p', { class: 'ti-label' }, 'Tadi: ' + digital(j, m)));
+    ctx.sfx('pop');
+    await ctx.wait(350);
   }
 
   TI.register({
@@ -90,16 +96,29 @@
       const lesson = 'Jarum pendek menunjuk jam, jarum panjang menunjuk menit. Jam 07.00 dibaca jam tujuh tepat.';
       if (ctx.isTK) {
         const jam = sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 6);
-        ctx.series(jam.map((j) => ({ j, m: 0 })), (s) => satuSoal(ctx, s.j, s.m, 3, [0]), { lesson });
+        const soal = jam.map((j) => ({ j, m: 0, sulit: 0 }));
+        soal.sort((a, b) => a.sulit - b.sulit);
+        let ke = 0;
+        ctx.series(soal, async (s) => {
+          ke++;
+          if (ke === 3) ctx.correct(null, { say: 'Bagus! Setengah jalan!' });
+          await satuSoal(ctx, s.j, s.m, 3, [0]);
+        }, { lesson });
       } else {
         const jam = sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 8);
-        const tipe = ['tepat', 'tepat', 'setengah', 'setengah', 'seperempat', 'seperempat', 'tepat', 'setengah'];
+        const tipe = ['tepat', 'tepat', 'tepat', 'setengah', 'setengah', 'setengah', 'seperempat', 'seperempat'];
         const soal = jam.map((j, i) => {
           const t = tipe[i];
           const m = t === 'tepat' ? 0 : t === 'setengah' ? 30 : pick([15, 45]);
-          return { j, m };
+          return { j, m, sulit: t === 'tepat' ? 0 : t === 'setengah' ? 1 : 2 };
         });
-        ctx.series(soal, (s) => satuSoal(ctx, s.j, s.m, 4, [0, 15, 30, 45]), { lesson });
+        soal.sort((a, b) => a.sulit - b.sulit);
+        let ke = 0;
+        ctx.series(soal, async (s) => {
+          ke++;
+          if (ke === 4) ctx.correct(null, { say: 'Bagus! Terus naik ke yang sulit.' });
+          await satuSoal(ctx, s.j, s.m, 4, [0, 15, 30, 45]);
+        }, { lesson });
       }
     },
   });

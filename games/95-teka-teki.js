@@ -1,4 +1,7 @@
-/* 95 Teka-teki Siapa. Einstein junior: baca petunjuk, tebak siapa di rumah mana. Penghuni hanya teks, tanpa emoji hewan. */
+/* 95 Teka-teki Siapa. Einstein junior: baca petunjuk, tebak siapa di rumah mana. Penghuni hanya teks, tanpa emoji hewan.
+   Papan tampil tiap soal dan penghuni terungkap satu per satu. Petunjuk bisa
+   diketuk untuk didengar (TK dibacakan otomatis). Urut gampang dulu.
+   Bantu: ketuk 1-2 bacakan ulang petunjuk, ketuk 3 jawab otomatis. */
 (function () {
   const { h, svg, shuffle } = TI;
 
@@ -10,6 +13,7 @@
 .play[data-game="teka-teki"] .tt-who { margin: 0; min-height: 1.6em; font-weight: 800; font-size: 1.15rem; text-align: center; }
 .play[data-game="teka-teki"] .tt-clues { width: min(100%, 440px); margin: 0; padding: 10px 14px 10px 38px; border-radius: 18px; background: #fff8dc; box-shadow: 0 4px 0 var(--shadow); font-weight: 700; font-size: 1.05rem; line-height: 1.5; }
 .play[data-game="teka-teki"] .tt-clues li { margin: 2px 0; }
+.play[data-game="teka-teki"] .tt-clue { border: 0; background: none; padding: 0; font: inherit; font-weight: inherit; text-align: left; cursor: pointer; color: inherit; }
 `;
 
   function rumahSVG(warna) {
@@ -32,8 +36,9 @@
       'Ikan tidak tinggal di rumah merah.',
     ],
     tanya: [
-      { soal: 'Siapa yang tinggal di rumah merah?', jawab: 'Kucing' },
-      { soal: 'Di rumah apa Ikan tinggal?', jawab: 'Biru', opsi: ['Merah', 'Biru'], ucap: ['Rumah merah', 'Rumah biru'] },
+      { soal: 'Siapa yang tinggal di rumah merah?', jawab: 'Kucing', sulit: 0, ungkap: [0, 'Kucing'] },
+      { soal: 'Di rumah apa Ikan tinggal?', jawab: 'Biru', opsi: ['Merah', 'Biru'], ucap: ['Rumah merah', 'Rumah biru'], sulit: 1, ungkap: [1, 'Ikan'] },
+      { soal: 'Kucing di rumah merah. Siapa di rumah satunya?', jawab: 'Ikan', sulit: 1, ungkap: [1, 'Ikan'] },
     ],
   };
   const SD = {
@@ -49,9 +54,10 @@
       'Burung tinggal di rumah biru.',
     ],
     tanya: [
-      { soal: 'Siapa yang tinggal di rumah merah?', jawab: 'Kucing' },
-      { soal: 'Di rumah apa Ikan tinggal?', jawab: 'Kuning', opsi: ['Merah', 'Kuning', 'Biru'], ucap: ['Rumah merah', 'Rumah kuning', 'Rumah biru'] },
-      { soal: 'Siapa yang tinggal di rumah biru?', jawab: 'Burung' },
+      { soal: 'Siapa yang tinggal di rumah merah?', jawab: 'Kucing', sulit: 0, ungkap: [0, 'Kucing'] },
+      { soal: 'Di rumah apa Ikan tinggal?', jawab: 'Kuning', opsi: ['Merah', 'Kuning', 'Biru'], ucap: ['Rumah merah', 'Rumah kuning', 'Rumah biru'], sulit: 1, ungkap: [1, 'Ikan'] },
+      { soal: 'Siapa yang tinggal di rumah biru?', jawab: 'Burung', sulit: 0, ungkap: [2, 'Burung'] },
+      { soal: 'Kucing di rumah merah, Burung di rumah biru. Siapa di rumah kuning?', jawab: 'Ikan', sulit: 2, ungkap: [1, 'Ikan'] },
     ],
   };
 
@@ -67,19 +73,39 @@
       const P = tk ? TK : SD;
       const nOpsi = tk ? 3 : 4;
 
-      ctx.series(P.tanya, async (t, i) => {
-        if (i === 0) {
-          const baris = h('div', { class: 'tt-houses' });
-          P.rumah.forEach((rm) => {
-            baris.append(h('div', { class: 'tt-house pop-in' },
-              rumahSVG(rm.warna),
-              h('p', { class: 'tt-who' }, 'Rumah ' + rm.nama),
-              h('p', { class: 'tt-who', 'aria-hidden': 'true' }, '?')));
-          });
-          const clues = h('ol', { class: 'tt-clues' });
-          P.petunjuk.forEach((c) => clues.append(h('li', null, c)));
-          ctx.el.append(h('div', { class: 'tt-wrap' }, baris, clues));
-        }
+      const tanya = [...P.tanya].sort((a, b) => a.sulit - b.sulit);
+      const terjawab = {};
+      ctx.series(tanya, async (t, i) => {
+        const baris = h('div', { class: 'tt-houses' });
+        P.rumah.forEach((rm, ri) => {
+          baris.append(h('div', { class: 'tt-house pop-in' },
+            rumahSVG(rm.warna),
+            h('p', { class: 'tt-who' }, 'Rumah ' + rm.nama),
+            h('p', { class: 'tt-who', 'aria-hidden': 'true' }, terjawab[ri] || '?')));
+        });
+        const clues = h('ol', { class: 'tt-clues' });
+        P.petunjuk.forEach((c) => {
+          const b = h('button', { type: 'button', class: 'tt-clue', 'data-tap': true }, c);
+          b.addEventListener('click', () => { ctx.sfx('tap'); ctx.say(c); });
+          clues.append(h('li', null, b));
+        });
+        const btnBantu = h('button', { type: 'button', class: 'ti-btn is-ghost ti-help' }, '💡 Bantu');
+        ctx.el.append(h('div', { class: 'tt-wrap' }, baris, clues, btnBantu));
+        ctx.sfx('pop');
+        let bantu = 0, terjawabQ = false;
+        btnBantu.addEventListener('click', async () => {
+          if (!ctx.alive || terjawabQ || bantu >= 3) return;
+          bantu++;
+          ctx.mistakes++;
+          if (bantu >= 3) {
+            const benar = [...ctx.el.querySelectorAll('.ti-choices .choice:not([disabled])')].find((x) => x.textContent.trim() === t.jawab);
+            if (benar) benar.click();
+          } else {
+            ctx.sfx('klik');
+            for (const c of P.petunjuk) { if (ctx.alive && !terjawabQ) await ctx.sayWait(c); }
+          }
+        });
+        if (tk && i === 0) for (const c of P.petunjuk) { if (ctx.alive) await ctx.sayWait(c); }
         ctx.ask(t.soal);
         let opsi;
         if (t.opsi) {
@@ -92,7 +118,13 @@
           opsi = shuffle([t.jawab].concat(pengecoh).map((o) => ({ label: o, value: o, say: o })));
         }
         const r = await ctx.choose({ options: opsi, answer: t.jawab, speakLabel: true, layout: 'is-col' });
-        if (i === P.tanya.length - 1 && r.firstTry) ctx.say('Semua benar! Kamu detektif hebat.');
+        terjawabQ = true;
+        // Ungkap penghuni di rumahnya.
+        baris.children[t.ungkap[0]].querySelectorAll('.tt-who')[1].textContent = t.ungkap[1];
+        terjawab[t.ungkap[0]] = t.ungkap[1];
+        ctx.sfx('pop');
+        await ctx.wait(600);
+        if (i === tanya.length - 1) ctx.correct(null, { say: r.firstTry ? 'Semua benar! Kamu detektif hebat.' : 'Rumah misteri terpecahkan!' });
       }, {
         lesson: tk
           ? 'Petunjuk dibaca satu per satu, lalu disimpulkan. Kucing di rumah merah, Ikan di rumah biru.'

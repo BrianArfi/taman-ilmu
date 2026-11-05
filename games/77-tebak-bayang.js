@@ -1,4 +1,5 @@
-/* 77 Tebak Bayangan. Lihat siluetnya, tebak bendanya. */
+/* 77 Tebak Bayangan. Lihat siluetnya, tebak bendanya.
+   Urut gampang dulu (bentuk khas, lalu yang mirip). Nama terungkap tiap benar. */
 (function () {
   const { h, svg, shuffle, sample } = TI;
 
@@ -63,6 +64,7 @@
   async function satuSoal(ctx, id, nOpsi) {
     ctx.ask('Bayangan apa ini? Tebak bendanya!');
     ctx.el.append(h('div', { class: 'ti-card tb-kartu pop-in' }, siluet(id)));
+    ctx.sfx('pop');
     const opsi = shuffle([id, ...sample(SEMUA.filter((k) => k !== id), nOpsi - 1)]);
     await ctx.choose({
       options: opsi.map((k) => ({ label: NAMA[k], value: k, say: NAMA[k] })),
@@ -70,6 +72,9 @@
       layout: 'is-col',
       speakLabel: true,
     });
+    ctx.el.append(h('p', { class: 'ti-label' }, 'Benar! Ini ' + NAMA[id] + '.'));
+    ctx.sfx('pop');
+    await ctx.wait(350);
   }
 
   TI.register({
@@ -83,13 +88,20 @@
       const lesson = ctx.isTK
         ? 'Setiap benda punya bentuk bayangan yang khas.'
         : 'Bayangan terjadi karena cahaya terhalang benda. Bentuk bayangan mengikuti bentuk bendanya.';
+      const SULIT = { sendok: 0, buku: 0, topi: 0, payung: 1, cangkir: 1, kunci: 1, gunting: 2, sisir: 2 };
       if (ctx.isTK) {
-        const daftar = sample(SEMUA, 6);
-        ctx.series(daftar, (id) => satuSoal(ctx, id, 3), { lesson });
+        const daftar = sample(SEMUA, 6).map((id) => ({ id, sulit: SULIT[id] })).sort((a, b) => a.sulit - b.sulit);
+        let ke = 0;
+        ctx.series(daftar, async ({ id }) => {
+          ke++;
+          if (ke === 3) ctx.correct(null, { say: 'Bagus! Terus naik ke yang sulit.' });
+          await satuSoal(ctx, id, 3);
+        }, { lesson });
       } else {
-        const daftar = shuffle(SEMUA);
-        ctx.series(daftar.map((id, i) => ({ id, i })), async ({ id, i }) => {
+        const daftar = shuffle(SEMUA).map((id) => ({ id, sulit: SULIT[id] })).sort((a, b) => a.sulit - b.sulit);
+        ctx.series(daftar.map((o, i) => ({ ...o, i })), async ({ id, i }) => {
           if (i === 4) {
+            ctx.correct(null, { say: 'Bagus! Terus naik ke yang sulit.' });
             ctx.note('Bayangan terjadi karena cahaya terhalang benda. Benda padat membuat bayangan gelap.', { title: 'Tahukah kamu?' });
             await ctx.next();
             ctx.clear();

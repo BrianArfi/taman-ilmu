@@ -71,11 +71,11 @@
     start(ctx) {
       TI.style('adab', CSS);
       // TK: 7 soal dari soal TK. SD: 8 soal acak dari semua.
-      const soal = ctx.isTK ? sample(BANK.filter((b) => b.tk), 7) : sample(BANK, 8);
+      const soal = ctx.isTK ? BANK.filter((b) => b.tk) : sample(BANK, 8).map((s) => Object.assign({ sulit: s.tk ? 0 : 1 }, s)).sort((a, b) => a.sulit - b.sulit); // gampang dulu
 
-      return ctx.series(soal, async (s) => {
-        ctx.ask(s.q);
-        ctx.el.append(h('div', { class: 'adab-card pop-in', 'aria-hidden': 'true' }, h('span', { class: 'adab-ic' }, s.ic)));
+      let ke = 0; return ctx.series(soal, async (s) => {
+        ke++; if (ke === 4) ctx.correct(null, { say: ctx.isTK ? 'Bagus! Setengah jalan!' : 'Bagus! Terus naik ke yang sulit.' }); ctx.ask(s.q);
+        ctx.el.append(h('div', { class: 'adab-card pop-in', 'aria-hidden': 'true' }, h('span', { class: 'adab-ic' }, s.ic))); ctx.sfx('pop');
         await ctx.choose({
           options: shuffle([s.a, ...s.x]),
           answer: s.a,
@@ -87,7 +87,7 @@
           const pilihan = ctx.el.querySelector('.ti-choices');
           if (pilihan) pilihan.classList.add('is-done'); // sembunyikan pilihan yang salah supaya artinya muat di layar
           ctx.note('"' + s.a + '" berarti ' + kecil(arti) + '.', { title: 'Artinya:' });
-          await ctx.next();
+          ctx.sfx('pop'); await ctx.next();
         }
       }, {
         lesson: 'Anak shalih membiasakan ucapan baik dan adab yang baik setiap hari.',
