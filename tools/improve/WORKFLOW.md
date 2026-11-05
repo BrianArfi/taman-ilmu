@@ -63,10 +63,17 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 2 (5 Nov 2026)**: pola-angka 69→88, balok-pas 73→88, banding
   73→92, rumah-makhluk 72→84, sirah-urut 73→88. D0 tercapai.
   Detail: `reports/cycle-20261105-s2.md`.
+- **Siklus 3 (5 Nov 2026)**: teka-teki 73→92, jam-cocok 73→88,
+  tebak-bayang 73→88, adab 73→88, bangun 76→92.
+  Detail: `reports/cycle-20261105-s3.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar
   kode tidak ikut); saran sesi cuma kalau di luar 3-12.
+- **v1.5 (5 Nov 2026)**: umpan balik kenal debu/dust/pantul/mendarat
+  (kosakata game aksi gelombang 2).
+- **v1.6 (5 Nov 2026)**: deteksi sort menanjak boleh diawali kurung
+  (komparator ternary berkurung).
 - **v1.2 (5 Nov 2026)**: sfx hitung correct/wrong; ramp kenal sort komparator +
   array ronde menanjak; fail-soft kenal ctx.choose dan hitungan bantu ke-3.
 - **v1.1 (5 Nov 2026)**: id dibaca dari blok TI.register; aksi hitung tombol

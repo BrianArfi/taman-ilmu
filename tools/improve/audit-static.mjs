@@ -40,6 +40,7 @@ function audit(file) {
   const sfxN = count(src, /ctx\.sfx\(/g) + count(src, /ctx\.correct\(/g) + count(src, /ctx\.wrong\(/g);
   const fbHits = ['partikel', 'particle', '+1', 'pop-in', 'memantul',
     'goyang', 'shake', 'confetti', 'melompat', 'berdenyut', 'pulse', 'percikan',
+    'debu', 'dust', 'pantul', 'mendarat',
     'ctx.correct', 'ctx.wrong'].filter((k) => src.includes(k));
   sig.feedback = (sfxN >= 3 ? 1 : 0) + (fbHits.length >= 2 ? 1 : 0);
   if (sfxN < 3) sug.push(`sfx cuma ${sfxN}x: bunyikan tiap aksi berhasil/gagal`);
@@ -49,7 +50,7 @@ function audit(file) {
   const stages = count(src, /babak|ronde|tahap|stage|level|Level/gi);
   const rampParam = has(src, /kecepatan|speed|waktu.*-|maksimal.*\+|jumlah.*\+|durasi|level.*\+|\+.*level|naik/i);
   // Urutan sengaja digampangin dulu: sort komparator atau array ronde menanjak.
-  const ordered = /\.sort\(\(\s*a\s*,\s*b\s*\)\s*=>\s*a\b/.test(src) || [...src.matchAll(/\b\w*(ronde|babak|tahap|nobj|nObj|jumlah)\w*\s*=\s*(\[[^\]]+\])/gi)]
+  const ordered = /\.sort\(\(\s*a\s*,\s*b\s*\)\s*=>\s*\(?\s*a\b/.test(src) || [...src.matchAll(/\b\w*(ronde|babak|tahap|nobj|nObj|jumlah)\w*\s*=\s*(\[[^\]]+\])/gi)]
     .some((m) => { const ns = m[2].split(',').map((x) => parseInt(x, 10)).filter((n) => Number.isFinite(n)); return ns.length >= 2 && ns.every((n, i) => i === 0 || n > ns[i - 1]); });
   const seriesLike = has(src, /ctx\.series|ctx\.progress|ronde|babak/i);
   sig.ramp = ((stages >= 3 && rampParam) || (ordered && seriesLike)) ? 2 : (stages >= 3 || rampParam || ordered) ? 1 : 0;
@@ -97,7 +98,7 @@ function audit(file) {
 const files = fs.readdirSync(gamesDir).filter((f) => f.endsWith('.js')).sort();
 const rows = files.map(audit).sort((a, b) => a.static100 - b.static100 || a.id.localeCompare(b.id));
 const d = new Date(Date.now() + 7 * 3600 * 1000).toISOString().slice(0, 10).replaceAll('-', '');
-const out = { date: d, version: 'improve-v1.4', games: rows };
+const out = { date: d, version: 'improve-v1.6', games: rows };
 fs.writeFileSync(path.join(outDir, `static-${d}.json`), JSON.stringify(out, null, 1));
 
 const cls = (s) => (s >= 85 ? 'A' : s >= 70 ? 'B' : s >= 50 ? 'C' : 'D');

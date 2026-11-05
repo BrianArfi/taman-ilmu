@@ -3,57 +3,15 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "rumah-makhluk",
-   "title": "Rumah Makhluk",
-   "cat": "sains",
-   "file": "78-rumah-makhluk.js",
-   "static100": 71,
-   "dyn100": 99,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 52,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 84,
-   "cls": "B",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "id": "pola-angka",
-   "title": "Pola Angka",
-   "cat": "logika",
-   "file": "97-pola-angka.js",
-   "static100": 79,
-   "dyn100": 99,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 51,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 88,
-   "cls": "A",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut",
-    "sesi 4 soal: ideal 6-10 soal (2-4 menit)"
-   ]
-  },
-  {
-   "id": "balok-pas",
-   "title": "Balok yang Pas",
-   "cat": "logika",
-   "file": "96-balok-pas.js",
+   "id": "jam-cocok",
+   "title": "Jam Cocok",
+   "cat": "mat",
+   "file": "71-jam-cocok.js",
    "static100": 79,
    "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 15,
+   "avgActions": 18,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
@@ -61,47 +19,86 @@
    "cls": "A",
    "sug": [
     "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
-    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {
-   "id": "sirah-urut",
-   "title": "Urut Kisah Nabi",
-   "cat": "islam",
-   "file": "60-sirah-urut.js",
+   "id": "tebak-bayang",
+   "title": "Tebak Bayangan",
+   "cat": "sains",
+   "file": "77-tebak-bayang.js",
    "static100": 79,
    "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 14,
+   "avgActions": 21,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
    "fun": 88,
    "cls": "A",
    "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {
-   "id": "banding",
-   "title": "Lebih Besar, Lebih Kecil",
-   "cat": "mat",
-   "file": "10-banding.js",
+   "id": "adab",
+   "title": "Ucapan & Adab Baik",
+   "cat": "islam",
+   "file": "07-adab.js",
+   "static100": 79,
+   "dyn100": 100,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 22,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 88,
+   "cls": "A",
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "id": "teka-teki",
+   "title": "Teka-teki Siapa",
+   "cat": "logika",
+   "file": "95-teka-teki.js",
    "static100": 86,
    "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 16,
+   "avgActions": 27,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
    "fun": 92,
    "cls": "A",
    "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "id": "bangun",
+   "title": "Bangun Masjid",
+   "cat": "islam",
+   "file": "26-bangun.js",
+   "static100": 86,
+   "dyn100": 100,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 18,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 92,
+   "cls": "A",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   }
  ]
