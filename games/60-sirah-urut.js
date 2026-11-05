@@ -1,6 +1,6 @@
 /* 60 Urut Kisah Nabi. ctx.order peristiwa penting sirah Nabi Muhammad
    Shallallahu 'alaihi wa sallam: Lahir di Mekah, Wahyu pertama di Gua Hira,
-   Isra Mikraj, Hijrah ke Madinah, Fathu Mekah. */
+   Isra Mikraj, Hijrah ke Madinah, Fathu Mekah. Kuis urut gampang dulu. */
 (function () {
   const { h, shuffle, sample } = TI;
 
@@ -30,20 +30,26 @@ ${P} .su-kuis .choice { min-height: 64px; }`;
       const items = TK ? [SEMUA[0], SEMUA[1], SEMUA[3], SEMUA[4]] : SEMUA;
 
       ctx.ask('Urutkan kisah ' + SALAWAT + ' dari yang paling awal!');
-      const w = h('div', { class: 'su-order' });
+      const w = h('div', { class: 'su-order pop-in' });
       ctx.el.append(w);
       await ctx.order({ items, guide: TK ? 'always' : 'after-wrong', into: w });
       if (!ctx.alive) return;
+      ctx.sfx('pop');
       ctx.note(SALAWAT + ' lahir di Mekah, menerima wahyu di Gua Hira, lalu hijrah ke Madinah.', { title: 'Masya Allah!' });
       await ctx.next();
       if (!ctx.alive) return;
 
       if (!TK) {
         const kuis = [
-          { q: SALAWAT + ' lahir di kota?', a: 'Makkah', x: ['Madinah', 'Thaif'] },
-          { q: 'Wahyu pertama turun kepada beliau di gua?', a: 'Gua Hira', x: ['Gua Tsur', 'Gua Kahfi'] },
+          { q: SALAWAT + ' lahir di kota?', a: 'Makkah', x: ['Madinah', 'Thaif'], sulit: 0 },
+          { q: 'Wahyu pertama turun kepada beliau di gua?', a: 'Gua Hira', x: ['Gua Tsur', 'Gua Kahfi'], sulit: 1 },
         ];
+        kuis.sort((a, b) => a.sulit - b.sulit); // gampang dulu
+        let ke = 0;
         await ctx.series(kuis, async (s) => {
+          ke++;
+          if (ke === 2) ctx.correct(null, { say: 'Benar! Satu lagi.' });
+          ctx.sfx('pop');
           ctx.ask(s.q);
           const wadah = h('div', { class: 'su-kuis' });
           ctx.el.append(wadah);

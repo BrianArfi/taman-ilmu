@@ -1,4 +1,5 @@
-/* 96 Balok yang Pas. Lubang bentuk di dinding, balok mana yang pas? Termasuk putaran 90 derajat. */
+/* 96 Balok yang Pas. Lubang bentuk di dinding, balok mana yang pas? Termasuk putaran 90 derajat.
+   Urut gampang dulu (tegak, lalu miring). Lubang terisi warna balok saat benar. */
 (function () {
   const { h, svg, shuffle, sample } = TI;
 
@@ -52,9 +53,14 @@
         const putar = bisaPutar.includes(bi) && i % 2 === 0 ? 90 : 0;
         return { bi, putar, warna: WARNA_B[i % WARNA_B.length] };
       });
+      soal.sort((a, b) => a.putar - b.putar); // tegak dulu, miring belakangan
 
+      let ke = 0;
       ctx.series(soal, async ({ bi, putar, warna }) => {
+        ke++;
         const lubang = h('div', { class: 'bp-wall pop-in' });
+        ctx.sfx('pop');
+        if (ke === Math.ceil(soal.length / 2) + 1) ctx.correct(null, { say: 'Bagus! Terus naik ke yang sulit.' });
         const lsvg = bentukSVG(bi, putar);
         gantiFill(lsvg, '#4a3520');
         lubang.append(lsvg);
@@ -81,6 +87,10 @@
           answer: 'ya',
           speakLabel: true,
         });
+        // Balok masuk lubang: lubang ikut berwarna.
+        lsvg.querySelectorAll('[fill]').forEach((el) => el.setAttribute('fill', warna));
+        ctx.sfx('pop');
+        await ctx.wait(350);
       }, {
         lesson: 'Bentuk yang sama pasti pas. Balok yang miring harus diputar dulu dalam bayanganmu.',
       });

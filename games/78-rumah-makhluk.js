@@ -1,5 +1,6 @@
-/* 78 Rumah Makhluk. Antar tiap makhluk ke rumahnya. Makhluk tampil sebagai kartu teks
-   tanpa gambar hewan dan tanpa wajah. */
+/* 78 Rumah Makhluk. Antar tiap makhluk ke rumahnya. Makhluk tampil sebagai siluet
+   tanpa wajah. Urut gampang dulu (hewan akrab, lalu yang jarang ditemui).
+   Tengah jalan ada pujian. */
 (function () {
   const { h, svg, shuffle, sample } = TI;
 
@@ -84,6 +85,8 @@
       const daftar = ctx.isTK
         ? shuffle(['ikan', 'kucing', 'burung', 'gurita', 'kuda', 'kupu'])
         : shuffle(MAKHLUK.map((m) => m.id));
+      // Hewan akrab dulu (ikan, kucing, burung), yang jarang ditemui belakangan.
+      const SULIT = { ikan: 0, kucing: 0, burung: 0, kuda: 1, kelinci: 1, kupu: 1, gurita: 2, udang: 2, capung: 2 };
       const items = daftar.map((id) => {
         const m = MAKHLUK.find((x) => x.id === id);
         return {
@@ -93,9 +96,12 @@
           bin: m.rumah,
           why: m.why,
           hint: 'Pikirkan di mana ia hidup: di air, di darat, atau di udara?',
+          sulit: SULIT[id],
         };
       });
+      items.sort((a, b) => a.sulit - b.sulit);
       ctx.ask('Di mana rumah makhluk ini? Ketuk tempat tinggalnya!');
+      ctx.sfx('pop');
       ctx.progress(0, items.length);
       ctx.sort({
         items,
@@ -104,7 +110,10 @@
           { id: 'darat', label: 'Darat', icon: '🌳' },
           { id: 'udara', label: 'Udara', icon: '☁️' },
         ],
-        onStep: (done) => ctx.progress(done, items.length),
+        onStep: (done) => {
+          ctx.progress(done, items.length);
+          if (done === Math.ceil(items.length / 2)) ctx.correct(null, { say: 'Bagus! Sekarang naik ke yang sulit.' });
+        },
       }).then(() => {
         if (!ctx.alive) return;
         ctx.progress(items.length, items.length);

@@ -85,15 +85,15 @@
   }
 
   function mainTK(ctx) {
-    const soal = [];
-    for (let i = 0; i < 8; i++) {
+    const soal = []; const jumlah = 8;
+    for (let i = 0; i < jumlah; i++) {
       const minBeda = i < 4 ? 2 : 1;
       let a, b;
       do { a = rand(1, 10); b = rand(1, 10); } while (Math.abs(a - b) < minBeda);
-      soal.push({ a, b, banyak: Math.random() < 0.5, emo: EMO[(i * 3 + rand(0, 2)) % EMO.length] });
+      soal.push({ a, b, banyak: Math.random() < 0.5, emo: EMO[(i * 3 + rand(0, 2)) % EMO.length], sulit: i < 4 ? 0 : 1 });
     }
 
-    return ctx.series(soal, async ({ a, b, banyak, emo }) => {
+    soal.sort((a, b) => a.sulit - b.sulit); let ke = 0; return ctx.series(soal, async ({ a, b, banyak, emo }) => { // beda besar dulu
       ctx.ask(banyak ? 'Mana yang lebih banyak?' : 'Mana yang lebih sedikit?');
       const benar = (banyak ? a > b : a < b) ? 'kiri' : 'kanan';
       let terbuka = false;
@@ -109,7 +109,7 @@
       });
       ctx.el.append(wrap, h('p', { class: 'ti-label ban-tip' }, 'Ketuk kelompok yang kamu pilih'));
       await p;
-      const besar = Math.max(a, b), kecil = Math.min(a, b);
+      ke++; if (ke === 4) ctx.correct(null, { say: 'Bagus! Sekarang naik, bedanya makin sedikit.' }); const besar = Math.max(a, b), kecil = Math.min(a, b);
       const kalimat = banyak ? kata(besar) + ' lebih banyak dari ' + kata(kecil) : kata(kecil) + ' lebih sedikit dari ' + kata(besar);
       await bicara(ctx, kalimat, 1100);
     }, { lesson: 'Tanda > artinya lebih besar, < artinya lebih kecil, = artinya sama dengan.' });
@@ -139,27 +139,27 @@
     // 4) sama banyak, atau dekat 100
     if (Math.random() < 0.5) { const n = rand(20, 95); out.push([n, n]); }
     else out.push(Math.random() < 0.5 ? [100, rand(90, 99)] : [rand(90, 99), 100]);
-    return shuffle(out).map(([l, r]) => ({
-      kiri: String(l), kanan: String(r), lv: l, rv: r, sayL: kata(l), sayR: kata(r),
-    }));
+    return out.map(([l, r], i) => ({
+      kiri: String(l), kanan: String(r), lv: l, rv: r, sayL: kata(l), sayR: kata(r), sulit: i,
+    })).sort((a, b) => a.sulit - b.sulit);
   }
 
   function soalHitungan() {
     const mau = shuffle(['>', '<', '=', '=']);
     return mau.map((tanda) => {
-      let teks, ucap, v;
+      let teks, ucap, v, sulit;
       if (Math.random() < 0.5) {
         const x = rand(3, 12), y = rand(2, 12);
-        v = x + y; teks = x + ' + ' + y; ucap = kata(x) + ' tambah ' + kata(y);
+        v = x + y; teks = x + ' + ' + y; ucap = kata(x) + ' tambah ' + kata(y); sulit = 0;
       } else {
         const x = rand(10, 20), y = rand(2, 9);
-        v = x - y; teks = x + ' - ' + y; ucap = kata(x) + ' kurang ' + kata(y);
+        v = x - y; teks = x + ' - ' + y; ucap = kata(x) + ' kurang ' + kata(y); sulit = 1;
       }
       let r = v;
       if (tanda === '>') r = v - rand(1, 3);
       else if (tanda === '<') r = v + rand(1, 3);
       if (r < 1) { r = v + 1; tanda = '<'; }
-      return { kiri: teks, kanan: String(r), lv: v, rv: r, sayL: ucap, sayR: kata(r) };
+      return { kiri: teks, kanan: String(r), lv: v, rv: r, sayL: ucap, sayR: kata(r), sulit };
     });
   }
 
@@ -167,7 +167,7 @@
 
   async function mainSD(ctx) {
     // Petunjuk sekali di awal.
-    ctx.progress(0, 8);
+    const jumlah = 8; ctx.progress(0, jumlah);
     ctx.ask('Ayo belajar tanda > < dan =', { speak: false });
     ctx.el.append(h('div', { class: 'ban-intro' },
       chip('9 > 4', 'lebih besar'), chip('4 < 9', 'lebih kecil'), chip('6 = 6', 'sama dengan')));
@@ -175,11 +175,11 @@
     await ctx.next('Mulai');
     if (!ctx.alive) return;
 
-    const soal = [...soalAngka(), ...soalHitungan()];
-    return ctx.series(soal, async (s) => {
+    const soal = [...soalAngka(), ...soalHitungan().sort((a, b) => a.sulit - b.sulit)]; // tambah dulu, kurang belakangan
+    let ke = 0; return ctx.series(soal, async (s) => {
       const tanda = s.lv > s.rv ? '>' : s.lv < s.rv ? '<' : '=';
       ctx.ask('Pilih tanda yang tepat.', { say: 'Pilih tanda yang tepat untuk ' + s.sayL + ' dan ' + s.sayR + '.' });
-      const kotak = h('span', { class: 'ban-box', 'aria-hidden': 'true' }, '?');
+      const kotak = h('span', { class: 'ban-box', 'aria-hidden': 'true' }, '?'); ctx.sfx('pop');
       ctx.el.append(h('div', { class: 'ti-card ban-eq pop-in', role: 'img', 'aria-label': s.kiri + ' dan ' + s.kanan },
         h('span', { class: 'ban-side' }, s.kiri), kotak, h('span', { class: 'ban-side' }, s.kanan)));
       let terisi = false;
@@ -199,7 +199,7 @@
       ctx.el.append(h('p', { class: 'ti-label ban-legend' },
         h('span', null, h('b', null, '>'), ' lebih besar'), h('span', null, h('b', null, '<'), ' lebih kecil'), h('span', null, h('b', null, '='), ' sama dengan')));
       await p;
-      await bicara(ctx, s.sayL + ' ' + KATA_TANDA[tanda] + ' ' + s.sayR, 1100);
+      ke++; if (ke === 4) ctx.correct(null, { say: 'Bagus! Sekarang naik ke hitungan.' }); await bicara(ctx, s.sayL + ' ' + KATA_TANDA[tanda] + ' ' + s.sayR, 1100);
     }, { lesson: 'Tanda > artinya lebih besar, < artinya lebih kecil, = artinya sama dengan.' });
   }
 
