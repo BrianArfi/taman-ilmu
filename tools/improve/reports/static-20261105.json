@@ -26,121 +26,6 @@
    ]
   },
   {
-   "file": "58-jam-shalat.js",
-   "id": "jam-shalat",
-   "title": "Kapan Shalatnya",
-   "cat": "islam",
-   "bytes": 6008,
-   "soal": 5,
-   "sig": {
-    "aksi": 1,
-    "feedback": 0,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 50,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
-   ]
-  },
-  {
-   "file": "72-sortir-bangun.js",
-   "id": "sortir-bangun",
-   "title": "Sortir Bangun",
-   "cat": "mat",
-   "bytes": 4090,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 0,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 50,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
-   ]
-  },
-  {
-   "file": "68-tebak-berat.js",
-   "id": "tebak-berat",
-   "title": "Tebak Berat",
-   "cat": "mat",
-   "bytes": 4835,
-   "soal": 3,
-   "sig": {
-    "aksi": 0,
-    "feedback": 0,
-    "ramp": 1,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 50,
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
-   ]
-  },
-  {
-   "file": "52-tertib-shalat.js",
-   "id": "tertib-shalat",
-   "title": "Tertib Gerakan Shalat",
-   "cat": "islam",
-   "bytes": 3217,
-   "soal": 3,
-   "sig": {
-    "aksi": 1,
-    "feedback": 0,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 50,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
-   ]
-  },
-  {
-   "file": "73-toples-tebak.js",
-   "id": "toples-tebak",
-   "title": "Toples Tebakan",
-   "cat": "mat",
-   "bytes": 4855,
-   "soal": 6,
-   "sig": {
-    "aksi": 0,
-    "feedback": 0,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 50,
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
-   ]
-  },
-  {
    "file": "82-daur-hidup.js",
    "id": "daur-hidup",
    "title": "Daur Hidup Kacang",
@@ -1093,6 +978,29 @@
    ]
   },
   {
+   "file": "72-sortir-bangun.js",
+   "id": "sortir-bangun",
+   "title": "Sortir Bangun",
+   "cat": "mat",
+   "bytes": 4798,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 1,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
    "file": "90-tangram.js",
    "id": "tangram",
    "title": "Tangram Rumah",
@@ -1112,6 +1020,28 @@
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton",
     "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "68-tebak-berat.js",
+   "id": "tebak-berat",
+   "title": "Tebak Berat",
+   "cat": "mat",
+   "bytes": 5563,
+   "soal": 3,
+   "sig": {
+    "aksi": 0,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {
@@ -1405,6 +1335,28 @@
    ]
   },
   {
+   "file": "58-jam-shalat.js",
+   "id": "jam-shalat",
+   "title": "Kapan Shalatnya",
+   "cat": "islam",
+   "bytes": 7011,
+   "soal": 5,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
    "file": "18-lempar.js",
    "id": "lempar",
    "title": "Lempar Tepat",
@@ -1621,6 +1573,28 @@
    ]
   },
   {
+   "file": "52-tertib-shalat.js",
+   "id": "tertib-shalat",
+   "title": "Tertib Gerakan Shalat",
+   "cat": "islam",
+   "bytes": 3903,
+   "soal": 3,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
    "file": "15-timbangan.js",
    "id": "timbangan",
    "title": "Timbangan Seimbang",
@@ -1639,6 +1613,28 @@
    "static100": 79,
    "sug": [
     "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "file": "73-toples-tebak.js",
+   "id": "toples-tebak",
+   "title": "Toples Tebakan",
+   "cat": "mat",
+   "bytes": 5792,
+   "soal": 6,
+   "sig": {
+    "aksi": 0,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {

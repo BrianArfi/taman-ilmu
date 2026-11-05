@@ -66,6 +66,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 3 (5 Nov 2026)**: teka-teki 73→92, jam-cocok 73→88,
   tebak-bayang 73→88, adab 73→88, bangun 76→92.
   Detail: `reports/cycle-20261105-s3.md`.
+- **Siklus 4 (5 Nov 2026)**: jam-shalat 73→88, sortir-bangun 72→84,
+  tebak-berat 73→84, tertib-shalat 72→88, toples-tebak 73→88.
+  Detail: `reports/cycle-20261105-s4.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar
