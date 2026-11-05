@@ -1,4 +1,5 @@
-/* 100 Raja Taman. Ujian terakhir: 10 soal campuran 4 kategori, 3 nyawa. Fakta hanya dari bank SPEC dan game lama. */
+/* 100 Raja Taman. Ujian terakhir: 10 soal campuran 4 kategori, 3 nyawa. Fakta hanya dari bank SPEC dan game lama.
+   Kategori selang-seling seimbang. Tiap soal teks ada ikon kategorinya. */
 (function () {
   const { h, shuffle, sample } = TI;
 
@@ -67,11 +68,15 @@
       const tk = ctx.isTK;
       const nOpsi = tk ? 3 : 4;
 
-      const ambil = (bank, n) => sample(bank, n);
-      const soal = shuffle(ambil(HIJAIYAH, 3).concat(ambil(HITUNG, 3), ambil(LANGIT, 2), ambil(LAWAN, 2)));
+      const ambil = (bank, n, tag) => sample(bank, n).map((s) => ({ ...s, bank: tag }));
+      const grup = [ambil(HIJAIYAH, 3, 'hijaiyah'), ambil(HITUNG, 3, 'hitung'), ambil(LANGIT, 2, 'langit'), ambil(LAWAN, 2, 'lawan')];
+      // Selang-seling kategori supaya ujian seimbang (bukan menumpuk acak).
+      const soal = [];
+      for (let g = 0; g < 3; g++) for (const bank of grup) if (bank[g]) soal.push(bank[g]);
+      const IKON = { hijaiyah: '📜', hitung: '🔢', langit: '🌤️', lawan: '🔀' };
 
       const main = async () => {
-        let nyawa = 3, benar = 0;
+        let nyawa = 3, benar = 0, beruntun = 0;
         const hud = h('div', { class: 'rj-hud' });
         const hati = h('span', { class: 'rj-chip is-hati', 'aria-label': 'Nyawa' });
         const chipSoal = h('span', { class: 'rj-chip' });
@@ -87,12 +92,17 @@
           gambarHati();
           chipSoal.textContent = 'Soal ' + (i + 1) + ' dari ' + soal.length;
           const ok = await satu(soal[i]);
-          if (ok) benar++;
-          else {
+          if (ok) {
+            benar++;
+            beruntun++;
+            if (beruntun === 3) ctx.correct(null, { say: 'Tiga benar beruntun! Hebat!' });
+          } else {
             nyawa--;
+            beruntun = 0;
             gambarHati();
             if (nyawa <= 0) { await ctx.wait(600); break; }
           }
+          if (i === 4 && nyawa > 0) ctx.correct(null, { say: 'Bagus! Setengah jalan!' });
           ctx.progress(i + 1, soal.length);
         }
         if (!ctx.alive) return;
@@ -133,6 +143,8 @@
           return r.firstTry;
         }
         ctx.ask(s.soal);
+        ctx.el.append(h('div', { class: 'rj-card pop-in' }, h('p', { class: 'rj-big', 'aria-hidden': 'true' }, IKON[s.bank])));
+        ctx.sfx('pop');
         const r = await ctx.choose({ options: shuffle(opsi), answer: s.jawab, speakLabel: true, retry: false });
         return r.firstTry;
       }

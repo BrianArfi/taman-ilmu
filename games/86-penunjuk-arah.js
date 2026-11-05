@@ -65,10 +65,14 @@
       const arah = ctx.isTK ? ARAH4 : ARAH8;
       const ronde = ctx.isTK ? 4 : 8;
       const target = shuffle(arah.slice()).slice(0, ronde);
+      // Mata angin pokok dulu, arah serong belakangan.
+      target.forEach((t) => { t.sulit = t.deg % 90 === 0 ? 0 : 1; });
+      target.sort((a, b) => a.sulit - b.sulit);
       return (async () => {
         let fakta = false;
         for (let k = 0; k < target.length && ctx.alive; k++) {
           ctx.progress(k, target.length);
+          if (k === Math.ceil(target.length / 2)) ctx.correct(null, { say: ctx.isTK ? 'Bagus! Setengah jalan!' : 'Bagus! Terus naik ke arah serong.' });
           await soal(target[k], k);
         }
         if (ctx.isSD && ctx.alive) {

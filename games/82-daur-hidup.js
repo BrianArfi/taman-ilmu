@@ -1,5 +1,6 @@
 /* 82 Daur Hidup Kacang. Urutkan Biji, Kecambah, Tunas, Berbunga, Berbuah (SVG tanpa wajah),
-   lalu SD menjawab 3 kuis syarat tumbuh: air, cahaya, tanah. */
+   lalu SD menjawab 3 kuis syarat tumbuh: air, cahaya, tanah.
+   Dua tahap berlabel; SD naik ke kuis setelah urutan. */
 (function () {
   const { h, svg, shuffle } = TI;
 
@@ -51,19 +52,22 @@
     start(ctx) {
       TI.style('daur-hidup', CSS);
       return (async () => {
-        ctx.ask('Urutkan gambar dari biji sampai berbuah. Ketuk yang paling muda dulu.');
+        ctx.ask('Tahap 1: urutkan gambar dari biji sampai berbuah. Ketuk yang paling muda dulu.');
+        ctx.sfx('pop');
         await ctx.order({
           items: TAHAP.map((t, i) => ({ label: t.label, say: t.say, node: tahapNode(i) })),
-          guide: 'always',
+          guide: ctx.isTK ? 'always' : 'after-wrong',
           onStep: (done, total) => ctx.progress(done, ctx.isTK ? total : total + KUIS.length),
         });
         if (!ctx.alive) return;
         if (ctx.isSD) {
+          ctx.correct(null, { say: 'Bagus! Terus naik ke tahap 2: syarat tumbuh.' });
           for (let i = 0; i < KUIS.length && ctx.alive; i++) {
             const k = KUIS[i];
             ctx.progress(5 + i, 5 + KUIS.length);
-            ctx.ask(k.q);
-            ctx.el.append(h('p', { class: 'dh-why' }, k.icon));
+            ctx.ask('Tahap 2: ' + k.q);
+            ctx.el.append(h('p', { class: 'dh-why pop-in' }, k.icon));
+            ctx.sfx('pop');
             await ctx.choose({ options: shuffle(k.opsi.slice()), answer: k.jawab, layout: 'is-col', speakLabel: true });
             if (ctx.alive) await ctx.sayWait(k.jawab + ' membuat tanaman tumbuh sehat.');
           }

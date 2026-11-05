@@ -1,4 +1,5 @@
-/* 13 Jam Berapa? Jam analog digambar sendiri dengan SVG: jarum pendek (jam) dan jarum panjang (menit). */
+/* 13 Jam Berapa? Jam analog digambar sendiri dengan SVG: jarum pendek (jam) dan jarum panjang (menit).
+   TK: kenali dulu baru baca. SD: tepat, setengah, seperempat, lalu menit bebas. */
 (function () {
   const { h, svg, rand, pick, shuffle, sample, numChoices } = TI;
 
@@ -85,6 +86,7 @@
       h('span', null, h('i', { style: 'background:#2f6fed' }), 'Jarum pendek: jam'),
       h('span', null, h('i', { style: 'background:#e5484d' }), 'Jarum panjang: menit'));
     ctx.el.append(h('div', { class: 'ti-card jm-kartu pop-in' }, el, legenda));
+    ctx.sfx('pop');
     if (!TI.reduced()) ctx.after(60, el._pasang);
   }
 
@@ -154,20 +156,35 @@
       const lesson = 'Jarum pendek menunjuk jam, jarum panjang menunjuk menit.';
       if (ctx.isTK) {
         const jam = sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 8);
-        const soal = [...jam.slice(0, 6).map((j) => ({ tipe: 'baca', j })), ...jam.slice(6).map((j) => ({ tipe: 'mana', j }))];
-        ctx.series(soal, (s) => soalTK(ctx, s), { lesson });
+        // Kenali dulu (mana), baru baca: pengenalan lebih gampang dari mengingat.
+        const soal = [...jam.slice(0, 6).map((j) => ({ tipe: 'baca', sulit: 1, j })), ...jam.slice(6).map((j) => ({ tipe: 'mana', sulit: 0, j }))];
+        soal.sort((a, b) => a.sulit - b.sulit);
+        let ke = 0;
+        ctx.series(soal, async (s) => {
+          ke++;
+          if (ke === 4) ctx.correct(null, { say: 'Bagus! Setengah jalan!' });
+          await soalTK(ctx, s);
+        }, { lesson });
       } else {
         const jam = sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 6);
         const tipe = ['tepat', 'setengah', 'seperempat', 'lima', 'setengah', 'lima'];
+        const sulitTipe = { tepat: 0, setengah: 1, kegiatan: 1, seperempat: 2, lima: 3 };
         const menit = (t) => (t === 'tepat' ? 0 : t === 'setengah' ? 30 : t === 'seperempat' ? pick([15, 45]) : pick([5, 10, 20, 25, 35, 40, 50, 55]));
         let sudahCatatan = false;
         const soal = tipe.map((t, i) => {
-          const o = { tipe: t, j: jam[i], m: menit(t) };
+          const o = { tipe: t, sulit: sulitTipe[t], j: jam[i], m: menit(t) };
           if (t === 'setengah' && !sudahCatatan) { o.catatan = true; sudahCatatan = true; }
           return o;
         });
-        const keg = sample(KEGIATAN, 2).map(([nama, j, m]) => ({ tipe: 'kegiatan', nama, j, m }));
-        ctx.series([...soal, ...keg], (s) => soalSD(ctx, s), { lesson });
+        const keg = sample(KEGIATAN, 2).map(([nama, j, m]) => ({ tipe: 'kegiatan', sulit: 1, nama, j, m }));
+        const semua = [...soal, ...keg];
+        semua.sort((a, b) => a.sulit - b.sulit);
+        let ke = 0;
+        ctx.series(semua, async (s) => {
+          ke++;
+          if (ke === 4) ctx.correct(null, { say: 'Bagus! Terus naik ke yang sulit.' });
+          await soalSD(ctx, s);
+        }, { lesson });
       }
     },
   });

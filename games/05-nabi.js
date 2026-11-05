@@ -75,11 +75,16 @@
       } else {
         soal = sample(BANK, 8);
       }
+      // Urut kisah: nabi awal dulu, sesuai urutan bank SPEC.
+      soal.forEach((s) => { s.urut = BANK.indexOf(s); });
+      soal.sort((a, b) => a.urut - b.urut);
       return ctx.series(soal, async (s, i) => {
+        if (i === 3) ctx.correct(null, { say: 'Bagus! Lanjut ke kisah berikutnya!' });
         ctx.ask(s.q);
         const kartu = h('div', { class: 'ti-card nb-kartu pop-in' }, h('div', { class: 'nb-ikon', 'aria-hidden': 'true' }, s.icon));
         const pilihan = h('div', { class: 'ti-choices is-col nb-pilihan' });
         ctx.el.append(kartu, pilihan);
+        ctx.sfx('pop');
         await ctx.choose({
           options: shuffle([s.a, ...s.w]).map((t) => ({ label: t, value: t })),
           answer: s.a,
@@ -89,6 +94,7 @@
         // Pilihan diganti jawaban benar supaya kisahnya muat di layar HP.
         pilihan.remove();
         kartu.append(h('p', { class: 'nb-jawab' }, s.a));
+        ctx.sfx('pop');
         ctx.note(s.fakta, { title: 'Kisahnya' });
         await ctx.next(i === soal.length - 1 ? 'Selesai' : 'Lanjut');
       }, { lesson: LESSON });
