@@ -1,5 +1,6 @@
 /* 53 Tebak Nabi dari Petunjuk. Tiap soal 3 petunjuk bertahap tentang satu nabi.
-   Fakta dipakai ulang dari 05-nabi.js, tidak ada fakta baru. Tanpa gambar orang. */
+   Fakta dipakai ulang dari 05-nabi.js, tidak ada fakta baru. Tanpa gambar orang.
+   Urut nabi masyhur dulu. Tengah jalan ada pujian. */
 (function () {
   const { h, shuffle, sample } = TI;
 
@@ -68,10 +69,17 @@ ${P} .kc-pilihan .choice { min-height: 64px; }`;
       } else {
         soal = sample(BANK, 8);
       }
+      // Nabi masyhur dulu, yang jarang dikenal belakangan.
+      soal.forEach((s) => { s.sulit = BANK.indexOf(s) < 9 ? 0 : 1; });
+      soal.sort((a, b) => a.sulit - b.sulit);
       const nOpsi = TK ? 3 : 4;
 
+      let ke = 0;
       return ctx.series(soal, async (s) => {
+        ke++;
+        if (ke === Math.ceil(soal.length / 2)) ctx.correct(null, { say: TK ? 'Bagus! Setengah jalan!' : 'Bagus! Terus naik ke yang sulit.' });
         ctx.ask('Perhatikan tiga petunjuk ini. Nabi siapa dia?');
+        ctx.sfx('pop');
         const clue = h('div', { class: 'kc-clue pop-in' },
           h('div', { class: 'kc-satu' }, h('span', { class: 'kc-no' }, '1'), h('span', { class: 'kc-ikon', 'aria-hidden': 'true' }, s.icon), h('span', null, 'Kisahnya berkaitan dengan gambar ini.')),
           h('div', { class: 'kc-satu' }, h('span', { class: 'kc-no' }, '2'), h('span', null, s.q)),
@@ -87,6 +95,7 @@ ${P} .kc-pilihan .choice { min-height: 64px; }`;
         });
         if (!ctx.alive) return;
         pilihan.remove();
+        ctx.sfx('pop');
         ctx.note(s.fakta, { title: 'Kisahnya' });
         await ctx.next();
       }, {

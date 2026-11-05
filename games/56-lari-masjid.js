@@ -1,6 +1,7 @@
 /* 56 Lari ke Masjid. Auto-runner canvas: kotak bercahaya (tanpa wajah) lari
    otomatis ke masjid. Ketuk untuk melompat menghindari lubang dan mengambil
-   bintang. Jarak TETAP lalu finish. Tabrakan hanya mengurangi bintang. */
+   bintang. Jarak TETAP lalu finish. Tabrakan hanya mengurangi bintang.
+   Babak 2 di tengah jalan: kecepatan naik. Tiap 3x kena lubang ada semangat. */
 (function () {
   const { h } = TI;
 
@@ -26,8 +27,8 @@ ${P} .lm-lompat { min-height: 72px; font-size: 1.4rem; width: 100%; max-width: 5
       const reduced = TI.reduced();
       // Aslinya TK 30 detik; dipadatkan jadi 18 agar selesai dalam 200 aksi uji acak.
       const LAMA = TK ? 18 : 14; // detik, jarak tetap
-      const CEPAT = (TK ? 150 : 250) * (reduced ? 0.85 : 1);
-      const DUNIA = CEPAT * LAMA;
+      let cepat = (TK ? 150 : 250) * (reduced ? 0.85 : 1);
+      const DUNIA = cepat * LAMA;
 
       ctx.ask('Lari ke masjid! Ketuk layar atau tombol Lompat untuk melompat.');
       const info = h('p', { class: 'ti-label lm-info' },
@@ -36,7 +37,7 @@ ${P} .lm-lompat { min-height: 72px; font-size: 1.4rem; width: 100%; max-width: 5
       const scene = h('div', { class: 'ti-scene lm-scene', 'data-tap': true, 'aria-label': 'Area lari. Ketuk untuk melompat.' });
       const cv = h('canvas', null);
       scene.append(cv);
-      const btn = h('button', { type: 'button', class: 'ti-btn lm-lompat' }, '⬆️ Lompat!');
+      const btn = h('button', { type: 'button', class: 'ti-btn lm-lompat pop-in' }, '⬆️ Lompat!');
       ctx.el.append(info, sisa, scene, btn);
 
       let W = 360, H = 330;
@@ -70,7 +71,7 @@ ${P} .lm-lompat { min-height: 72px; font-size: 1.4rem; width: 100%; max-width: 5
 
       const pemain = { x: 66, w: 34, h: 44, y: 0, vy: 0, diTanah: true, kedip: 0 };
       pemain.y = 0;
-      let jauh = 0, dapat = 0, selesai = false;
+      let jauh = 0, dapat = 0, selesai = false, naik = false, gagal = 0;
       const GRAV = 2500, LOMPAT = 880;
       const label = info.firstChild;
 
@@ -103,7 +104,14 @@ ${P} .lm-lompat { min-height: 72px; font-size: 1.4rem; width: 100%; max-width: 5
 
       ctx.loop((dt) => {
         if (selesai) return false;
-        jauh += CEPAT * dt;
+        jauh += cepat * dt;
+        // Babak 2: kecepatan naik di tengah jalan.
+        if (!naik && jauh >= DUNIA / 2) {
+          naik = true;
+          cepat *= TK ? 1.15 : 1.2;
+          ctx.correct(null, { say: 'Bagus! Babak 2, kecepatan naik!' });
+          info.append(h('span', { class: 'lm-bintang' }, '🏁 Babak 2'));
+        }
         if (jauh >= DUNIA) {
           selesai = true;
           const b = dapat >= 8 ? 3 : dapat >= 5 ? 2 : 1;
@@ -143,7 +151,9 @@ ${P} .lm-lompat { min-height: 72px; font-size: 1.4rem; width: 100%; max-width: 5
             if (dapat > 0) { dapat--; label.textContent = '⭐ ' + dapat; }
             pemain.kedip = 0.6;
             ctx.sfx('salah');
-            ctx.say('Aduh, lubang! Ayo lompat.');
+            gagal++;
+            if (gagal === 3) ctx.say('Tidak apa-apa, terus lari ke masjid!');
+            else ctx.say('Aduh, lubang! Ayo lompat.');
           }
         }
         if (pemain.kedip > 0) pemain.kedip -= dt;

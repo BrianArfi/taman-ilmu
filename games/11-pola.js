@@ -66,9 +66,9 @@
       tampil.map((t) => h('span', { class: 'pol-cell', 'aria-hidden': 'true' }, isiToken(t))), q);
     return { row, q };
   }
-  function jawabKotak(q, tok) {
+  function jawabKotak(ctx, q, tok) {
     q.classList.remove('is-q');
-    q.classList.add('is-ans');
+    q.classList.add('is-ans'); ctx.sfx('pop');
     q.replaceChildren(isiToken(tok));
   }
   const sama = (a, b) => (typeof a === 'object' ? typeof b === 'object' && a.n === b.n : a === b);
@@ -93,17 +93,17 @@
       const jawab = seq[L];
       const lain = SEMUA.filter((e) => !set.includes(e));
       const pengecoh = [...set.filter((e) => e !== jawab), ...shuffle(lain)].slice(0, 2);
-      return { tampil: seq.slice(0, L), jawab, opsi: shuffle([jawab, ...pengecoh]) };
+      return { tampil: seq.slice(0, L), jawab, opsi: shuffle([jawab, ...pengecoh]), sulit: tipe === 'AB' ? 0 : tipe === 'ABC' ? 2 : 1 };
     });
   }
 
   // ---------- SD ----------
   const ATURAN_ANGKA = [
-    { aturan: 'setiap angka ditambah 2', ucap: 'setiap angka ditambah dua', mulai: () => rand(1, 6), langkah: (x) => x + 2, beda: 2, L: [4, 5] },
-    { aturan: 'setiap angka ditambah 5', ucap: 'setiap angka ditambah lima', mulai: () => (Math.random() < 0.5 ? 5 : rand(2, 9)), langkah: (x) => x + 5, beda: 5, L: [4, 5] },
-    { aturan: 'setiap angka ditambah 10', ucap: 'setiap angka ditambah sepuluh', mulai: () => (Math.random() < 0.5 ? 10 : rand(3, 26)), langkah: (x) => x + 10, beda: 10, L: [4, 5] },
-    { aturan: 'setiap angka dikurangi 3', ucap: 'setiap angka dikurangi tiga', mulai: () => rand(20, 30), langkah: (x) => x - 3, beda: 3, L: [4, 5] },
-    { aturan: 'setiap angka dikali 2', ucap: 'setiap angka dikali dua', mulai: () => rand(1, 3), langkah: (x) => x * 2, beda: 0, L: [4] },
+    { aturan: 'setiap angka ditambah 2', ucap: 'setiap angka ditambah dua', mulai: () => rand(1, 6), langkah: (x) => x + 2, beda: 2, L: [4, 5], s: 0 },
+    { aturan: 'setiap angka ditambah 5', ucap: 'setiap angka ditambah lima', mulai: () => (Math.random() < 0.5 ? 5 : rand(2, 9)), langkah: (x) => x + 5, beda: 5, L: [4, 5], s: 1 },
+    { aturan: 'setiap angka ditambah 10', ucap: 'setiap angka ditambah sepuluh', mulai: () => (Math.random() < 0.5 ? 10 : rand(3, 26)), langkah: (x) => x + 10, beda: 10, L: [4, 5], s: 1 },
+    { aturan: 'setiap angka dikurangi 3', ucap: 'setiap angka dikurangi tiga', mulai: () => rand(20, 30), langkah: (x) => x - 3, beda: 3, L: [4, 5], s: 2 },
+    { aturan: 'setiap angka dikali 2', ucap: 'setiap angka dikali dua', mulai: () => rand(1, 3), langkah: (x) => x * 2, beda: 0, L: [4], s: 3 },
   ];
   const SET4 = [['🔺', '🟦', '⭐', '🔴'], ['🟩', '🔷', '🟡', '🔶'], ['⭐', '🟣', '🔺', '🟢']];
   const SET_AABB = [['🔺', '🟦'], ['⭐', '🔴'], ['🟩', '🔶'], ['🍎', '🍌']];
@@ -116,19 +116,19 @@
     const beda = r.beda || jawab - seq[L - 1];
     const pool = [jawab + 1, jawab - 1, jawab + beda, jawab - beda, jawab + 2, jawab - 2, jawab + 10, jawab * 2].filter((v) => v > 0 && v !== jawab);
     const pengecoh = [...new Set(shuffle(pool))].slice(0, 3);
-    return { tampil: seq.slice(0, L), jawab, opsi: shuffle([jawab, ...pengecoh]), aturan: r.aturan, ucap: r.ucap, angka: true };
+    return { tampil: seq.slice(0, L), jawab, opsi: shuffle([jawab, ...pengecoh]), aturan: r.aturan, ucap: r.ucap, angka: true, sulit: r.s };
   }
   function polaABCD() {
     const set = SET4[rand(0, SET4.length - 1)];
     const seq = Array.from({ length: 8 }, (_, k) => set[k % 4]);
-    return { tampil: seq.slice(0, 7), jawab: seq[7], opsi: shuffle(set), aturan: 'empat gambar ini berulang terus', ucap: 'empat gambar ini berulang terus' };
+    return { tampil: seq.slice(0, 7), jawab: seq[7], opsi: shuffle(set), aturan: 'empat gambar ini berulang terus', ucap: 'empat gambar ini berulang terus', sulit: 2 };
   }
   function polaAABB() {
     const set = shuffle(SET_AABB[rand(0, SET_AABB.length - 1)]);
     const unit = [0, 0, 1, 1];
     const seq = Array.from({ length: 7 }, (_, k) => set[unit[k % 4]]);
     const lain = SEMUA.filter((e) => !set.includes(e));
-    return { tampil: seq.slice(0, 6), jawab: seq[6], opsi: shuffle([seq[6], set.find((e) => e !== seq[6]), ...shuffle(lain).slice(0, 2)]), aturan: 'setiap gambar muncul dua kali berturut-turut', ucap: 'setiap gambar muncul dua kali berturut-turut' };
+    return { tampil: seq.slice(0, 6), jawab: seq[6], opsi: shuffle([seq[6], set.find((e) => e !== seq[6]), ...shuffle(lain).slice(0, 2)]), aturan: 'setiap gambar muncul dua kali berturut-turut', ucap: 'setiap gambar muncul dua kali berturut-turut', sulit: 1 };
   }
   function polaTumbuhAngka() {
     const v = Math.random() < 0.5 ? [1, 3, 6, 10, 15] : [2, 4, 7, 11, 16];
@@ -137,7 +137,7 @@
     const jawab = v[L];
     const pool = [jawab - 1, jawab + 1, jawab - 2, jawab + 2, jawab + 5, jawab - 5, v[L - 1] + 4, v[L - 1] + 6].filter((x) => x > 0 && x !== jawab);
     return { tampil: v.slice(0, L), jawab, opsi: shuffle([jawab, ...[...new Set(shuffle(pool))].slice(0, 3)]),
-      aturan: 'tambahannya naik satu: +' + d.join(', +'), ucap: 'tambahannya naik satu: tambah ' + d.map(kata).join(', tambah '), angka: true };
+      aturan: 'tambahannya naik satu: +' + d.join(', +'), ucap: 'tambahannya naik satu: tambah ' + d.map(kata).join(', tambah '), angka: true, sulit: 3 };
   }
   function polaTumbuhBlok() {
     const mulai = rand(1, 2);
@@ -145,7 +145,7 @@
     const jawab = { n: mulai + 3 };
     const ns = [...new Set([jawab.n, jawab.n - 1, jawab.n + 1, jawab.n + 2, jawab.n - 2].filter((x) => x > 0))];
     const pengecoh = shuffle(ns.filter((x) => x !== jawab.n)).slice(0, 3);
-    return { tampil, jawab, opsi: shuffle([jawab, ...pengecoh.map((n) => ({ n }))]), aturan: 'setiap langkah ditambah satu kotak', ucap: 'setiap langkah ditambah satu kotak' };
+    return { tampil, jawab, opsi: shuffle([jawab, ...pengecoh.map((n) => ({ n }))]), aturan: 'setiap langkah ditambah satu kotak', ucap: 'setiap langkah ditambah satu kotak', sulit: 2 };
   }
 
   function soalSD() {
@@ -161,13 +161,13 @@
     desc: 'Lihat pola yang berulang, lalu tebak apa yang datang selanjutnya.',
     start(ctx) {
       TI.style('pola', CSS);
-      const soal = ctx.isTK ? soalTK() : soalSD();
+      const soal = ctx.isTK ? soalTK() : soalSD(); soal.sort((a, b) => a.sulit - b.sulit); // gampang dulu
 
       return ctx.series(soal, async (s, i) => {
-        ctx.ask(ctx.isTK ? 'Apa selanjutnya?' : 'Lanjutkan pola ini.', {
+        if (i === 4) ctx.correct(null, { say: ctx.isTK ? 'Bagus! Setengah jalan!' : 'Bagus! Terus naik ke yang sulit.' }); ctx.ask(ctx.isTK ? 'Apa selanjutnya?' : 'Lanjutkan pola ini.', {
           say: i === 0 ? 'Lihat polanya. Apa yang datang selanjutnya?' : (ctx.isTK ? 'Apa selanjutnya?' : 'Lanjutkan pola ini. Apa yang datang selanjutnya?'),
         });
-        const { row, q } = baris(s.tampil);
+        const { row, q } = baris(s.tampil); ctx.sfx('pop');
         ctx.el.append(row);
 
         let terbuka = false;
@@ -182,7 +182,7 @@
           options: opsi,
           answer: (v) => {
             const ok = v === jawabNilai;
-            if (ok && !terbuka) { terbuka = true; jawabKotak(q, s.jawab); }
+            if (ok && !terbuka) { terbuka = true; jawabKotak(ctx, q, s.jawab); }
             return ok;
           },
           layout: ctx.isTK ? 'pol-opts3' : 'pol-opts',

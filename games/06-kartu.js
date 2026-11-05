@@ -1,6 +1,6 @@
 /* 06 Kartu Pasangan (memory game).
    TK: dek "Benda Islami", 6 pasang kembar, nama dibacakan saat kartu dibuka.
-   SD: pilih dek (Kitab & Nabi, Malaikat & Tugasnya, Asmaul Husna), cocokkan nama dengan artinya. */
+   SD: pilih dek (Kitab & Nabi, Malaikat & Tugasnya, Asmaul Husna), cocokkan nama dengan artinya. TK intip dulu, tiap 3x salah waktu lihat tambah. */
 (function () {
   const { h, shuffle, sample } = TI;
 
@@ -191,7 +191,7 @@
       grid.append(btn);
       return k;
     });
-    ctx.el.append(wrap);
+    ctx.el.append(wrap); if (ctx.isTK) { kartu.forEach((x) => x.btn.classList.add('is-open')); ctx.say('Ingat-ingat letaknya!'); ctx.sfx('pop'); ctx.after(2500, () => kartu.forEach((x) => { if (!x.buka && !x.selesai) x.btn.classList.remove('is-open'); })); }
 
     function buka(k) {
       k.buka = true;
@@ -233,7 +233,7 @@
         await ctx.wait(300);
       } else {
         salah++;
-        await ctx.wait(ctx.isTK ? 1100 : 950);
+        await ctx.wait((ctx.isTK ? 1100 : 950) + (salah >= 3 ? 800 : 0)); // makin lama lihat kalau sering salah
         tutup(a); tutup(b);
       }
       kuncikan(false);

@@ -1,5 +1,6 @@
 /* 55 Sehari Berpuasa. Babak 1: urutkan dari sahur sampai buka (ctx.order).
-   Babak 2: pilah yang membatalkan dan tidak (ctx.sort). */
+   Babak 2: pilah yang membatalkan dan tidak (ctx.sort).
+   Dua babak berlabel; naik ke babak pilah setelah urutan. */
 (function () {
   const { h } = TI;
 
@@ -59,20 +60,23 @@ ${P} .ps-sort .choice { min-height: 72px; }`;
       const TK = ctx.isTK;
 
       ctx.progress(0, 2);
-      ctx.ask('Urutkan kegiatan puasa dari pagi sampai sore!');
-      const w1 = h('div', { class: 'ps-order' });
+      ctx.ask('Babak 1: urutkan kegiatan puasa dari pagi sampai sore!');
+      const w1 = h('div', { class: 'ps-order pop-in' });
       ctx.el.append(w1);
+      ctx.sfx('pop');
       await ctx.order({ items: TK ? URUT_TK : URUT_SD, guide: TK ? 'always' : 'after-wrong', into: w1 });
       if (!ctx.alive) return;
       ctx.progress(1, 2);
+      ctx.correct(null, { say: 'Bagus! Terus naik ke babak 2.' });
       ctx.note('Puasa dimulai sejak fajar sampai magrib. Sahur dulu, lalu niat, lalu menahan diri sampai beduk magrib.', { title: 'Hebat!' });
       await ctx.next();
       if (!ctx.alive) return;
 
       ctx.clear();
-      ctx.ask('Mana yang membatalkan puasa? Ketuk keranjang yang benar!');
-      const w2 = h('div', { class: 'ps-sort' });
+      ctx.ask('Babak 2: mana yang membatalkan puasa? Ketuk keranjang yang benar!');
+      const w2 = h('div', { class: 'ps-sort pop-in' });
       ctx.el.append(w2);
+      ctx.sfx('pop');
       await ctx.sort({ items: TK ? SORT_TK : SORT_SD, bins: BINS, into: w2 });
       if (!ctx.alive) return;
       ctx.progress(2, 2);
