@@ -1,4 +1,6 @@
-/* 72 Sortir Bangun. Sortir bentuk ke keranjang jumlah sisinya. */
+/* 72 Sortir Bangun. Sortir bentuk ke keranjang jumlah sisinya.
+   Urut gampang dulu (segitiga dan persegi, lalu segi banyak dan yang mirip).
+   Tengah jalan ada pujian, penempatan pertama berbunyi. */
 (function () {
   const { h, svg, shuffle, sample, pick } = TI;
 
@@ -64,6 +66,7 @@
       const kunci = ctx.isTK
         ? ['segitiga', 'persegi', 'persegi panjang', 'trapesium', 'segi lima', 'segi enam']
         : ['segitiga', 'persegi', 'persegi panjang', 'trapesium', 'belah ketupat', 'jajar genjang', 'layang-layang', 'segi lima', 'segi enam', 'segi delapan'];
+      const SULIT = { segitiga: 0, persegi: 0, 'persegi panjang': 1, 'segi lima': 1, 'segi enam': 1, 'segi delapan': 2, trapesium: 2, 'belah ketupat': 2, 'jajar genjang': 2, 'layang-layang': 2 };
       const items = shuffle(kunci).map((k) => ({
         label: NAMA[k],
         say: NAMA[k] + '. Punya berapa sisi?',
@@ -71,8 +74,11 @@
         bin: binOf(k),
         why: NAMA[k] + ' punya ' + kataSisi(k) + '.',
         hint: 'Hitung sisinya satu per satu ya.',
+        sulit: SULIT[k],
       }));
+      items.sort((a, b) => a.sulit - b.sulit);
       ctx.ask('Hitung sisinya, lalu ketuk keranjang yang benar!');
+      ctx.sfx('pop');
       ctx.progress(0, items.length);
       ctx.sort({
         items,
@@ -81,7 +87,11 @@
           { id: 's4', label: '4 sisi', icon: '🟥' },
           { id: 's5', label: 'Banyak sisi', icon: '⬢' },
         ],
-        onStep: (done) => ctx.progress(done, items.length),
+        onStep: (done) => {
+          ctx.progress(done, items.length);
+          if (done === 1) ctx.sfx('pop');
+          if (done === Math.ceil(items.length / 2)) ctx.correct(null, { say: 'Bagus! Terus naik ke yang sulit.' });
+        },
       }).then(() => {
         if (!ctx.alive) return;
         ctx.progress(items.length, items.length);

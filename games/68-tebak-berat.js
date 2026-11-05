@@ -1,5 +1,6 @@
 /* 68 Tebak Berat. Bandingkan 2 benda (mana lebih berat) lalu tebak berat dalam kubus satuan.
-   TK: 5 soal banding. SD: tambah tebakan angka (banding tricky + estimasi kubus). */
+   TK: 5 soal banding. SD: tambah tebakan angka (banding tricky + estimasi kubus).
+   Urut gampang dulu (banding, jebakan sama, kubus). Jawaban terungkap. */
 (function () {
   const { h, shuffle, sample, numChoices } = TI;
 
@@ -34,13 +35,17 @@
       TI.style('tebak-berat', CSS);
       const TK = ctx.isTK;
       const banding = TK ? sample(PASANGAN, 5) : sample(PASANGAN, 3);
-      const ronde = banding.map((p) => ({ tipe: 'banding', p }));
+      const ronde = banding.map((p) => ({ tipe: 'banding', sulit: 0, p }));
       if (!TK) {
-        ronde.push({ tipe: 'sama' });
-        for (let i = 0; i < 2; i++) ronde.push({ tipe: 'kubus' });
+        ronde.push({ tipe: 'sama', sulit: 1 });
+        for (let i = 0; i < 2; i++) ronde.push({ tipe: 'kubus', sulit: 2 });
       }
+      ronde.sort((a, b) => a.sulit - b.sulit); // banding dulu, kubus belakangan
 
-      await ctx.series(shuffle(ronde), async (r) => {
+      let ke = 0;
+      await ctx.series(ronde, async (r) => {
+        ke++;
+        if (ke === 3) ctx.correct(null, { say: TK ? 'Bagus! Setengah jalan!' : 'Bagus! Terus naik ke yang sulit.' });
         if (r.tipe === 'banding') {
           const { berat, ringan } = r.p;
           const opsi = shuffle([
@@ -52,6 +57,9 @@
             options: opsi.map((o) => ({ ...o, cls: 'is-big' })),
             answer: 'berat',
           });
+          ctx.el.append(h('p', { class: 'ti-label' }, 'Benar! ' + berat[1] + ' lebih berat.'));
+          ctx.sfx('pop');
+          await ctx.wait(350);
         } else if (r.tipe === 'sama') {
           ctx.ask('Mana yang lebih berat: 1 kg kapas atau 1 kg besi?');
           await ctx.choose({
@@ -70,7 +78,7 @@
           const benda = sample([['🍉', 'semangka'], ['📚', 'tumpukan buku'], ['🎒', 'tas'], ['🥥', 'kelapa']], 1)[0];
           const kubus = h('div', { class: 'tb-kubus', role: 'img', 'aria-label': K + ' kubus' });
           for (let i = 0; i < K; i++) kubus.append(h('i'));
-          const timbang = h('div', { class: 'ti-panel tb-timbang' },
+          const timbang = h('div', { class: 'ti-panel tb-timbang pop-in' },
             h('div', { class: 'tb-piring' }, h('span', { class: 'tb-ic', 'aria-hidden': 'true' }, benda[0]), h('span', null, benda[1])),
             h('b', { class: 'tb-ic', 'aria-hidden': 'true' }, '='),
             h('div', { class: 'tb-piring' }, kubus, h('span', null, 'kubus satuan')));
@@ -82,6 +90,9 @@
             answer: K,
             speakLabel: true,
           });
+          ctx.el.append(h('p', { class: 'ti-label' }, 'Beratnya ' + K + ' kubus.'));
+          ctx.sfx('pop');
+          await ctx.wait(350);
         }
       }, {
         lesson: 'Benda besar belum tentu lebih berat. Timbangan dan satuan kubus membantu kita menebak berat.',

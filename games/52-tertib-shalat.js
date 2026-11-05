@@ -1,5 +1,6 @@
 /* 52 Tertib Gerakan Shalat. ctx.order gerakan shalat dari takbir sampai salam.
-   TK: 5 gerakan. SD: 8 gerakan + kuis jumlah rakaat tiap shalat. Tanpa teks Arab. */
+   TK: 5 gerakan. SD: 8 gerakan + kuis jumlah rakaat tiap shalat. Tanpa teks Arab.
+   SD dua babak: kuis rakaat sebagai pemanasan, lalu naik ke urutan 8 gerakan. */
 (function () {
   const { h, shuffle, sample } = TI;
 
@@ -46,38 +47,50 @@ ${P} .ts-rak .choice { min-height: 72px; min-width: 76px; font-size: 1.6rem; fon
         ];
         ctx.progress(0, 1);
         ctx.ask('Urutkan gerakan shalat dari awal sampai akhir!');
-        const wadah = h('div', { class: 'ts-order' });
+        const wadah = h('div', { class: 'ts-order pop-in' });
         ctx.el.append(wadah);
         await ctx.order({ items, guide: 'always', into: wadah });
         if (!ctx.alive) return;
         ctx.progress(1, 1);
+        ctx.sfx('pop');
         ctx.note('Shalat dimulai dengan takbir dan diakhiri dengan salam.', { title: 'Ingat!' });
         await ctx.next();
         ctx.finish({ lesson: 'Gerakan shalat berurutan dari takbir sampai salam. Kerjakan dengan tenang dan tertib.' });
         return;
       }
 
-      // SD: urutan 8 gerakan + 3 kuis rakaat.
+      // SD: pemanasan 3 kuis rakaat (babak 1), lalu urutan 8 gerakan (babak 2).
       const kuis = sample(RAKAAT, 3);
-      const total = 1 + kuis.length;
+      const total = kuis.length + 1;
+      const LESSON_SD = 'Gerakan shalat berurutan dari takbir sampai salam. Subuh 2, Zuhur 4, Ashar 4, Maghrib 3, Isya 4 rakaat.';
       ctx.progress(0, total);
-      ctx.ask('Urutkan 8 gerakan shalat dari takbir sampai salam!');
-      const wadah = h('div', { class: 'ts-order' });
-      ctx.el.append(wadah);
-      await ctx.order({ items: SEMUA, guide: 'never', into: wadah });
-      if (!ctx.alive) return;
-      ctx.progress(1, total);
-
-      await ctx.series(kuis, async (s) => {
-        ctx.ask('Shalat ' + s.nama + ' berapa rakaat?', { say: 'Shalat ' + s.nama + ' berapa rakaat?' });
+      // Babak 1: kuis rakaat sebagai pemanasan.
+      for (const s of kuis) {
+        ctx.clear();
+        ctx.ask('Babak 1: shalat ' + s.nama + ' berapa rakaat?');
+        const wr = h('div', { class: 'ts-rak pop-in' });
+        ctx.el.append(wr);
         await ctx.choose({
           options: shuffle([2, 3, 4]).map((n) => ({ label: String(n), value: n, say: sebut[n] + ' rakaat' })),
           answer: s.n,
+          into: wr,
           speakLabel: true,
         });
-      }, {
-        lesson: 'Gerakan shalat berurutan dari takbir sampai salam. Subuh 2, Zuhur 4, Ashar 4, Maghrib 3, Isya 4 rakaat.',
-      });
+        if (!ctx.alive) return;
+        ctx.sfx('pop');
+        ctx.progress(kuis.indexOf(s) + 1, total);
+      }
+      // Babak 2: naik ke urutan 8 gerakan.
+      ctx.clear();
+      ctx.correct(null, { say: 'Bagus! Terus naik ke urutan gerakan.' });
+      ctx.ask('Babak 2: urutkan 8 gerakan shalat dari takbir sampai salam!');
+      const wadah = h('div', { class: 'ts-order pop-in' });
+      ctx.el.append(wadah);
+      ctx.sfx('pop');
+      await ctx.order({ items: SEMUA, guide: 'after-wrong', into: wadah });
+      if (!ctx.alive) return;
+      ctx.progress(total, total);
+      ctx.finish({ lesson: LESSON_SD });
     },
   });
 })();

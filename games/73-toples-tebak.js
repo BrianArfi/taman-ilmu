@@ -1,4 +1,6 @@
-/* 73 Toples Tebakan. Tebak isi toples tanpa menghitung satu-satu. */
+/* 73 Toples Tebakan. Tebak isi toples tanpa menghitung satu-satu.
+   Isi urut sedikit dulu. Isi asli terungkap tiap benar (SD: bandingkan
+   tebakanmu dengan isi asli). Tengah jalan ada pujian. */
 (function () {
   const { h, svg, shuffle, sample, rand, pick, numChoices, dots } = TI;
 
@@ -61,6 +63,7 @@
   async function soalTK(ctx, n) {
     ctx.ask('Ada berapa kelereng di toples? Tebak tanpa menghitung satu-satu!');
     ctx.el.append(h('div', { class: 'ti-card tt-kartu pop-in' }, toplesSvg(n)));
+    ctx.sfx('pop');
     const opsi = numChoices(n, 3, 1, 12);
     await ctx.choose({
       options: opsi.map((x) => ({
@@ -70,17 +73,24 @@
       answer: n,
       speakLabel: true,
     });
+    ctx.el.append(h('p', { class: 'ti-label' }, 'Benar! Isinya ' + n + ' kelereng.'));
+    ctx.sfx('pop');
+    await ctx.wait(350);
   }
 
   async function soalSD(ctx, n) {
     ctx.ask('Kira-kira ada berapa kelereng? Pilih yang paling dekat!');
     ctx.el.append(h('div', { class: 'ti-card tt-kartu pop-in' }, toplesSvg(n)));
+    ctx.sfx('pop');
     const { opsi, jawab } = opsiTerdekat(n);
-    await ctx.choose({
+    const r = await ctx.choose({
       options: shuffle(opsi).map((x) => ({ label: String(x), value: x, say: 'Angka ' + x })),
       answer: jawab,
       layout: 'is-grid2',
     });
+    ctx.el.append(h('p', { class: 'ti-label' }, 'Isi aslinya ' + n + '. Tebakanmu ' + r.value + '.'));
+    ctx.sfx('pop');
+    await ctx.wait(350);
   }
 
   TI.register({
@@ -92,13 +102,23 @@
     start(ctx) {
       TI.style('toples-tebak', CSS);
       if (ctx.isTK) {
-        const daftar = sample([4, 5, 6, 7, 8, 9, 10], 6);
-        ctx.series(daftar, (n) => soalTK(ctx, n), {
+        const daftar = sample([4, 5, 6, 7, 8, 9, 10], 6).sort((a, b) => a - b);
+        let ke = 0;
+        ctx.series(daftar, async (n) => {
+          ke++;
+          if (ke === 3) ctx.correct(null, { say: 'Bagus! Setengah jalan!' });
+          await soalTK(ctx, n);
+        }, {
           lesson: 'Kamu bisa menebak banyak benda dengan melihat polanya, tanpa menghitung satu-satu.',
         });
       } else {
-        const daftar = Array.from({ length: 6 }, () => rand(20, 50));
-        ctx.series(daftar, (n) => soalSD(ctx, n), {
+        const daftar = Array.from({ length: 6 }, () => rand(20, 50)).sort((a, b) => a - b);
+        let ke = 0;
+        ctx.series(daftar, async (n) => {
+          ke++;
+          if (ke === 3) ctx.correct(null, { say: 'Bagus! Terus naik ke yang penuh.' });
+          await soalSD(ctx, n);
+        }, {
           lesson: 'Membulatkan ke angka terdekat membuat tebakan kita cepat dan tidak jauh dari benar.',
         });
       }

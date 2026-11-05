@@ -1,6 +1,7 @@
 /* 58 Kapan Shalatnya. Cocokkan shalat dengan gambar langitnya.
    Gambar langit dibuat sendiri dengan SVG, tanpa wajah dan tanpa matahari berwajah.
-   TK: dengar nama shalat, pilih gambar (3 opsi). SD: lihat gambar pilih shalat + urutkan 5 waktu. */
+   TK: dengar nama shalat, pilih gambar (3 opsi). SD: lihat gambar pilih shalat + urutkan 5 waktu.
+   Urut pagi ke malam. Jawaban terungkap + pujian tengah jalan. */
 (function () {
   const { h, svg, shuffle, sample } = TI;
 
@@ -71,8 +72,13 @@ ${P} .js-order .choice { min-height: 64px; }`;
       const TK = ctx.isTK;
 
       if (TK) {
-        const soal = shuffle([...WAKTU, TI.pick(WAKTU)]);
+        const soal = shuffle([...WAKTU, TI.pick(WAKTU)]).map((s) => ({ ...s, urut: WAKTU.indexOf(s) }));
+        soal.sort((a, b) => a.urut - b.urut); // pagi ke malam
+        let ke = 0;
         await ctx.series(soal, async (s) => {
+          ke++;
+          if (ke === 3) ctx.correct(null, { say: 'Bagus! Setengah jalan!' });
+          ctx.sfx('pop');
           ctx.ask('Shalat ' + s.nama + ' langitnya yang mana? (' + s.ket + ')', { say: 'Shalat ' + s.nama + ' langitnya yang mana?' });
           const lawan = shuffle(WAKTU.filter((x) => x.nama !== s.nama)).slice(0, 2);
           const wadah = h('div', { class: 'ti-choices is-grid2 js-pilihan' });
@@ -83,6 +89,9 @@ ${P} .js-order .choice { min-height: 64px; }`;
             into: wadah,
             speakLabel: true,
           });
+          ctx.el.append(h('p', { class: 'ti-label' }, 'Benar! Ini langit waktu ' + s.nama + '.'));
+          ctx.sfx('pop');
+          await ctx.wait(350);
         }, {
           lesson: 'Shalat wajib ada 5 waktu: Subuh, Zuhur, Ashar, Maghrib, Isya.',
         });
@@ -90,13 +99,18 @@ ${P} .js-order .choice { min-height: 64px; }`;
       }
 
       // SD: 5 soal lihat gambar + urutan 5 waktu.
-      const soal = sample(WAKTU, 5);
+      const soal = sample(WAKTU, 5).map((s) => ({ ...s, urut: WAKTU.indexOf(s) }));
+      soal.sort((a, b) => a.urut - b.urut); // pagi ke malam
       const total = soal.length + 1;
       ctx.progress(0, total);
+      let ke = 0;
       for (const s of soal) {
         ctx.clear();
+        ke++;
+        if (ke === 3) ctx.correct(null, { say: 'Bagus! Terus naik ke malam hari.' });
         ctx.ask('Langit ini waktu shalat apa?');
         ctx.el.append(h('div', { class: 'js-besar pop-in' }, langitNode(s.nama, true)));
+        ctx.sfx('pop');
         const lawan = shuffle(WAKTU.filter((x) => x.nama !== s.nama)).slice(0, 3);
         await ctx.choose({
           options: shuffle([s, ...lawan]).map((x) => ({ label: x.nama, value: x.nama })),
@@ -104,6 +118,9 @@ ${P} .js-order .choice { min-height: 64px; }`;
           layout: 'is-grid2',
         });
         if (!ctx.alive) return;
+        ctx.el.append(h('p', { class: 'ti-label' }, 'Benar! Ini waktu ' + s.nama + '.'));
+        ctx.sfx('pop');
+        await ctx.wait(350);
         ctx.progress(soal.indexOf(s) + 1, total);
       }
       ctx.clear();
