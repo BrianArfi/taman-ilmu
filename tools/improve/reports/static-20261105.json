@@ -26,52 +26,6 @@
    ]
   },
   {
-   "file": "82-daur-hidup.js",
-   "id": "daur-hidup",
-   "title": "Daur Hidup Kacang",
-   "cat": "sains",
-   "bytes": 4740,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 0,
-    "ramp": 1,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 57,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
-   ]
-  },
-  {
-   "file": "13-jam.js",
-   "id": "jam",
-   "title": "Jam Berapa?",
-   "cat": "mat",
-   "bytes": 9178,
-   "soal": 8,
-   "sig": {
-    "aksi": 0,
-    "feedback": 0,
-    "ramp": 0,
-    "failsoft": 2,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 57,
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
-   ]
-  },
-  {
    "file": "06-kartu.js",
    "id": "kartu",
    "title": "Kartu Pasangan",
@@ -141,52 +95,6 @@
    ]
   },
   {
-   "file": "05-nabi.js",
-   "id": "nabi",
-   "title": "Kuis Kisah Nabi",
-   "cat": "islam",
-   "bytes": 6358,
-   "soal": 8,
-   "sig": {
-    "aksi": 0,
-    "feedback": 0,
-    "ramp": 0,
-    "failsoft": 2,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 57,
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
-   ]
-  },
-  {
-   "file": "86-penunjuk-arah.js",
-   "id": "penunjuk-arah",
-   "title": "Penunjuk Arah",
-   "cat": "sains",
-   "bytes": 5747,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 1,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 57,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
    "file": "55-puasa-sehari.js",
    "id": "puasa-sehari",
    "title": "Sehari Berpuasa",
@@ -207,29 +115,6 @@
     "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
     "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
     "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
-   "file": "100-raja-taman.js",
-   "id": "raja-taman",
-   "title": "Raja Taman",
-   "cat": "logika",
-   "bytes": 7377,
-   "soal": 10,
-   "sig": {
-    "aksi": 0,
-    "feedback": 0,
-    "ramp": 0,
-    "failsoft": 2,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 57,
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
    ]
   },
   {
@@ -911,6 +796,29 @@
    ]
   },
   {
+   "file": "100-raja-taman.js",
+   "id": "raja-taman",
+   "title": "Raja Taman",
+   "cat": "logika",
+   "bytes": 8357,
+   "soal": 10,
+   "sig": {
+    "aksi": 0,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 71,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
    "file": "76-roket-air.js",
    "id": "roket-air",
    "title": "Roket Air",
@@ -1222,6 +1130,28 @@
    ]
   },
   {
+   "file": "82-daur-hidup.js",
+   "id": "daur-hidup",
+   "title": "Daur Hidup Kacang",
+   "cat": "sains",
+   "bytes": 5071,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
    "file": "61-halal-pilah.js",
    "id": "halal-pilah",
    "title": "Halal atau Haram",
@@ -1397,6 +1327,27 @@
    "sug": [
     "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "86-penunjuk-arah.js",
+   "id": "penunjuk-arah",
+   "title": "Penunjuk Arah",
+   "cat": "sains",
+   "bytes": 6203,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
    ]
   },
   {
@@ -1853,6 +1804,28 @@
    ]
   },
   {
+   "file": "13-jam.js",
+   "id": "jam",
+   "title": "Jam Berapa?",
+   "cat": "mat",
+   "bytes": 10128,
+   "soal": 8,
+   "sig": {
+    "aksi": 0,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
    "file": "84-katrol.js",
    "id": "katrol",
    "title": "Katrol dan Tuas",
@@ -1955,6 +1928,27 @@
    "static100": 86,
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "file": "05-nabi.js",
+   "id": "nabi",
+   "title": "Kuis Kisah Nabi",
+   "cat": "islam",
+   "bytes": 6760,
+   "soal": 8,
+   "sig": {
+    "aksi": 0,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
    ]
   },
   {

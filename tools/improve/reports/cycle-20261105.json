@@ -3,104 +3,102 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "sortir-bangun",
-   "title": "Sortir Bangun",
-   "cat": "mat",
-   "file": "72-sortir-bangun.js",
+   "id": "raja-taman",
+   "title": "Raja Taman",
+   "cat": "logika",
+   "file": "100-raja-taman.js",
    "static100": 71,
+   "dyn100": 100,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 6,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 84,
+   "cls": "B",
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "id": "daur-hidup",
+   "title": "Daur Hidup Kacang",
+   "cat": "sains",
+   "file": "82-daur-hidup.js",
+   "static100": 79,
+   "dyn100": 100,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 28,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 88,
+   "cls": "A",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "id": "penunjuk-arah",
+   "title": "Penunjuk Arah",
+   "cat": "sains",
+   "file": "86-penunjuk-arah.js",
+   "static100": 79,
    "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 55,
+   "avgActions": 38,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 84,
-   "cls": "B",
+   "fun": 88,
+   "cls": "A",
    "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+    "tambah variasi aksi kedua biar tidak monoton"
    ]
   },
   {
-   "id": "tebak-berat",
-   "title": "Tebak Berat",
+   "id": "jam",
+   "title": "Jam Berapa?",
    "cat": "mat",
-   "file": "68-tebak-berat.js",
-   "static100": 71,
+   "file": "13-jam.js",
+   "static100": 86,
    "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 10,
+   "avgActions": 21,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 84,
-   "cls": "B",
+   "fun": 92,
+   "cls": "A",
    "sug": [
     "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {
-   "id": "jam-shalat",
-   "title": "Kapan Shalatnya",
+   "id": "nabi",
+   "title": "Kuis Kisah Nabi",
    "cat": "islam",
-   "file": "58-jam-shalat.js",
-   "static100": 79,
+   "file": "05-nabi.js",
+   "static100": 86,
    "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 17,
+   "avgActions": 26,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 88,
+   "fun": 92,
    "cls": "A",
    "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "id": "tertib-shalat",
-   "title": "Tertib Gerakan Shalat",
-   "cat": "islam",
-   "file": "52-tertib-shalat.js",
-   "static100": 79,
-   "dyn100": 100,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 22,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 88,
-   "cls": "A",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "id": "toples-tebak",
-   "title": "Toples Tebakan",
-   "cat": "mat",
-   "file": "73-toples-tebak.js",
-   "static100": 79,
-   "dyn100": 100,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 15,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 88,
-   "cls": "A",
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
    ]
   }
  ]

@@ -69,6 +69,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 4 (5 Nov 2026)**: jam-shalat 73→88, sortir-bangun 72→84,
   tebak-berat 73→84, tertib-shalat 72→88, toples-tebak 73→88.
   Detail: `reports/cycle-20261105-s4.md`.
+- **Siklus 5 (5 Nov 2026)**: daur-hidup 76→88, jam 76→92, raja-taman
+  76→84, nabi 76→92, penunjuk-arah 76→88.
+  Detail: `reports/cycle-20261105-s5.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar
