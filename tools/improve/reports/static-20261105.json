@@ -71,29 +71,6 @@
    ]
   },
   {
-   "file": "09-gelembung.js",
-   "id": "gelembung",
-   "title": "Pecah Gelembung",
-   "cat": "mat",
-   "bytes": 15253,
-   "soal": null,
-   "sig": {
-    "aksi": 2,
-    "feedback": 1,
-    "ramp": 1,
-    "failsoft": 0,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 64,
-   "sug": [
-    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
    "file": "06-kartu.js",
    "id": "kartu",
    "title": "Kartu Pasangan",
@@ -162,29 +139,6 @@
    ]
   },
   {
-   "file": "03-rukun.js",
-   "id": "rukun",
-   "title": "Rukun Islam & Iman",
-   "cat": "islam",
-   "bytes": 5338,
-   "soal": 3,
-   "sig": {
-    "aksi": 2,
-    "feedback": 0,
-    "ramp": 0,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 64,
-   "sug": [
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
    "file": "94-sambung-kabel.js",
    "id": "sambung-kabel",
    "title": "Sambung Kabel",
@@ -205,52 +159,6 @@
     "tambah variasi aksi kedua biar tidak monoton",
     "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "04-shalat.js",
-   "id": "shalat",
-   "title": "Shalat 5 Waktu",
-   "cat": "islam",
-   "bytes": 10893,
-   "soal": 3,
-   "sig": {
-    "aksi": 1,
-    "feedback": 0,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 64,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
-   ]
-  },
-  {
-   "file": "87-siang-malam.js",
-   "id": "siang-malam",
-   "title": "Siang atau Malam",
-   "cat": "sains",
-   "bytes": 5920,
-   "soal": 6,
-   "sig": {
-    "aksi": 2,
-    "feedback": 0,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 64,
-   "sug": [
-    "sfx cuma 1x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
    ]
   },
   {
@@ -320,29 +228,6 @@
     "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
     "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
     "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
-   "file": "02-wudhu.js",
-   "id": "wudhu",
-   "title": "Urutan Wudhu",
-   "cat": "islam",
-   "bytes": 5665,
-   "soal": 5,
-   "sig": {
-    "aksi": 1,
-    "feedback": 0,
-    "ramp": 1,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 64,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
    ]
   },
   {
@@ -1344,6 +1229,28 @@
    ]
   },
   {
+   "file": "04-shalat.js",
+   "id": "shalat",
+   "title": "Shalat 5 Waktu",
+   "cat": "islam",
+   "bytes": 11097,
+   "soal": 3,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
    "file": "60-sirah-urut.js",
    "id": "sirah-urut",
    "title": "Urut Kisah Nabi",
@@ -1690,6 +1597,25 @@
    ]
   },
   {
+   "file": "09-gelembung.js",
+   "id": "gelembung",
+   "title": "Pecah Gelembung",
+   "cat": "mat",
+   "bytes": 15641,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": []
+  },
+  {
    "file": "49-hanoi.js",
    "id": "hanoi",
    "title": "Menara Hanoi",
@@ -2006,6 +1932,28 @@
    ]
   },
   {
+   "file": "02-wudhu.js",
+   "id": "wudhu",
+   "title": "Urutan Wudhu",
+   "cat": "islam",
+   "bytes": 5856,
+   "soal": 5,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
    "file": "51-asma-buru.js",
    "id": "asma-buru",
    "title": "Buru Asmaul Husna",
@@ -2158,6 +2106,46 @@
    },
    "static100": 93,
    "sug": []
+  },
+  {
+   "file": "03-rukun.js",
+   "id": "rukun",
+   "title": "Rukun Islam & Iman",
+   "cat": "islam",
+   "bytes": 5555,
+   "soal": 3,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": []
+  },
+  {
+   "file": "87-siang-malam.js",
+   "id": "siang-malam",
+   "title": "Siang atau Malam",
+   "cat": "sains",
+   "bytes": 6723,
+   "soal": 6,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
   },
   {
    "file": "25-surat.js",

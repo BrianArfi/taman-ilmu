@@ -75,6 +75,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 6 (5 Nov 2026)**: kartu 76→80, kisah-clue 76→92,
   lari-masjid 75→91, puasa-sehari 76→92, pola 80→92.
   Detail: `reports/cycle-20261105-s6.md`.
+- **Siklus 7 (5 Nov 2026)**: rukun 80→96, wudhu 80→92, shalat 80→88,
+  siang-malam 80→96, gelembung 80→92.
+  Detail: `reports/cycle-20261105-s7.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar
