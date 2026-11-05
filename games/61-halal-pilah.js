@@ -1,5 +1,7 @@
 /* 61 Halal atau Haram. Pilah makanan dan perbuatan ke keranjang yang benar.
-   Semua item berupa TEKS (bukan gambar hewan). TK: 6 item. SD: 10 item + alasan singkat. */
+   Ikon tiap item beda (makanan dan simbol, tanpa wajah). Makanan konkret dulu,
+   perbuatan abstrak belakangan; tengah jalan ada pujian + naik tingkat.
+   TK: 6 item. SD: 10 item + alasan singkat. Tiap salah ada petunjuk suara. */
 (function () {
   const { h, shuffle } = TI;
 
@@ -32,16 +34,23 @@
     desc: 'Pilah makanan dan perbuatan ke keranjang benar.',
     async start(ctx) {
       TI.style('halal-pilah', CSS);
+      const IKON = { 'Apel': '🍎', 'Susu': '🥛', 'Roti': '🍞', 'Kurma': '🌴', 'Madu': '🍯', 'Minuman keras': '🍾', 'Daging babi': '🍖', 'Judi': '🎲', 'Mencuri': '💰', 'Berdusta': '💬' };
+      const PERBUATAN = ['Judi', 'Mencuri', 'Berdusta'];
       const labels = ctx.isTK
         ? shuffle(HALAL).slice(0, 3).concat(shuffle(HARAM).slice(0, 3))
         : HALAL.concat(HARAM);
       const items = shuffle(labels).map((label) => ({
         label,
-        icon: '🍽️',
+        icon: IKON[label],
         bin: HALAL.includes(label) ? 'halal' : 'haram',
         why: ctx.isSD ? WHY[label] : undefined,
+        hint: PERBUATAN.includes(label) ? 'Itu perbuatan. ' + WHY[label] : WHY[label],
         say: label,
+        sulit: PERBUATAN.includes(label) ? 1 : 0,
       }));
+      // Makanan konkret dulu, perbuatan abstrak belakangan (acak di dalam grup).
+      items.sort((a, b) => a.sulit - b.sulit);
+      const nGampang = items.filter((x) => !x.sulit).length;
       ctx.ask('Mana yang halal dan mana yang haram? Ketuk keranjang yang benar!');
       ctx.progress(0, items.length);
       await ctx.sort({
@@ -50,7 +59,10 @@
           { id: 'halal', label: 'HALAL', icon: '✅' },
           { id: 'haram', label: 'HARAM', icon: '🚫' },
         ],
-        onStep: (i, n) => ctx.progress(i, n),
+        onStep: (i, n) => {
+          ctx.progress(i, n);
+          if (i === nGampang) ctx.correct(null, { say: 'Bagus! Sekarang naik ke perbuatan.' });
+        },
       });
       ctx.finish({ lesson: 'Makanan halal baik untuk tubuh kita. Yang haram harus dijauhi.' });
     },

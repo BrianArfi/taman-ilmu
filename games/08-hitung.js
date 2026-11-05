@@ -91,7 +91,7 @@
 
   // ---------- TK: hitung 1-10 benda ----------
   function mainTK(ctx) {
-    const jumlah = sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 8);
+    const jumlah = sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 8).sort((a, b) => a - b); // urut gampang dulu
     const benda = shuffle(BENDA);
     const soal = jumlah.map((n, i) => ({ n, b: benda[i % benda.length], pertama: i === 0 }));
 
@@ -106,10 +106,10 @@
         const badge = h('span', { class: 'hit-badge', 'aria-hidden': 'true' });
         const btn = h('button', { type: 'button', class: 'hit-item pop-in', 'data-tap': true, style: '--i:' + Math.min(i, 9), 'aria-label': nama + ' ke-' + (i + 1) },
           h('span', { 'aria-hidden': 'true' }, emo), badge);
-        let no = 0;
+        let no = 0, dipuji = false;
         btn.addEventListener('click', () => {
           ctx.sfx('tap');
-          if (!no) { no = ++urut; badge.textContent = String(no); btn.classList.add('is-counted'); }
+          if (!no) { no = ++urut; badge.textContent = String(no); btn.classList.add('is-counted'); if (urut === n && !dipuji) { dipuji = true; ctx.sfx('benar'); } }
           ctx.say(kata(no)); // ketuk lagi: hanya menyebut angkanya, tidak menghitung ulang
         });
         grid.append(btn);
@@ -124,7 +124,7 @@
 
   // ---------- SD: hitung 11-30 dan perkalian kelompok ----------
   function mainSD(ctx) {
-    const hitung = sample([11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29], 4)
+    const hitung = sample([11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29], 4).sort((a, b) => a - b) // urut gampang dulu
       .map((n, i) => ({ tipe: 'hitung', n, b: BENDA[(rand(0, 9) + i * 3) % BENDA.length] }));
     const kali = [];
     const dipakai = new Set();
@@ -135,7 +135,7 @@
       kali.push({ tipe: 'kali', j, p, b: MAKANAN[(rand(0, 5) + kali.length) % MAKANAN.length] });
     }
 
-    return ctx.series([...hitung, ...kali], async (s) => {
+    return ctx.series([...hitung, ...kali.sort((a, b) => a.j * a.p - b.j * b.p)], async (s) => {
       if (s.tipe === 'hitung') await soalHitung(ctx, s);
       else await soalKali(ctx, s);
     }, { lesson: 'Menghitung satu per satu dengan teliti membuat jawaban kita benar.' });
@@ -151,7 +151,7 @@
       for (let i = 0; i < isi; i++) row.append(h('span', null, emo));
       rows.append(row);
     }
-    ctx.el.append(rows, h('p', { class: 'ti-label hit-tip' }, 'Satu baris penuh isinya 10'));
+    ctx.el.append(rows, h('p', { class: 'ti-label hit-tip' }, 'Satu baris penuh isinya 10')); ctx.sfx('pop');
     await ctx.choose({
       options: pilihanAngka(n, 4, [n - 1, n + 1, n - 2, n + 2, n < 21 ? n + 10 : n - 10]).map((v) => ({ label: String(v), value: v, say: kata(v) })),
       answer: n,
@@ -169,7 +169,7 @@
       for (let k = 0; k < p; k++) isi.append(h('span', null, emo));
       plates.append(h('div', { class: 'hit-plate pop-in', style: '--i:' + i, 'aria-hidden': 'true' }, isi));
     }
-    ctx.el.append(plates);
+    ctx.el.append(plates); ctx.sfx('pop');
     await ctx.choose({
       options: pilihanAngka(total, 4, [j + p, total - j, total + p, total + 1, total - 1, total + j]).map((v) => ({ label: String(v), value: v, say: kata(v) })),
       answer: total,

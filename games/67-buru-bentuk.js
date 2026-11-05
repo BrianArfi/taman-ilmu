@@ -1,5 +1,7 @@
 /* 67 Buru Bentuk. Banyak bentuk acak tersebar, ketuk semua targetnya.
-   TK: 1 bentuk, 8 objek. SD: 2 bentuk bergantian, 20 objek + pengecoh mirip.
+   Ronde menanjak: TK 2 ronde (6 lalu 8 objek), SD 3 ronde (12, 16, 20 objek,
+   pengecoh mirip mulai ronde 2, target ronde 3 lima buah). Tombol Bantu:
+   ketuk 1-2 tunjuk 1 target (denyut), ketuk 3 temukan semua otomatis.
    Bentuk yang salah diketuk lalu dinonaktifkan supaya sesi selalu selesai. */
 (function () {
   const { h, svg, shuffle, rand, sample } = TI;
@@ -26,7 +28,12 @@
 .play[data-game="buru-bentuk"] .bb-obj svg { display: block; width: 100%; height: 100%; overflow: visible; }
 .play[data-game="buru-bentuk"] .bb-obj.is-found { background: #d3f9d8; border-color: #37b24d; }
 .play[data-game="buru-bentuk"] .bb-obj.is-out { opacity: 0.35; }
-.play[data-game="buru-bentuk"] .bb-hitung { font-size: 1.25rem; font-weight: 800; }`;
+.play[data-game="buru-bentuk"] .bb-hitung { font-size: 1.25rem; font-weight: 800; }
+.play[data-game="buru-bentuk"] .bb-obj.is-hint { border-color: var(--c); animation: bb-hint 600ms var(--ease-in-out) 2; } /* motion-ok: petunjuk Bantu, hanya setelah diminta */
+@keyframes bb-hint { 50% { transform: scale(1.12); } }
+@media (prefers-reduced-motion: reduce) {
+.play[data-game="buru-bentuk"] .bb-obj.is-hint { animation: none; }
+}`;
 
   function bentuk(kind, warna) {
     const isi = { fill: warna, stroke: '#fff', 'stroke-width': 4, 'stroke-linejoin': 'round' };
@@ -60,35 +67,39 @@
       const targetDaftar = TK
         ? sample(Object.keys(BENTUK), 2)
         : sample(Object.keys(BENTUK), 3);
-      const nObj = TK ? 8 : 16;
+      const NOBJ_TK = [6, 8], NOBJ_SD = [12, 16, 20];
+      const nObjList = TK ? NOBJ_TK : NOBJ_SD;
       const nTarget = TK ? 3 : 4;
 
       ctx.progress(0, targetDaftar.length);
       for (let r = 0; r < targetDaftar.length; r++) {
         if (!ctx.alive) return;
         const target = targetDaftar[r];
-        const mirip = !TK && MIRIP[target] ? MIRIP[target] : null;
+        const nObj = nObjList[r];
+        const nT = !TK && r === targetDaftar.length - 1 ? nTarget + 1 : nTarget;
+        const mirip = !TK && r > 0 && MIRIP[target] ? MIRIP[target] : null;
         const pool = Object.keys(NAMA).filter((k) => k !== target && k !== mirip);
         // Susun daftar objek: target + pengecoh (mirip bila ada) + acak.
         const daftar = [];
-        for (let i = 0; i < nTarget; i++) daftar.push(target);
+        for (let i = 0; i < nT; i++) daftar.push(target);
         if (mirip) { daftar.push(mirip, mirip); }
         while (daftar.length < nObj) daftar.push(pool[(daftar.length) % pool.length]);
         const acak = shuffle(daftar);
 
-        ctx.ask('Ketuk semua ' + NAMA[target] + '! Ada ' + nTarget + '.');
+        ctx.ask('Ronde ' + (r + 1) + ' dari ' + targetDaftar.length + ': ketuk semua ' + NAMA[target] + '! Ada ' + nT + '.');
         const wrap = h('div', { class: 'bb-wrap' });
-        const hitung = h('div', { class: 'bb-hitung' }, 'Ketemu: 0 dari ' + nTarget);
+        const hitung = h('div', { class: 'bb-hitung' }, 'Ketemu: 0 dari ' + nT);
         const scene = h('div', { class: 'ti-scene bb-scene' });
+        const btnBantu = h('button', { type: 'button', class: 'ti-btn is-ghost ti-help' }, '💡 Bantu');
         wrap.append(
           h('div', { class: 'ti-panel bb-target pop-in' }, bentuk(target, '#2f6fed'), h('span', null, NAMA[target])),
-          scene, hitung);
+          btnBantu, scene, hitung);
         ctx.el.append(wrap);
 
         // Petak posisi acak supaya tidak bertumpuk dan tidak meluber.
         const cols = 4, rows = Math.ceil(nObj / cols);
         const selPos = shuffle(Array.from({ length: cols * rows }, (_, i) => i)).slice(0, nObj);
-        let ketemu = 0;
+        let ketemu = 0, selesai = false, bantu = 0;
         const done = new Promise((res) => {
           acak.forEach((kind, i) => {
             const sel = selPos[i];
@@ -98,6 +109,7 @@
               type: 'button', class: 'bb-obj pop-in', style: '--i:' + (i % 6),
               'aria-label': NAMA[kind],
             }, bentuk(kind, WARNA[i % WARNA.length]));
+            b._target = (kind === target);
             // Posisi: sudut kiri atas sel grid + goyangan kecil. Tombol 72px muat di sel.
             b.style.left = 'calc(' + (cx * 100).toFixed(1) + '% + ' + jx + 'px)';
             b.style.top = 'calc(' + (cy * 100).toFixed(1) + '% + ' + jy + 'px)';
@@ -107,9 +119,10 @@
                 b.disabled = true;
                 b.classList.add('is-found');
                 ketemu++;
-                hitung.textContent = 'Ketemu: ' + ketemu + ' dari ' + nTarget;
+                hitung.textContent = 'Ketemu: ' + ketemu + ' dari ' + nT;
                 await ctx.correct(b, { say: NAMA[target] });
-                if (ketemu >= nTarget) {
+                if (ketemu >= nT) {
+                  selesai = true;
                   scene.querySelectorAll('button').forEach((x) => { x.disabled = true; });
                   ctx.after(500, res);
                 }
@@ -122,9 +135,27 @@
             scene.append(b);
           });
         });
+        btnBantu.addEventListener('click', async () => {
+          if (!ctx.alive || selesai || bantu >= 3) return;
+          bantu++;
+          ctx.mistakes++;
+          ctx.sfx('klik');
+          const sisa = [...scene.querySelectorAll('button:not([disabled])')].filter((x) => x._target);
+          if (!sisa.length) return;
+          if (bantu >= 3) {
+            btnBantu.disabled = true;
+            for (const x of sisa) { if (!ctx.alive || selesai) return; x.click(); await ctx.wait(400); }
+          } else {
+            const x = sisa[rand(0, sisa.length - 1)];
+            x.classList.add('is-hint');
+            ctx.sfx('pop');
+            ctx.after(1300, () => x.classList.remove('is-hint'));
+          }
+        });
         await done;
         if (!ctx.alive) return;
         await ctx.wait(300);
+        ctx.sfx('pop');
         ctx.clear();
         ctx.progress(r + 1, targetDaftar.length);
       }
