@@ -26,96 +26,6 @@
    ]
   },
   {
-   "file": "93-cermin-pola.js",
-   "id": "cermin-pola",
-   "title": "Cermin Pola",
-   "cat": "logika",
-   "bytes": 6355,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 64,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
-   "file": "06-kartu.js",
-   "id": "kartu",
-   "title": "Kartu Pasangan",
-   "cat": "islam",
-   "bytes": 14672,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 64,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
-   "file": "91-parkir.js",
-   "id": "parkir",
-   "title": "Parkir Pintar",
-   "cat": "logika",
-   "bytes": 14698,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 64,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "94-sambung-kabel.js",
-   "id": "sambung-kabel",
-   "title": "Sambung Kabel",
-   "cat": "logika",
-   "bytes": 11869,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 64,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
    "file": "16-apung.js",
    "id": "apung",
    "title": "Tenggelam atau Terapung",
@@ -828,6 +738,27 @@
    ]
   },
   {
+   "file": "93-cermin-pola.js",
+   "id": "cermin-pola",
+   "title": "Cermin Pola",
+   "cat": "logika",
+   "bytes": 6673,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
    "file": "82-daur-hidup.js",
    "id": "daur-hidup",
    "title": "Daur Hidup Kacang",
@@ -985,6 +916,27 @@
    ]
   },
   {
+   "file": "06-kartu.js",
+   "id": "kartu",
+   "title": "Kartu Pasangan",
+   "cat": "islam",
+   "bytes": 14890,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
    "file": "18-lempar.js",
    "id": "lempar",
    "title": "Lempar Tepat",
@@ -1045,6 +997,28 @@
    "static100": 79,
    "sug": [
     "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "91-parkir.js",
+   "id": "parkir",
+   "title": "Parkir Pintar",
+   "cat": "logika",
+   "bytes": 14909,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
@@ -1131,6 +1105,28 @@
    "static100": 79,
    "sug": [
     "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal"
+   ]
+  },
+  {
+   "file": "94-sambung-kabel.js",
+   "id": "sambung-kabel",
+   "title": "Sambung Kabel",
+   "cat": "logika",
+   "bytes": 12040,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {

@@ -3,15 +3,15 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "beda-satu",
-   "title": "Mana yang Beda",
+   "id": "cermin-pola",
+   "title": "Cermin Pola",
    "cat": "logika",
-   "file": "99-beda-satu.js",
+   "file": "93-cermin-pola.js",
    "static100": 79,
    "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 53,
+   "avgActions": 83,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
@@ -22,78 +22,61 @@
    ]
   },
   {
-   "id": "lompat-bintang",
-   "title": "Lompat Bintang",
-   "cat": "mat",
-   "file": "69-lompat-bintang.js",
-   "static100": 79,
-   "dyn100": 98,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 103,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 88,
-   "cls": "A",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
-  },
-  {
-   "id": "tabung-infaq",
-   "title": "Tabung Infaq",
+   "id": "kartu",
+   "title": "Kartu Pasangan",
    "cat": "islam",
-   "file": "62-tabung-infaq.js",
-   "static100": 86,
+   "file": "06-kartu.js",
+   "static100": 79,
    "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 80,
+   "avgActions": 65,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 92,
+   "fun": 88,
    "cls": "A",
    "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "id": "parkir",
+   "title": "Parkir Pintar",
+   "cat": "logika",
+   "file": "91-parkir.js",
+   "static100": 79,
+   "dyn100": 100,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 17,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 88,
+   "cls": "A",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {
-   "id": "sudoku",
-   "title": "Sudoku Mini",
+   "id": "sambung-kabel",
+   "title": "Sambung Kabel",
    "cat": "logika",
-   "file": "44-sudoku.js",
-   "static100": 86,
-   "dyn100": 99,
+   "file": "94-sambung-kabel.js",
+   "static100": 79,
+   "dyn100": 98,
    "plays": 4,
    "finished": 4,
-   "avgActions": 78,
+   "avgActions": 92,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 92,
+   "fun": 88,
    "cls": "A",
    "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
-  },
-  {
-   "id": "tatasurya",
-   "title": "Jelajah Tata Surya",
-   "cat": "sains",
-   "file": "20-tatasurya.js",
-   "static100": 93,
-   "dyn100": 100,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 30,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 96,
-   "cls": "A",
-   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   }
