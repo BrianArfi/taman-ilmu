@@ -1,4 +1,5 @@
-/* 94 Sambung Kabel. Ketuk ujung warna lalu ketuk sel sebelahnya untuk menarik kabel. Sambungkan tiap pasang tanpa bersinggungan. */
+/* 94 Sambung Kabel. Ketuk ujung warna lalu ketuk sel sebelahnya untuk menarik kabel. Sambungkan tiap pasang tanpa bersinggungan.
+   Kabel kedua jalurnya lebih panjang (naik). */
 (function () {
   const { h } = TI;
 
@@ -74,6 +75,7 @@
           ctx.progress(pi, soal.length);
           ctx.clear();
           await satu(pi);
+          if (pi < soal.length - 1 && ctx.alive) ctx.correct(null, { say: 'Bagus! Terus naik ke babak ' + (pi + 2) + '!' });
         }
         if (!ctx.alive) return;
         ctx.progress(soal.length, soal.length);
@@ -91,9 +93,9 @@
 
           ctx.ask(pi === 0
             ? 'Sambungkan warna yang sama! Ketuk ujung warna, lalu ketuk sel sebelahnya.'
-            : 'Kabel ' + (pi + 1) + '. Sambungkan semua warna!');
+            : 'Babak ' + (pi + 1) + '. Sambungkan semua warna!');
 
-          const chip = h('div', { class: 'sk-chip' }, 'Kabel ' + (pi + 1) + ' dari ' + soal.length);
+          const chip = h('div', { class: 'sk-chip' }, 'Babak ' + (pi + 1) + ' dari ' + soal.length);
           const papan = h('div', { class: 'sk-board', style: '--n:' + n, 'aria-label': 'Papan kabel' });
           const bReset = h('button', { type: 'button', class: 'ti-btn is-ghost' }, '↺ Ulang');
           const bBantu = h('button', { type: 'button', class: 'ti-btn is-ghost ti-help' }, '💡 Bantu');

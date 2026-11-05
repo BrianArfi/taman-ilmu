@@ -1,4 +1,5 @@
-/* 91 Parkir Pintar. Rush hour junior: ketuk mobil untuk pilih, ketuk sel tujuan sebaris untuk geser. Keluarkan mobil bintang ke kanan. */
+/* 91 Parkir Pintar. Rush hour junior: ketuk mobil untuk pilih, ketuk sel tujuan sebaris untuk geser. Keluarkan mobil bintang ke kanan.
+   Parkir kedua butuh langkah solusi lebih banyak (naik). */
 (function () {
   const { h, svg, rand } = TI;
 
@@ -97,9 +98,9 @@
     return null;
   }
 
-  function acak(n, cars, tk) {
+  function acak(n, cars, tk, pi) {
     const K = tk ? 5 : 9;
-    const minJ = tk ? 2 : 4;
+    const minJ = (tk ? 2 : 4) + pi; // parkir kedua naik
     let jatuh = null;
     for (let t = 0; t < 80; t++) {
       const st = cars.map((c) => [c.r, c.c]);
@@ -163,6 +164,7 @@
           ctx.progress(pi, total);
           ctx.clear();
           await satu(pi);
+          if (pi < total - 1 && ctx.alive) ctx.correct(null, { say: 'Bagus! Terus naik ke babak ' + (pi + 2) + '!' });
         }
         if (!ctx.alive) return;
         ctx.progress(total, total);
@@ -173,17 +175,17 @@
         return new Promise((resolve) => {
           const cars = awal(n, tk);
           const er = exitR(n);
-          const posAwal = acak(n, cars, tk);
+          const posAwal = acak(n, cars, tk, pi);
           let pos = posAwal.map((p) => p.slice());
           let sel = null, gagal = 0, ketukN = 0, selesai = false, sibuk = false;
 
           ctx.ask(pi === 0
             ? 'Keluarkan mobil bintang! Ketuk mobil untuk pilih, lalu ketuk jalan tujuannya.'
-            : 'Parkir ' + (pi + 1) + '. Keluarkan mobil bintang ke panah kanan!');
+            : 'Babak ' + (pi + 1) + '. Keluarkan mobil bintang ke panah kanan!');
 
           const papan = h('div', { class: 'pk-board', style: '--n:' + n, role: 'grid', 'aria-label': 'Tempat parkir' });
           const info = h('div', { class: 'pk-info' },
-            h('span', { class: 'pk-chip' }, 'Parkir ' + (pi + 1) + ' dari ' + total),
+            h('span', { class: 'pk-chip' }, 'Babak ' + (pi + 1) + ' dari ' + total),
             h('span', { class: 'pk-chip' }, '⭐ = mobil bintang'));
           const bReset = h('button', { type: 'button', class: 'ti-btn is-ghost' }, '↺ Ulang');
           const bBantu = h('button', { type: 'button', class: 'ti-btn is-ghost ti-help' }, '💡 Bantu');

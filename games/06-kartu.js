@@ -1,6 +1,6 @@
 /* 06 Kartu Pasangan (memory game).
    TK: dek "Benda Islami", 6 pasang kembar, nama dibacakan saat kartu dibuka.
-   SD: pilih dek (Kitab & Nabi, Malaikat & Tugasnya, Asmaul Husna), cocokkan nama dengan artinya. TK intip dulu, tiap 3x salah waktu lihat tambah. */
+   SD: pilih dek (Kitab & Nabi, Malaikat & Tugasnya, Asmaul Husna), cocokkan nama dengan artinya. TK intip dulu, tiap 3x salah waktu lihat tambah. Tahap 1 pilih/ingat, tahap 2 cari. */
 (function () {
   const { h, shuffle, sample } = TI;
 
@@ -18,7 +18,7 @@
   // Tiap pasangan: a = sisi nama, b = sisi arti/tugas. ar = teks Arab (hanya Asmaul Husna dari SPEC).
   const DEK = [
     {
-      id: 'kitab', judul: 'Kitab & Nabi', icon: '📖', ket: 'Cocokkan kitab dengan nabinya', jumlah: 4,
+      id: 'kitab', judul: 'Kitab & Nabi', icon: '📖', ket: 'Gampang: 4 pasang kitab dengan nabi', jumlah: 4,
       ask: 'Cocokkan kitab dengan nabi yang menerimanya!',
       pasangan: [
         { a: { main: 'Taurat' }, b: { main: 'Nabi Musa' } },
@@ -29,7 +29,7 @@
       lesson: () => "Allah menurunkan 4 kitab: Taurat, Zabur, Injil, dan Al-Qur'an.",
     },
     {
-      id: 'malaikat', judul: 'Malaikat & Tugasnya', icon: '✨', ket: 'Cocokkan malaikat dengan tugasnya', jumlah: 6,
+      id: 'malaikat', judul: 'Malaikat & Tugasnya', icon: '✨', ket: 'Seru: 6 pasang malaikat dengan tugasnya', jumlah: 6,
       ask: 'Cocokkan malaikat dengan tugasnya!',
       pasangan: [
         { a: { main: 'Jibril' }, b: { main: 'Menyampaikan wahyu' } },
@@ -45,7 +45,7 @@
       lesson: (p) => 'Setiap malaikat punya tugas dari Allah. Contohnya ' + p[0].a.main + ': ' + p[0].b.main.toLowerCase() + '.',
     },
     {
-      id: 'asmaul', judul: 'Asmaul Husna', icon: '🌟', ket: 'Cocokkan nama dengan artinya', jumlah: 6,
+      id: 'asmaul', judul: 'Asmaul Husna', icon: '🌟', ket: 'Seru: 6 pasang nama dengan artinya', jumlah: 6,
       ask: 'Cocokkan nama Allah yang indah dengan artinya!',
       pasangan: [
         { a: { main: 'Ar-Rahman', ar: 'الرحمن' }, b: { main: 'Maha Pengasih' } },
@@ -191,7 +191,7 @@
       grid.append(btn);
       return k;
     });
-    ctx.el.append(wrap); if (ctx.isTK) { kartu.forEach((x) => x.btn.classList.add('is-open')); ctx.say('Ingat-ingat letaknya!'); ctx.sfx('pop'); ctx.after(2500, () => kartu.forEach((x) => { if (!x.buka && !x.selesai) x.btn.classList.remove('is-open'); })); }
+    ctx.el.append(wrap); if (ctx.isTK) { kartu.forEach((x) => x.btn.classList.add('is-open')); ctx.say('Tahap 1: ingat-ingat letaknya!'); ctx.sfx('pop'); ctx.after(2500, () => kartu.forEach((x) => { if (!x.buka && !x.selesai) x.btn.classList.remove('is-open'); })); }
 
     function buka(k) {
       k.buka = true;
@@ -220,7 +220,7 @@
         await ctx.wait(330); // biarkan balik kartu selesai dulu
         for (const x of [a, b]) { x.selesai = true; x.btn.classList.add('is-done'); }
         ketemu++;
-        ctx.progress(ketemu, jumlah);
+        ctx.progress(ketemu, jumlah); if (ketemu === Math.ceil(jumlah / 2)) ctx.correct(null, { say: 'Bagus! Setengah jalan, terus naik sampai semua ketemu!' });
         info(ketemu);
         ctx.sfx('benar');
         ctx.say(ucapPasangan(a.c, b.c));
@@ -253,7 +253,7 @@
         main(ctx, {
           data: susunKartu(TK_KARTU, true),
           jumlah: TK_KARTU.length,
-          ask: 'Cari dua kartu yang sama! Ketuk kartunya.',
+          ask: 'Tahap 2: cari dua kartu yang sama! Ketuk kartunya.',
           lesson: LESSON_TK,
           ucapPasangan: (a) => 'Cocok! ' + a.say + '.',
         });
@@ -261,7 +261,7 @@
       }
 
       // SD: pilih dek dulu.
-      ctx.ask('Pilih kartu yang mau kamu mainkan!');
+      ctx.ask('Tahap 1: pilih kartu yang mau kamu mainkan!');
       const dek = await new Promise((selesai) => {
         const daftar = h('div', { class: 'kt-decks' }, DEK.map((d, i) => h('button', {
           type: 'button', class: 'choice kt-deck pop-in', style: '--i:' + i,
@@ -276,7 +276,7 @@
       main(ctx, {
         data: susunKartu(pasangan, false),
         jumlah: dek.jumlah,
-        ask: dek.ask,
+        ask: 'Tahap 2: ' + dek.ask,
         lesson: dek.lesson(pasangan),
         ucapPasangan: (a, b) => {
           const p = pasangan[a.pair];

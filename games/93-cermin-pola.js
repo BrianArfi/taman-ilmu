@@ -1,4 +1,5 @@
-/* 93 Cermin Pola. Kiri sudah terisi, ketuk kotak kanan agar sama seperti cermin. */
+/* 93 Cermin Pola. Kiri sudah terisi, ketuk kotak kanan agar sama seperti cermin.
+   Pola pertama jarang isinya (gampang dulu), lalu makin padat. */
 (function () {
   const { h } = TI;
 
@@ -33,17 +34,20 @@
           ctx.progress(pi, total);
           ctx.clear();
           await satu(pi);
+          if (pi < total - 1 && ctx.alive) ctx.correct(null, { say: 'Bagus! Terus naik ke babak ' + (pi + 2) + '!' });
         }
         if (!ctx.alive) return;
         ctx.progress(total, total);
         ctx.finish({ lesson: 'Cermin memantulkan sama persis. Kanan dan kiri harus sama.' });
       };
 
-      function polaAcak() {
+      function polaAcak(pi) {
+        const padat = pi === 0 ? 0.3 : 0.45; // pola pertama jarang, gampang dulu
+        const maks = pi === 0 ? n + 1 : n * n / 2 - 1;
         for (let t = 0; t < 60; t++) {
-          const kiri = Array.from({ length: n }, () => Array.from({ length: n / 2 }, () => Math.random() < 0.45));
+          const kiri = Array.from({ length: n }, () => Array.from({ length: n / 2 }, () => Math.random() < padat));
           const isi = kiri.flat().filter(Boolean).length;
-          if (isi >= n && isi <= n * n / 2 - 1) return kiri;
+          if (isi >= n && isi <= maks) return kiri;
         }
         const kiri = Array.from({ length: n }, () => Array.from({ length: n / 2 }, () => false));
         kiri[0][0] = true; kiri[1][1] = true; kiri[n - 1][0] = true;
@@ -52,16 +56,16 @@
 
       function satu(pi) {
         return new Promise((resolve) => {
-          const kiri = polaAcak();
+          const kiri = polaAcak(pi);
           const kanan = Array.from({ length: n }, () => Array(n / 2).fill(false));
           let gagal = 0, ketukN = 0, selesai = false;
           const tombol = [];
 
           ctx.ask(pi === 0
             ? 'Lengkapi bayangan cerminnya! Ketuk kotak putih agar sama dengan kiri.'
-            : 'Pola ' + (pi + 1) + '. Buat kanan sama dengan kiri!');
+            : 'Babak ' + (pi + 1) + '. Buat kanan sama dengan kiri!');
 
-          const chip = h('div', { class: 'cm-chip' }, 'Pola ' + (pi + 1) + ' dari ' + total);
+          const chip = h('div', { class: 'cm-chip' }, 'Babak ' + (pi + 1) + ' dari ' + total);
           const papan = h('div', { class: 'cm-board', style: '--n:' + n, 'aria-label': 'Papan cermin' });
           for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) {
             const setengah = n / 2;
