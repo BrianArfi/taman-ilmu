@@ -1,4 +1,5 @@
-/* 75 Pancing Magnet. Pancing benda logam dengan magnet. */
+/* 75 Pancing Magnet. Pancing benda logam dengan magnet.
+   Babak 2 di tengah: kait bergerak lebih cepat. */
 (function () {
   const { h, shuffle } = TI;
 
@@ -63,9 +64,9 @@
 
       let dapat = 0, tekan = 0, gagalRuntun = 0, tahanX = null;
       const red = TI.reduced();
-      const cepat = ctx.isTK ? 0.7 : 1.0;
+      let cepat = ctx.isTK ? 0.7 : 1.0, babak2 = false; // naik di babak 2
 
-      const panel = h('div', { class: 'ti-panel pm-panel' });
+      const panel = h('div', { class: 'ti-panel pm-panel pop-in' });
       const skor = h('span', { class: 'pm-skor', 'aria-live': 'polite' });
       panel.append(skor);
       const scene = h('div', { class: 'ti-scene pm-scene' });
@@ -105,6 +106,7 @@
         if (!ctx.alive) return false;
         t += dt * (red ? 0.4 : 1);
         kaitX = tahanX != null ? tahanX : 0.5 + 0.38 * Math.sin(t * cepat);
+        if (!babak2 && dapat >= Math.ceil(target / 2)) { babak2 = true; cepat *= 1.3; ctx.correct(null, { say: 'Bagus! Babak 2, kecepatan naik!' }); }
         const w = scene.clientWidth || 340;
         gantung.style.transform = 'translate3d(' + (kaitX * w).toFixed(1) + 'px,0,0)';
         if (!red && ctx.isSD) {

@@ -406,13 +406,13 @@ ${P} .hj-opt b { font-size: 2.2rem; line-height: 1; }
         if (!ctx.alive) return;
         if (TK) {
           ctx.clear();
-          await soalTK();
+          ctx.correct(null, { say: 'Bagus! Thawaf selesai. Terus naik ke babak soal!' }); await soalTK();
         } else {
-          await sai();
+          ctx.correct(null, { say: 'Bagus! Thawaf selesai. Terus naik ke babak sai!' }); await sai();
           if (!ctx.alive) return;
           ctx.note("Sa'i mengenang Siti Hajar yang berjalan antara bukit Shafa dan Marwah untuk mencari air bagi Nabi Ismail 'alaihis salam. Sa'i dimulai di Shafa dan berakhir di Marwah.", { title: 'Kisahnya' });
           await ctx.next();
-          await soalSD();
+          ctx.correct(null, { say: 'Bagus! Terus naik ke babak soal!' }); await soalSD();
         }
         if (!ctx.alive) return;
         ctx.progress(TOTAL, TOTAL);

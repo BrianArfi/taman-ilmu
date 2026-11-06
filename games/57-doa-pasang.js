@@ -1,6 +1,7 @@
 /* 57 Pasangan Doa. Memory: pasangkan doa sehari-hari dengan artinya.
    Lafaz Bismillah dan Alhamdulillah dipakai ulang dari 07-adab.js.
-   Doa lain hanya judul + arti, tanpa mengarang lafaz. */
+   Doa lain hanya judul + arti, tanpa mengarang lafaz.
+   TK intip dulu, lalu cari. Pujian tengah jalan. */
 (function () {
   const { h, shuffle, sample } = TI;
 
@@ -80,6 +81,7 @@ ${P} .dp-teks { font-size: 0.92rem; line-height: 1.2; }
         grid.append(btn);
         return k;
       });
+      if (TK) { kartu.forEach((x) => x.btn.classList.add('is-open')); ctx.say('Ingat-ingat letaknya!'); ctx.sfx('pop'); ctx.after(2500, () => kartu.forEach((x) => { if (!x.buka && !x.selesai) x.btn.classList.remove('is-open'); })); }
 
       function buka(k) {
         k.buka = true;
@@ -105,6 +107,7 @@ ${P} .dp-teks { font-size: 0.92rem; line-height: 1.2; }
           a.selesai = k.selesai = true;
           a.btn.classList.add('is-done'); k.btn.classList.add('is-done');
           ketemu++;
+          if (ketemu === Math.ceil(jumlah / 2)) ctx.correct(null, { say: 'Bagus! Setengah jalan!' });
           ctx.progress(ketemu, jumlah);
           info(ketemu);
           ctx.sfx('benar');

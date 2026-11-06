@@ -1,4 +1,5 @@
-/* 80 Tubuhku. Tempelkan bagian tubuh ke tempatnya. Bagan tubuh polos tanpa wajah. */
+/* 80 Tubuhku. Tempelkan bagian tubuh ke tempatnya. Bagan tubuh polos tanpa wajah.
+   SD: tempel dulu lalu kuis (naik). */
 (function () {
   const { h, svg, shuffle } = TI;
 
@@ -82,6 +83,7 @@
       move: false,
       onPlace: (piece, slot) => {
         slot.el.textContent = '✓ ' + piece.label;
+        ctx.sfx('pop');
       },
     });
     tunjuk();
@@ -105,7 +107,7 @@
           ctx.finish({ lesson });
         });
       } else {
-        ctx.series([{ tahap: 'tempel' }, ...KUIS.map((k) => ({ tahap: 'kuis', ...k }))], async (s) => {
+        let ke = 0; ctx.series([{ tahap: 'tempel' }, ...KUIS.map((k) => ({ tahap: 'kuis', ...k }))], async (s) => { ke++; if (ke === 2) ctx.correct(null, { say: 'Bagus! Terus naik ke kuis!' });
           if (s.tahap === 'tempel') {
             await tempelBagian(ctx, BAGIAN_SD);
           } else {
