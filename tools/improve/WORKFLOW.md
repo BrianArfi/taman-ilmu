@@ -108,6 +108,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 17 (7 Nov 2026)**: belah-buah 88→92, ingat 88→92,
   hujan 88→96.
   Detail: `reports/cycle-20261107-s17.md`.
+- **Siklus 18 (7 Nov 2026)**: pizza-pecahan 88→92, warung 88→88,
+  beda 88→88.
+  Detail: `reports/cycle-20261107-s18.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar

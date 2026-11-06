@@ -253,7 +253,7 @@
    "id": "beda",
    "title": "Cari Perbedaan",
    "cat": "logika",
-   "bytes": 22401,
+   "bytes": 22513,
    "soal": 3,
    "sig": {
     "aksi": 1,
@@ -640,27 +640,6 @@
    ]
   },
   {
-   "file": "64-pizza-pecahan.js",
-   "id": "pizza-pecahan",
-   "title": "Pizza Pecahan",
-   "cat": "mat",
-   "bytes": 7807,
-   "soal": null,
-   "sig": {
-    "aksi": 2,
-    "feedback": 2,
-    "ramp": 1,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
    "file": "97-pola-angka.js",
    "id": "pola-angka",
    "title": "Pola Angka",
@@ -906,7 +885,7 @@
    "id": "warung",
    "title": "Warung Jujur",
    "cat": "mat",
-   "bytes": 16694,
+   "bytes": 16908,
    "soal": 5,
    "sig": {
     "aksi": 1,
@@ -1445,6 +1424,25 @@
    "sug": [
     "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
    ]
+  },
+  {
+   "file": "64-pizza-pecahan.js",
+   "id": "pizza-pecahan",
+   "title": "Pizza Pecahan",
+   "cat": "mat",
+   "bytes": 7905,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": []
   },
   {
    "file": "11-pola.js",
