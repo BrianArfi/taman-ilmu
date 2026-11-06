@@ -105,6 +105,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 16 (7 Nov 2026)**: zakat-fitrah 88→92, wujud 88→92,
   tanam 88→91.
   Detail: `reports/cycle-20261107-s16.md`.
+- **Siklus 17 (7 Nov 2026)**: belah-buah 88→92, ingat 88→92,
+  hujan 88→96.
+  Detail: `reports/cycle-20261107-s17.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar

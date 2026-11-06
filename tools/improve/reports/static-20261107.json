@@ -292,27 +292,6 @@
    ]
   },
   {
-   "file": "74-belah-buah.js",
-   "id": "belah-buah",
-   "title": "Belah Buah Hitung",
-   "cat": "mat",
-   "bytes": 7964,
-   "soal": 5,
-   "sig": {
-    "aksi": 2,
-    "feedback": 2,
-    "ramp": 1,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
    "file": "93-cermin-pola.js",
    "id": "cermin-pola",
    "title": "Cermin Pola",
@@ -419,52 +398,6 @@
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton",
     "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "41-hujan.js",
-   "id": "hujan",
-   "title": "Siklus Air & Cuaca",
-   "cat": "sains",
-   "bytes": 19279,
-   "soal": 6,
-   "sig": {
-    "aksi": 2,
-    "feedback": 0,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "47-ingat.js",
-   "id": "ingat",
-   "title": "Ingat Urutan",
-   "cat": "logika",
-   "bytes": 9817,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 1,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
@@ -1076,6 +1009,25 @@
    ]
   },
   {
+   "file": "74-belah-buah.js",
+   "id": "belah-buah",
+   "title": "Belah Buah Hitung",
+   "cat": "mat",
+   "bytes": 8166,
+   "soal": 5,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": []
+  },
+  {
    "file": "12-bentuk.js",
    "id": "bentuk",
    "title": "Kenal Bentuk",
@@ -1241,6 +1193,28 @@
    "static100": 86,
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "file": "47-ingat.js",
+   "id": "ingat",
+   "title": "Ingat Urutan",
+   "cat": "logika",
+   "bytes": 9951,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {
@@ -1904,6 +1878,27 @@
    },
    "static100": 93,
    "sug": []
+  },
+  {
+   "file": "41-hujan.js",
+   "id": "hujan",
+   "title": "Siklus Air & Cuaca",
+   "cat": "sains",
+   "bytes": 19458,
+   "soal": 6,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
   },
   {
    "file": "66-kembalian-kilat.js",
