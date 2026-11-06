@@ -859,28 +859,6 @@
    ]
   },
   {
-   "file": "42-tanam.js",
-   "id": "tanam",
-   "title": "Ayo Menanam",
-   "cat": "sains",
-   "bytes": 28977,
-   "soal": null,
-   "sig": {
-    "aksi": 2,
-    "feedback": 2,
-    "ramp": 1,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
    "file": "77-tebak-bayang.js",
    "id": "tebak-bayang",
    "title": "Tebak Bayangan",
@@ -997,50 +975,6 @@
    "cat": "mat",
    "bytes": 16694,
    "soal": 5,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 1,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
-   "file": "19-wujud.js",
-   "id": "wujud",
-   "title": "Es, Air, Uap",
-   "cat": "sains",
-   "bytes": 18056,
-   "soal": 2,
-   "sig": {
-    "aksi": 2,
-    "feedback": 2,
-    "ramp": 1,
-    "failsoft": 2,
-    "sesi": 0,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "sesi 2 soal: ideal 6-10 soal (2-4 menit)"
-   ]
-  },
-  {
-   "file": "54-zakat-fitrah.js",
-   "id": "zakat-fitrah",
-   "title": "Takar Zakat Fitrah",
-   "cat": "islam",
-   "bytes": 5585,
-   "soal": null,
    "sig": {
     "aksi": 1,
     "feedback": 2,
@@ -1686,6 +1620,27 @@
    ]
   },
   {
+   "file": "42-tanam.js",
+   "id": "tanam",
+   "title": "Ayo Menanam",
+   "cat": "sains",
+   "bytes": 29096,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
    "file": "21-tangkap.js",
    "id": "tangkap",
    "title": "Tangkap Hijaiyah",
@@ -1790,6 +1745,48 @@
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton",
     "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
+   "file": "19-wujud.js",
+   "id": "wujud",
+   "title": "Es, Air, Uap",
+   "cat": "sains",
+   "bytes": 18189,
+   "soal": 2,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 0,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "sesi 2 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "54-zakat-fitrah.js",
+   "id": "zakat-fitrah",
+   "title": "Takar Zakat Fitrah",
+   "cat": "islam",
+   "bytes": 5855,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
    ]
   },
   {

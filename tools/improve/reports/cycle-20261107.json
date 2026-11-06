@@ -3,57 +3,61 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "susun",
-   "title": "Susun Bentuk",
-   "cat": "logika",
-   "file": "48-susun.js",
-   "static100": 93,
+   "id": "tanam",
+   "title": "Ayo Menanam",
+   "cat": "sains",
+   "file": "42-tanam.js",
+   "static100": 86,
    "dyn100": 98,
    "plays": 4,
    "finished": 4,
-   "avgActions": 91,
+   "avgActions": 103,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 95,
-   "cls": "A",
-   "sug": []
-  },
-  {
-   "id": "balap-kali",
-   "title": "Balap Kali-kali",
-   "cat": "mat",
-   "file": "63-balap-kali.js",
-   "static100": 93,
-   "dyn100": 100,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 18,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 96,
+   "fun": 91,
    "cls": "A",
    "sug": [
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {
-   "id": "timbangan",
-   "title": "Timbangan Seimbang",
-   "cat": "sains",
-   "file": "15-timbangan.js",
-   "static100": 100,
+   "id": "zakat-fitrah",
+   "title": "Takar Zakat Fitrah",
+   "cat": "islam",
+   "file": "54-zakat-fitrah.js",
+   "static100": 86,
    "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 15,
+   "avgActions": 28,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 100,
+   "fun": 92,
    "cls": "A",
-   "sug": []
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "id": "wujud",
+   "title": "Es, Air, Uap",
+   "cat": "sains",
+   "file": "19-wujud.js",
+   "static100": 86,
+   "dyn100": 99,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 57,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 92,
+   "cls": "A",
+   "sug": [
+    "sesi 2 soal: ideal 6-10 soal (2-4 menit)"
+   ]
   }
  ]
 }
