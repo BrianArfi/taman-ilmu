@@ -4,7 +4,7 @@
 (function () {
   const { h, shuffle } = TI;
 
-  const STAGE_NAME = ['Biji', 'Kecambah', 'Tunas', 'Berdaun', 'Berbunga', 'Berbuah'];
+  const STAGE_NAME = ['Biji', 'Kecambah', 'Tunas', 'Berdaun', 'Berbunga', 'Berbuah']; // enam tahap tumbuh
   const STAGE_MSG = [
     '',
     'Hore! Bijimu berkecambah.',
@@ -259,7 +259,7 @@
           if (stage >= 5) await ctx.sayWait(text); else ctx.say(text);
         }
         async function morningGrow(to) {
-          stage = to;
+          if (to === 3) ctx.correct(null, { say: 'Hebat! Setengah jalan, terus naik ke tahap berbunga!' }); stage = to;
           sc.setStage(stage);
           sc.flash('is-grow', 700, ctx);
           ctx.sfx('benar');

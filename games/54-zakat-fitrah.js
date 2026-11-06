@@ -1,5 +1,6 @@
 /* 54 Takar Zakat Fitrah. Ketuk cup untuk dituang ke timbangan sampai pas.
-   TK: target 1-3. SD: sampai 5 + hitung total untuk 3 jiwa. */
+   TK: target 1-3. SD: sampai 5 + hitung total untuk 3 jiwa.
+   Urut menanjak: TK 1-2-3, SD 2-3-4-5 lalu soal. */
 (function () {
   const { h, shuffle } = TI;
 
@@ -88,13 +89,14 @@ ${P} .zf-msg.is-salah { color: var(--bad); }`;
       const TK = ctx.isTK;
 
       if (TK) {
-        await ctx.series([2, 1, 3], (t) => rondeTakar(ctx, t), {
+        let ke = 0;
+        await ctx.series([1, 2, 3], (t) => { ke++; if (ke === 2) ctx.correct(null, { say: 'Bagus! Satu lagi!' }); return rondeTakar(ctx, t); }, {
           lesson: 'Zakat fitrah dibayar sebelum shalat Idul Fitri. Ayo ajak ayah dan ibu membayar zakat tepat waktu.',
         });
         return;
       }
 
-      const takar = [3, 4, 5, 2];
+      const takar = [2, 3, 4, 5];
       const total = takar.length + 1;
       ctx.progress(0, total);
       for (const t of takar) {
@@ -102,6 +104,7 @@ ${P} .zf-msg.is-salah { color: var(--bad); }`;
         await rondeTakar(ctx, t);
         if (!ctx.alive) return;
         ctx.progress(takar.indexOf(t) + 1, total);
+        if (takar.indexOf(t) < takar.length - 1) ctx.correct(null, { say: 'Bagus! Terus naik ke ronde berikutnya!' });
       }
       // Ronde akhir: total untuk 3 jiwa.
       ctx.clear();

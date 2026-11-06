@@ -1,5 +1,5 @@
 /* 19 Es, Air, Uap. Bagian 1: lab panas dingin (kompor, gelas, termometer) dengan tugas mencair, menguap,
-   mengembun, membeku. Bagian 2: memilah benda padat, cair, dan gas dengan ctx.sort. */
+   mengembun, membeku. Bagian 2: memilah benda padat, cair, dan gas dengan ctx.sort. Dua babak: lab lalu pilah. */
 (function () {
   const { h, svg, shuffle, sample } = TI;
 
@@ -275,11 +275,11 @@
           await afterNote(ctx, task.note, ctx.isSD ? 'Istilah baru' : 'Hore!');
         }
         if (!ctx.alive) return;
-        if (lab.stop) lab.stop();
+        if (lab.stop) lab.stop(); if (ctx.alive) ctx.correct(null, { say: 'Bagus! Terus naik ke babak pilah!' });
 
         // ===== bagian 2: sortir padat, cair, gas =====
         ctx.clear();
-        ctx.ask(ctx.isTK ? 'Sekarang pilah benda ini: padat atau cair?' : 'Sekarang pilah benda ini: padat, cair, atau gas?');
+        ctx.ask(ctx.isTK ? 'Babak pilah: sekarang pilah benda ini, padat atau cair?' : 'Babak pilah: sekarang pilah benda ini, padat, cair, atau gas?');
         await ctx.sort({
           items: things.map((x) => ({
             icon: x.icon, label: x.label, bin: x.bin, why: WHY[x.bin],
