@@ -1,23 +1,21 @@
-# Backlog improvement Taman Ilmu (siklus 20261105)
+# Backlog improvement Taman Ilmu (siklus 20261106)
 
 Diurut dari skor Fun terbawah. Skor = statis + smoke + engagement anak.
 Kelas: A 85+, B 70-84, C 50-69, D <50. Gerbang: smoke OK, skor tidak turun, SPEC 3-4, ustadz untuk teks agama, push hanya dengan "gas".
 
-## A 88 — Cermin Pola (`cermin-pola`, logika)
-- Bukti: statis 79 · smoke 99 (selesai 4/4, rerata 83 aksi) · engagement: belum ada data
+## A 88 — Tebak Bunyi (`tebak-bunyi`, sains)
+- Bukti: statis 79 · smoke 100 (selesai 4/4, rerata 30 aksi) · engagement: belum ada data
+- Saran: tambah variasi aksi kedua biar tidak monoton
+- Saran: naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)
+
+## A 92 — Kenal Bentuk (`bentuk`, mat)
+- Bukti: statis 86 · smoke 100 (selesai 4/4, rerata 26 aksi) · engagement: belum ada data
 - Saran: tambah variasi aksi kedua biar tidak monoton
 
-## A 88 — Kartu Pasangan (`kartu`, islam)
-- Bukti: statis 79 · smoke 99 (selesai 4/4, rerata 65 aksi) · engagement: belum ada data
+## A 92 — Geser Angka (`geser`, logika)
+- Bukti: statis 86 · smoke 99 (selesai 4/4, rerata 85 aksi) · engagement: belum ada data
 - Saran: tambah variasi aksi kedua biar tidak monoton
 
-## A 88 — Parkir Pintar (`parkir`, logika)
-- Bukti: statis 79 · smoke 100 (selesai 4/4, rerata 17 aksi) · engagement: belum ada data
-- Saran: tambah variasi aksi kedua biar tidak monoton
-- Saran: setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut
-
-## A 88 — Sambung Kabel (`sambung-kabel`, logika)
-- Bukti: statis 79 · smoke 98 (selesai 4/4, rerata 92 aksi) · engagement: belum ada data
-- Saran: tambah variasi aksi kedua biar tidak monoton
-- Saran: setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut
+## A 92 — Ajaib Magnet (`magnet`, sains)
+- Bukti: statis 86 · smoke 100 (selesai 4/4, rerata 16 aksi) · engagement: belum ada data
 

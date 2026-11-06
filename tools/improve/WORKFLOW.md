@@ -84,6 +84,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 9 (5 Nov 2026)**: cermin-pola 80→88, kartu 80→88,
   parkir 80→88, sambung-kabel 80→88.
   Detail: `reports/cycle-20261105-s9.md`.
+- **Siklus 10 (6 Nov 2026)**: bentuk 84→92, geser 83→92,
+  magnet 84→92, tebak-bunyi 84→88.
+  Detail: `reports/cycle-20261106.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar
