@@ -90,6 +90,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 11 (6 Nov 2026)**: apung 84→92, baju-cuaca 83→95,
   roket-air 84→92, listrik 84→92.
   Detail: `reports/cycle-20261106-s11.md`.
+- **Siklus 12 (6 Nov 2026)**: pancing-magnet 84→96, doa-pasang
+  84→92, tubuhku 83→92, haji 84→92.
+  Detail: `reports/cycle-20261106-s12.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar

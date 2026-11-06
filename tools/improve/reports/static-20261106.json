@@ -48,29 +48,6 @@
    ]
   },
   {
-   "file": "57-doa-pasang.js",
-   "id": "doa-pasang",
-   "title": "Pasangan Doa",
-   "cat": "islam",
-   "bytes": 7289,
-   "soal": 6,
-   "sig": {
-    "aksi": 1,
-    "feedback": 0,
-    "ramp": 1,
-    "failsoft": 2,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 71,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
-   ]
-  },
-  {
    "file": "35-grafik.js",
    "id": "grafik",
    "title": "Panen Buah & Grafik",
@@ -89,28 +66,6 @@
    "static100": 71,
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "23-haji.js",
-   "id": "haji",
-   "title": "haji",
-   "cat": "islam",
-   "bytes": 23449,
-   "soal": null,
-   "sig": {
-    "aksi": 2,
-    "feedback": 2,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 71,
-   "sug": [
     "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
@@ -180,28 +135,6 @@
    "static100": 71,
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
-   "file": "75-pancing-magnet.js",
-   "id": "pancing-magnet",
-   "title": "Pancing Magnet",
-   "cat": "sains",
-   "bytes": 9258,
-   "soal": 4,
-   "sig": {
-    "aksi": 2,
-    "feedback": 1,
-    "ramp": 0,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 71,
-   "sug": [
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
     "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
    ]
   },
@@ -384,29 +317,6 @@
    "sug": [
     "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "80-tubuhku.js",
-   "id": "tubuhku",
-   "title": "Tubuhku",
-   "cat": "sains",
-   "bytes": 5371,
-   "soal": null,
-   "sig": {
-    "aksi": 2,
-    "feedback": 0,
-    "ramp": 1,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 71,
-   "sug": [
-    "sfx cuma 1x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
    ]
   },
   {
@@ -1388,6 +1298,29 @@
    ]
   },
   {
+   "file": "57-doa-pasang.js",
+   "id": "doa-pasang",
+   "title": "Pasangan Doa",
+   "cat": "islam",
+   "bytes": 7675,
+   "soal": 6,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
    "file": "34-domino.js",
    "id": "domino",
    "title": "Domino Hitung",
@@ -1446,6 +1379,27 @@
    "static100": 86,
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "file": "23-haji.js",
+   "id": "haji",
+   "title": "haji",
+   "cat": "islam",
+   "bytes": 23672,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {
@@ -1845,6 +1799,27 @@
    ]
   },
   {
+   "file": "80-tubuhku.js",
+   "id": "tubuhku",
+   "title": "Tubuhku",
+   "cat": "sains",
+   "bytes": 5522,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 1,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
    "file": "39-warna.js",
    "id": "warna",
    "title": "Lab Warna & Pelangi",
@@ -2049,6 +2024,25 @@
    "cat": "mat",
    "bytes": 20539,
    "soal": 5,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": []
+  },
+  {
+   "file": "75-pancing-magnet.js",
+   "id": "pancing-magnet",
+   "title": "Pancing Magnet",
+   "cat": "sains",
+   "bytes": 9498,
+   "soal": 4,
    "sig": {
     "aksi": 2,
     "feedback": 2,
