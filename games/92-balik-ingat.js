@@ -1,4 +1,5 @@
-/* 92 Balik dan Ingat. Beberapa kartu berkedip lalu tertutup, ketuk kartu yang tadi berkedip. 6 ronde. */
+/* 92 Balik dan Ingat. Beberapa kartu berkedip lalu tertutup, ketuk kartu yang tadi berkedip. 6 ronde.
+   Ronde akhir waktu lihat makin singkat. */
 (function () {
   const { h, shuffle } = TI;
 
@@ -42,6 +43,7 @@
           ctx.progress(rd, total);
           ctx.clear();
           await satu(rd);
+          if (rd < total - 1 && ctx.alive) ctx.correct(null, { say: 'Bagus! Terus naik ke ronde ' + (rd + 2) + '!' });
         }
         if (!ctx.alive) return;
         ctx.progress(total, total);
@@ -85,7 +87,7 @@
               if (!ctx.alive || selesai) return;
               selTarget.forEach((k) => buka(k, 'is-blink'));
               ctx.sfx('pop');
-              await ctx.wait(tk ? 1100 : 900);
+              await ctx.wait(Math.max(500, (tk ? 1100 : 900) - rd * 100)); // ronde akhir makin singkat
               if (!ctx.alive || selesai) return;
               tutupSemua();
               await ctx.wait(350);

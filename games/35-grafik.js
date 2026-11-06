@@ -106,7 +106,7 @@
 
       for (let r = 0; r < RONDE; r++) {
         if (!ctx.alive) return;
-        await ronde(r);
+        await ronde(r); if (r < RONDE - 1 && ctx.alive) ctx.correct(null, { say: 'Bagus! Terus naik ke ronde ' + (r + 2) + '!' });
       }
       if (!ctx.alive) return;
       ctx.progress(UNIT, UNIT);

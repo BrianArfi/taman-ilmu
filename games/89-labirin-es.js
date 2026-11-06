@@ -1,5 +1,6 @@
 /* 89 Labirin Es. Kotak meluncur sampai dinding; ketuk arah untuk meluncur ke bendera.
-   TK: 4x4, 2 level. SD: 6x6, 3 level. Ada Reset, Bantu (1 langkah), batas longgar. */
+   TK: 4x4, 2 level. SD: 6x6, 3 level. Ada Reset, Bantu (1 langkah), batas longgar.
+   Tiap babak labirinnya beda. */
 (function () {
   const { h } = TI;
 
@@ -82,7 +83,7 @@
         let auto = 0;
         for (let i = 0; i < lvs.length && ctx.alive; i++) {
           ctx.progress(i, lvs.length);
-          const hasil = await level(lvs[i], i);
+          const hasil = await level(lvs[i], i); if (i < lvs.length - 1 && ctx.alive) ctx.correct(null, { say: 'Bagus! Terus naik ke babak ' + (i + 2) + '!' });
           if (hasil === 'auto') auto++;
         }
         if (!ctx.alive) return;
@@ -100,7 +101,7 @@
           let sr = 0, sc = 0;
           map.forEach((row, r) => row.forEach((ch, c) => { if (ch === 'S') { sr = r; sc = c; } }));
           ctx.clear();
-          ctx.ask(idx === 0 ? 'Ketuk arah untuk meluncur. Sampai ke bendera.' : 'Labirin berikutnya. Sampai ke bendera.');
+          ctx.ask(idx === 0 ? 'Babak 1 dari ' + lvs.length + '. Ketuk arah untuk meluncur. Sampai ke bendera.' : 'Babak ' + (idx + 1) + ' dari ' + lvs.length + '. Sampai ke bendera.');
           const wrap = h('div', { class: 'le-wrap' });
           const board = h('div', { class: 'le-board' });
           const grid = h('div', { class: 'le-grid', style: 'grid-template-columns: repeat(' + W + ', 1fr);grid-template-rows: repeat(' + H + ', 1fr);' });

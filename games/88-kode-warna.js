@@ -1,6 +1,7 @@
 /* 88 Tebak Kode Warna. Mastermind junior: isi lingkaran dengan warna,
    ketuk Tebak. Titik hijau = tepat, kuning = warna benar posisi salah.
-   TK: 3 warna, 6 tebakan. SD: 4 warna, 6 tebakan. 2 ronde. */
+   TK: 3 warna, 6 tebakan. SD: 4 warna, 6 tebakan. 2 ronde.
+   Ronde kedua tebakan lebih sedikit (naik sulitnya). */
 (function () {
   const { h, sample, shuffle } = TI;
 
@@ -61,7 +62,7 @@
         let gagalRonde = 0;
         for (let r = 0; r < 2 && ctx.alive; r++) {
           ctx.progress(r, 2);
-          const ok = await ronde(r);
+          const ok = await ronde(r); if (r < 1 && ctx.alive) ctx.correct(null, { say: 'Bagus! Terus naik ke ronde kedua!' });
           if (!ok) gagalRonde++;
         }
         if (!ctx.alive) return;
@@ -76,7 +77,7 @@
         return new Promise((selesai) => {
           ctx.clear();
           ctx.ask(r === 0 ? 'Ketuk warna untuk mengisi lingkaran, lalu ketuk Tebak.' : 'Ronde kedua. Pecahkan kode yang baru.');
-          const rahasia = sample(palet, len).map((w) => w.id);
+          const maks = r === 0 ? 6 : 5; const rahasia = sample(palet, len).map((w) => w.id);
           const olehId = (id) => palet.find((w) => w.id === id);
           const wrap = h('div', { class: 'kw-wrap' });
           const code = h('div', { class: 'kw-code' });
