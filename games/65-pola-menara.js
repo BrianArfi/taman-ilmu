@@ -1,6 +1,7 @@
 /* 65 Menara Pola. Susun balok warna mengikuti polanya (AB, AAB, ABC).
    Ketuk balok warna di nampan untuk menaruhnya di menara sesuai urutan.
-   TK: pola AB 6 balok. SD: AAB dan ABC 9 balok + tebak 2 balok berikutnya. */
+   TK: pola AB 6 balok. SD: AAB dan ABC 9 balok + tebak 2 balok berikutnya.
+   Tiap ronde pola naik (AB lalu AAB lalu ABC). */
 (function () {
   const { h, shuffle } = TI;
 
@@ -100,6 +101,7 @@
         await selesai;
         if (!ctx.alive) return;
         await ctx.wait(300);
+        if (r < ronde.length - 1) ctx.correct(null, { say: 'Bagus! Terus naik ke pola ' + ronde[r + 1].nama + '!' });
         ctx.clear();
       }
 

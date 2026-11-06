@@ -65,7 +65,7 @@
         let bintang = 3, pakaiBantu = false;
         for (let p = 0; p < ronde && ctx.alive; p++) {
           ctx.progress(p, ronde);
-          const hasil = await puzzle(p);
+          const hasil = await puzzle(p); if (p < ronde - 1 && ctx.alive) ctx.correct(null, { say: 'Bagus! Terus naik ke pipa ' + (p + 2) + '!' });
           if (hasil === 'auto') bintang = 1;
           else if (hasil === 'bantu' && bintang > 2) { bintang = 2; pakaiBantu = true; }
           void pakaiBantu;
@@ -83,7 +83,7 @@
           const msg = h('p', { class: 'pp-msg', 'aria-live': 'polite' }, 'Air belum mengalir.');
           const bantu = h('button', { type: 'button', class: 'ti-btn is-ghost ti-help' }, '💡 Bantu');
           top.append(bantu);
-          const grid = h('div', { class: 'pp-grid', style: 'grid-template-columns: repeat(' + n + ', 1fr);' });
+          const grid = h('div', { class: 'pp-grid pop-in', style: 'grid-template-columns: repeat(' + n + ', 1fr);' });
           ctx.el.append(top, grid, msg);
 
           // Susun sel dari jalur ular.

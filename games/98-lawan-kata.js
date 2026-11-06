@@ -1,4 +1,5 @@
-/* 98 Lawan Kata. Memory pasangan kata dengan lawannya: panas-dingin, besar-kecil, dan kawan-kawan. */
+/* 98 Lawan Kata. Memory pasangan kata dengan lawannya: panas-dingin, besar-kecil, dan kawan-kawan.
+   TK intip dulu, lalu cari. Pujian tengah jalan. */
 (function () {
   const { h, shuffle, sample } = TI;
 
@@ -39,7 +40,7 @@
       });
       const acak = shuffle(kartu);
 
-      ctx.ask('Cari pasangan lawan katanya! Ketuk dua kartu.');
+      ctx.ask('Tahap 2: cari pasangan lawan katanya! Ketuk dua kartu.');
 
       const chip = h('div', { class: 'lk-chip' }, '0 dari ' + total + ' pasang');
       const grid = h('div', { class: 'lk-grid', style: '--n:' + (tk ? 2 : 3), role: 'group', 'aria-label': 'Kartu lawan kata' });
@@ -50,6 +51,7 @@
         return b;
       });
       ctx.el.append(h('div', { class: 'lk-wrap' }, chip, grid));
+      if (tk) { tombol.forEach((b, i) => { b.textContent = acak[i].kata; b.classList.add('is-open'); }); ctx.say('Tahap 1: ingat-ingat letaknya!'); ctx.sfx('pop'); ctx.after(2500, () => tombol.forEach((b, k) => { if (!temu(k)) { b.textContent = '?'; b.classList.remove('is-open'); } })); }
 
       let buka = [], ketemu = 0, miss = 0, ketukN = 0, kunci = false, selesai = false;
       const temu = (i) => tombol[i].classList.contains('is-found');
@@ -102,6 +104,7 @@
           tombol[a].classList.add('is-found'); tombol[b].classList.add('is-found');
           tombol[a].disabled = true; tombol[b].disabled = true;
           ketemu++;
+          if (ketemu === Math.ceil(total / 2)) ctx.correct(null, { say: 'Bagus! Setengah jalan, terus naik sampai semua ketemu!' });
           chip.textContent = ketemu + ' dari ' + total + ' pasang';
           ctx.sfx('benar');
           ctx.say(acak[a].kata + ' lawannya ' + acak[b].kata + '. Hebat!');
