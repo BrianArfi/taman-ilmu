@@ -238,8 +238,8 @@
   // Tipe B (SD): hitung kembalian.
   async function kembalian(ctx, b, bayarUang) {
     const kembali = bayarUang - b.harga;
-    ctx.ask('Harga ' + rupiah(b.harga) + ', kamu bayar ' + rupiah(bayarUang) + '. Berapa kembaliannya?',
-      { say: 'Harga ' + ucapRp(b.harga) + ', kamu bayar ' + ucapRp(bayarUang) + '. Berapa kembaliannya?' });
+    ctx.ask('Tahap kembalian: harga ' + rupiah(b.harga) + ', kamu bayar ' + rupiah(bayarUang) + '. Berapa kembaliannya?',
+      { say: 'Tahap kembalian: harga ' + ucapRp(b.harga) + ', kamu bayar ' + ucapRp(bayarUang) + '. Berapa kembaliannya?' });
     const bayarNode = caraPas(bayarUang, UANG).map((u) => uang(u, true));
     ctx.el.append(
       toko([b]),
@@ -295,7 +295,7 @@
         let ke = 0;
         ctx.series(soal, async (s) => { ke++; if (ke === 3) ctx.correct(null, { say: 'Bagus! Setengah jalan!' });
           const b = s.barang[0];
-          ctx.ask(b.nama + ' harganya ' + rupiah(b.harga) + '. Ayo bayar pas!', { say: b.nama + ' harganya ' + ucapRp(b.harga) + '. Ayo bayar pas!' });
+          ctx.ask('Tahap bayar: ' + b.nama + ' harganya ' + rupiah(b.harga) + '. Ayo bayar pas!', { say: 'Tahap bayar: ' + b.nama + ' harganya ' + ucapRp(b.harga) + '. Ayo bayar pas!' });
           await bayarPas(ctx, s.barang, DOMPET_TK);
         }, { lesson });
       } else {
@@ -304,7 +304,7 @@
           if (s.tipe === 'A') {
             const sebut = s.barang.map((b) => b.nama + ' ' + rupiah(b.harga)).join(' dan ');
             const ucap = s.barang.map((b) => b.nama + ' ' + ucapRp(b.harga)).join(' dan ');
-            ctx.ask(s.barang.length > 1 ? 'Kamu beli ' + sebut + '. Bayar dengan uang pas!' : sebut + '. Bayar dengan uang pas!',
+            ctx.ask(s.barang.length > 1 ? 'Tahap bayar: kamu beli ' + sebut + '. Bayar dengan uang pas!' : 'Tahap bayar: ' + sebut + '. Bayar dengan uang pas!',
               { say: s.barang.length > 1 ? 'Kamu beli ' + ucap + '. Bayar dengan uang pas!' : ucap + '. Bayar dengan uang pas!' });
             await bayarPas(ctx, s.barang, UANG);
           } else {

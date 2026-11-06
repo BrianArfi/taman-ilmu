@@ -2,7 +2,7 @@
    Dua gambar pemandangan SVG buatan sendiri (tanpa orang dan hewan): halaman rumah, taman masjid, pantai.
    Gambar 2 sama dengan gambar 1 kecuali beberapa perbedaan (warna, hilang, tambahan, ukuran, posisi).
    Tiap perbedaan punya area ketuk transparan (tombol) di KEDUA gambar. TK: 3 perbedaan besar per gambar. SD: 5 perbedaan.
-   Bantu: ungkap satu perbedaan; ketukan ke-3 mengungkap semua sisanya. */
+   Bantu: ungkap satu perbedaan; ketukan ke-3 mengungkap semua sisanya. Tiga level gambar. */
 (function () {
   const { h, svg } = TI;
 
@@ -239,7 +239,7 @@
         if (!ctx.alive) return;
         ctx.progress(temuTotal, total);
         ctx.clear();
-        await main(SCENES[si], si); if (si < SCENES.length - 1 && ctx.alive) ctx.correct(null, { say: 'Hebat! Terus naik ke gambar berikutnya!' });
+        await main(SCENES[si], si); if (si < SCENES.length - 1 && ctx.alive) ctx.correct(null, { say: 'Hebat! Terus naik ke level berikutnya!' });
       }
       if (!ctx.alive) return;
       ctx.progress(total, total);
@@ -258,8 +258,8 @@
           let salahBeruntun = 0, bantu = 0, sibuk = false;
 
           ctx.ask(si === 0
-            ? 'Cari ' + jumlah + ' perbedaan antara gambar 1 dan gambar 2. Ketuk bagian yang berbeda!'
-            : scene.nama + '. Cari ' + jumlah + ' perbedaan!');
+            ? 'Level 1: cari ' + jumlah + ' perbedaan antara gambar 1 dan gambar 2. Ketuk bagian yang berbeda!'
+            : 'Level ' + (si + 1) + ': ' + scene.nama + '. Cari ' + jumlah + ' perbedaan!');
 
           const bingkai = [gambarSvg(scene, new Set()), gambarSvg(scene, aktif)].map((gs, i) => {
             const fr = h('div', { class: 'bd-frame', 'data-no': i + 1 }, gs, h('span', { class: 'bd-tag', 'aria-hidden': 'true' }, 'Gambar ' + (i + 1)));

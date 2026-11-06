@@ -207,8 +207,8 @@ ${P} .sw-celeng { font-size: 3.4rem; line-height: 1; }
       if (opsi.size >= 3) break;
       if (tepat - d > 0) opsi.add(tepat - d);
     }
-    ctx.ask('Harga ' + rupiah(harga) + '. Sisihkan sedekah 10 persen. Berapa rupiah?',
-      { say: 'Harga ' + ucapRp(harga) + '. Sisihkan sedekah 10 persen. Berapa rupiah?' });
+    ctx.ask('Tahap sedekah: harga ' + rupiah(harga) + '. Sisihkan sedekah 10 persen. Berapa rupiah?',
+      { say: 'Tahap sedekah: harga ' + ucapRp(harga) + '. Sisihkan sedekah 10 persen. Berapa rupiah?' });
     ctx.el.append(h('div', { class: 'sw-sedekah pop-in' },
       h('div', { class: 'sw-celeng', 'aria-hidden': 'true' }, '📦'),
       h('p', { class: 'ti-label' }, 'Celengan sedekah: 10 persen dari ' + rupiah(harga))));
@@ -223,8 +223,8 @@ ${P} .sw-celeng { font-size: 3.4rem; line-height: 1; }
 
   async function kembalian(ctx, b, bayarUang) {
     const kembali = bayarUang - b.harga;
-    ctx.ask('Harga ' + rupiah(b.harga) + ', kamu bayar ' + rupiah(bayarUang) + '. Berapa kembaliannya?',
-      { say: 'Harga ' + ucapRp(b.harga) + ', kamu bayar ' + ucapRp(bayarUang) + '. Berapa kembaliannya?' });
+    ctx.ask('Tahap kembalian: harga ' + rupiah(b.harga) + ', kamu bayar ' + rupiah(bayarUang) + '. Berapa kembaliannya?',
+      { say: 'Tahap kembalian: harga ' + ucapRp(b.harga) + ', kamu bayar ' + ucapRp(bayarUang) + '. Berapa kembaliannya?' });
     ctx.el.append(toko([b]));
     const kandidat = shuffle([kembali + 500, kembali + 1000, kembali + 2000, kembali - 500, kembali - 1000, kembali - 1500])
       .filter((x) => x > 0 && x <= bayarUang && x !== kembali);
@@ -257,8 +257,8 @@ ${P} .sw-celeng { font-size: 3.4rem; line-height: 1; }
           [{ em: '🥤', nama: 'Susu cokelat', harga: 1000 }],
         ];
         ctx.series(soal, async (barang) => {
-          ctx.ask(barang[0].nama + ' harganya ' + rupiah(barang[0].harga) + '. Bayar pas, lalu sedekah!',
-            { say: barang[0].nama + ' harganya ' + ucapRp(barang[0].harga) + '. Bayar pas, lalu sedekah!' });
+          ctx.ask('Tahap bayar: ' + barang[0].nama + ' harganya ' + rupiah(barang[0].harga) + '. Bayar pas, lalu tahap sedekah!',
+            { say: 'Tahap bayar: ' + barang[0].nama + ' harganya ' + ucapRp(barang[0].harga) + '. Bayar pas, lalu tahap sedekah!' });
           const harga = await bayarPas(ctx, barang, DOMPET_TK);
           if (!ctx.alive) return;
           ctx.clear();
@@ -276,8 +276,8 @@ ${P} .sw-celeng { font-size: 3.4rem; line-height: 1; }
           let harga;
           if (s.tipe === 'A') {
             const sebut = s.barang.map((x) => x.nama + ' ' + rupiah(x.harga)).join(' dan ');
-            ctx.ask('Kamu beli ' + sebut + '. Bayar dengan uang pas!',
-              { say: 'Kamu beli ' + s.barang.map((x) => x.nama + ' ' + ucapRp(x.harga)).join(' dan ') + '. Bayar dengan uang pas!' });
+            ctx.ask('Tahap bayar: kamu beli ' + sebut + '. Bayar dengan uang pas!',
+              { say: 'Tahap bayar: kamu beli ' + s.barang.map((x) => x.nama + ' ' + ucapRp(x.harga)).join(' dan ') + '. Bayar dengan uang pas!' });
             harga = await bayarPas(ctx, s.barang, UANG);
           } else {
             await kembalian(ctx, s.b, s.bayar);

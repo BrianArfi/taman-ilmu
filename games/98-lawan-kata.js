@@ -1,5 +1,5 @@
 /* 98 Lawan Kata. Memory pasangan kata dengan lawannya: panas-dingin, besar-kecil, dan kawan-kawan.
-   TK intip dulu, lalu cari. Pujian tengah jalan. */
+   TK intip dulu, lalu cari. Pujian tengah jalan. Dua tahap: intip lalu cari. */
 (function () {
   const { h, shuffle, sample } = TI;
 
