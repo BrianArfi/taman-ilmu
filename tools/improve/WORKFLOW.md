@@ -114,6 +114,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 19 (7 Nov 2026)**: hitung 88→92, rahasia 88→92,
   ukur 88→92.
   Detail: `reports/cycle-20261107-s19.md`.
+- **Siklus 20 (7 Nov 2026)**: beda 88→92, warung 88→92,
+  sedekah-warung 88→92, lawan-kata 88→92.
+  Detail: `reports/cycle-20261107-s20.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar

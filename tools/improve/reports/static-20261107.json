@@ -249,28 +249,6 @@
    ]
   },
   {
-   "file": "46-beda.js",
-   "id": "beda",
-   "title": "Cari Perbedaan",
-   "cat": "logika",
-   "bytes": 22513,
-   "soal": 3,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 1,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
    "file": "99-beda-satu.js",
    "id": "beda-satu",
    "title": "Mana yang Beda",
@@ -488,28 +466,6 @@
    ]
   },
   {
-   "file": "98-lawan-kata.js",
-   "id": "lawan-kata",
-   "title": "Lawan Kata",
-   "cat": "logika",
-   "bytes": 7082,
-   "soal": 6,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 1,
-    "failsoft": 1,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
    "file": "18-lempar.js",
    "id": "lempar",
    "title": "Lempar Tepat",
@@ -661,28 +617,6 @@
    ]
   },
   {
-   "file": "59-sedekah-warung.js",
-   "id": "sedekah-warung",
-   "title": "Warung Sedekah",
-   "cat": "islam",
-   "bytes": 14972,
-   "soal": 3,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 1,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
    "file": "04-shalat.js",
    "id": "shalat",
    "title": "Shalat 5 Waktu",
@@ -815,28 +749,6 @@
    ]
   },
   {
-   "file": "14-warung.js",
-   "id": "warung",
-   "title": "Warung Jujur",
-   "cat": "mat",
-   "bytes": 16908,
-   "soal": 5,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 1,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
    "file": "16-apung.js",
    "id": "apung",
    "title": "Tenggelam atau Terapung",
@@ -919,6 +831,27 @@
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "46-beda.js",
+   "id": "beda",
+   "title": "Cari Perbedaan",
+   "cat": "logika",
+   "bytes": 22569,
+   "soal": 3,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
    ]
   },
   {
@@ -1257,6 +1190,27 @@
    "sug": []
   },
   {
+   "file": "98-lawan-kata.js",
+   "id": "lawan-kata",
+   "title": "Lawan Kata",
+   "cat": "logika",
+   "bytes": 7110,
+   "soal": 6,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
    "file": "37-listrik.js",
    "id": "listrik",
    "title": "Rangkaian Listrik",
@@ -1525,6 +1479,27 @@
    ]
   },
   {
+   "file": "59-sedekah-warung.js",
+   "id": "sedekah-warung",
+   "title": "Warung Sedekah",
+   "cat": "islam",
+   "bytes": 15110,
+   "soal": 3,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
    "file": "44-sudoku.js",
    "id": "sudoku",
    "title": "Sudoku Mini",
@@ -1691,6 +1666,27 @@
    "sug": [
     "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "14-warung.js",
+   "id": "warung",
+   "title": "Warung Jujur",
+   "cat": "mat",
+   "bytes": 17009,
+   "soal": 5,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
    ]
   },
   {
