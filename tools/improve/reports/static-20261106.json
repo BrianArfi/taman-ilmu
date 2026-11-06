@@ -26,50 +26,6 @@
    ]
   },
   {
-   "file": "16-apung.js",
-   "id": "apung",
-   "title": "Tenggelam atau Terapung",
-   "cat": "sains",
-   "bytes": 13862,
-   "soal": 3,
-   "sig": {
-    "aksi": 2,
-    "feedback": 2,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 71,
-   "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "79-baju-cuaca.js",
-   "id": "baju-cuaca",
-   "title": "Koper Cuaca",
-   "cat": "sains",
-   "bytes": 5161,
-   "soal": null,
-   "sig": {
-    "aksi": 2,
-    "feedback": 1,
-    "ramp": 0,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 71,
-   "sug": [
-    "sfx cuma 1x: bunyikan tiap aksi berhasil/gagal",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
    "file": "92-balik-ingat.js",
    "id": "balik-ingat",
    "title": "Balik dan Ingat",
@@ -228,29 +184,6 @@
    ]
   },
   {
-   "file": "37-listrik.js",
-   "id": "listrik",
-   "title": "Rangkaian Listrik",
-   "cat": "sains",
-   "bytes": 28424,
-   "soal": 2,
-   "sig": {
-    "aksi": 2,
-    "feedback": 2,
-    "ramp": 0,
-    "failsoft": 2,
-    "sesi": 0,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 71,
-   "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut",
-    "sesi 2 soal: ideal 6-10 soal (2-4 menit)"
-   ]
-  },
-  {
    "file": "75-pancing-magnet.js",
    "id": "pancing-magnet",
    "title": "Pancing Magnet",
@@ -338,27 +271,6 @@
     "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
     "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "76-roket-air.js",
-   "id": "roket-air",
-   "title": "Roket Air",
-   "cat": "sains",
-   "bytes": 8372,
-   "soal": null,
-   "sig": {
-    "aksi": 2,
-    "feedback": 2,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 71,
-   "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
    ]
   },
   {
@@ -1349,6 +1261,27 @@
    ]
   },
   {
+   "file": "16-apung.js",
+   "id": "apung",
+   "title": "Tenggelam atau Terapung",
+   "cat": "sains",
+   "bytes": 14469,
+   "soal": 3,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
    "file": "32-balapan.js",
    "id": "balapan",
    "title": "Balapan Hitung",
@@ -1641,6 +1574,28 @@
    "sug": []
   },
   {
+   "file": "37-listrik.js",
+   "id": "listrik",
+   "title": "Rangkaian Listrik",
+   "cat": "sains",
+   "bytes": 28656,
+   "soal": 2,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 0,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut",
+    "sesi 2 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
    "file": "29-loncat.js",
    "id": "loncat",
    "title": "Loncat Angka",
@@ -1785,6 +1740,25 @@
    "sug": [
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
+  },
+  {
+   "file": "76-roket-air.js",
+   "id": "roket-air",
+   "title": "Roket Air",
+   "cat": "sains",
+   "bytes": 8648,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": []
   },
   {
    "file": "44-sudoku.js",
@@ -1939,6 +1913,25 @@
    "title": "Bagi Permen",
    "cat": "mat",
    "bytes": 9456,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": []
+  },
+  {
+   "file": "79-baju-cuaca.js",
+   "id": "baju-cuaca",
+   "title": "Koper Cuaca",
+   "cat": "sains",
+   "bytes": 5505,
    "soal": null,
    "sig": {
     "aksi": 2,

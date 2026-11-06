@@ -87,6 +87,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 10 (6 Nov 2026)**: bentuk 84→92, geser 83→92,
   magnet 84→92, tebak-bunyi 84→88.
   Detail: `reports/cycle-20261106.md`.
+- **Siklus 11 (6 Nov 2026)**: apung 84→92, baju-cuaca 83→95,
+  roket-air 84→92, listrik 84→92.
+  Detail: `reports/cycle-20261106-s11.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar

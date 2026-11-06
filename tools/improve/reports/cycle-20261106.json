@@ -3,68 +3,10 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "tebak-bunyi",
-   "title": "Tebak Bunyi",
+   "id": "apung",
+   "title": "Tenggelam atau Terapung",
    "cat": "sains",
-   "file": "81-tebak-bunyi.js",
-   "static100": 79,
-   "dyn100": 100,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 30,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 88,
-   "cls": "A",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
-   "id": "bentuk",
-   "title": "Kenal Bentuk",
-   "cat": "mat",
-   "file": "12-bentuk.js",
-   "static100": 86,
-   "dyn100": 100,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 26,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 92,
-   "cls": "A",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
-  },
-  {
-   "id": "geser",
-   "title": "Geser Angka",
-   "cat": "logika",
-   "file": "45-geser.js",
-   "static100": 86,
-   "dyn100": 99,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 85,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 92,
-   "cls": "A",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
-  },
-  {
-   "id": "magnet",
-   "title": "Ajaib Magnet",
-   "cat": "sains",
-   "file": "17-magnet.js",
+   "file": "16-apung.js",
    "static100": 86,
    "dyn100": 100,
    "plays": 4,
@@ -74,6 +16,62 @@
    "escFail": 0,
    "eng100": null,
    "fun": 92,
+   "cls": "A",
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "id": "roket-air",
+   "title": "Roket Air",
+   "cat": "sains",
+   "file": "76-roket-air.js",
+   "static100": 86,
+   "dyn100": 99,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 31,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 92,
+   "cls": "A",
+   "sug": []
+  },
+  {
+   "id": "listrik",
+   "title": "Rangkaian Listrik",
+   "cat": "sains",
+   "file": "37-listrik.js",
+   "static100": 86,
+   "dyn100": 99,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 72,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 92,
+   "cls": "A",
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut",
+    "sesi 2 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "id": "baju-cuaca",
+   "title": "Koper Cuaca",
+   "cat": "sains",
+   "file": "79-baju-cuaca.js",
+   "static100": 93,
+   "dyn100": 98,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 135,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 95,
    "cls": "A",
    "sug": []
   }
