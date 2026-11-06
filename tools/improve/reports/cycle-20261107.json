@@ -3,80 +3,76 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "beda",
-   "title": "Cari Perbedaan",
-   "cat": "logika",
-   "file": "46-beda.js",
+   "id": "tebak-bayang",
+   "title": "Tebak Bayangan",
+   "cat": "sains",
+   "file": "77-tebak-bayang.js",
    "static100": 86,
    "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 12,
+   "avgActions": 23,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
    "fun": 92,
    "cls": "A",
    "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
    ]
   },
   {
-   "id": "warung",
-   "title": "Warung Jujur",
+   "id": "toples-tebak",
+   "title": "Toples Tebakan",
    "cat": "mat",
-   "file": "14-warung.js",
+   "file": "73-toples-tebak.js",
    "static100": 86,
-   "dyn100": 99,
+   "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 74,
+   "avgActions": 18,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
    "fun": 92,
    "cls": "A",
    "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
    ]
   },
   {
-   "id": "sedekah-warung",
-   "title": "Warung Sedekah",
-   "cat": "islam",
-   "file": "59-sedekah-warung.js",
-   "static100": 86,
-   "dyn100": 99,
+   "id": "lempar",
+   "title": "Lempar Tepat",
+   "cat": "sains",
+   "file": "18-lempar.js",
+   "static100": 93,
+   "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 49,
+   "avgActions": 27,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 92,
+   "fun": 96,
    "cls": "A",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
+   "sug": []
   },
   {
-   "id": "lawan-kata",
-   "title": "Lawan Kata",
-   "cat": "logika",
-   "file": "98-lawan-kata.js",
-   "static100": 86,
+   "id": "menara",
+   "title": "Menara Balok",
+   "cat": "mat",
+   "file": "31-menara.js",
+   "static100": 93,
    "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 53,
+   "avgActions": 54,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 92,
+   "fun": 96,
    "cls": "A",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
+   "sug": []
   }
  ]
 }

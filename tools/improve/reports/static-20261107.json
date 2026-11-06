@@ -466,27 +466,6 @@
    ]
   },
   {
-   "file": "18-lempar.js",
-   "id": "lempar",
-   "title": "Lempar Tepat",
-   "cat": "sains",
-   "bytes": 23285,
-   "soal": null,
-   "sig": {
-    "aksi": 2,
-    "feedback": 2,
-    "ramp": 1,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
    "file": "69-lompat-bintang.js",
    "id": "lompat-bintang",
    "title": "Lompat Bintang",
@@ -505,28 +484,6 @@
    "static100": 79,
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton"
-   ]
-  },
-  {
-   "file": "31-menara.js",
-   "id": "menara",
-   "title": "Menara Balok",
-   "cat": "mat",
-   "bytes": 21960,
-   "soal": null,
-   "sig": {
-    "aksi": 2,
-    "feedback": 2,
-    "ramp": 1,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {
@@ -661,28 +618,6 @@
    ]
   },
   {
-   "file": "77-tebak-bayang.js",
-   "id": "tebak-bayang",
-   "title": "Tebak Bayangan",
-   "cat": "sains",
-   "bytes": 5237,
-   "soal": 6,
-   "sig": {
-    "aksi": 0,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
    "file": "81-tebak-bunyi.js",
    "id": "tebak-bunyi",
    "title": "Tebak Bunyi",
@@ -723,28 +658,6 @@
    "static100": 79,
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "73-toples-tebak.js",
-   "id": "toples-tebak",
-   "title": "Toples Tebakan",
-   "cat": "mat",
-   "bytes": 5792,
-   "soal": 6,
-   "sig": {
-    "aksi": 0,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
@@ -1584,6 +1497,27 @@
    ]
   },
   {
+   "file": "77-tebak-bayang.js",
+   "id": "tebak-bayang",
+   "title": "Tebak Bayangan",
+   "cat": "sains",
+   "bytes": 5532,
+   "soal": 6,
+   "sig": {
+    "aksi": 0,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
+   ]
+  },
+  {
    "file": "95-teka-teki.js",
    "id": "teka-teki",
    "title": "Teka-teki Siapa",
@@ -1602,6 +1536,27 @@
    "static100": 86,
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "file": "73-toples-tebak.js",
+   "id": "toples-tebak",
+   "title": "Toples Tebakan",
+   "cat": "mat",
+   "bytes": 6331,
+   "soal": 6,
+   "sig": {
+    "aksi": 0,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
    ]
   },
   {
@@ -1950,12 +1905,50 @@
    ]
   },
   {
+   "file": "18-lempar.js",
+   "id": "lempar",
+   "title": "Lempar Tepat",
+   "cat": "sains",
+   "bytes": 23878,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": []
+  },
+  {
    "file": "30-martabak.js",
    "id": "martabak",
    "title": "Bagi Martabak",
    "cat": "mat",
    "bytes": 20539,
    "soal": 5,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": []
+  },
+  {
+   "file": "31-menara.js",
+   "id": "menara",
+   "title": "Menara Balok",
+   "cat": "mat",
+   "bytes": 22719,
+   "soal": null,
    "sig": {
     "aksi": 2,
     "feedback": 2,
