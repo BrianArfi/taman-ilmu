@@ -379,29 +379,6 @@
    ]
   },
   {
-   "file": "08-hitung.js",
-   "id": "hitung",
-   "title": "Ayo Berhitung",
-   "cat": "mat",
-   "bytes": 9831,
-   "soal": 4,
-   "sig": {
-    "aksi": 1,
-    "feedback": 1,
-    "ramp": 2,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
    "file": "71-jam-cocok.js",
    "id": "jam-cocok",
    "title": "Jam Cocok",
@@ -662,27 +639,6 @@
    ]
   },
   {
-   "file": "33-rahasia.js",
-   "id": "rahasia",
-   "title": "Angka Rahasia",
-   "cat": "mat",
-   "bytes": 13759,
-   "soal": null,
-   "sig": {
-    "aksi": 2,
-    "feedback": 1,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal"
-   ]
-  },
-  {
    "file": "94-sambung-kabel.js",
    "id": "sambung-kabel",
    "title": "Sambung Kabel",
@@ -855,28 +811,6 @@
    "static100": 79,
    "sug": [
     "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "36-ukur.js",
-   "id": "ukur",
-   "title": "Ayo Mengukur",
-   "cat": "mat",
-   "bytes": 28077,
-   "soal": 3,
-   "sig": {
-    "aksi": 2,
-    "feedback": 1,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
@@ -1172,6 +1106,28 @@
    "static100": 86,
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "file": "08-hitung.js",
+   "id": "hitung",
+   "title": "Ayo Berhitung",
+   "cat": "mat",
+   "bytes": 10012,
+   "soal": 4,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {
@@ -1510,6 +1466,25 @@
    ]
   },
   {
+   "file": "33-rahasia.js",
+   "id": "rahasia",
+   "title": "Angka Rahasia",
+   "cat": "mat",
+   "bytes": 13888,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": []
+  },
+  {
    "file": "76-roket-air.js",
    "id": "roket-air",
    "title": "Roket Air",
@@ -1673,6 +1648,27 @@
    "static100": 86,
    "sug": [
     "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
+   "file": "36-ukur.js",
+   "id": "ukur",
+   "title": "Ayo Mengukur",
+   "cat": "mat",
+   "bytes": 28215,
+   "soal": 3,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {

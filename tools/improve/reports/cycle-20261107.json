@@ -3,61 +3,60 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "warung",
-   "title": "Warung Jujur",
+   "id": "hitung",
+   "title": "Ayo Berhitung",
    "cat": "mat",
-   "file": "14-warung.js",
-   "static100": 79,
-   "dyn100": 99,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 68,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 88,
-   "cls": "A",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
-   "id": "beda",
-   "title": "Cari Perbedaan",
-   "cat": "logika",
-   "file": "46-beda.js",
-   "static100": 79,
-   "dyn100": 100,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 12,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 88,
-   "cls": "A",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
-   "id": "pizza-pecahan",
-   "title": "Pizza Pecahan",
-   "cat": "mat",
-   "file": "64-pizza-pecahan.js",
+   "file": "08-hitung.js",
    "static100": 86,
    "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 31,
+   "avgActions": 42,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 92,
+   "cls": "A",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "id": "rahasia",
+   "title": "Angka Rahasia",
+   "cat": "mat",
+   "file": "33-rahasia.js",
+   "static100": 86,
+   "dyn100": 100,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 15,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
    "fun": 92,
    "cls": "A",
    "sug": []
+  },
+  {
+   "id": "ukur",
+   "title": "Ayo Mengukur",
+   "cat": "mat",
+   "file": "36-ukur.js",
+   "static100": 86,
+   "dyn100": 100,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 27,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 92,
+   "cls": "A",
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
   }
  ]
 }
