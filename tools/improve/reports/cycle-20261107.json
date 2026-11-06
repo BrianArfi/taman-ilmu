@@ -1,0 +1,65 @@
+{
+ "date": "20261107",
+ "version": "improve-v1.0",
+ "rows": [
+  {
+   "id": "lawan-kata",
+   "title": "Lawan Kata",
+   "cat": "logika",
+   "file": "98-lawan-kata.js",
+   "static100": 79,
+   "dyn100": 99,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 54,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 88,
+   "cls": "A",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  },
+  {
+   "id": "pola-menara",
+   "title": "Menara Pola",
+   "cat": "mat",
+   "file": "65-pola-menara.js",
+   "static100": 86,
+   "dyn100": 100,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 29,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 92,
+   "cls": "A",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
+   "id": "sambung-pipa",
+   "title": "Sambung Pipa",
+   "cat": "sains",
+   "file": "85-sambung-pipa.js",
+   "static100": 86,
+   "dyn100": 99,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 50,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 92,
+   "cls": "A",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  }
+ ]
+}

@@ -96,6 +96,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 13 (6 Nov 2026)**: balik-ingat 83→88, grafik 84→88,
   kode-warna 84→88, labirin-es 83→88.
   Detail: `reports/cycle-20261106-s13.md`.
+- **Siklus 14 (7 Nov 2026)**: pola-menara 84→92, sambung-pipa
+  84→92, lawan-kata 84→88.
+  Detail: `reports/cycle-20261107.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar
