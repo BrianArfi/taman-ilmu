@@ -292,13 +292,15 @@
 
       if (ctx.isTK) {
         const soal = sample(BARANG, 6).map(([em, nama]) => ({ tipe: 'A', barang: [{ em, nama, harga: rand(1, 5) * 1000 }] }));
-        ctx.series(soal, async (s) => {
+        let ke = 0;
+        ctx.series(soal, async (s) => { ke++; if (ke === 3) ctx.correct(null, { say: 'Bagus! Setengah jalan!' });
           const b = s.barang[0];
           ctx.ask(b.nama + ' harganya ' + rupiah(b.harga) + '. Ayo bayar pas!', { say: b.nama + ' harganya ' + ucapRp(b.harga) + '. Ayo bayar pas!' });
           await bayarPas(ctx, s.barang, DOMPET_TK);
         }, { lesson });
       } else {
-        ctx.series(buatSoalSD(), async (s) => {
+        let ke = 0;
+        ctx.series(buatSoalSD(), async (s) => { ke++; if (ke === 4) ctx.correct(null, { say: 'Bagus! Setengah jalan, terus naik ke yang sulit!' });
           if (s.tipe === 'A') {
             const sebut = s.barang.map((b) => b.nama + ' ' + rupiah(b.harga)).join(' dan ');
             const ucap = s.barang.map((b) => b.nama + ' ' + ucapRp(b.harga)).join(' dan ');

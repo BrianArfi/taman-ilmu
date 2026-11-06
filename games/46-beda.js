@@ -239,7 +239,7 @@
         if (!ctx.alive) return;
         ctx.progress(temuTotal, total);
         ctx.clear();
-        await main(SCENES[si], si);
+        await main(SCENES[si], si); if (si < SCENES.length - 1 && ctx.alive) ctx.correct(null, { say: 'Hebat! Terus naik ke gambar berikutnya!' });
       }
       if (!ctx.alive) return;
       ctx.progress(total, total);

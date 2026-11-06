@@ -142,7 +142,7 @@
         if (!ctx.alive) return;
         await ctx.wait(300);
         ctx.clear();
-        ctx.progress(r + 1, ronde.length);
+        ctx.progress(r + 1, ronde.length); if (r < ronde.length - 1) ctx.correct(null, { say: 'Bagus! Terus naik ke pecahan berikutnya!' });
       }
       ctx.finish({ lesson: 'Pecahan artinya bagian dari yang utuh. Setengah artinya satu dari dua potong sama besar.' });
     },
