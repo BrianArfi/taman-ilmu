@@ -1,6 +1,6 @@
 /* 45 Geser Angka. Puzzle geser: ubin bernomor dan satu tempat kosong. Ketuk ubin di sebelah tempat kosong untuk menggesernya.
    Papan diacak dengan jalan acak dari kondisi selesai (jadi pasti bisa diselesaikan). Tombol Bantu memakai BFS dari kondisi selesai
-   (jarak ke tujuan untuk setiap keadaan), jadi petunjuknya selalu satu langkah dari jalan terpendek, walaupun anak sudah menyimpang. */
+   (jarak ke tujuan untuk setiap keadaan), jadi petunjuknya selalu satu langkah dari jalan terpendek, walaupun anak sudah menyimpang. Tiga babak menanjak (acak makin jauh). */
 (function () {
   const { h, pick } = TI;
 
@@ -146,8 +146,8 @@
         let moves = 0, helps = 0, busy = false, solved = false;
 
         ctx.ask(ctx.isTK
-          ? 'Puzzle ' + (idx + 1) + '. Geser ubin sampai urut dari 1 sampai ' + (n - 1) + '!'
-          : 'Puzzle ' + (idx + 1) + '. Geser ubin sampai urut dari 1 sampai ' + (n - 1) + '. Pikirkan beberapa langkah ke depan!');
+          ? 'Babak ' + (idx + 1) + '. Geser ubin sampai urut dari 1 sampai ' + (n - 1) + '!'
+          : 'Babak ' + (idx + 1) + '. Geser ubin sampai urut dari 1 sampai ' + (n - 1) + '. Pikirkan beberapa langkah ke depan!');
 
         // ----- tampilan -----
         const counter = h('b', null, '0');
@@ -255,7 +255,7 @@
         for (let i = 0; i < total && ctx.alive; i++) {
           ctx.progress(i, total);
           ctx.clear();
-          await playPuzzle(i);
+          await playPuzzle(i); if (i < total - 1 && ctx.alive) ctx.correct(null, { say: 'Bagus! Terus naik ke babak ' + (i + 2) + '!' });
         }
         if (!ctx.alive) return;
         ctx.progress(total, total);

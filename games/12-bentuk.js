@@ -1,4 +1,5 @@
-/* 12 Kenal Bentuk. Semua bentuk digambar sendiri dengan SVG (tanpa wajah, tanpa emoji hewan/orang). */
+/* 12 Kenal Bentuk. Semua bentuk digambar sendiri dengan SVG (tanpa wajah, tanpa emoji hewan/orang).
+   SD urut nama, sisi, definisi, benda nyata (gampang dulu). */
 (function () {
   const { h, svg, rand, pick, shuffle, sample, numChoices } = TI;
 
@@ -221,7 +222,10 @@
       if (ctx.isTK) {
         const target = sample(TK, 5).map((k) => ({ tipe: 'mana', k }));
         const cari = ['segitiga', 'segitiga', 'segitiga'].map((k) => ({ tipe: 'cari', k }));
+        let ke = 0;
         ctx.series([...target, ...cari], async (s) => {
+          ke++;
+          if (ke === 4) ctx.correct(null, { say: 'Bagus! Setengah jalan!' });
           if (s.tipe === 'mana') await manaBentuk(ctx, s.k);
           else await cariSemua(ctx, s.k);
         }, { lesson: 'Segitiga punya 3 sisi, persegi 4 sisi sama panjang, lingkaran tidak punya sudut.' });
@@ -233,7 +237,11 @@
           { tipe: 'persegi' },
           { tipe: 'benda', id: 'roda' }, { tipe: 'benda', id: 'papan' }, { tipe: 'benda', id: 'kubah' },
         ];
-        ctx.series(shuffle(daftar), (s) => soalSD(ctx, s), {
+        const sulit = (s) => (s.tipe === 'nama' ? 0 : s.tipe === 'sisi' ? 1 : s.tipe === 'persegi' ? 2 : 3);
+        daftar.forEach((s) => { s.sulit = sulit(s); });
+        daftar.sort((a, b) => a.sulit - b.sulit); // gampang dulu
+        let ke = 0;
+        ctx.series(daftar, (s) => { ke++; if (ke === 4) ctx.correct(null, { say: 'Bagus! Terus naik ke yang sulit.' }); return soalSD(ctx, s); }, {
           lesson: 'Segitiga punya 3 sisi, persegi 4 sisi sama panjang, lingkaran tidak punya sudut.',
         });
       }

@@ -1,5 +1,5 @@
 /* 17 Ajaib Magnet. Tebak benda menempel atau tidak, lalu magnet SVG mendekat dan buktikan.
-   SD: ditambah 2 soal kutub (tolak-menolak dan tarik-menarik) dengan dua magnet batang. */
+   SD: ditambah 2 soal kutub (tolak-menolak dan tarik-menarik) dengan dua magnet batang. Contoh menempel dulu, lalu yang sulit dan kutub. */
 (function () {
   const { h, svg, shuffle, sample } = TI;
 
@@ -246,16 +246,16 @@
         list = shuffle([
           ...sample(ITEMS.filter((i) => i.stick), 3),
           ...sample(ITEMS.filter((i) => !i.stick && !i.sd), 3),
-        ]).map((it) => ({ kind: 'item', it }));
+        ]).map((it) => ({ kind: 'item', it, sulit: it.stick ? 0 : 1 })).sort((a, b) => a.sulit - b.sulit); // contoh menempel dulu
       } else {
         // 8 benda: 4 menempel, emas dan aluminium, 2 benda biasa yang tidak menempel
         const stick = sample(ITEMS.filter((i) => i.stick), 4);
         const tricky = ITEMS.filter((i) => i.sd);
         const plain = sample(ITEMS.filter((i) => !i.stick && !i.sd), 2);
-        list = shuffle([...stick, ...tricky, ...plain]).map((it) => ({ kind: 'item', it }));
+        list = [...stick, ...plain, ...tricky].map((it) => ({ kind: 'item', it, sulit: it.sd ? 1 : 0 })).sort((a, b) => a.sulit - b.sulit); // gampang dulu
         list.push(...shuffle(POLES).map((q) => ({ kind: 'pole', q })));
       }
-      ctx.series(list, (task) => (task.kind === 'item' ? runItem(ctx, task.it) : runPole(ctx, task.q)), {
+      let ke = 0; ctx.series(list, (task) => { ke++; if (ke === Math.ceil(list.length / 2)) ctx.correct(null, { say: 'Bagus! Terus naik ke yang sulit.' }); return task.kind === 'item' ? runItem(ctx, task.it) : runPole(ctx, task.q); }, {
         lesson: 'Magnet menarik benda dari besi dan baja. Kutub yang sama tolak-menolak, kutub berbeda tarik-menarik.',
       });
     },

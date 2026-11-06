@@ -1,6 +1,7 @@
 /* 81 Tebak Bunyi. Dengar kata dibacakan TI.say dengan pitch/rate beda, lalu pilah.
    TK: TINGGI vs RENDAH (6 soal). SD: tambah CEPAT vs LAMBAT (10 soal).
-   Tanpa file audio, semua lewat suara TTS. */
+   Tanpa file audio, semua lewat suara TTS.
+   SD sumbu dikenal dulu (tinggi-rendah), lalu sumbu cepat-lambat. */
 (function () {
   const { h, sample, shuffle } = TI;
 
@@ -93,10 +94,12 @@
         if (i % 2 === 0) return { soal: w, kunci: Math.random() < 0.5 ? 'tinggi' : 'rendah', sumbu: ['tinggi', 'rendah'] };
         return { soal: w, kunci: Math.random() < 0.5 ? 'cepat' : 'lambat', sumbu: ['cepat', 'lambat'] };
       });
-      // Acak urutan tampil, sumbu tetap menempel pada soalnya.
-      const urutan = shuffle(items.map((it, i) => i));
+      // Sumbu dikenal dulu (tinggi-rendah), lalu sumbu cepat-lambat. Sumbu tetap menempel pada soalnya.
+      const rank = (it) => (it.sumbu[0] === 'tinggi' ? 0 : 1);
+      const urutan = items.map((it, i) => i).sort((a, b) => rank(items[a]) - rank(items[b])); // gampang dulu
       return (async () => {
         for (let k = 0; k < urutan.length && ctx.alive; k++) {
+          if (k === Math.floor(urutan.length / 2)) ctx.correct(null, { say: isTK ? 'Bagus! Setengah jalan!' : 'Bagus! Terus naik ke suara cepat dan lambat!' });
           ctx.progress(k, urutan.length);
           const it = items[urutan[k]];
           await mainkan(it.soal, it.kunci, it.sumbu)(ctx);
