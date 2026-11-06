@@ -89,6 +89,8 @@
     wall: 'Kena tembok! Naikkan sudutnya supaya bola melambung lebih tinggi.',
   };
 
+  // Ronde berlabel: target dekat dulu, makin jauh di ronde akhir (SD: + tembok, + Bulan).
+  const RONDE = ['Pemanasan', 'Tantangan', 'Final'];
   TI.register({
     id: 'lempar',
     title: 'Lempar Tepat',
@@ -319,14 +321,18 @@
         }
         S.tg = tg; S.rest = 3; S.trail = []; S.oldTrail = []; S.sol = null; S.ball = null; S.appear = 0; S.jig = 0;
         setSliders(45, S.power); showHint('');
+        const ronde = Math.min(2, Math.floor((i * 3) / targets.length));
+        const judulRonde = 'Ronde ' + (ronde + 1) + ' ' + RONDE[ronde] + ': ';
+        const pujiRonde = ronde > (S.rondeLalu == null ? -1 : S.rondeLalu) && i > 0 ? 'Makin jauh, kamu pasti bisa! ' : '';
+        S.rondeLalu = ronde;
         const t0 = performance.now();
         const grow = () => { S.appear = TI.reduced() ? 1 : Math.min(1, (performance.now() - t0) / 240); return S.appear < 1; };
         ctx.loop(() => grow() ? undefined : false);
 
-        if (ctx.isTK) ctx.ask(i === 0 ? 'Lempar bola ke keranjang! Geser kekuatan, lalu ketuk Lempar.' : 'Ayo lempar ke keranjang berikutnya!');
-        else if (tg.moon) ctx.ask('Di Bulan! Atur sudut dan kekuatan, lalu ketuk Lempar.');
-        else if (tg.wall) ctx.ask('Ada tembok! Lempar bola melewati tembok ke keranjang.');
-        else ctx.ask('Target ' + (i + 1) + ' dari ' + targets.length + ': atur sudut dan kekuatan, lalu ketuk Lempar.');
+        if (ctx.isTK) ctx.ask(judulRonde + pujiRonde + (i === 0 ? 'Lempar bola ke keranjang! Geser kekuatan, lalu ketuk Lempar.' : 'Ayo lempar ke keranjang berikutnya!'));
+        else if (tg.moon) ctx.ask(judulRonde + pujiRonde + 'Di Bulan! Atur sudut dan kekuatan, lalu ketuk Lempar.');
+        else if (tg.wall) ctx.ask(judulRonde + pujiRonde + 'Ada tembok! Lempar bola melewati tembok ke keranjang.');
+        else ctx.ask(judulRonde + pujiRonde + 'Target ' + (i + 1) + ' dari ' + targets.length + ': atur sudut dan kekuatan, lalu ketuk Lempar.');
 
         while (S.rest > 0) {
           await waitThrow();
@@ -355,7 +361,7 @@
             await ctx.wait(500);
             await fly(demo);
             S.ball = null; S.jig = 1; S.jigT = 0; burst(); ctx.sfx('benar');
-            await ctx.sayWait('Nah, seperti ini caranya.');
+            await ctx.sayWait('Nah, seperti ini caranya. Ayo coba lagi di target berikutnya!');
             return false;
           }
           showHint(msg);

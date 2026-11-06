@@ -66,6 +66,7 @@
     ctx.el.append(h('div', { class: 'ti-card tb-kartu pop-in' }, siluet(id)));
     ctx.sfx('pop');
     const opsi = shuffle([id, ...sample(SEMUA.filter((k) => k !== id), nOpsi - 1)]);
+    const m0 = ctx.mistakes;
     await ctx.choose({
       options: opsi.map((k) => ({ label: NAMA[k], value: k, say: NAMA[k] })),
       answer: id,
@@ -73,6 +74,11 @@
       speakLabel: true,
     });
     ctx.el.append(h('p', { class: 'ti-label' }, 'Benar! Ini ' + NAMA[id] + '.'));
+    const salah = ctx.mistakes - m0;
+    if (salah >= 3) {
+      ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Ingat-ingat bentuk ' + NAMA[id] + ' ya!'));
+      ctx.say('Ingat-ingat bentuk ' + NAMA[id] + ' ya!');
+    }
     ctx.sfx('pop');
     await ctx.wait(350);
   }

@@ -94,6 +94,7 @@
     start(ctx) {
       TI.style('menara', CSS);
       const reduced = TI.reduced();
+      const RONDE = ['Pemanasan', 'Tantangan', 'Final'];
       const TOTAL = ctx.isTK ? 8 : 10;
       const ASK_AT = ctx.isTK ? [3, 6, 8] : [4, 8, 10];
       const WAKTU = 60; // detik nyata, berhenti saat soal
@@ -101,7 +102,7 @@
       const G = 2600;
 
       // ---------- tampilan ----------
-      const left = h('span', { class: 'mn-left' }, 'Sisa balok: ' + TOTAL);
+      const left = h('span', { class: 'mn-left' }, 'Ronde 1 ' + RONDE[0] + ' · Sisa balok: ' + TOTAL);
       const barFill = h('i');
       const hud = h('div', { class: 'ti-panel mn-hud' },
         h('div', { class: 'mn-row' }, left, h('span', { class: 'mn-time', 'aria-hidden': 'true' }, barFill)),
@@ -131,6 +132,8 @@
       let W = 0, H = 0, bh = 36, groundY = 0, y0 = 0, pedH = 0, bw0 = 120;
       let state = 'swing'; // swing | drop | wait | ask | done
       let cur = null, drops = 0, streak = 0, phase = Math.random() * 6.28;
+      let rondeLalu = -1, meleset = 0, mudah = false;
+      const ronde = () => Math.min(2, Math.floor((drops * 3) / TOTAL));
       let cam = 0, camTarget = 0, tLeft = WAKTU, lastNow = 0, ukurTerakhir = 0, timeUp = false;
       const stack = [], pieces = [];
       const pedData = { x: 0, w: 0 };
@@ -221,6 +224,16 @@
         rope.style.transform = 'translate3d(' + (b.x + b.w / 2 - 2).toFixed(1) + 'px,' + (b.y - 1596).toFixed(1) + 'px,0)';
         state = 'swing';
         rope.style.visibility = '';
+        const r = ronde();
+        if (r !== rondeLalu) {
+          if (drops > 0) {
+            ctx.say('Ronde ' + (r + 1) + ' ' + RONDE[r] + '! Makin cepat, kamu pasti bisa!');
+            teks('Ronde ' + (r + 1) + '!', W / 2, H * 0.25);
+          }
+          rondeLalu = r;
+        }
+        mudah = meleset >= 3;
+        if (meleset === 3) ctx.say('Masih ada kesempatan! Sekarang lebih gampang, ketuk pas balok di tengah!');
         bottom.replaceChildren(dropBtn);
         ctx.ask('Ketuk untuk menjatuhkan balok!', { speak: false });
       }
@@ -237,7 +250,7 @@
         b.res = { ov: Math.min(x + b.w, top.x + top.w) - Math.max(x, top.x), dc: (x + b.w / 2) - (top.x + top.w / 2) };
         b.vy = 0;
         if (b.res.ov < 3) { // meleset total: jatuh ke tanah
-          cur = null; drops++;
+          cur = null; drops++; meleset++;
           towerLayer.removeChild(b.el);
           jatuhkanPotongan(b.x, b.y, b.w, (b.res.dc > 0 ? 1 : -1) * 50, (b.res.dc > 0 ? 1 : -1) * 2.2, b.color, '');
           streak = 0;
@@ -252,6 +265,7 @@
 
       function mendarat() {
         const b = cur, first = stack.length === 0, top = topData();
+        meleset = 0;
         const { ov, dc } = b.res;
         let x = b.x, w = b.w;
         b.y = b.targetY;
@@ -286,7 +300,7 @@
 
       async function selesaiJatuh() {
         ctx.progress(drops, TOTAL);
-        left.textContent = 'Sisa balok: ' + (TOTAL - drops);
+        left.textContent = 'Ronde ' + (ronde() + 1) + ' ' + RONDE[ronde()] + ' · Sisa balok: ' + (TOTAL - drops);
         await ctx.wait(560);
         if (ASK_AT.includes(drops)) await tanya(ASK_AT.indexOf(drops) === ASK_AT.length - 1 && ctx.isSD ? 'sisa' : ctx.isSD ? 'tinggi' : 'hitung');
         if (drops >= TOTAL) return selesai();
@@ -396,7 +410,7 @@
           barFill.style.transform = 'scaleX(' + clamp(tLeft / WAKTU, 0, 1).toFixed(3) + ')';
           phase += omega() * dt;
           const amp0 = Math.max(0, (W - cur.w) / 2 - 8);
-          const amp = Math.min(amp0, ctx.isTK ? Math.min(W * 0.22, 150) : 190);
+          const amp = Math.min(amp0, ctx.isTK ? Math.min(W * 0.22, 150) : 190) * (mudah ? 0.55 : 1);
           cur.x = (W - cur.w) / 2 + amp * Math.sin(phase);
           place(cur);
           rope.style.transform = 'translate3d(' + (cur.x + cur.w / 2 - 2).toFixed(1) + 'px,' + (cur.y - 1600 + 4).toFixed(1) + 'px,0)';

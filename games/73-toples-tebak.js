@@ -65,6 +65,7 @@
     ctx.el.append(h('div', { class: 'ti-card tt-kartu pop-in' }, toplesSvg(n)));
     ctx.sfx('pop');
     const opsi = numChoices(n, 3, 1, 12);
+    const m0 = ctx.mistakes;
     await ctx.choose({
       options: opsi.map((x) => ({
         node: h('span', { class: 'tt-opsi' }, h('span', { class: 'tt-angka' }, String(x)), dots(x)),
@@ -74,6 +75,11 @@
       speakLabel: true,
     });
     ctx.el.append(h('p', { class: 'ti-label' }, 'Benar! Isinya ' + n + ' kelereng.'));
+    const salah = ctx.mistakes - m0;
+    if (salah >= 3) {
+      ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Tips: kelompokkan kelereng 5-5 biar cepat!'));
+      ctx.say('Tips. Kelompokkan kelereng lima lima biar cepat!');
+    }
     ctx.sfx('pop');
     await ctx.wait(350);
   }
@@ -83,12 +89,17 @@
     ctx.el.append(h('div', { class: 'ti-card tt-kartu pop-in' }, toplesSvg(n)));
     ctx.sfx('pop');
     const { opsi, jawab } = opsiTerdekat(n);
+    const m0 = ctx.mistakes;
     const r = await ctx.choose({
       options: shuffle(opsi).map((x) => ({ label: String(x), value: x, say: 'Angka ' + x })),
       answer: jawab,
       layout: 'is-grid2',
     });
     ctx.el.append(h('p', { class: 'ti-label' }, 'Isi aslinya ' + n + '. Tebakanmu ' + r.value + '.'));
+    const salah = ctx.mistakes - m0;
+    if (salah >= 3) {
+      ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Tips: bulatkan ke puluhan terdekat!'));
+    }
     ctx.sfx('pop');
     await ctx.wait(350);
   }
