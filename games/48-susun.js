@@ -222,7 +222,7 @@
         if (!ctx.alive) return;
         ctx.progress(gi, daftar.length);
         ctx.clear();
-        await susun(GAMBAR[daftar[gi]], gi);
+        await susun(GAMBAR[daftar[gi]], gi); if (gi < daftar.length - 1 && ctx.alive) ctx.correct(null, { say: 'Bagus! Terus naik ke babak ' + (gi + 2) + '!' });
       }
       if (!ctx.alive) return;
       ctx.progress(daftar.length, daftar.length);
@@ -235,7 +235,7 @@
 
       async function susun(g, gi) {
         const bagian = g.bagian.map((p) => ({ ...p, key: kunciBagian(p) }));
-        ctx.ask(gi === 0 ? 'Ketuk bentuk, lalu ketuk tempatnya. Boleh juga diseret!' : 'Susun gambar ' + g.nama.toLowerCase() + '!');
+        ctx.ask(gi === 0 ? 'Babak 1 dari ' + daftar.length + '. Ketuk bentuk, lalu ketuk tempatnya. Boleh juga diseret!' : 'Babak ' + (gi + 1) + ' dari ' + daftar.length + '. Susun gambar ' + g.nama.toLowerCase() + '!');
 
         // ----- papan -----
         const latar = svg('svg', { viewBox: '0 0 ' + W + ' ' + H, class: 'sb-bg', preserveAspectRatio: 'none', 'aria-hidden': 'true', focusable: 'false' }, g.latar());
@@ -267,7 +267,7 @@
         }));
         const tray = h('div', { class: 'ti-tray sb-tray' });
         const bantuBtn = h('button', { type: 'button', class: 'ti-btn is-ghost ti-help' }, '💡 Bantu');
-        const info = h('span', { class: 'sb-chip' }, 'Gambar ' + (gi + 1) + ' dari ' + daftar.length);
+        const info = h('span', { class: 'sb-chip' }, 'Babak ' + (gi + 1) + ' dari ' + daftar.length);
         const pasangChip = h('span', { class: 'sb-chip' }, '0 dari ' + kepingan.length + ' terpasang');
         ctx.el.append(h('div', { class: 'sb-wrap' }, h('div', { class: 'sb-info' }, info, pasangChip), papan, tray, h('div', { class: 'ti-toolbar' }, bantuBtn)));
 

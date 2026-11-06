@@ -62,7 +62,7 @@
     async start(ctx) {
       TI.style('balap-kali', CSS);
       const TK = ctx.isTK;
-      const soal = buatSoal(TK);
+      const soal = buatSoal(TK); soal.sort((a, b) => a.jawab - b.jawab); // gampang dulu
       const TOTAL = soal.length;
       const WAKTU_LAWAN = TK ? 75 : 120; // detik: lawan sangat lambat, pemain selalu bisa menang
 
@@ -147,7 +147,7 @@
           });
         });
         if (!ctx.alive || over || !hasil) break;
-        ctx.progress(i + 1, TOTAL);
+        ctx.progress(i + 1, TOTAL); if (i + 1 === Math.floor(TOTAL / 2)) ctx.correct(null, { say: 'Bagus! Setengah jalan, terus naik ke yang sulit!' });
         ctx.sfx('whoosh');
         tween = { dari: kamuF, ke: (i + 1) / TOTAL, t: 0, dur: 0.6 };
         await ctx.wait(450);

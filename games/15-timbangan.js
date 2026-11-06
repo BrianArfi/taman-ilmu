@@ -1,5 +1,6 @@
 /* 15 Timbangan Seimbang. Timbangan SVG: lengan berputar ke sisi yang lebih berat, piring tetap tegak.
-   Caranya: lengan dan tiap piring diputar dengan sudut yang sama tapi berlawanan arah (transition transform). */
+   Caranya: lengan dan tiap piring diputar dengan sudut yang sama tapi berlawanan arah (transition transform).
+   SD: 6 soal seimbang menanjak, lalu 2 soal satuan sebagai babak akhir. */
 (function () {
   const { h, svg, rand, pick, shuffle, sample, numChoices } = TI;
 
@@ -326,7 +327,7 @@
       } else {
         const soal = [0, 1, 2, 3, 4, 5].map(buatSoalSeimbang);
         soal.push({ tipe: 'gram' }, { tipe: 'kapas' });
-        ctx.series(shuffle(soal), (s) => (s.tipe === 'seimbang' ? soalSeimbang(ctx, s) : soalSatuan(ctx, s)), { lesson });
+        let ke = 0; ctx.series(soal, (s) => { ke++; if (ke === 5) ctx.correct(null, { say: 'Bagus! Terus naik ke babak soal!' }); if (ke === 7) ctx.correct(null, { say: 'Bagus! Babak soal dimulai!' }); return s.tipe === 'seimbang' ? soalSeimbang(ctx, s) : soalSatuan(ctx, s); }, { lesson });
       }
     },
   });
