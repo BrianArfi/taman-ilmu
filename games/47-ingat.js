@@ -168,7 +168,7 @@
         const jeda = tk ? 280 : Math.max(150, Math.round(lit * 0.45));
         ctx.progress(r, ronde);
         chipRonde.textContent = 'Ronde ' + (r + 1) + ' dari ' + ronde;
-        chipPanjang.textContent = 'Urutan: ' + panjang;
+        chipPanjang.textContent = 'Urutan: ' + panjang; if (r === Math.floor(ronde / 2) && ctx.alive) ctx.correct(null, { say: 'Bagus! Setengah jalan, terus naik ke yang lebih panjang!' });
         isiDots(0, panjang);
         if (r > 0) ctx.ask(tk ? 'Ronde ' + (r + 1) + '. Lihat baik-baik!' : 'Ronde ' + (r + 1) + '. Hafalkan urutannya!', { speak: tk });
 

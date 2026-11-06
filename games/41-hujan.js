@@ -237,11 +237,11 @@
               icon: s.icon, label: s.name, say: sentence(s),
               node: h('span', { class: 'hj-desc' }, s.text),
             })),
-            onStep: (done) => { showStage(done - 1); ctx.progress(done, total); },
+            onStep: (done) => { showStage(done - 1); ctx.sfx('pop'); ctx.progress(done, total); },
           });
           if (!ctx.alive) return;
           qbox.replaceChildren();
-          cap.textContent = 'Air terus berputar: menguap, menjadi awan, turun sebagai hujan, lalu mengalir kembali ke laut.';
+          cap.textContent = 'Air terus berputar: menguap, menjadi awan, turun sebagai hujan, lalu mengalir kembali ke laut.'; if (ctx.alive) ctx.correct(null, { say: 'Bagus! Lanjut ke babak soal!' });
 
           // ===== babak 2: soal =====
           for (let i = 0; i < SD_Q.length && ctx.alive; i++) {
@@ -285,7 +285,7 @@
         ctx.progress(TK_Q.length, total);
         qbox.replaceChildren();
         ctx.ask('Lihat, ini perjalanan air!', { speak: false });
-        await ctx.sayWait('Lihat, ini perjalanan air!');
+        await ctx.sayWait('Lihat, ini perjalanan air!'); if (ctx.alive) ctx.correct(null, { say: 'Bagus! Sekarang lihat tahapnya satu-satu!' });
         for (let i = 0; i < STAGES.length && ctx.alive; i++) {
           showStage(i);
           await ctx.sayWait(sentence(STAGES[i]));

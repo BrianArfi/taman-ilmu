@@ -155,8 +155,8 @@
     start(ctx) {
       TI.style('belah-buah', CSS);
       const buat = ctx.isTK ? buatTarget : buatTargetSD;
-      const daftar = Array.from({ length: RONDE }, buat);
-      ctx.series(daftar, (target) => satuRonde(ctx, target), {
+      const daftar = Array.from({ length: RONDE }, buat); daftar.sort((a, b) => a.hasil - b.hasil); // gampang dulu
+      let ke = 0; ctx.series(daftar, (target) => { ke++; if (ke === Math.floor(RONDE / 2)) ctx.correct(null, { say: 'Bagus! Setengah jalan, terus naik ke yang sulit!' }); return satuRonde(ctx, target); }, {
         lesson: ctx.isTK
           ? 'Menambah dan mengurangi sampai 10 membuat berhitung makin cepat.'
           : 'Kurang dan kali adalah kebalikan tambah dan bagi. Latihan membuat hafal.',
