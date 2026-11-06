@@ -183,28 +183,6 @@
    ]
   },
   {
-   "file": "63-balap-kali.js",
-   "id": "balap-kali",
-   "title": "Balap Kali-kali",
-   "cat": "mat",
-   "bytes": 9062,
-   "soal": 10,
-   "sig": {
-    "aksi": 2,
-    "feedback": 2,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
    "file": "92-balik-ingat.js",
    "id": "balik-ingat",
    "title": "Balik dan Ingat",
@@ -881,27 +859,6 @@
    ]
   },
   {
-   "file": "48-susun.js",
-   "id": "susun",
-   "title": "Susun Bentuk",
-   "cat": "logika",
-   "bytes": 21959,
-   "soal": null,
-   "sig": {
-    "aksi": 2,
-    "feedback": 2,
-    "ramp": 0,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
    "file": "42-tanam.js",
    "id": "tanam",
    "title": "Ayo Menanam",
@@ -987,27 +944,6 @@
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "15-timbangan.js",
-   "id": "timbangan",
-   "title": "Timbangan Seimbang",
-   "cat": "sains",
-   "bytes": 17526,
-   "soal": null,
-   "sig": {
-    "aksi": 2,
-    "feedback": 2,
-    "ramp": 0,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
    ]
   },
   {
@@ -1914,6 +1850,27 @@
    "sug": []
   },
   {
+   "file": "63-balap-kali.js",
+   "id": "balap-kali",
+   "title": "Balap Kali-kali",
+   "cat": "mat",
+   "bytes": 9235,
+   "soal": 10,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
    "file": "40-gesekan.js",
    "id": "gesekan",
    "title": "Luncur Kotak",
@@ -2108,6 +2065,25 @@
    "sug": []
   },
   {
+   "file": "48-susun.js",
+   "id": "susun",
+   "title": "Susun Bentuk",
+   "cat": "logika",
+   "bytes": 22162,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": []
+  },
+  {
    "file": "20-tatasurya.js",
    "id": "tatasurya",
    "title": "Jelajah Tata Surya",
@@ -2127,6 +2103,25 @@
    "sug": [
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
+  },
+  {
+   "file": "15-timbangan.js",
+   "id": "timbangan",
+   "title": "Timbangan Seimbang",
+   "cat": "sains",
+   "bytes": 17768,
+   "soal": 6,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 100,
+   "sug": []
   }
  ]
 }

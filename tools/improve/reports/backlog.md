@@ -3,17 +3,13 @@
 Diurut dari skor Fun terbawah. Skor = statis + smoke + engagement anak.
 Kelas: A 85+, B 70-84, C 50-69, D <50. Gerbang: smoke OK, skor tidak turun, SPEC 3-4, ustadz untuk teks agama, push hanya dengan "gas".
 
-## A 88 — Lawan Kata (`lawan-kata`, logika)
-- Bukti: statis 79 · smoke 99 (selesai 4/4, rerata 54 aksi) · engagement: belum ada data
-- Saran: tambah variasi aksi kedua biar tidak monoton
-- Saran: naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)
+## A 95 — Susun Bentuk (`susun`, logika)
+- Bukti: statis 93 · smoke 98 (selesai 4/4, rerata 91 aksi) · engagement: belum ada data
 
-## A 92 — Menara Pola (`pola-menara`, mat)
-- Bukti: statis 86 · smoke 100 (selesai 4/4, rerata 29 aksi) · engagement: belum ada data
-- Saran: tambah variasi aksi kedua biar tidak monoton
-- Saran: game puzzle wajib punya tombol Bantu (SPEC 7.1)
+## A 96 — Balap Kali-kali (`balap-kali`, mat)
+- Bukti: statis 93 · smoke 100 (selesai 4/4, rerata 18 aksi) · engagement: belum ada data
+- Saran: setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut
 
-## A 92 — Sambung Pipa (`sambung-pipa`, sains)
-- Bukti: statis 86 · smoke 99 (selesai 4/4, rerata 50 aksi) · engagement: belum ada data
-- Saran: tambah variasi aksi kedua biar tidak monoton
+## A 100 — Timbangan Seimbang (`timbangan`, sains)
+- Bukti: statis 100 · smoke 100 (selesai 4/4, rerata 15 aksi) · engagement: belum ada data
 

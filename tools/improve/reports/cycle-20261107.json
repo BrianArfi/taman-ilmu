@@ -3,63 +3,57 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "lawan-kata",
-   "title": "Lawan Kata",
+   "id": "susun",
+   "title": "Susun Bentuk",
    "cat": "logika",
-   "file": "98-lawan-kata.js",
-   "static100": 79,
-   "dyn100": 99,
+   "file": "48-susun.js",
+   "static100": 93,
+   "dyn100": 98,
    "plays": 4,
    "finished": 4,
-   "avgActions": 54,
+   "avgActions": 91,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 88,
+   "fun": 95,
    "cls": "A",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
+   "sug": []
   },
   {
-   "id": "pola-menara",
-   "title": "Menara Pola",
+   "id": "balap-kali",
+   "title": "Balap Kali-kali",
    "cat": "mat",
-   "file": "65-pola-menara.js",
-   "static100": 86,
+   "file": "63-balap-kali.js",
+   "static100": 93,
    "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 29,
+   "avgActions": 18,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 92,
+   "fun": 96,
    "cls": "A",
    "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {
-   "id": "sambung-pipa",
-   "title": "Sambung Pipa",
+   "id": "timbangan",
+   "title": "Timbangan Seimbang",
    "cat": "sains",
-   "file": "85-sambung-pipa.js",
-   "static100": 86,
-   "dyn100": 99,
+   "file": "15-timbangan.js",
+   "static100": 100,
+   "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 50,
+   "avgActions": 15,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 92,
+   "fun": 100,
    "cls": "A",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
+   "sug": []
   }
  ]
 }

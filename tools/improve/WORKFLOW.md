@@ -99,6 +99,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 14 (7 Nov 2026)**: pola-menara 84→92, sambung-pipa
   84→92, lawan-kata 84→88.
   Detail: `reports/cycle-20261107.md`.
+- **Siklus 15 (7 Nov 2026)**: balap-kali 88→96, susun 88→95,
+  timbangan 88→100.
+  Detail: `reports/cycle-20261107-s15.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar
