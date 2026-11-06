@@ -1,4 +1,5 @@
-/* 76 Roket Air. Pompa dan lepas di saat tepat sampai bulan. */
+/* 76 Roket Air. Pompa dan lepas di saat tepat sampai bulan.
+   Tiap babak zona hijau menyempit (naik sulitnya). */
 (function () {
   const { h } = TI;
 
@@ -71,7 +72,8 @@
   }
 
   async function satuPenerbangan(ctx, cfg, nomor) {
-    const { pompa, lebar, angin } = cfg;
+    const { pompa, lebar: lebar0, angin } = cfg;
+    const lebar = Math.max(ctx.isTK ? 0.15 : 0.07, lebar0 - (nomor - 1) * 0.03); // tiap babak zona menyempit
     ctx.ask('Penerbangan ' + nomor + '. Ketuk pompa ' + pompa + ' kali, lalu lepas saat jarum di hijau!');
     const scene = h('div', { class: 'ti-scene ra-scene' });
     const cv = document.createElement('canvas');
@@ -165,6 +167,7 @@
       gambarLangit(cv, y0 + (y1 - y0) * e, 1 - e * 0.4, w() * 0.78, 56);
     });
     await ctx.correct(null, { say: 'Roket sampai di bulan! Hebat!' });
+    if (nomor < cfg.terbang.length) ctx.correct(null, { say: 'Bagus! Terus naik ke babak berikutnya!' });
   }
 
   TI.register({

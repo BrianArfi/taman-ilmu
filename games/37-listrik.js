@@ -339,7 +339,7 @@
 
       const tk = ctx.isTK;
       const conductors = sample(CONDUCT, tk ? 2 : 3), insulators = sample(INSUL, tk ? 2 : 3);
-      const items = shuffle([...conductors, ...insulators]);
+      const items = shuffle([...conductors, ...insulators]); items.sort((a, b) => (a.ok ? 0 : 1) - (b.ok ? 0 : 1)); // contoh menyala dulu
       const total = tk ? 2 + items.length : items.length + 2;
       let step = 0;
       const lc = tk ? ['Menyala', 'Tidak menyala'] : ['Konduktor', 'Isolator'];
@@ -398,7 +398,7 @@
         }
 
         // ===== benda satu per satu =====
-        for (const it of items) {
+        let ke = 0; for (const it of items) { ke++; if (ke === Math.ceil(items.length / 2)) ctx.correct(null, { say: tk ? 'Bagus! Setengah jalan!' : 'Bagus! Terus naik ke yang sulit.' });
           if (!ctx.alive) return;
           board.fill(null); board.set({ closed: true });
           const box = h('div', { class: 'ls-box' });

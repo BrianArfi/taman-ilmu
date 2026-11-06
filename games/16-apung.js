@@ -1,5 +1,6 @@
 /* 16 Tenggelam atau Terapung. Akuarium di .ti-scene: benda jatuh ke air dengan fisika sederhana (ctx.loop + transform).
-   rho = kerapatan benda dibanding air. rho < 1 terapung (tenggelam sebagian sampai seimbang), rho > 1 tenggelam ke pasir. */
+   rho = kerapatan benda dibanding air. rho < 1 terapung (tenggelam sebagian sampai seimbang), rho > 1 tenggelam ke pasir.
+   Benda jebakan (apel, es, telur, kelapa) belakangan. */
 (function () {
   const { h, svg, rand, pick, shuffle, sample } = TI;
 
@@ -234,11 +235,17 @@
       const apung = BENDA.filter((x) => x.apung), tenggelam = BENDA.filter((x) => !x.apung);
       if (ctx.isTK) {
         const soal = shuffle([...sample(apung, 3), ...sample(tenggelam, 3)]);
-        ctx.series(soal, (b) => soalBenda(ctx, b), { lesson });
+        soal.forEach((b) => { b.sulit = ['apel', 'es', 'telur', 'kelapa'].includes(b.id) ? 1 : 0; });
+        soal.sort((a, b) => a.sulit - b.sulit); // gampang dulu
+        let ke = 0;
+        ctx.series(soal, (b) => { ke++; if (ke === 3) ctx.correct(null, { say: 'Bagus! Setengah jalan!' }); return soalBenda(ctx, b); }, { lesson });
       } else {
         const telur = BENDA.find((x) => x.id === 'telur');
         const soal = shuffle([...sample(apung, 4), telur, ...sample(tenggelam.filter((x) => x !== telur), 3)]);
-        ctx.series([...soal, { kapal: true }], (b) => (b.kapal ? soalKapal(ctx) : soalBenda(ctx, b)), { lesson });
+        soal.forEach((b) => { b.sulit = ['apel', 'es', 'telur', 'kelapa'].includes(b.id) ? 1 : 0; });
+        soal.sort((a, b) => a.sulit - b.sulit); // gampang dulu
+        let ke = 0;
+        ctx.series([...soal, { kapal: true }], (b) => { ke++; if (ke === 5) ctx.correct(null, { say: 'Bagus! Terus naik ke yang sulit.' }); return b.kapal ? soalKapal(ctx) : soalBenda(ctx, b); }, { lesson });
       }
     },
   });

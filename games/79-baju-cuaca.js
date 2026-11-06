@@ -1,4 +1,5 @@
-/* 79 Koper Cuaca. Isi koper sesuai cuaca hari ini. */
+/* 79 Koper Cuaca. Isi koper sesuai cuaca hari ini.
+   Babak berurutan: hujan dan panas dulu, lalu angin dan dingin. */
 (function () {
   const { h, shuffle } = TI;
 
@@ -43,8 +44,8 @@
   .play[data-game="baju-cuaca"] .bc-slot { min-height: 96px; }
 }`;
 
-  async function satuCuaca(ctx, c) {
-    ctx.ask(c.kata);
+  async function satuCuaca(ctx, c, no, total) {
+    ctx.ask('Babak ' + (no + 1) + ' dari ' + total + ': ' + c.kata);
     ctx.el.append(h('div', { class: 'ti-card bc-cuaca pop-in' },
       h('span', { class: 'bc-em', 'aria-hidden': 'true' }, c.icon),
       h('span', { class: 'bc-nama' }, 'Hari ini: ' + c.nama)));
@@ -95,8 +96,10 @@
       ctx.progress(0, daftar.length);
       let n = 0;
       ctx.series(daftar, async (c) => {
-        await satuCuaca(ctx, c);
+        await satuCuaca(ctx, c, n, daftar.length);
         n++;
+        if (n === 1 && ctx.isTK) ctx.correct(null, { say: 'Bagus! Satu lagi!' });
+        if (n === 2 && !ctx.isTK) ctx.correct(null, { say: 'Bagus! Setengah jalan, terus naik ke babak berikutnya!' });
         ctx.progress(n, daftar.length);
       }, {
         lesson: 'Kita memakai baju sesuai cuaca supaya badan tetap sehat. Hujan bawa payung, panas pakai topi.',
