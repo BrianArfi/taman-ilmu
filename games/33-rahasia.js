@@ -106,7 +106,7 @@
       for (let r = 0; r < BABAK.length; r++) {
         ctx.clear();
         ctx.progress(r, BABAK.length);
-        await babak(BABAK[r], r);
+        await babak(BABAK[r], r); if (r < BABAK.length - 1 && ctx.alive) ctx.correct(null, { say: 'Bagus! Terus naik ke peti ' + (r + 2) + '!' });
       }
       ctx.progress(BABAK.length, BABAK.length);
       const t = semuaTebakan;
@@ -188,7 +188,7 @@
             b.classList.add('is-win');
             chest.classList.add('is-open');
             plat.textContent = String(n);
-            ctx.sfx('benar');
+            ctx.sfx('pop'); ctx.sfx('benar');
             ctx.say('Benar! Angkanya ' + n + '. Kamu menemukannya di tebakan ke-' + tebak + '!');
             count.textContent = 'Ketemu di tebakan ke-' + tebak;
             hint.replaceChildren(h('div', { class: 'rs-hint-in rs-hint-t' }, h('b', null, 'Peti terbuka!'), h('span', null, 'Angkanya ' + n + '.')));

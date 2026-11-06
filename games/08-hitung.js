@@ -95,7 +95,7 @@
     const benda = shuffle(BENDA);
     const soal = jumlah.map((n, i) => ({ n, b: benda[i % benda.length], pertama: i === 0 }));
 
-    return ctx.series(soal, async ({ n, b, pertama }) => {
+    let ke = 0; return ctx.series(soal, async ({ n, b, pertama }) => { ke++; if (ke === 4) ctx.correct(null, { say: 'Bagus! Setengah jalan!' });
       const [emo, nama] = b;
       ctx.ask('Ada berapa ' + nama + '?', {
         say: pertama ? 'Ada berapa ' + nama + '? Ketuk setiap ' + nama + ' untuk menghitung.' : undefined,
@@ -135,7 +135,7 @@
       kali.push({ tipe: 'kali', j, p, b: MAKANAN[(rand(0, 5) + kali.length) % MAKANAN.length] });
     }
 
-    return ctx.series([...hitung, ...kali.sort((a, b) => a.j * a.p - b.j * b.p)], async (s) => {
+    let ke = 0; return ctx.series([...hitung, ...kali.sort((a, b) => a.j * a.p - b.j * b.p)], async (s) => { ke++; if (ke === 4) ctx.correct(null, { say: 'Bagus! Terus naik ke perkalian!' });
       if (s.tipe === 'hitung') await soalHitung(ctx, s);
       else await soalKali(ctx, s);
     }, { lesson: 'Menghitung satu per satu dengan teliti membuat jawaban kita benar.' });

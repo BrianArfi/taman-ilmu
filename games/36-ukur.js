@@ -467,7 +467,7 @@
           { t: 'meter' }, { t: 'cmpunit' },
         ];
       }
-      ctx.series(tasks, (task) => {
+      let ke = 0; ctx.series(tasks, (task) => { ke++; if (ke === Math.ceil(tasks.length / 2)) ctx.correct(null, { say: 'Bagus! Setengah jalan, terus naik ke yang sulit!' });
         if (task.t === 'cmp') return runCompare(ctx, task);
         if (task.t === 'order') return runOrder(ctx);
         if (task.t === 'clip') return runClips(ctx, task.n);
