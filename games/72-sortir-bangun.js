@@ -90,7 +90,7 @@
         onStep: (done) => {
           ctx.progress(done, items.length);
           if (done === 1) ctx.sfx('pop');
-          if (done === Math.ceil(items.length / 2)) ctx.correct(null, { say: 'Bagus! Terus naik ke yang sulit.' });
+          if (done === Math.ceil(items.length / 2)) { ctx.el.append(h('p', { class: 'ti-label pop-in' }, 'Tahap 2: sisi banyak')); ctx.correct(null, { say: 'Bagus! Terus naik ke yang sulit.' }); }
         },
       }).then(() => {
         if (!ctx.alive) return;

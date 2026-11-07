@@ -117,6 +117,7 @@
       }).then(() => {
         if (!ctx.alive) return;
         ctx.progress(items.length, items.length);
+        ctx.sfx('benar'); // perayaan selesai
         ctx.finish({ lesson: 'Ikan hidup di air, kucing di darat, burung di udara. Setiap makhluk punya rumahnya sendiri.' });
       });
     },

@@ -45,6 +45,7 @@
       let ke = 0;
       await ctx.series(ronde, async (r) => {
         ke++;
+        const m0 = ctx.mistakes;
         if (ke === 3) ctx.correct(null, { say: TK ? 'Bagus! Setengah jalan!' : 'Bagus! Terus naik ke yang sulit.' });
         if (r.tipe === 'banding') {
           const { berat, ringan } = r.p;
@@ -93,6 +94,11 @@
           ctx.el.append(h('p', { class: 'ti-label' }, 'Beratnya ' + K + ' kubus.'));
           ctx.sfx('pop');
           await ctx.wait(350);
+        }
+        const salah = ctx.mistakes - m0;
+        if (salah >= 3) {
+          ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Tips: bandingkan baik-baik!'));
+          ctx.say('Tips. Bandingkan baik-baik!');
         }
       }, {
         lesson: 'Benda besar belum tentu lebih berat. Timbangan dan satuan kubus membantu kita menebak berat.',

@@ -247,7 +247,8 @@ ${P} .pz-help[disabled] { opacity: 0.5; }
 
       async function level(g, no) {
         ctx.clear();
-        ctx.ask('Susun gambar ' + g.nama + '!', { say: 'Susun gambar ' + g.nama + '! Ketuk kepingan, lalu ketuk tempatnya. Atau seret.' });
+        ctx.ask('Level ' + (no + 1) + ' dari ' + daftar.length + ': susun gambar ' + g.nama + '!', { say: 'Susun gambar ' + g.nama + '! Ketuk kepingan, lalu ketuk tempatnya. Atau seret.' });
+        ctx.sfx('pop'); // level baru dibuka
 
         const slots = [], slotEls = [];
         for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) {
