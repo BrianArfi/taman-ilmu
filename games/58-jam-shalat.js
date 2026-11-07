@@ -82,6 +82,7 @@ ${P} .js-order .choice { min-height: 64px; }`;
           ctx.ask('Shalat ' + s.nama + ' langitnya yang mana? (' + s.ket + ')', { say: 'Shalat ' + s.nama + ' langitnya yang mana?' });
           const lawan = shuffle(WAKTU.filter((x) => x.nama !== s.nama)).slice(0, 2);
           const wadah = h('div', { class: 'ti-choices is-grid2 js-pilihan' });
+          const m0 = ctx.mistakes;
           ctx.el.append(wadah);
           await ctx.choose({
             options: shuffle([s, ...lawan]).map((x) => ({ node: langitNode(x.nama, false), value: x.nama, say: 'Langit waktu ' + x.nama, aria: 'Langit waktu ' + x.nama })),
@@ -90,6 +91,11 @@ ${P} .js-order .choice { min-height: 64px; }`;
             speakLabel: true,
           });
           ctx.el.append(h('p', { class: 'ti-label' }, 'Benar! Ini langit waktu ' + s.nama + '.'));
+          const salah = ctx.mistakes - m0;
+          if (salah >= 3) {
+            ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Tips: lihat warna langitnya baik-baik!'));
+            ctx.say('Tips. Lihat warna langitnya baik-baik!');
+          }
           ctx.sfx('pop');
           await ctx.wait(350);
         }, {
@@ -111,6 +117,7 @@ ${P} .js-order .choice { min-height: 64px; }`;
         ctx.ask('Langit ini waktu shalat apa?');
         ctx.el.append(h('div', { class: 'js-besar pop-in' }, langitNode(s.nama, true)));
         ctx.sfx('pop');
+        const m0 = ctx.mistakes;
         const lawan = shuffle(WAKTU.filter((x) => x.nama !== s.nama)).slice(0, 3);
         await ctx.choose({
           options: shuffle([s, ...lawan]).map((x) => ({ label: x.nama, value: x.nama })),
@@ -119,6 +126,11 @@ ${P} .js-order .choice { min-height: 64px; }`;
         });
         if (!ctx.alive) return;
         ctx.el.append(h('p', { class: 'ti-label' }, 'Benar! Ini waktu ' + s.nama + '.'));
+        const salah = ctx.mistakes - m0;
+        if (salah >= 3) {
+          ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Tips: lihat warna langitnya baik-baik!'));
+          ctx.say('Tips. Lihat warna langitnya baik-baik!');
+        }
         ctx.sfx('pop');
         await ctx.wait(350);
         ctx.progress(soal.indexOf(s) + 1, total);

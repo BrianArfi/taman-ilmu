@@ -52,6 +52,7 @@ ${P} .su-kuis .choice { min-height: 64px; }`;
           ctx.sfx('pop');
           ctx.ask(s.q);
           const wadah = h('div', { class: 'su-kuis' });
+          const m0 = ctx.mistakes;
           ctx.el.append(wadah);
           await ctx.choose({
             options: shuffle([s.a, ...s.x]),
@@ -59,6 +60,11 @@ ${P} .su-kuis .choice { min-height: 64px; }`;
             into: wadah,
             layout: 'is-col',
           });
+          const salah = ctx.mistakes - m0;
+          if (salah >= 3) {
+            ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Ingat-ingat kisahnya, lalu pilih lagi ya!'));
+            ctx.say('Ingat-ingat kisahnya, lalu pilih lagi ya!');
+          }
         }, {
           lesson: SALAWAT + ' lahir di Mekah dan berjuang menyebarkan Islam sampai Fathu Mekah.',
         });

@@ -175,7 +175,7 @@
           () => urutkan(ctx),
         ];
       }
-      return ctx.series(soal, (jalankan, i) => { if (i === 3) ctx.correct(null, { say: ctx.isTK ? 'Bagus! Setengah jalan!' : 'Bagus! Terus naik ke yang sulit.' }); ctx.sfx('pop'); return jalankan(); }, { lesson: LESSON });
+      return ctx.series(soal, (jalankan, i) => { if (i === 3) ctx.correct(null, { say: ctx.isTK ? 'Bagus! Setengah jalan!' : 'Bagus! Terus naik ke yang sulit.' }); ctx.sfx('pop'); const m0 = ctx.mistakes; return jalankan().then(() => { const salah = ctx.mistakes - m0; if (salah >= 3) { ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Ingat-ingat lagi ya!')); ctx.say('Ingat-ingat lagi ya!'); } }); }, { lesson: LESSON });
     },
   });
 })();

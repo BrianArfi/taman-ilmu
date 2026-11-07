@@ -66,10 +66,16 @@
             const k = KUIS[i];
             ctx.progress(5 + i, 5 + KUIS.length);
             ctx.ask('Tahap 2: ' + k.q);
+            const m0 = ctx.mistakes;
             ctx.el.append(h('p', { class: 'dh-why pop-in' }, k.icon));
             ctx.sfx('pop');
             await ctx.choose({ options: shuffle(k.opsi.slice()), answer: k.jawab, layout: 'is-col', speakLabel: true });
             if (ctx.alive) await ctx.sayWait(k.jawab + ' membuat tanaman tumbuh sehat.');
+            const salah = ctx.mistakes - m0;
+            if (salah >= 3) {
+              ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Tips: pikir yang dibutuhkan tanaman untuk hidup!'));
+              ctx.say('Tips. Pikir yang dibutuhkan tanaman untuk hidup!');
+            }
           }
         }
         if (!ctx.alive) return;
