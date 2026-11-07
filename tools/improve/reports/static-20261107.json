@@ -71,71 +71,6 @@
    ]
   },
   {
-   "file": "78-rumah-makhluk.js",
-   "id": "rumah-makhluk",
-   "title": "Rumah Makhluk",
-   "cat": "sains",
-   "bytes": 7072,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "72-sortir-bangun.js",
-   "id": "sortir-bangun",
-   "title": "Sortir Bangun",
-   "cat": "mat",
-   "bytes": 4879,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "68-tebak-berat.js",
-   "id": "tebak-berat",
-   "title": "Tebak Berat",
-   "cat": "mat",
-   "bytes": 5858,
-   "soal": 3,
-   "sig": {
-    "aksi": 0,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
-   ]
-  },
-  {
    "file": "07-adab.js",
    "id": "adab",
    "title": "Ucapan & Adab Baik",
@@ -1202,6 +1137,27 @@
    "sug": []
   },
   {
+   "file": "78-rumah-makhluk.js",
+   "id": "rumah-makhluk",
+   "title": "Rumah Makhluk",
+   "cat": "sains",
+   "bytes": 7432,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
    "file": "94-sambung-kabel.js",
    "id": "sambung-kabel",
    "title": "Sambung Kabel",
@@ -1307,6 +1263,27 @@
    ]
   },
   {
+   "file": "72-sortir-bangun.js",
+   "id": "sortir-bangun",
+   "title": "Sortir Bangun",
+   "cat": "mat",
+   "bytes": 5239,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
    "file": "44-sudoku.js",
    "id": "sudoku",
    "title": "Sudoku Mini",
@@ -1409,6 +1386,27 @@
    "static100": 86,
    "sug": [
     "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
+   ]
+  },
+  {
+   "file": "68-tebak-berat.js",
+   "id": "tebak-berat",
+   "title": "Tebak Berat",
+   "cat": "mat",
+   "bytes": 6233,
+   "soal": 3,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
    ]
   },
   {

@@ -7,18 +7,17 @@
    "title": "Rumah Makhluk",
    "cat": "sains",
    "file": "78-rumah-makhluk.js",
-   "static100": 79,
+   "static100": 86,
    "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 77,
+   "avgActions": 75,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 88,
+   "fun": 92,
    "cls": "A",
    "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
@@ -27,18 +26,17 @@
    "title": "Sortir Bangun",
    "cat": "mat",
    "file": "72-sortir-bangun.js",
-   "static100": 79,
+   "static100": 86,
    "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 65,
+   "avgActions": 66,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 88,
+   "fun": 92,
    "cls": "A",
    "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
@@ -47,36 +45,19 @@
    "title": "Tebak Berat",
    "cat": "mat",
    "file": "68-tebak-berat.js",
-   "static100": 79,
+   "static100": 86,
    "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 12,
+   "avgActions": 11,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 88,
+   "fun": 92,
    "cls": "A",
    "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
+    "tambah variasi aksi kedua biar tidak monoton"
    ]
-  },
-  {
-   "id": "puzzle",
-   "title": "Puzzle Masjid",
-   "cat": "islam",
-   "file": "24-puzzle.js",
-   "static100": 93,
-   "dyn100": 98,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 104,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 95,
-   "cls": "A",
-   "sug": []
   }
  ]
 }
