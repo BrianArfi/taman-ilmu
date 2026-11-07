@@ -73,6 +73,7 @@
     ctx.el.append(h('div', { class: 'ti-card jc-kartu pop-in' }, jam, legenda));
     ctx.sfx('pop');
     const opsi = shuffle([[j, m], ...pengecoh(j, m, nOpsi - 1, pool)]);
+    const m0 = ctx.mistakes;
     await ctx.choose({
       options: opsi.map(([a, b]) => ({
         label: h('span', { class: 'jc-digital' }, digital(a, b)), value: digital(a, b), say: ucap(a, b), aria: 'Jam ' + digital(a, b),
@@ -81,6 +82,11 @@
       layout: 'is-grid2',
     });
     ctx.el.append(h('p', { class: 'ti-label' }, 'Tadi: ' + digital(j, m)));
+    const salah = ctx.mistakes - m0;
+    if (salah >= 3) {
+      ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Ingat: jarum pendek jam, jarum panjang menit!'));
+      ctx.say('Ingat. Jarum pendek menunjuk jam, jarum panjang menunjuk menit!');
+    }
     ctx.sfx('pop');
     await ctx.wait(350);
   }

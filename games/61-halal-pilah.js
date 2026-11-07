@@ -52,6 +52,7 @@
       items.sort((a, b) => a.sulit - b.sulit);
       const nGampang = items.filter((x) => !x.sulit).length;
       ctx.ask('Mana yang halal dan mana yang haram? Ketuk keranjang yang benar!');
+      ctx.sfx('pop'); // keranjang muncul
       ctx.progress(0, items.length);
       await ctx.sort({
         items,
@@ -61,9 +62,10 @@
         ],
         onStep: (i, n) => {
           ctx.progress(i, n);
-          if (i === nGampang) ctx.correct(null, { say: 'Bagus! Sekarang naik ke perbuatan.' });
+          if (i === nGampang) { ctx.el.append(h('p', { class: 'ti-label pop-in' }, 'Tahap 2: perbuatan')); ctx.correct(null, { say: 'Bagus! Sekarang naik ke perbuatan.' }); }
         },
       });
+      ctx.sfx('benar'); // perayaan selesai
       ctx.finish({ lesson: 'Makanan halal baik untuk tubuh kita. Yang haram harus dijauhi.' });
     },
   });

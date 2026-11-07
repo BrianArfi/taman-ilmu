@@ -28,14 +28,14 @@
 .play[data-game="tebak-bunyi"] .tb-bin.is-show { outline: 4px solid var(--good); outline-offset: 3px; }
 `;
 
-  function mainkan(soal, kunci, sumbu) {
+  function mainkan(soal, kunci, sumbu, ronde) {
     // soal: kata yang dibaca, kunci: 'tinggi'/'rendah'/'cepat'/'lambat', sumbu: ['tinggi','rendah'] atau ['cepat','lambat']
     return async (ctx) => {
       let gagal = 0;
       for (;;) {
         if (!ctx.alive) return;
         ctx.clear();
-        const tanya = sumbu[0] === 'tinggi' ? 'Dengar baik-baik. Suaranya tinggi atau rendah?' : 'Dengar baik-baik. Suaranya cepat atau lambat?';
+        const tanya = 'Ronde ' + (ronde + 1) + '. ' + (sumbu[0] === 'tinggi' ? 'Dengar baik-baik. Suaranya tinggi atau rendah?' : 'Dengar baik-baik. Suaranya cepat atau lambat?');
         ctx.ask(tanya);
         const wrap = h('div', { class: 'tb-wrap' });
         const hear = h('button', { type: 'button', class: 'ti-btn tb-hear pop-in', 'aria-label': 'Dengar suaranya' }, '🔊 Dengar');
@@ -102,7 +102,8 @@
           if (k === Math.floor(urutan.length / 2)) ctx.correct(null, { say: isTK ? 'Bagus! Setengah jalan!' : 'Bagus! Terus naik ke suara cepat dan lambat!' });
           ctx.progress(k, urutan.length);
           const it = items[urutan[k]];
-          await mainkan(it.soal, it.kunci, it.sumbu)(ctx);
+          const fase = it.sumbu[0] === 'tinggi' ? 0 : 1;
+          await mainkan(it.soal, it.kunci, it.sumbu, fase)(ctx);
         }
         if (!ctx.alive) return;
         ctx.progress(urutan.length, urutan.length);

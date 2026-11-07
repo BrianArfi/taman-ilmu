@@ -237,11 +237,11 @@
   }
 
   const MORE = [
-    { text: 'Geser matahari sampai bayangan paling pendek!', say: 'Geser matahari sampai bayangan paling pendek!', start: 14, fix: 50, ok: (v) => Math.abs(v - 50) <= 6,
+    { text: 'Geser matahari sampai bayangan paling pendek!', say: 'Geser matahari sampai bayangan paling pendek!', susah: 2, start: 14, fix: 50, ok: (v) => Math.abs(v - 50) <= 6,
       hint: 'Bayangan paling pendek saat matahari tepat di atas. Geser matahari ke tengah.', note: 'Siang hari matahari tepat di atas tiang, jadi bayangan paling pendek.' },
-    { text: 'Buat bayangan mengarah ke kanan!', say: 'Buat bayangan mengarah ke kanan! Ini seperti hari masih pagi.', start: 76, fix: 16, ok: (v) => v <= 40,
+    { text: 'Buat bayangan mengarah ke kanan!', say: 'Buat bayangan mengarah ke kanan! Ini seperti hari masih pagi.', susah: 1, start: 76, fix: 16, ok: (v) => v <= 40,
       hint: 'Bayangan mengarah ke kanan kalau matahari ada di kiri. Geser matahari ke kiri.', note: 'Pagi hari matahari di timur, di sebelah kiri. Bayangan jatuh ke arah barat, di sebelah kanan.' },
-    { text: 'Buat bayangan mengarah ke kiri!', say: 'Buat bayangan mengarah ke kiri! Ini seperti hari sudah sore.', start: 24, fix: 84, ok: (v) => v >= 60,
+    { text: 'Buat bayangan mengarah ke kiri!', say: 'Buat bayangan mengarah ke kiri! Ini seperti hari sudah sore.', susah: 1, start: 24, fix: 84, ok: (v) => v >= 60,
       hint: 'Bayangan mengarah ke kiri kalau matahari ada di kanan. Geser matahari ke kanan.', note: 'Sore hari matahari di barat, di sebelah kanan. Bayangan jatuh ke arah timur, di sebelah kiri.' },
   ];
 
@@ -303,9 +303,9 @@
         ctx.progress(0, total);
 
         // ----- tugas geser matahari -----
-        for (const task of MORE) {
+        for (const [ronde, task] of MORE.slice().sort((a, b) => a.susah - b.susah).entries()) {
           if (!ctx.alive) return;
-          ctx.ask(task.text, { say: task.say });
+          ctx.ask('Ronde ' + (ronde + 1) + ': ' + task.text, { say: task.say });
           msg.textContent = 'Geser slider, lepaskan, lalu lihat bayangan di tanah.';
           slider.disabled = false; ctl.hidden = false;
           await tween(ctx, T(350), (e) => setV(lab.v + (task.start - lab.v) * e));
