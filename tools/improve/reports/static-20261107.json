@@ -183,27 +183,6 @@
    ]
   },
   {
-   "file": "92-balik-ingat.js",
-   "id": "balik-ingat",
-   "title": "Balik dan Ingat",
-   "cat": "logika",
-   "bytes": 6057,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
-  },
-  {
    "file": "96-balok-pas.js",
    "id": "balok-pas",
    "title": "Balok yang Pas",
@@ -336,28 +315,6 @@
    ]
   },
   {
-   "file": "91-parkir.js",
-   "id": "parkir",
-   "title": "Parkir Pintar",
-   "cat": "logika",
-   "bytes": 14909,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
    "file": "86-penunjuk-arah.js",
    "id": "penunjuk-arah",
    "title": "Penunjuk Arah",
@@ -376,50 +333,6 @@
    "static100": 79,
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton"
-   ]
-  },
-  {
-   "file": "97-pola-angka.js",
-   "id": "pola-angka",
-   "title": "Pola Angka",
-   "cat": "logika",
-   "bytes": 4907,
-   "soal": 4,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "94-sambung-kabel.js",
-   "id": "sambung-kabel",
-   "title": "Sambung Kabel",
-   "cat": "logika",
-   "bytes": 12040,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
   {
@@ -528,6 +441,27 @@
    "static100": 86,
    "sug": [
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "92-balik-ingat.js",
+   "id": "balik-ingat",
+   "title": "Balik dan Ingat",
+   "cat": "logika",
+   "bytes": 6225,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
    ]
   },
   {
@@ -1202,6 +1136,27 @@
    ]
   },
   {
+   "file": "91-parkir.js",
+   "id": "parkir",
+   "title": "Parkir Pintar",
+   "cat": "logika",
+   "bytes": 15255,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
    "file": "64-pizza-pecahan.js",
    "id": "pizza-pecahan",
    "title": "Pizza Pecahan",
@@ -1240,6 +1195,27 @@
    "sug": [
     "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "97-pola-angka.js",
+   "id": "pola-angka",
+   "title": "Pola Angka",
+   "cat": "logika",
+   "bytes": 5248,
+   "soal": 4,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
    ]
   },
   {
@@ -1322,6 +1298,27 @@
    },
    "static100": 86,
    "sug": []
+  },
+  {
+   "file": "94-sambung-kabel.js",
+   "id": "sambung-kabel",
+   "title": "Sambung Kabel",
+   "cat": "logika",
+   "bytes": 12313,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
   },
   {
    "file": "85-sambung-pipa.js",

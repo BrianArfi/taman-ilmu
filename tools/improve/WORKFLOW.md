@@ -126,6 +126,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 23 (7 Nov 2026)**: beda-satu+cermin-pola 88→92,
   kartu+lompat-bintang 88→91.
   Detail: `reports/cycle-20261107-s23.md`.
+- **Siklus 24 (7 Nov 2026)**: parkir+pola-angka+sambung-kabel+
+  balik-ingat 88→92.
+  Detail: `reports/cycle-20261107-s24.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar
