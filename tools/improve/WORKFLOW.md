@@ -64,27 +64,31 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
   simpan `reports/stats-YYYYMMDD.json`. Makin banyak berkas stats, makin
   hidup bobot engagement 20% dan skor promo.
 
-## 6. Loop Ide (rekursif, harian)
+## 6. Loop Ide (rekursif, kontinu)
 
 Eksekusi pola murah ada plafonnya (A99). Supaya naik terus, ide baru dicari
-tiap hari oleh tim multi-agent, lalu dieksekusi loop 30 mnt:
+nonstop oleh tim multi-agent, lalu dieksekusi loop 30 mnt:
 
-1. **Cari**: kron harian `Loop Ide Taman Ilmu` memanggil Workflow dengan
-   skrip kanonis `tools/improve/ide-workflow.js` (3 anak read-only:
+1. **Cari**: kron `Loop Ide Taman Ilmu` (tiap 2 jam) memanggil Workflow
+   dengan skrip kanonis `tools/improve/ide-workflow.js` (3 anak read-only:
    playtest-anak, mekanik-viral, lensa-ortu + 1 sintesis berperingkat).
+   Gate: jalan hanya jika TODO < 8 (backlog butuh isi ulang) dan tidak ada
+   `.ide-lock` segar (<180 mnt). Riset boleh overlap dengan loop eksekusi.
 2. **Catat**: gabungkan ke `reports/ide-backlog.md` (dedup vs TODO lama,
    tandai DONE yang sudah dibangun via git log, urut dampak-per-effort,
-   maks 12 TODO). Commit + push (berkas md saja, tanpa cek live).
+   maks 12 TODO). Hapus `.ide-lock`. Commit + push (berkas md saja, tanpa
+   cek live; jika push ditolak: `pull --rebase`, ulangi sekali).
 3. **Kerjakan**: watcher 30 mnt, jika tidak ada batch murah, ambil 1 ide
    TODO teratas (lewati effort L dan flag ustadz=ya) sebagai siklus itu,
-   lalu tandai DONE + catat hasilnya di laporan siklus.
+   lalu tandai DONE + catat hasilnya di laporan siklus. Serah terima
+   otomatis: ide yang dicatat loop ide langsung bisa ditarik watcher
+   berikutnya (maks 30 mnt kemudian).
 4. **Ukur**: hasilnya terlihat di `tren.jsonl` + `promo-*.json` + stats HP,
-   dan loop ide berikutnya membaca semuanya. Ini rekursinya.
+   dan loop ide berikutnya membaca semuanya. Ini rekursinya: ide habis
+   dimakan eksekutor -> gate terbuka -> ide baru dicari lagi.
 
 Aturan: ide tidak boleh mengubah teks Arab/fakta agama secara otomatis
-(flag ustadz=ya selalu TOLAK/tahan untuk review). Jika `.cycle-lock` ada
-saat kron ide menyala, lewati hari itu (tulis heartbeat saja) supaya tidak
-tabrakan push dengan loop eksekusi.
+(flag ustadz=ya selalu TOLAK/tahan untuk review).
 
 ## Kadensi
 
