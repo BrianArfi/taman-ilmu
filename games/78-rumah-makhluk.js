@@ -101,6 +101,14 @@
       });
       items.sort((a, b) => a.sulit - b.sulit);
       ctx.ask('Di mana rumah makhluk ini? Ketuk tempat tinggalnya!');
+      // Kibor: angka 1-3 memilih keranjang (aksesibilitas desktop).
+      ctx.on(document, 'keydown', (e) => {
+        if (!ctx.alive || e.ctrlKey || e.metaKey || e.altKey) return;
+        const i = ['1', '2', '3'].indexOf(e.key);
+        if (i < 0) return;
+        const b = ctx.el.querySelectorAll('.ti-bin')[i];
+        if (b) b.click();
+      });
       ctx.sfx('pop');
       ctx.progress(0, items.length);
       ctx.sort({

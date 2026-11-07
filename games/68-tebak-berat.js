@@ -43,6 +43,14 @@
       ronde.sort((a, b) => a.sulit - b.sulit); // banding dulu, kubus belakangan
 
       let ke = 0;
+      // Kibor: angka 1-4 memilih jawaban (aksesibilitas desktop).
+      ctx.on(document, 'keydown', (e) => {
+        if (!ctx.alive || e.ctrlKey || e.metaKey || e.altKey) return;
+        const i = ['1', '2', '3', '4'].indexOf(e.key);
+        if (i < 0) return;
+        const b = ctx.el.querySelectorAll('.ti-choices .choice')[i];
+        if (b) b.click();
+      });
       await ctx.series(ronde, async (r) => {
         ke++;
         const m0 = ctx.mistakes;

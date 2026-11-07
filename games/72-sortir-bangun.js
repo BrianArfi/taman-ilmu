@@ -78,6 +78,14 @@
       }));
       items.sort((a, b) => a.sulit - b.sulit);
       ctx.ask('Hitung sisinya, lalu ketuk keranjang yang benar!');
+      // Kibor: angka 1-3 memilih keranjang (aksesibilitas desktop).
+      ctx.on(document, 'keydown', (e) => {
+        if (!ctx.alive || e.ctrlKey || e.metaKey || e.altKey) return;
+        const i = ['1', '2', '3'].indexOf(e.key);
+        if (i < 0) return;
+        const b = ctx.el.querySelectorAll('.ti-bin')[i];
+        if (b) b.click();
+      });
       ctx.sfx('pop');
       ctx.progress(0, items.length);
       ctx.sort({
