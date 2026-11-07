@@ -63,12 +63,18 @@
     desc: 'Susun keping jadi rumah dan perahu.',
     start(ctx) {
       TI.style('tangram', CSS);
-      const keping = ctx.isTK ? RUMAH.slice() : RUMAH.concat(PERAHU);
+      const tahap = ctx.isTK ? [RUMAH] : [RUMAH, PERAHU];
       return (async () => {
-        ctx.progress(0, 1);
-        const hasil = await papan(keping);
+        let hasil = 'ok';
+        for (const [ti, kep] of tahap.entries()) {
+          if (!ctx.alive) return;
+          ctx.progress(ti, tahap.length);
+        const m = await papan(kep, ti);
+          if (m === 'auto') hasil = 'auto';
+          else if (m === 'bantu' && hasil === 'ok') hasil = 'bantu';
+        }
         if (!ctx.alive) return;
-        ctx.progress(1, 1);
+        ctx.progress(tahap.length, tahap.length);
         ctx.finish({
           stars: hasil === 'auto' ? 1 : hasil === 'bantu' || ctx.mistakes > 0 ? 2 : 3,
           lesson: ctx.isTK
@@ -77,7 +83,7 @@
         });
       })();
 
-      function papan(keping) {
+      function papan(keping, ti) {
         return new Promise((selesai) => {
           ctx.clear();
           ctx.ask(ctx.isTK ? 'Ketuk keping, lalu ketuk tempatnya di gambar.' : 'Susun semua keping jadi rumah dan perahu.');
@@ -93,7 +99,7 @@
           board.append(svgEl);
           const VBW = ctx.isTK ? 170 : 320, VBH = 200;
           const tray = h('div', { class: 'ti-tray tg-tray' });
-          const msg = h('p', { class: 'tg-msg', 'aria-live': 'polite' }, keping.length + ' keping. Ketuk keping dulu.');
+          const msg = h('p', { class: 'tg-msg', 'aria-live': 'polite' }, (tahap.length > 1 ? 'Tahap ' + (ti + 1) + ' dari ' + tahap.length + ': ' : '') + keping.length + ' keping. Ketuk keping dulu.');
           const bantu = h('button', { type: 'button', class: 'ti-btn is-ghost ti-help' }, '💡 Bantu');
           wrap.append(board, msg, tray, bantu);
           ctx.el.append(wrap);
@@ -112,6 +118,13 @@
             });
             board.append(slot);
             slotOf[p.id] = slot;
+          });
+          // Kibor: angka memilih keping, B = bantu (aksesibilitas desktop).
+          ctx.on(document, 'keydown', (e) => {
+            if (!ctx.alive || tutup || e.ctrlKey || e.metaKey || e.altKey) return;
+            const i = ['1', '2', '3', '4', '5', '6'].indexOf(e.key);
+            if (i >= 0 && acak[i] && !chipOf[acak[i].id].disabled) { chipOf[acak[i].id].click(); return; }
+            if (e.key === 'b' || e.key === 'B') bantu.click();
           });
           acak.forEach((p) => {
             const chip = h('button', { type: 'button', class: 'choice tg-chip pop-in', 'aria-label': p.label });
