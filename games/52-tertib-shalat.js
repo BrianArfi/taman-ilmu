@@ -69,6 +69,7 @@ ${P} .ts-rak .choice { min-height: 72px; min-width: 76px; font-size: 1.6rem; fon
         ctx.clear();
         ctx.ask('Babak 1: shalat ' + s.nama + ' berapa rakaat?');
         const wr = h('div', { class: 'ts-rak pop-in' });
+        const m0 = ctx.mistakes;
         ctx.el.append(wr);
         await ctx.choose({
           options: shuffle([2, 3, 4]).map((n) => ({ label: String(n), value: n, say: sebut[n] + ' rakaat' })),
@@ -76,6 +77,11 @@ ${P} .ts-rak .choice { min-height: 72px; min-width: 76px; font-size: 1.6rem; fon
           into: wr,
           speakLabel: true,
         });
+        const salah = ctx.mistakes - m0;
+        if (salah >= 3) {
+          ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Ingat-ingat jumlahnya ya!'));
+          ctx.say('Ingat-ingat jumlahnya!');
+        }
         if (!ctx.alive) return;
         ctx.sfx('pop');
         ctx.progress(kuis.indexOf(s) + 1, total);

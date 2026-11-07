@@ -82,7 +82,7 @@
           const wrap = h('div', { class: 'kw-wrap' });
           const code = h('div', { class: 'kw-code' });
           const slots = [];
-          let tutup = false, proses = false, pakai = 0, sentuh = 0;
+          let tutup = false, proses = false, pakai = 0, sentuh = 0, dibantu = false;
           const batasi = () => {
             sentuh++;
             if (sentuh >= 30 && !tutup) { tutup = true; tunjuk(); return true; }
@@ -116,6 +116,7 @@
           });
           const go = h('button', { type: 'button', class: 'ti-btn kw-go' }, 'Tebak!');
           const ulang = h('button', { type: 'button', class: 'ti-btn is-ghost kw-go' }, '🔄 Ulangi');
+          const bBantu = h('button', { type: 'button', class: 'ti-btn is-ghost kw-go ti-help' }, '💡 Bantu');
           ulang.addEventListener('click', () => {
             if (tutup) return;
             ctx.sfx('tap');
@@ -127,9 +128,26 @@
           });
           const hist = h('div', { class: 'kw-hist' });
           const msg = h('p', { class: 'kw-msg', 'aria-live': 'polite' }, maks + ' tebakan. Hijau tepat, kuning hampir.');
-          wrap.append(code, pal, go, ulang, msg, hist);
+          bBantu.addEventListener('click', () => { if (!tutup) bantuTangan(); });
+          wrap.append(code, pal, go, ulang, bBantu, msg, hist);
           ctx.el.append(wrap);
 
+          function bantuTangan() {
+            if (dibantu) { msg.textContent = 'Bantu cuma sekali tiap ronde.'; return; }
+            dibantu = true;
+            let ti = slots.findIndex((s) => !s.warna);
+            if (ti < 0) ti = slots.findIndex((s, i2) => s.warna !== rahasia[i2]);
+            if (ti < 0) ti = 0;
+            const t = slots[ti];
+            t.warna = rahasia[ti];
+            t.el.classList.add('is-full');
+            t.el.style.background = olehId(t.warna).hex;
+            t.el.textContent = '';
+            t.el.setAttribute('aria-label', olehId(t.warna).label);
+            ctx.sfx('benar');
+            ctx.say('Dibantu satu lingkaran! Lanjutkan!');
+            batasi();
+          }
           const tunjuk = async () => {
             tutup = true;
             msg.textContent = 'Kodenya: ' + rahasia.map((id) => olehId(id).label).join(', ') + '.';

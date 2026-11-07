@@ -227,6 +227,7 @@
           if (!ctx.alive) return;
           const s = soal[q];
           ctx.ask(s.teks, s.say ? { say: s.say } : undefined);
+          const m0 = ctx.mistakes;
           const kotak = h('div', { class: 'pg-opts pop-in' });
           let opsi;
           if (s.tipe === 'ikon') {
@@ -242,6 +243,11 @@
           }
           ctx.el.append(kotak);
           await ctx.choose({ options: opsi, answer: s.ans, into: kotak });
+          const salah = ctx.mistakes - m0;
+          if (salah >= 3) {
+            ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Tips: hitung gambarnya satu-satu!'));
+            ctx.say('Tips. Hitung gambarnya satu-satu!');
+          }
           kotak.remove();
           ctx.progress(dasar + 1 + q + 1, UNIT);
         }
