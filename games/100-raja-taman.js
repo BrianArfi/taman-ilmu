@@ -67,6 +67,8 @@
       TI.style('raja-taman', CSS);
       const tk = ctx.isTK;
       const nOpsi = tk ? 3 : 4;
+      let tanyaTerakhir = '';
+      const tanya = (t) => { tanyaTerakhir = t; ctx.ask(t); };
 
       const ambil = (bank, n, tag) => sample(bank, n).map((s) => ({ ...s, bank: tag }));
       const grup = [ambil(HIJAIYAH, 3, 'hijaiyah'), ambil(HITUNG, 3, 'hitung'), ambil(LANGIT, 2, 'langit'), ambil(LAWAN, 2, 'lawan')];
@@ -80,7 +82,17 @@
         const hud = h('div', { class: 'rj-hud' });
         const hati = h('span', { class: 'rj-chip is-hati', 'aria-label': 'Nyawa' });
         const chipSoal = h('span', { class: 'rj-chip' });
-        hud.append(hati, chipSoal);
+        const ulang = h('button', { type: 'button', class: 'ti-btn is-ghost', 'aria-label': 'Ulangi pertanyaan' }, '🔊');
+        hud.append(hati, chipSoal, ulang);
+        ulang.addEventListener('click', () => { if (tanyaTerakhir) ctx.say(tanyaTerakhir); });
+        // Kibor: angka 1-4 memilih jawaban (aksesibilitas desktop).
+        ctx.on(document, 'keydown', (e) => {
+          if (!ctx.alive || e.ctrlKey || e.metaKey || e.altKey) return;
+          const i = ['1', '2', '3', '4'].indexOf(e.key);
+          if (i < 0) return;
+          const b = ctx.el.querySelectorAll('.choice')[i];
+          if (b) b.click();
+        });
         const gambarHati = () => { hati.textContent = '❤️'.repeat(nyawa) + '🤍'.repeat(3 - nyawa); };
         gambarHati();
 
@@ -126,13 +138,13 @@
           opsi = opsi.slice(0, nOpsi);
         }
         if (s.kind === 'lihat') {
-          ctx.ask('Huruf apa ini?');
+          tanya('Huruf apa ini?');
           ctx.el.append(h('div', { class: 'rj-card pop-in' }, h('p', { class: 'rj-big ti-arabic' }, s.ar)));
           const r = await ctx.choose({ options: shuffle(opsi), answer: s.jawab, speakLabel: true, retry: false });
           return r.firstTry;
         }
         if (s.kind === 'dengar') {
-          ctx.ask('Mana huruf ' + s.nama + '?');
+          tanya('Mana huruf ' + s.nama + '?');
           const NAMA = { 'ا': 'Alif', 'ب': 'Ba', 'ت': 'Ta', 'م': 'Mim', 'ن': 'Nun', 'و': 'Wau', 'ل': 'Lam' };
           const r = await ctx.choose({
             options: shuffle(opsi.map((o) => ({ node: arab(o), value: o, say: 'Huruf ' + (NAMA[o] || o), aria: 'Huruf ' + (NAMA[o] || o) }))),
@@ -142,7 +154,7 @@
           });
           return r.firstTry;
         }
-        ctx.ask(s.soal);
+        tanya(s.soal);
         ctx.el.append(h('div', { class: 'rj-card pop-in' }, h('p', { class: 'rj-big', 'aria-hidden': 'true' }, IKON[s.bank])));
         ctx.sfx('pop');
         const r = await ctx.choose({ options: shuffle(opsi), answer: s.jawab, speakLabel: true, retry: false });
