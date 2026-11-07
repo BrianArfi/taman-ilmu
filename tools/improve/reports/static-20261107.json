@@ -26,28 +26,6 @@
    ]
   },
   {
-   "file": "90-tangram.js",
-   "id": "tangram",
-   "title": "Tangram Rumah",
-   "cat": "logika",
-   "bytes": 9921,
-   "soal": 3,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 0,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 71,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
    "file": "07-adab.js",
    "id": "adab",
    "title": "Ucapan & Adab Baik",
@@ -1364,6 +1342,27 @@
    "static100": 86,
    "sug": [
     "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
+   ]
+  },
+  {
+   "file": "90-tangram.js",
+   "id": "tangram",
+   "title": "Tangram Rumah",
+   "cat": "logika",
+   "bytes": 10721,
+   "soal": 3,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 1,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
    ]
   },
   {

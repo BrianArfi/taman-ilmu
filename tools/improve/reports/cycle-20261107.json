@@ -3,23 +3,22 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "raja-taman",
-   "title": "Raja Taman",
+   "id": "tangram",
+   "title": "Tangram Rumah",
    "cat": "logika",
-   "file": "100-raja-taman.js",
+   "file": "90-tangram.js",
    "static100": 86,
-   "dyn100": 100,
+   "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 17,
+   "avgActions": 40,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
    "fun": 92,
    "cls": "A",
    "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
    ]
   }
  ]
