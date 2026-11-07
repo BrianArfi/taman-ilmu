@@ -3,17 +3,20 @@
 Diurut dari skor Fun terbawah. Skor = statis + smoke + engagement anak.
 Kelas: A 85+, B 70-84, C 50-69, D <50. Gerbang: smoke OK, skor tidak turun, SPEC 3-4, ustadz untuk teks agama, push hanya dengan "gas".
 
-## A 92 — Tebak Bayangan (`tebak-bayang`, sains)
-- Bukti: statis 86 · smoke 100 (selesai 4/4, rerata 23 aksi) · engagement: belum ada data
+## A 92 — Tebak Bunyi (`tebak-bunyi`, sains)
+- Bukti: statis 86 · smoke 100 (selesai 4/4, rerata 30 aksi) · engagement: belum ada data
+- Saran: tambah variasi aksi kedua biar tidak monoton
+
+## A 92 — Halal atau Haram (`halal-pilah`, islam)
+- Bukti: statis 86 · smoke 99 (selesai 4/4, rerata 51 aksi) · engagement: belum ada data
+- Saran: tambah variasi aksi kedua biar tidak monoton
+
+## A 92 — Jam Cocok (`jam-cocok`, mat)
+- Bukti: statis 86 · smoke 100 (selesai 4/4, rerata 17 aksi) · engagement: belum ada data
 - Saran: kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal
 
-## A 92 — Toples Tebakan (`toples-tebak`, mat)
-- Bukti: statis 86 · smoke 100 (selesai 4/4, rerata 18 aksi) · engagement: belum ada data
-- Saran: kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal
-
-## A 96 — Lempar Tepat (`lempar`, sains)
+## A 96 — Cahaya & Bayangan (`bayangan`, sains)
 - Bukti: statis 93 · smoke 100 (selesai 4/4, rerata 27 aksi) · engagement: belum ada data
-
-## A 96 — Menara Balok (`menara`, mat)
-- Bukti: statis 93 · smoke 99 (selesai 4/4, rerata 54 aksi) · engagement: belum ada data
+- Saran: game puzzle wajib punya tombol Bantu (SPEC 7.1)
+- Saran: setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut
 

@@ -226,29 +226,6 @@
    ]
   },
   {
-   "file": "38-bayangan.js",
-   "id": "bayangan",
-   "title": "Cahaya & Bayangan",
-   "cat": "sains",
-   "bytes": 24758,
-   "soal": 7,
-   "sig": {
-    "aksi": 2,
-    "feedback": 2,
-    "ramp": 0,
-    "failsoft": 1,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
    "file": "99-beda-satu.js",
    "id": "beda-satu",
    "title": "Mana yang Beda",
@@ -331,50 +308,6 @@
    "static100": 79,
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "61-halal-pilah.js",
-   "id": "halal-pilah",
-   "title": "Halal atau Haram",
-   "cat": "islam",
-   "bytes": 3245,
-   "soal": 3,
-   "sig": {
-    "aksi": 1,
-    "feedback": 1,
-    "ramp": 2,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "sfx cuma 1x: bunyikan tiap aksi berhasil/gagal"
-   ]
-  },
-  {
-   "file": "71-jam-cocok.js",
-   "id": "jam-cocok",
-   "title": "Jam Cocok",
-   "cat": "mat",
-   "bytes": 6666,
-   "soal": 8,
-   "sig": {
-    "aksi": 0,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
@@ -615,28 +548,6 @@
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "81-tebak-bunyi.js",
-   "id": "tebak-bunyi",
-   "title": "Tebak Bunyi",
-   "cat": "sains",
-   "bytes": 5361,
-   "soal": 10,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 1,
-    "failsoft": 1,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
    ]
   },
   {
@@ -934,6 +845,27 @@
    ]
   },
   {
+   "file": "61-halal-pilah.js",
+   "id": "halal-pilah",
+   "title": "Halal atau Haram",
+   "cat": "islam",
+   "bytes": 3412,
+   "soal": 3,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
    "file": "49-hanoi.js",
    "id": "hanoi",
    "title": "Menara Hanoi",
@@ -1018,6 +950,27 @@
    "sug": [
     "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "71-jam-cocok.js",
+   "id": "jam-cocok",
+   "title": "Jam Cocok",
+   "cat": "mat",
+   "bytes": 6991,
+   "soal": 8,
+   "sig": {
+    "aksi": 0,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
    ]
   },
   {
@@ -1518,6 +1471,27 @@
    ]
   },
   {
+   "file": "81-tebak-bunyi.js",
+   "id": "tebak-bunyi",
+   "title": "Tebak Bunyi",
+   "cat": "sains",
+   "bytes": 5579,
+   "soal": 10,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
    "file": "95-teka-teki.js",
    "id": "teka-teki",
    "title": "Teka-teki Siapa",
@@ -1783,6 +1757,28 @@
    },
    "static100": 93,
    "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "38-bayangan.js",
+   "id": "bayangan",
+   "title": "Cahaya & Bayangan",
+   "cat": "sains",
+   "bytes": 24881,
+   "soal": 7,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": [
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },

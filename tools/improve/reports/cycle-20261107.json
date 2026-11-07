@@ -3,34 +3,53 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "tebak-bayang",
-   "title": "Tebak Bayangan",
+   "id": "tebak-bunyi",
+   "title": "Tebak Bunyi",
    "cat": "sains",
-   "file": "77-tebak-bayang.js",
+   "file": "81-tebak-bunyi.js",
    "static100": 86,
    "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 23,
+   "avgActions": 30,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
    "fun": 92,
    "cls": "A",
    "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
+    "tambah variasi aksi kedua biar tidak monoton"
    ]
   },
   {
-   "id": "toples-tebak",
-   "title": "Toples Tebakan",
+   "id": "halal-pilah",
+   "title": "Halal atau Haram",
+   "cat": "islam",
+   "file": "61-halal-pilah.js",
+   "static100": 86,
+   "dyn100": 99,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 51,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 92,
+   "cls": "A",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "id": "jam-cocok",
+   "title": "Jam Cocok",
    "cat": "mat",
-   "file": "73-toples-tebak.js",
+   "file": "71-jam-cocok.js",
    "static100": 86,
    "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 18,
+   "avgActions": 17,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
@@ -41,10 +60,10 @@
    ]
   },
   {
-   "id": "lempar",
-   "title": "Lempar Tepat",
+   "id": "bayangan",
+   "title": "Cahaya & Bayangan",
    "cat": "sains",
-   "file": "18-lempar.js",
+   "file": "38-bayangan.js",
    "static100": 93,
    "dyn100": 100,
    "plays": 4,
@@ -55,24 +74,10 @@
    "eng100": null,
    "fun": 96,
    "cls": "A",
-   "sug": []
-  },
-  {
-   "id": "menara",
-   "title": "Menara Balok",
-   "cat": "mat",
-   "file": "31-menara.js",
-   "static100": 93,
-   "dyn100": 99,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 54,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 96,
-   "cls": "A",
-   "sug": []
+   "sug": [
+    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
   }
  ]
 }
