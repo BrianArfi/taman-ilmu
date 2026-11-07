@@ -4,7 +4,7 @@
    Tiap perbedaan punya area ketuk transparan (tombol) di KEDUA gambar. TK: 3 perbedaan besar per gambar. SD: 5 perbedaan.
    Bantu: ungkap satu perbedaan; ketukan ke-3 mengungkap semua sisanya. Tiga level gambar. */
 (function () {
-  const { h, svg } = TI;
+  const { h, svg, shuffle } = TI;
 
   const VW = 320, VH = 200;
   const OL = { stroke: '#51485f', 'stroke-width': 1.4, 'stroke-linejoin': 'round' };
@@ -215,8 +215,10 @@
 
   const pct = (v, total) => (v / total * 100).toFixed(3) + '%';
 
-  function gambarSvg(scene, aktif) {
-    return svg('svg', { viewBox: '0 0 ' + VW + ' ' + VH, class: 'bd-svg', preserveAspectRatio: 'xMidYMid slice', role: 'img', 'aria-label': scene.nama, focusable: 'false' }, scene.draw(aktif));
+  function gambarSvg(scene, aktif, cermin) {
+    const isi = scene.draw(aktif);
+    const bungkus = cermin ? G({ transform: 'translate(' + VW + ' 0) scale(-1 1)' }, isi) : isi;
+    return svg('svg', { viewBox: '0 0 ' + VW + ' ' + VH, class: 'bd-svg', preserveAspectRatio: 'xMidYMid slice', role: 'img', 'aria-label': scene.nama, focusable: 'false' }, bungkus);
   }
 
   TI.register({
@@ -235,11 +237,12 @@
       const total = SCENES.length * jumlah;
       let temuTotal = 0;
 
-      for (let si = 0; si < SCENES.length; si++) {
+      const urutan = shuffle(SCENES); // scene acak tiap main: lokasi jawaban pindah
+      for (let si = 0; si < urutan.length; si++) {
         if (!ctx.alive) return;
         ctx.progress(temuTotal, total);
         ctx.clear();
-        await main(SCENES[si], si); if (si < SCENES.length - 1 && ctx.alive) ctx.correct(null, { say: 'Hebat! Terus naik ke level berikutnya!' });
+        await main(urutan[si], si); if (si < urutan.length - 1 && ctx.alive) ctx.correct(null, { say: 'Hebat! Terus naik ke level berikutnya!' });
       }
       if (!ctx.alive) return;
       ctx.progress(total, total);
@@ -253,6 +256,7 @@
       function main(scene, si) {
         return new Promise((resolve) => {
           const diffs = scene.diffs.filter((d) => !tk || d.besar).slice(0, jumlah);
+          const cermin = Math.random() < 0.5; // 50%: gambar dicerminkan, jawaban pindah sisi
           const aktif = new Set(diffs.map((d) => d.id));
           const ditemu = new Set();
           let salahBeruntun = 0, bantu = 0, sibuk = false;
@@ -261,7 +265,7 @@
             ? 'Level 1: cari ' + jumlah + ' perbedaan antara gambar 1 dan gambar 2. Ketuk bagian yang berbeda!'
             : 'Level ' + (si + 1) + ': ' + scene.nama + '. Cari ' + jumlah + ' perbedaan!');
 
-          const bingkai = [gambarSvg(scene, new Set()), gambarSvg(scene, aktif)].map((gs, i) => {
+          const bingkai = [gambarSvg(scene, new Set(), cermin), gambarSvg(scene, aktif, cermin)].map((gs, i) => {
             const fr = h('div', { class: 'bd-frame', 'data-no': i + 1 }, gs, h('span', { class: 'bd-tag', 'aria-hidden': 'true' }, 'Gambar ' + (i + 1)));
             fr.addEventListener('click', (e) => ketukLain(e, fr));
             return fr;
@@ -270,7 +274,8 @@
           const pos = {};
           diffs.forEach((d) => {
             pos[d.id] = bingkai.map((fr, i) => {
-              const el = h('div', { class: 'bd-pos', style: 'left:' + pct(d.cx, VW) + ';top:' + pct(d.cy, VH) + ';width:' + pct(d.w, VW) + ';height:' + pct(d.h, VH) },
+              const cx = cermin ? VW - d.cx : d.cx; // ikut cermin: jawaban pindah sisi
+              const el = h('div', { class: 'bd-pos', style: 'left:' + pct(cx, VW) + ';top:' + pct(d.cy, VH) + ';width:' + pct(d.w, VW) + ';height:' + pct(d.h, VH) },
                 h('button', { type: 'button', class: 'bd-hot', 'aria-label': 'Perbedaan di gambar ' + (i + 1) }),
                 h('span', { class: 'bd-ring', 'aria-hidden': 'true' }));
               el.querySelector('button').addEventListener('click', (e) => { e.stopPropagation(); temukan(d.id, false); });

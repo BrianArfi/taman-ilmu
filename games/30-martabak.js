@@ -247,7 +247,7 @@
     });
     ctx.el.append(h('div', { class: 'mb-board' }, pic));
     await ctx.choose({
-      options: [2, 3, 4].map((v) => ({ node: angka(v), value: v, say: String(v), aria: v + ' potong', cls: 'is-big' })),
+      options: shuffle([2, 3, 4]).map((v) => ({ node: angka(v), value: v, say: String(v), aria: v + ' potong', cls: 'is-big' })),
       answer: n,
     });
   }

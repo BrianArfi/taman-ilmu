@@ -77,7 +77,7 @@
         ctx.correct(null, { say: 'Bagus! Terus naik ke kuis.' }); ctx.ask('Tahap 2: ada berapa rukun Islam?');
         ctx.el.append(h('div', { class: 'ti-card rk-kartu pop-in' }, h('div', { class: 'rk-ikon', 'aria-hidden': 'true' }, ISLAM.map((x) => h('span', null, x.icon)))));
         await ctx.choose({
-          options: [4, 5, 6].map((n) => ({ node: angka(n), value: n, say: String(n), aria: n + ' rukun', cls: 'is-big' })),
+          options: shuffle([4, 5, 6]).map((n) => ({ node: angka(n), value: n, say: String(n), aria: n + ' rukun', cls: 'is-big' })),
           answer: 5,
         });
         maju(6);
@@ -113,7 +113,7 @@
 
         ctx.clear();
         ctx.ask('Tahap 4: ada berapa rukun Iman?');
-        await ctx.choose({ options: [4, 5, 6, 7], answer: 6 });
+        await ctx.choose({ options: shuffle([4, 5, 6, 7]), answer: 6 });
       }
       if (!ctx.alive) return;
       maju(total);

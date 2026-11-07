@@ -30,8 +30,9 @@
     async start(ctx) {
       TI.style('bagi-permen', CSS);
       const ronde = ctx.isTK
-        ? [{ permen: 4, toples: 2 }, { permen: 6, toples: 2 }]
-        : [{ permen: 12, toples: 3 }, { permen: 16, toples: 4 }];
+        ? [{ permen: 4, toples: 2, sulit: 0 }, { permen: 6, toples: 2, sulit: 1 }]
+        : [{ permen: 12, toples: 3, sulit: 0 }, { permen: 15, toples: 3, sulit: 1 }];
+      ronde.sort((a, b) => a.sulit - b.sulit); // gampang dulu: tiap toples 4 lalu 5
 
       ctx.progress(0, ronde.length);
       for (let r = 0; r < ronde.length; r++) {
@@ -47,7 +48,7 @@
           [tiap + 1, tiap - 1, tiap + 2, tiap + toples].forEach((v) => { if (set.size < 4 && v > 0) set.add(v); });
           for (let g = tiap + 3; set.size < 4; g++) set.add(g);
           await ctx.choose({
-            options: [...set].sort((a, b) => a - b).map((v) => ({ label: String(v), value: v, say: v + ' permen' })),
+            options: shuffle([...set]).map((v) => ({ label: String(v), value: v, say: v + ' permen' })),
             answer: tiap,
             speakLabel: true,
           });

@@ -16,12 +16,12 @@
 
   // Pasangan [berat, ringan]: yang berat selalu menang kecuali babak sama berat.
   const PASANGAN = [
-    { berat: ['🍉', 'Semangka'], ringan: ['🍒', 'Ceri'] },
-    { berat: ['🧱', 'Bata'], ringan: ['🪶', 'Bulu'] },
-    { berat: ['🎒', 'Tas penuh buku'], ringan: ['🧦', 'Kaus kaki'] },
-    { berat: ['🥥', 'Kelapa'], ringan: ['🍇', 'Anggur'] },
-    { berat: ['📚', 'Buku tebal'], ringan: ['✏️', 'Pensil'] },
-    { berat: ['🎳', 'Bola bowling'], ringan: ['🎾', 'Bola tenis'] },
+    { berat: ['ðŸ‰', 'Semangka'], ringan: ['ðŸ’', 'Ceri'] },
+    { berat: ['ðŸ§±', 'Bata'], ringan: ['ðŸª¶', 'Bulu'] },
+    { berat: ['ðŸŽ’', 'Tas penuh buku'], ringan: ['ðŸ§¦', 'Kaus kaki'] },
+    { berat: ['ðŸ¥¥', 'Kelapa'], ringan: ['ðŸ‡', 'Anggur'] },
+    { berat: ['ðŸ“š', 'Buku tebal'], ringan: ['âœï¸', 'Pensil'] },
+    { berat: ['ðŸŽ³', 'Bola bowling'], ringan: ['ðŸŽ¾', 'Bola tenis'] },
   ];
   const kartu = ([ic, nama]) => h('span', null, h('span', { class: 'tb-ic', 'aria-hidden': 'true' }, ic), h('span', null, nama));
 
@@ -29,7 +29,7 @@
     id: 'tebak-berat',
     title: 'Tebak Berat',
     cat: 'mat',
-    icon: '🎒',
+    icon: 'ðŸŽ’',
     desc: 'Mana lebih berat? Tebak dengan kubus satuan.',
     async start(ctx) {
       TI.style('tebak-berat', CSS);
@@ -72,11 +72,11 @@
         } else if (r.tipe === 'sama') {
           ctx.ask('Mana yang lebih berat: 1 kg kapas atau 1 kg besi?');
           await ctx.choose({
-            options: [
+            options: shuffle([
               { label: 'Kapas', value: 'kapas', say: 'kapas' },
               { label: 'Sama berat', value: 'sama', say: 'sama berat' },
               { label: 'Besi', value: 'besi', say: 'besi' },
-            ],
+            ]),
             answer: 'sama',
           });
           ctx.note('1 kg kapas dan 1 kg besi sama beratnya. Kapas hanya terlihat lebih besar.', { title: 'Tahukah kamu?' });
@@ -84,7 +84,7 @@
         } else {
           // Estimasi: benda di timbangan setara K kubus.
           const K = 3 + Math.floor(Math.random() * 6); // 3-8
-          const benda = sample([['🍉', 'semangka'], ['📚', 'tumpukan buku'], ['🎒', 'tas'], ['🥥', 'kelapa']], 1)[0];
+          const benda = sample([['ðŸ‰', 'semangka'], ['ðŸ“š', 'tumpukan buku'], ['ðŸŽ’', 'tas'], ['ðŸ¥¥', 'kelapa']], 1)[0];
           const kubus = h('div', { class: 'tb-kubus', role: 'img', 'aria-label': K + ' kubus' });
           for (let i = 0; i < K; i++) kubus.append(h('i'));
           const timbang = h('div', { class: 'ti-panel tb-timbang pop-in' },

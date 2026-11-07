@@ -400,7 +400,7 @@
     const box = h('div', { class: 'ti-choices' });
     ctx.el.append(box);
     const r = await ctx.choose({
-      options: [{ value: 'm', label: '1 meter', say: 'satu meter' }, { value: 'cm', label: '50 cm', say: 'lima puluh sentimeter' }, { value: 'sama', label: 'Sama panjang', say: 'Sama panjang' }],
+      options: shuffle([{ value: 'm', label: '1 meter', say: 'satu meter' }, { value: 'cm', label: '50 cm', say: 'lima puluh sentimeter' }, { value: 'sama', label: 'Sama panjang', say: 'Sama panjang' }]),
       answer: 'm', into: box,
     });
     ctx.el.insertBefore(scene, box);

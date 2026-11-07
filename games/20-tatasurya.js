@@ -182,7 +182,7 @@
           const q = task.q;
           ctx.ask(q.text);
           if (q.numbers) {
-            await ctx.choose({ options: q.numbers.map((n) => ({ label: 'ke-' + n, value: n, say: 'ke-' + n })), answer: q.ans, speakLabel: false });
+            await ctx.choose({ options: shuffle(q.numbers).map((n) => ({ label: 'ke-' + n, value: n, say: 'ke-' + n })), answer: q.ans, speakLabel: false });
           } else {
             const others = q.fixed || sample(ORDER.filter((id) => id !== q.ans), 3);
             const ids = shuffle([q.ans, ...others]);
