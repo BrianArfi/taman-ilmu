@@ -310,7 +310,7 @@
             pos[i][0] += dr; pos[i][1] += dc;
             sel = i; gagal = 0;
             ctx.sfx('benar');
-            ctx.say('Lihat, mobil ' + cars[i].nama + ' digeser ke sini.');
+            ctx.say('Lihat cara benar: mobil ' + cars[i].nama + ' digeser ke sini.');
             const si = cars.findIndex((x) => x.star);
             if (pos[si][1] + cars[si].len - 1 === n - 1) { await menang(); return; }
             gambar();

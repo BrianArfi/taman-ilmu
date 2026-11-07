@@ -119,7 +119,7 @@
                 gagal = 0; ctx.mistakes++;
                 selesai = true;
                 selTarget.forEach((t) => { if (!kartu[t].disabled) buka(t, 'is-show'); });
-                ctx.say('Lihat, yang kuning ini yang tadi berkedip.');
+                ctx.say('Lihat, yang kuning ini yang tadi berkedip. Coba lagi di ronde berikutnya ya!');
                 await ctx.wait(1800);
                 if (ctx.alive) { ctx.progress(rd + 1, total); resolve(); }
               }

@@ -238,7 +238,7 @@
             done[target] = true;
             mandek = 0;
             ctx.sfx('benar');
-            ctx.say('Lihat, satu kabel terisi. Lanjutkan yang lain!');
+            ctx.say('Lihat cara benar: satu kabel terisi. Lanjutkan yang lain!');
             const sisa = done.findIndex((d) => !d);
             pilih = sisa < 0 ? 0 : sisa;
             gambar();

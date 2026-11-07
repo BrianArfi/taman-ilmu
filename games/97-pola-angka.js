@@ -52,6 +52,7 @@
       let ke = 0;
       ctx.series(soal, async ({ id, awal, tanyaAturan }) => {
         ke++;
+        const salah0 = ctx.mistakes;
         const at = AT[id];
         const deret = barisan(awal, at.f, 5);
         const jawab = deret[4];
@@ -87,6 +88,11 @@
           kotak.classList.add('is-jawab');
           ctx.sfx('pop');
           await ctx.wait(400);
+        }
+        const salah = ctx.mistakes - salah0;
+        if (salah >= 3) {
+          ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Tips: lihat selisih dua angka yang berdekatan!'));
+          ctx.say('Tips. Lihat selisih dua angka yang berdekatan!');
         }
       }, {
         lesson: tk
