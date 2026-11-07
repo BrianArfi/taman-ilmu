@@ -76,11 +76,17 @@
       let ke = 0; return ctx.series(soal, async (s) => {
         ke++; if (ke === 4) ctx.correct(null, { say: ctx.isTK ? 'Bagus! Setengah jalan!' : 'Bagus! Terus naik ke yang sulit.' }); ctx.ask(s.q);
         ctx.el.append(h('div', { class: 'adab-card pop-in', 'aria-hidden': 'true' }, h('span', { class: 'adab-ic' }, s.ic))); ctx.sfx('pop');
+        const m0 = ctx.mistakes;
         await ctx.choose({
           options: shuffle([s.a, ...s.x]),
           answer: s.a,
           layout: 'is-col',
         });
+        const salah = ctx.mistakes - m0;
+        if (salah >= 3) {
+          ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Ingat-ingat arti tiap ucapan ya!'));
+          ctx.say('Ingat-ingat arti tiap ucapan ya!');
+        }
         // Ucapan: tampilkan dan bacakan artinya. Perbuatan: langsung lanjut.
         const arti = ARTI[s.a];
         if (arti) {

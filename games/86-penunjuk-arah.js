@@ -115,7 +115,7 @@
                   putarKe(t.deg);
                   const benar = [...grid.children].find((x) => x.textContent === t.label);
                   if (benar) benar.classList.add('is-show');
-                  await ctx.sayWait('Arah ' + t.label + ' ada di sana. Lihat jarumnya.');
+                  await ctx.sayWait('Arah ' + t.label + ' ada di sana. Lihat jarumnya. Coba lagi di soal berikutnya ya!');
                   selesai();
                 }
               }

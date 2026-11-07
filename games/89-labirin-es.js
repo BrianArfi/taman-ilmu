@@ -170,7 +170,7 @@
           async function solusiOtomatis() {
             tutup = true;
             msg.textContent = 'Lihat jalannya ya.';
-            await ctx.sayWait('Langkahnya habis. Lihat jalan yang benar.');
+            await ctx.sayWait('Langkahnya habis. Lihat cara benar sampai bendera.');
             const path = jalur(map, r, c);
             for (const d of path) {
               if (!ctx.alive) break;

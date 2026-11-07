@@ -82,11 +82,17 @@
           const ucap = 'Balok ' + BENTUK[k.bi].nama + (k.putar ? ' miring' : '');
           return { node, value: k.benar ? 'ya' : 'tidak' + i, say: ucap, aria: ucap, cls: 'is-big' };
         });
+        const m0 = ctx.mistakes;
         await ctx.choose({
           options: opsi,
           answer: 'ya',
           speakLabel: true,
         });
+        const salah = ctx.mistakes - m0;
+        if (salah >= 3) {
+          ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Tips: putar bentuknya dalam bayanganmu!'));
+          ctx.say('Tips. Putar bentuknya dalam bayanganmu!');
+        }
         // Balok masuk lubang: lubang ikut berwarna.
         lsvg.querySelectorAll('[fill]').forEach((el) => el.setAttribute('fill', warna));
         ctx.sfx('pop');
