@@ -64,6 +64,28 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
   simpan `reports/stats-YYYYMMDD.json`. Makin banyak berkas stats, makin
   hidup bobot engagement 20% dan skor promo.
 
+## 6. Loop Ide (rekursif, harian)
+
+Eksekusi pola murah ada plafonnya (A99). Supaya naik terus, ide baru dicari
+tiap hari oleh tim multi-agent, lalu dieksekusi loop 30 mnt:
+
+1. **Cari**: kron harian `Loop Ide Taman Ilmu` memanggil Workflow dengan
+   skrip kanonis `tools/improve/ide-workflow.js` (3 anak read-only:
+   playtest-anak, mekanik-viral, lensa-ortu + 1 sintesis berperingkat).
+2. **Catat**: gabungkan ke `reports/ide-backlog.md` (dedup vs TODO lama,
+   tandai DONE yang sudah dibangun via git log, urut dampak-per-effort,
+   maks 12 TODO). Commit + push (berkas md saja, tanpa cek live).
+3. **Kerjakan**: watcher 30 mnt, jika tidak ada batch murah, ambil 1 ide
+   TODO teratas (lewati effort L dan flag ustadz=ya) sebagai siklus itu,
+   lalu tandai DONE + catat hasilnya di laporan siklus.
+4. **Ukur**: hasilnya terlihat di `tren.jsonl` + `promo-*.json` + stats HP,
+   dan loop ide berikutnya membaca semuanya. Ini rekursinya.
+
+Aturan: ide tidak boleh mengubah teks Arab/fakta agama secara otomatis
+(flag ustadz=ya selalu TOLAK/tahan untuk review). Jika `.cycle-lock` ada
+saat kron ide menyala, lewati hari itu (tulis heartbeat saja) supaya tidak
+tabrakan push dengan loop eksekusi.
+
 ## Kadensi
 
 - Siklus ringan (otomatis/agen): 1 batch 3-5 game terbawah per putaran.
