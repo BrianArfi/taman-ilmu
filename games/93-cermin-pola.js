@@ -117,7 +117,7 @@
                 kanan[r][cc] = cermin(r, cc);
                 tombol[r * (n / 2) + cc].classList.toggle('is-on', kanan[r][cc]);
               }
-              ctx.say('Lihat caranya, kanan dibuat sama dengan kiri.');
+              ctx.say('Lihat caranya, kanan dibuat sama dengan kiri. Nanti coba lagi di babak berikutnya ya!');
               await ctx.wait(1500);
               if (ctx.alive) menang();
             }

@@ -93,7 +93,7 @@
               if (gagal >= 3) {
                 selesai = true; ctx.mistakes++;
                 tombol[posisi].classList.add('is-tunjuk');
-                ctx.say('Lihat, yang ini yang beda.');
+                ctx.say('Lihat, yang ini yang beda. Coba lagi di ronde berikutnya ya!');
                 await ctx.wait(1700);
                 if (ctx.alive) { ctx.progress(i + 1, total); resolve(); }
               }

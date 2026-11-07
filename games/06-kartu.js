@@ -235,6 +235,7 @@
         salah++;
         await ctx.wait((ctx.isTK ? 1100 : 950) + (salah >= 3 ? 800 : 0)); // makin lama lihat kalau sering salah
         tutup(a); tutup(b);
+        if (salah === 3) ctx.say('Sering salah tidak apa. Lihat baik-baik, lalu coba lagi!');
       }
       kuncikan(false);
     }

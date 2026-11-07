@@ -82,6 +82,7 @@
               const pastiSalah = v % n !== 0 || v < target[pos];
               if (pastiSalah) { b.disabled = true; b.classList.add('is-out'); }
               await ctx.wrong(b, { say: 'Belum urutannya. Cari ' + target[pos] + '!' });
+              if (gagal === 3) ctx.say('Lihat bintang yang berkedip, lalu coba lagi!');
               if (gagal >= 3 && btns[target[pos]] && !btns[target[pos]].disabled) {
                 btns[target[pos]].classList.add('is-hint');
               }
