@@ -152,6 +152,36 @@
     }
   }
 
+  // Satu ketuk: salin isi tamanIlmu.stats.v1 ke clipboard untuk ditempel ke Brian.
+  function salinStats(ev) {
+    const btn = ev.currentTarget;
+    const txt = localStorage.getItem(STORE) || '{}';
+    const done = (ok) => {
+      btn.textContent = ok ? 'Tersalin! Tempel ke Brian ya.' : 'Gagal menyalin, coba lagi.';
+      try { TI.sfx(ok ? 'benar' : 'salah'); } catch (e) { /* abaikan */ }
+      setTimeout(() => { btn.textContent = 'Salin data statistik'; }, 2500);
+    };
+    const viaClip = () => new Promise((res) => {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) return res(false);
+      let s = false;
+      const t = setTimeout(() => { if (!s) { s = true; res(false); } }, 1500);
+      navigator.clipboard.writeText(txt).then(
+        () => { if (!s) { s = true; clearTimeout(t); res(true); } },
+        () => { if (!s) { s = true; clearTimeout(t); res(false); } });
+    });
+    const viaTeks = () => {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.append(ta); ta.select();
+        const ok = document.execCommand('copy');
+        ta.remove();
+        return ok;
+      } catch (e) { return false; }
+    };
+    viaClip().then((ok) => done(ok || viaTeks()));
+  }
+
   function render() {
     const m = summary();
     const byId = (id) => TI.games.find((g) => g.id === id);
@@ -175,6 +205,9 @@
       })) : TI.h('p', { class: 'board-note' }, 'Belum ada. Main dulu yuk.'),
       TI.h('h3', { class: 'stat-h' }, 'Banner promosi'),
       TI.h('p', { class: 'board-note' }, 'Dilihat ' + m.promoViews + ' kali, diklik ' + m.promoClicks + ' kali (' + m.promoCTR + '%).'),
+      TI.h('h3', { class: 'stat-h' }, 'Kirim data ke Brian'),
+      TI.h('p', { class: 'board-note' }, 'Data ini dipakai untuk memilih game yang diperbaiki duluan. Salin, lalu tempel di chat.'),
+      TI.h('p', null, TI.h('button', { type: 'button', class: 'ti-btn', onclick: salinStats }, 'Salin data statistik')),
       TI.h('h3', { class: 'stat-h' }, 'Seluruh pemain'),
       TI.h('div', { class: 'stat-global', id: 'stat-global' }, TI.h('p', { class: 'board-note' }, 'Mengambil data global...')));
     fetchGlobal(app.querySelector('#stat-global'));
