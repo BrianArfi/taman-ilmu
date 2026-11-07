@@ -161,50 +161,6 @@
    ]
   },
   {
-   "file": "07-adab.js",
-   "id": "adab",
-   "title": "Ucapan & Adab Baik",
-   "cat": "islam",
-   "bytes": 6169,
-   "soal": 8,
-   "sig": {
-    "aksi": 0,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "96-balok-pas.js",
-   "id": "balok-pas",
-   "title": "Balok yang Pas",
-   "cat": "logika",
-   "bytes": 5433,
-   "soal": 6,
-   "sig": {
-    "aksi": 0,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
    "file": "82-daur-hidup.js",
    "id": "daur-hidup",
    "title": "Daur Hidup Kacang",
@@ -293,49 +249,6 @@
    ]
   },
   {
-   "file": "89-labirin-es.js",
-   "id": "labirin-es",
-   "title": "Labirin Es",
-   "cat": "logika",
-   "bytes": 9957,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "86-penunjuk-arah.js",
-   "id": "penunjuk-arah",
-   "title": "Penunjuk Arah",
-   "cat": "sains",
-   "bytes": 6203,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
-  },
-  {
    "file": "04-shalat.js",
    "id": "shalat",
    "title": "Shalat 5 Waktu",
@@ -402,6 +315,27 @@
    ]
   },
   {
+   "file": "07-adab.js",
+   "id": "adab",
+   "title": "Ucapan & Adab Baik",
+   "cat": "islam",
+   "bytes": 6474,
+   "soal": 8,
+   "sig": {
+    "aksi": 0,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
+   ]
+  },
+  {
    "file": "16-apung.js",
    "id": "apung",
    "title": "Tenggelam atau Terapung",
@@ -462,6 +396,27 @@
    "static100": 86,
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "file": "96-balok-pas.js",
+   "id": "balok-pas",
+   "title": "Balok yang Pas",
+   "cat": "logika",
+   "bytes": 5752,
+   "soal": 6,
+   "sig": {
+    "aksi": 0,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
    ]
   },
   {
@@ -950,6 +905,27 @@
    ]
   },
   {
+   "file": "89-labirin-es.js",
+   "id": "labirin-es",
+   "title": "Labirin Es",
+   "cat": "logika",
+   "bytes": 10171,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
    "file": "56-lari-masjid.js",
    "id": "lari-masjid",
    "title": "Lari ke Masjid",
@@ -1141,6 +1117,27 @@
    "title": "Parkir Pintar",
    "cat": "logika",
    "bytes": 15255,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "file": "86-penunjuk-arah.js",
+   "id": "penunjuk-arah",
+   "title": "Penunjuk Arah",
+   "cat": "sains",
+   "bytes": 6236,
    "soal": null,
    "sig": {
     "aksi": 1,

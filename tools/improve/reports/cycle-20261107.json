@@ -3,72 +3,72 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "parkir",
-   "title": "Parkir Pintar",
+   "id": "labirin-es",
+   "title": "Labirin Es",
    "cat": "logika",
-   "file": "91-parkir.js",
+   "file": "89-labirin-es.js",
+   "static100": 86,
+   "dyn100": 98,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 102,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 91,
+   "cls": "A",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "id": "adab",
+   "title": "Ucapan & Adab Baik",
+   "cat": "islam",
+   "file": "07-adab.js",
    "static100": 86,
    "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 19,
+   "avgActions": 24,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
    "fun": 92,
    "cls": "A",
    "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
    ]
   },
   {
-   "id": "pola-angka",
-   "title": "Pola Angka",
+   "id": "balok-pas",
+   "title": "Balok yang Pas",
    "cat": "logika",
-   "file": "97-pola-angka.js",
+   "file": "96-balok-pas.js",
    "static100": 86,
-   "dyn100": 99,
+   "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 70,
+   "avgActions": 15,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
    "fun": 92,
    "cls": "A",
    "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
    ]
   },
   {
-   "id": "sambung-kabel",
-   "title": "Sambung Kabel",
-   "cat": "logika",
-   "file": "94-sambung-kabel.js",
+   "id": "penunjuk-arah",
+   "title": "Penunjuk Arah",
+   "cat": "sains",
+   "file": "86-penunjuk-arah.js",
    "static100": 86,
    "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 79,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 92,
-   "cls": "A",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
-  },
-  {
-   "id": "balik-ingat",
-   "title": "Balik dan Ingat",
-   "cat": "logika",
-   "file": "92-balik-ingat.js",
-   "static100": 86,
-   "dyn100": 99,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 85,
+   "avgActions": 52,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
