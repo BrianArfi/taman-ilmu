@@ -161,72 +161,6 @@
    ]
   },
   {
-   "file": "35-grafik.js",
-   "id": "grafik",
-   "title": "Panen Buah & Grafik",
-   "cat": "mat",
-   "bytes": 15368,
-   "soal": 3,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "88-kode-warna.js",
-   "id": "kode-warna",
-   "title": "Tebak Kode Warna",
-   "cat": "logika",
-   "bytes": 9155,
-   "soal": 4,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "game puzzle wajib punya tombol Bantu (SPEC 7.1)"
-   ]
-  },
-  {
-   "file": "52-tertib-shalat.js",
-   "id": "tertib-shalat",
-   "title": "Tertib Gerakan Shalat",
-   "cat": "islam",
-   "bytes": 3903,
-   "soal": 3,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
    "file": "07-adab.js",
    "id": "adab",
    "title": "Ucapan & Adab Baik",
@@ -604,6 +538,27 @@
    ]
   },
   {
+   "file": "35-grafik.js",
+   "id": "grafik",
+   "title": "Panen Buah & Grafik",
+   "cat": "mat",
+   "bytes": 15687,
+   "soal": 3,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
    "file": "23-haji.js",
    "id": "haji",
    "title": "haji",
@@ -835,6 +790,27 @@
    "static100": 86,
    "sug": [
     "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
+   ]
+  },
+  {
+   "file": "88-kode-warna.js",
+   "id": "kode-warna",
+   "title": "Tebak Kode Warna",
+   "cat": "logika",
+   "bytes": 10290,
+   "soal": 4,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
    ]
   },
   {
@@ -1488,6 +1464,27 @@
    "cat": "logika",
    "bytes": 7464,
    "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "file": "52-tertib-shalat.js",
+   "id": "tertib-shalat",
+   "title": "Tertib Gerakan Shalat",
+   "cat": "islam",
+   "bytes": 4191,
+   "soal": 3,
    "sig": {
     "aksi": 1,
     "feedback": 2,

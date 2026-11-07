@@ -135,6 +135,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 26 (7 Nov 2026)**: daur-hidup+jam-shalat+shalat+
   sirah-urut 88→92.
   Detail: `reports/cycle-20261107-s26.md`.
+- **Siklus 27 (7 Nov 2026)**: grafik+kode-warna+tertib-shalat
+  88→92. Semua B non-best-effort habis (A93 B6 C1).
+  Detail: `reports/cycle-20261107-s27.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar
