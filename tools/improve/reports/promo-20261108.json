@@ -1,0 +1,149 @@
+{
+ "date": "20261108",
+ "adaData": false,
+ "top": [
+  {
+   "id": "timbangan",
+   "title": "Timbangan Seimbang",
+   "cat": "sains",
+   "soal": 6,
+   "static100": 100,
+   "bytes": 17768,
+   "skor": 100,
+   "sementara": true,
+   "alasan": [],
+   "s": 0,
+   "f": 0
+  },
+  {
+   "id": "bayangan",
+   "title": "Cahaya & Bayangan",
+   "cat": "sains",
+   "soal": 7,
+   "static100": 93,
+   "bytes": 24881,
+   "skor": 100,
+   "sementara": true,
+   "alasan": [],
+   "s": 0,
+   "f": 0
+  },
+  {
+   "id": "martabak",
+   "title": "Bagi Martabak",
+   "cat": "mat",
+   "soal": 5,
+   "static100": 93,
+   "bytes": 20548,
+   "skor": 100,
+   "sementara": true,
+   "alasan": [],
+   "s": 0,
+   "f": 0
+  },
+  {
+   "id": "hujan",
+   "title": "Siklus Air & Cuaca",
+   "cat": "sains",
+   "soal": 6,
+   "static100": 93,
+   "bytes": 19458,
+   "skor": 100,
+   "sementara": true,
+   "alasan": [],
+   "s": 0,
+   "f": 0
+  },
+  {
+   "id": "hijriah",
+   "title": "Kereta Bulan Hijriah",
+   "cat": "islam",
+   "soal": 4,
+   "static100": 93,
+   "bytes": 18951,
+   "skor": 100,
+   "sementara": true,
+   "alasan": [],
+   "s": 0,
+   "f": 0
+  }
+ ],
+ "bawah": [
+  {
+   "id": "loncat",
+   "title": "Loncat Angka",
+   "cat": "mat",
+   "soal": 8,
+   "static100": 86,
+   "bytes": 21230,
+   "skor": 79,
+   "sementara": true,
+   "alasan": [
+    "tanpa progresi (anak tak balik)"
+   ],
+   "s": 0,
+   "f": 0
+  },
+  {
+   "id": "raja-taman",
+   "title": "Raja Taman",
+   "cat": "logika",
+   "soal": 10,
+   "static100": 86,
+   "bytes": 9051,
+   "skor": 79,
+   "sementara": true,
+   "alasan": [
+    "tanpa progresi (anak tak balik)"
+   ],
+   "s": 0,
+   "f": 0
+  },
+  {
+   "id": "listrik",
+   "title": "Rangkaian Listrik",
+   "cat": "sains",
+   "soal": 2,
+   "static100": 86,
+   "bytes": 28656,
+   "skor": 71,
+   "sementara": true,
+   "alasan": [
+    "sesi 2 soal (ideal 3-12)"
+   ],
+   "s": 0,
+   "f": 0
+  },
+  {
+   "id": "wujud",
+   "title": "Es, Air, Uap",
+   "cat": "sains",
+   "soal": 2,
+   "static100": 86,
+   "bytes": 18189,
+   "skor": 71,
+   "sementara": true,
+   "alasan": [
+    "sesi 2 soal (ideal 3-12)"
+   ],
+   "s": 0,
+   "f": 0
+  },
+  {
+   "id": "hijaiyah",
+   "title": "Tebak Huruf Hijaiyah",
+   "cat": "islam",
+   "soal": 8,
+   "static100": 50,
+   "bytes": 2418,
+   "skor": 64,
+   "sementara": true,
+   "alasan": [
+    "tanpa progresi (anak tak balik)",
+    "kuis murni (tak layak cuplikan video)"
+   ],
+   "s": 0,
+   "f": 0
+  }
+ ]
+}

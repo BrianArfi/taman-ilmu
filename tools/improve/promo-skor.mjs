@@ -65,5 +65,6 @@ const kat = {};
 for (const g of semua) { kat[g.cat] = kat[g.cat] || { n: 0, sum: 0 }; kat[g.cat].n++; kat[g.cat].sum += g.skor; }
 const arah = Object.entries(kat).map(([k, v]) => ({ k, r: Math.round(v.sum / v.n) })).sort((a, b) => b.r - a.r);
 console.log('\narah promosi (rerata skor per kategori): ' + arah.map((a) => `${a.k} ${a.r}`).join(', '));
-fs.writeFileSync(path.join(rep, 'promo-20261107.json'), JSON.stringify({ date: R.date, adaData, top: semua.slice(0, topN), bawah: semua.slice(-5) }, null, 1));
-console.log('tersimpan: tools/improve/reports/promo-20261107.json');
+const promoName = `promo-${R.date.replaceAll('-', '')}.json`;
+fs.writeFileSync(path.join(rep, promoName), JSON.stringify({ date: R.date, adaData, top: semua.slice(0, topN), bawah: semua.slice(-5) }, null, 1));
+console.log('tersimpan: tools/improve/reports/' + promoName);
