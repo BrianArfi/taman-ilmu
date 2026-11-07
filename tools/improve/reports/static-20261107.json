@@ -26,29 +26,6 @@
    ]
   },
   {
-   "file": "100-raja-taman.js",
-   "id": "raja-taman",
-   "title": "Raja Taman",
-   "cat": "logika",
-   "bytes": 8357,
-   "soal": 10,
-   "sig": {
-    "aksi": 0,
-    "feedback": 2,
-    "ramp": 0,
-    "failsoft": 2,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 71,
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
    "file": "90-tangram.js",
    "id": "tangram",
    "title": "Tangram Rumah",
@@ -1116,6 +1093,28 @@
    },
    "static100": 86,
    "sug": []
+  },
+  {
+   "file": "100-raja-taman.js",
+   "id": "raja-taman",
+   "title": "Raja Taman",
+   "cat": "logika",
+   "bytes": 9051,
+   "soal": 10,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 0,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
   },
   {
    "file": "76-roket-air.js",

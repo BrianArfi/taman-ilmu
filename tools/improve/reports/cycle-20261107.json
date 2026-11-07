@@ -3,60 +3,23 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "rumah-makhluk",
-   "title": "Rumah Makhluk",
-   "cat": "sains",
-   "file": "78-rumah-makhluk.js",
-   "static100": 86,
-   "dyn100": 99,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 75,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 92,
-   "cls": "A",
-   "sug": [
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "id": "sortir-bangun",
-   "title": "Sortir Bangun",
-   "cat": "mat",
-   "file": "72-sortir-bangun.js",
-   "static100": 86,
-   "dyn100": 99,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 66,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 92,
-   "cls": "A",
-   "sug": [
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "id": "tebak-berat",
-   "title": "Tebak Berat",
-   "cat": "mat",
-   "file": "68-tebak-berat.js",
+   "id": "raja-taman",
+   "title": "Raja Taman",
+   "cat": "logika",
+   "file": "100-raja-taman.js",
    "static100": 86,
    "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 11,
+   "avgActions": 17,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
    "fun": 92,
    "cls": "A",
    "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   }
  ]

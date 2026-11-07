@@ -145,6 +145,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 29 (7 Nov 2026)**: rumah-makhluk+sortir-bangun+
   tebak-berat 88→92 via kibor 1-4 (A97 B2 C1).
   Detail: `reports/cycle-20261107-s29.md`.
+- **Siklus 30 (7 Nov 2026)**: raja-taman 84→92 via kibor +
+  tombol ulangi (tangram stand down, A98 B1 C1).
+  Detail: `reports/cycle-20261107-s30.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar
