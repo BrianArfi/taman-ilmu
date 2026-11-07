@@ -132,6 +132,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 25 (7 Nov 2026)**: adab+balok-pas+penunjuk-arah 88→92,
   labirin-es 88→91.
   Detail: `reports/cycle-20261107-s25.md`.
+- **Siklus 26 (7 Nov 2026)**: daur-hidup+jam-shalat+shalat+
+  sirah-urut 88→92.
+  Detail: `reports/cycle-20261107-s26.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar
