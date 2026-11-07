@@ -151,6 +151,9 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 31 (7 Nov 2026)**: tangram 84→92 via 2 tahap SD +
   kibor (A99 B0 C1, misi selesai).
   Detail: `reports/cycle-20261107-s31.md`.
+- **Siklus 34 (7 Nov 2026)**: tombol Salin di #/statistik;
+  pipa engagement 20% terbukti hidup (eng 80). Minta data HP.
+  Detail: `reports/cycle-20261107-s34.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar

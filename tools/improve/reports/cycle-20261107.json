@@ -3,6 +3,27 @@
  "version": "improve-v1.0",
  "rows": [
   {
+   "id": "hijaiyah",
+   "title": "Tebak Huruf Hijaiyah",
+   "cat": "islam",
+   "file": "01-hijaiyah.js",
+   "static100": 50,
+   "dyn100": 100,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 21,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 73,
+   "cls": "B",
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
+    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
+   ]
+  },
+  {
    "id": "tangram",
    "title": "Tangram Rumah",
    "cat": "logika",
@@ -11,7 +32,7 @@
    "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 40,
+   "avgActions": 36,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
