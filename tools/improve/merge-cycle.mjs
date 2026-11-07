@@ -32,7 +32,10 @@ if (statsPath) {
 function runSmoke() {
   return new Promise((resolve) => {
     execFile('node', ['tools/smoke.mjs', ...ids, '--phone', maxArg, '--time=150'],
-      { cwd: root, maxBuffer: 8 * 1024 * 1024 }, (err, stdout) => resolve(stdout || ''));
+      { cwd: root, maxBuffer: 8 * 1024 * 1024 }, (err, stdout, stderr) => {
+        if (!stdout || !stdout.trim()) console.error('smoke anak gagal: ' + ((err && err.message) || '').split('\n')[0] + ' / ' + (stderr || '').slice(0, 300));
+        resolve(stdout || '');
+      });
   });
 }
 

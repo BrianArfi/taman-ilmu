@@ -3,44 +3,131 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "hijaiyah",
-   "title": "Tebak Huruf Hijaiyah",
-   "cat": "islam",
-   "file": "01-hijaiyah.js",
-   "static100": 50,
+   "id": "beda",
+   "title": "Cari Perbedaan",
+   "cat": "logika",
+   "file": "46-beda.js",
+   "static100": 86,
    "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 21,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 73,
-   "cls": "B",
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
-    "sfx cuma 0x: bunyikan tiap aksi berhasil/gagal",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil"
-   ]
-  },
-  {
-   "id": "tangram",
-   "title": "Tangram Rumah",
-   "cat": "logika",
-   "file": "90-tangram.js",
-   "static100": 86,
-   "dyn100": 99,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 36,
+   "avgActions": 12,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
    "fun": 92,
    "cls": "A",
    "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+    "tambah variasi aksi kedua biar tidak monoton"
    ]
+  },
+  {
+   "id": "ukur",
+   "title": "Ayo Mengukur",
+   "cat": "mat",
+   "file": "36-ukur.js",
+   "static100": 86,
+   "dyn100": 100,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 27,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 92,
+   "cls": "A",
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "id": "tebak-berat",
+   "title": "Tebak Berat",
+   "cat": "mat",
+   "file": "68-tebak-berat.js",
+   "static100": 86,
+   "dyn100": 100,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 10,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 92,
+   "cls": "A",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "id": "martabak",
+   "title": "Bagi Martabak",
+   "cat": "mat",
+   "file": "30-martabak.js",
+   "static100": 93,
+   "dyn100": 98,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 100,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 95,
+   "cls": "A",
+   "sug": []
+  },
+  {
+   "id": "rukun",
+   "title": "Rukun Islam & Iman",
+   "cat": "islam",
+   "file": "03-rukun.js",
+   "static100": 93,
+   "dyn100": 99,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 39,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 96,
+   "cls": "A",
+   "sug": []
+  },
+  {
+   "id": "tatasurya",
+   "title": "Jelajah Tata Surya",
+   "cat": "sains",
+   "file": "20-tatasurya.js",
+   "static100": 93,
+   "dyn100": 100,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 27,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 96,
+   "cls": "A",
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "id": "bagi-permen",
+   "title": "Bagi Permen",
+   "cat": "mat",
+   "file": "70-bagi-permen.js",
+   "static100": 93,
+   "dyn100": 99,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 78,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 96,
+   "cls": "A",
+   "sug": []
   }
  ]
 }

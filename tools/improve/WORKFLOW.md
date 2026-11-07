@@ -44,8 +44,25 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
    review ustadz/guru TPA sebelum push, lalu kabari grup keluarga).
 4. **Gerak SPEC 4**: motion-lint 0 error untuk file yang diubah.
 5. **Deploy = push ke main**: standing gas dari Brian (5 Nov 2026) buat
-   tiap siklus yang lolos gerbang 1-4. Tiap push dicatat di laporan siklus
+   tiap siklus yang lolos semua gerbang. Tiap push dicatat di laporan siklus
    (commit + cek live). Tanpa standing gas, push nunggu kata "gas".
+6. **Acak jawaban**: `node tools/cek-acakan.mjs` harus OK. Jawaban kuis
+   tidak boleh selalu di posisi yang sama (anak menghafal letak, bukan
+   belajar). Situs options baru yang urutan-tetap harus masuk allowlist
+   beralasan atau diacak dulu baru push.
+
+## 5. Promosi + pantau rekursif
+
+- `node tools/improve/promo-skor.mjs [--stats=s.json]`: skor promosi 0-100
+  per game (siap dipromosikan = sesi pas + visual + progresi + ramah gagal
+  + interaktif, lalu finish-rate dan bintang kalau ada data nyata).
+  Keluaran: top-10 siap promo, 5 terbawah + cara naik, arah kategori.
+- `node tools/improve/tren.mjs`: catat 1 snapshot per tanggal ke
+  `reports/tren.jsonl`, cetak delta vs snapshot sebelumnya. Dijalankan
+  tiap siklus sehingga tren tercatat otomatis (rekursif).
+- Data nyata: dari HP anak via `#/statistik` -> Salin data statistik ->
+  simpan `reports/stats-YYYYMMDD.json`. Makin banyak berkas stats, makin
+  hidup bobot engagement 20% dan skor promo.
 
 ## Kadensi
 
@@ -154,6 +171,10 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 34 (7 Nov 2026)**: tombol Salin di #/statistik;
   pipa engagement 20% terbukti hidup (eng 80). Minta data HP.
   Detail: `reports/cycle-20261107-s34.md`.
+- **Siklus 51 (7 Nov 2026)**: 8 jawaban posisi-tetap diacak (beda dicermin
+  + scene acak; bagi-permen SD yang tadinya selalu tombol ke-2).
+  Uji regresi `tools/cek-acakan.mjs` (gerbang 6) + `promo-skor.mjs` +
+  `tren.mjs` rekursif. Detail: `reports/cycle-20261107-s51.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar

@@ -178,7 +178,7 @@
    "id": "beda",
    "title": "Cari Perbedaan",
    "cat": "logika",
-   "bytes": 22569,
+   "bytes": 23362,
    "soal": 3,
    "sig": {
     "aksi": 1,
@@ -1391,7 +1391,7 @@
    "id": "tebak-berat",
    "title": "Tebak Berat",
    "cat": "mat",
-   "bytes": 6233,
+   "bytes": 6278,
    "soal": 3,
    "sig": {
     "aksi": 1,
@@ -1517,7 +1517,7 @@
    "id": "ukur",
    "title": "Ayo Mengukur",
    "cat": "mat",
-   "bytes": 28215,
+   "bytes": 28224,
    "soal": 3,
    "sig": {
     "aksi": 2,
@@ -1664,7 +1664,7 @@
    "id": "bagi-permen",
    "title": "Bagi Permen",
    "cat": "mat",
-   "bytes": 9456,
+   "bytes": 9770,
    "soal": null,
    "sig": {
     "aksi": 2,
@@ -1882,7 +1882,7 @@
    "id": "martabak",
    "title": "Bagi Martabak",
    "cat": "mat",
-   "bytes": 20539,
+   "bytes": 20548,
    "soal": 5,
    "sig": {
     "aksi": 2,
@@ -1958,7 +1958,7 @@
    "id": "rukun",
    "title": "Rukun Islam & Iman",
    "cat": "islam",
-   "bytes": 5555,
+   "bytes": 5573,
    "soal": 3,
    "sig": {
     "aksi": 2,
@@ -2036,7 +2036,7 @@
    "id": "tatasurya",
    "title": "Jelajah Tata Surya",
    "cat": "sains",
-   "bytes": 15422,
+   "bytes": 15431,
    "soal": 3,
    "sig": {
     "aksi": 2,
