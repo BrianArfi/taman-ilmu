@@ -138,6 +138,10 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 - **Siklus 27 (7 Nov 2026)**: grafik+kode-warna+tertib-shalat
   88→92. Semua B non-best-effort habis (A93 B6 C1).
   Detail: `reports/cycle-20261107-s27.md`.
+- **Siklus 28 (7 Nov 2026)**: puzzle 84→96, rumah-makhluk+
+  sortir-bangun+tebak-berat 84→88. Label best-effort dicabut
+  untuk 4 game ini (A94 B5 C1).
+  Detail: `reports/cycle-20261107-s28.md`.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar

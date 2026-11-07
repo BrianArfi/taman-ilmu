@@ -26,28 +26,6 @@
    ]
   },
   {
-   "file": "24-puzzle.js",
-   "id": "puzzle",
-   "title": "Puzzle Masjid",
-   "cat": "islam",
-   "bytes": 22713,
-   "soal": null,
-   "sig": {
-    "aksi": 2,
-    "feedback": 1,
-    "ramp": 0,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 71,
-   "sug": [
-    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
-  },
-  {
    "file": "100-raja-taman.js",
    "id": "raja-taman",
    "title": "Raja Taman",
@@ -67,52 +45,6 @@
    "sug": [
     "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
     "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "78-rumah-makhluk.js",
-   "id": "rumah-makhluk",
-   "title": "Rumah Makhluk",
-   "cat": "sains",
-   "bytes": 7025,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 1,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 71,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "sfx cuma 2x: bunyikan tiap aksi berhasil/gagal",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "72-sortir-bangun.js",
-   "id": "sortir-bangun",
-   "title": "Sortir Bangun",
-   "cat": "mat",
-   "bytes": 4798,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 1,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 71,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton",
-    "tambah umpan balik visual (partikel/+1/pantul) tiap aksi berhasil",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   },
@@ -139,14 +71,14 @@
    ]
   },
   {
-   "file": "68-tebak-berat.js",
-   "id": "tebak-berat",
-   "title": "Tebak Berat",
-   "cat": "mat",
-   "bytes": 5563,
-   "soal": 3,
+   "file": "78-rumah-makhluk.js",
+   "id": "rumah-makhluk",
+   "title": "Rumah Makhluk",
+   "cat": "sains",
+   "bytes": 7072,
+   "soal": null,
    "sig": {
-    "aksi": 0,
+    "aksi": 1,
     "feedback": 2,
     "ramp": 2,
     "failsoft": 1,
@@ -154,10 +86,53 @@
     "tk": 2,
     "polish": 2
    },
-   "static100": 71,
+   "static100": 79,
    "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal",
+    "tambah variasi aksi kedua biar tidak monoton",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "72-sortir-bangun.js",
+   "id": "sortir-bangun",
+   "title": "Sortir Bangun",
+   "cat": "mat",
+   "bytes": 4879,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 1,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "68-tebak-berat.js",
+   "id": "tebak-berat",
+   "title": "Tebak Berat",
+   "cat": "mat",
+   "bytes": 5858,
+   "soal": 3,
+   "sig": {
+    "aksi": 0,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 79,
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
    ]
   },
   {
@@ -1951,6 +1926,25 @@
    "cat": "sains",
    "bytes": 9498,
    "soal": 4,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": []
+  },
+  {
+   "file": "24-puzzle.js",
+   "id": "puzzle",
+   "title": "Puzzle Masjid",
+   "cat": "islam",
+   "bytes": 22810,
+   "soal": null,
    "sig": {
     "aksi": 2,
     "feedback": 2,

@@ -3,61 +3,80 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "grafik",
-   "title": "Panen Buah & Grafik",
+   "id": "rumah-makhluk",
+   "title": "Rumah Makhluk",
+   "cat": "sains",
+   "file": "78-rumah-makhluk.js",
+   "static100": 79,
+   "dyn100": 99,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 77,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 88,
+   "cls": "A",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "id": "sortir-bangun",
+   "title": "Sortir Bangun",
    "cat": "mat",
-   "file": "35-grafik.js",
-   "static100": 86,
+   "file": "72-sortir-bangun.js",
+   "static100": 79,
+   "dyn100": 99,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 65,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 88,
+   "cls": "A",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "id": "tebak-berat",
+   "title": "Tebak Berat",
+   "cat": "mat",
+   "file": "68-tebak-berat.js",
+   "static100": 79,
+   "dyn100": 100,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 12,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 88,
+   "cls": "A",
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
+   ]
+  },
+  {
+   "id": "puzzle",
+   "title": "Puzzle Masjid",
+   "cat": "islam",
+   "file": "24-puzzle.js",
+   "static100": 93,
    "dyn100": 98,
    "plays": 4,
    "finished": 4,
-   "avgActions": 99,
+   "avgActions": 104,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 91,
+   "fun": 95,
    "cls": "A",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
-  },
-  {
-   "id": "kode-warna",
-   "title": "Tebak Kode Warna",
-   "cat": "logika",
-   "file": "88-kode-warna.js",
-   "static100": 86,
-   "dyn100": 99,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 78,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 92,
-   "cls": "A",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
-  },
-  {
-   "id": "tertib-shalat",
-   "title": "Tertib Gerakan Shalat",
-   "cat": "islam",
-   "file": "52-tertib-shalat.js",
-   "static100": 86,
-   "dyn100": 99,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 31,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 92,
-   "cls": "A",
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
+   "sug": []
   }
  ]
 }
