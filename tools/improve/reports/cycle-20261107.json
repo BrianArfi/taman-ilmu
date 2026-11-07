@@ -3,34 +3,53 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "tebak-bunyi",
-   "title": "Tebak Bunyi",
-   "cat": "sains",
-   "file": "81-tebak-bunyi.js",
+   "id": "kartu",
+   "title": "Kartu Pasangan",
+   "cat": "islam",
+   "file": "06-kartu.js",
    "static100": 86,
-   "dyn100": 100,
+   "dyn100": 98,
    "plays": 4,
    "finished": 4,
-   "avgActions": 30,
+   "avgActions": 95,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 92,
+   "fun": 91,
    "cls": "A",
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton"
    ]
   },
   {
-   "id": "halal-pilah",
-   "title": "Halal atau Haram",
-   "cat": "islam",
-   "file": "61-halal-pilah.js",
+   "id": "lompat-bintang",
+   "title": "Lompat Bintang",
+   "cat": "mat",
+   "file": "69-lompat-bintang.js",
+   "static100": 86,
+   "dyn100": 98,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 118,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 91,
+   "cls": "A",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "id": "beda-satu",
+   "title": "Mana yang Beda",
+   "cat": "logika",
+   "file": "99-beda-satu.js",
    "static100": 86,
    "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 51,
+   "avgActions": 53,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
@@ -41,42 +60,22 @@
    ]
   },
   {
-   "id": "jam-cocok",
-   "title": "Jam Cocok",
-   "cat": "mat",
-   "file": "71-jam-cocok.js",
+   "id": "cermin-pola",
+   "title": "Cermin Pola",
+   "cat": "logika",
+   "file": "93-cermin-pola.js",
    "static100": 86,
-   "dyn100": 100,
+   "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 17,
+   "avgActions": 88,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
    "fun": 92,
    "cls": "A",
    "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
-   ]
-  },
-  {
-   "id": "bayangan",
-   "title": "Cahaya & Bayangan",
-   "cat": "sains",
-   "file": "38-bayangan.js",
-   "static100": 93,
-   "dyn100": 100,
-   "plays": 4,
-   "finished": 4,
-   "avgActions": 27,
-   "overflow": 0,
-   "escFail": 0,
-   "eng100": null,
-   "fun": 96,
-   "cls": "A",
-   "sug": [
-    "game puzzle wajib punya tombol Bantu (SPEC 7.1)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+    "tambah variasi aksi kedua biar tidak monoton"
    ]
   }
  ]

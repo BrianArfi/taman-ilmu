@@ -226,48 +226,6 @@
    ]
   },
   {
-   "file": "99-beda-satu.js",
-   "id": "beda-satu",
-   "title": "Mana yang Beda",
-   "cat": "logika",
-   "bytes": 4920,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
-  },
-  {
-   "file": "93-cermin-pola.js",
-   "id": "cermin-pola",
-   "title": "Cermin Pola",
-   "cat": "logika",
-   "bytes": 6673,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
-  },
-  {
    "file": "82-daur-hidup.js",
    "id": "daur-hidup",
    "title": "Daur Hidup Kacang",
@@ -334,27 +292,6 @@
    ]
   },
   {
-   "file": "06-kartu.js",
-   "id": "kartu",
-   "title": "Kartu Pasangan",
-   "cat": "islam",
-   "bytes": 14890,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
-  },
-  {
    "file": "88-kode-warna.js",
    "id": "kode-warna",
    "title": "Tebak Kode Warna",
@@ -396,27 +333,6 @@
    "sug": [
     "tambah variasi aksi kedua biar tidak monoton",
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
-   ]
-  },
-  {
-   "file": "69-lompat-bintang.js",
-   "id": "lompat-bintang",
-   "title": "Lompat Bintang",
-   "cat": "mat",
-   "bytes": 5390,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 1,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 79,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
    ]
   },
   {
@@ -679,6 +595,27 @@
    ]
   },
   {
+   "file": "99-beda-satu.js",
+   "id": "beda-satu",
+   "title": "Mana yang Beda",
+   "cat": "logika",
+   "bytes": 4954,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
    "file": "74-belah-buah.js",
    "id": "belah-buah",
    "title": "Belah Buah Hitung",
@@ -725,6 +662,27 @@
    "cat": "mat",
    "bytes": 8581,
    "soal": 3,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "file": "93-cermin-pola.js",
+   "id": "cermin-pola",
+   "title": "Cermin Pola",
+   "cat": "logika",
+   "bytes": 6854,
+   "soal": null,
    "sig": {
     "aksi": 1,
     "feedback": 2,
@@ -974,6 +932,27 @@
    ]
   },
   {
+   "file": "06-kartu.js",
+   "id": "kartu",
+   "title": "Kartu Pasangan",
+   "cat": "islam",
+   "bytes": 14985,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
    "file": "84-katrol.js",
    "id": "katrol",
    "title": "Katrol dan Tuas",
@@ -1096,6 +1075,27 @@
    "sug": [
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut",
     "sesi 2 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  },
+  {
+   "file": "69-lompat-bintang.js",
+   "id": "lompat-bintang",
+   "title": "Lompat Bintang",
+   "cat": "mat",
+   "bytes": 5479,
+   "soal": null,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 86,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
    ]
   },
   {
