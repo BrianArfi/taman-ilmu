@@ -277,6 +277,23 @@
         if (!ctx.alive) return;
         if (lab.stop) lab.stop(); if (ctx.alive) ctx.correct(null, { say: 'Bagus! Terus naik ke babak pilah!' });
 
+        // ===== jembatan ingatan: 1 pertanyaan kilat sebelum pilah =====
+        ctx.clear();
+        {
+          const JEMBATAN = [
+            { t: 'Es dipanaskan jadi apa?', j: 'air' },
+            { t: 'Air dipanaskan terus sampai 100 derajat jadi apa?', j: 'uap' },
+            { t: 'Air didinginkan terus jadi apa?', j: 'es' },
+          ];
+          const jb = JEMBATAN[Math.floor(Math.random() * JEMBATAN.length)];
+          ctx.ask('Ingat-ingat! ' + jb.t);
+          await ctx.choose({
+            options: shuffle(['es', 'air', 'uap'].map((w) => ({ label: LABEL[w], value: w, say: LABEL[w] }))),
+            answer: jb.j,
+            speakLabel: true,
+          });
+          if (!ctx.alive) return;
+        }
         // ===== bagian 2: sortir padat, cair, gas =====
         ctx.clear();
         ctx.ask(ctx.isTK ? 'Babak pilah: sekarang pilah benda ini, padat atau cair?' : 'Babak pilah: sekarang pilah benda ini, padat, cair, atau gas?');
