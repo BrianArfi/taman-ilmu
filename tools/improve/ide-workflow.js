@@ -32,13 +32,16 @@ const [main, viral, ortu] = await parallel([
     `Tulis 5 ide agar orang tua mau pasang/bagikan: apa, di mana, effort S/M/L, dampak 1-5. ` +
     `evidence: jalur file + baris tiap klaim.`, schema, label: 'lensa-ortu' },
 ]);
+const mentah = [main, viral, ortu].map((r) => r === null ? '' : (r.text || '')).join('\n\n');
 const gabung = [main, viral, ortu].map((r) => r === null
-  ? 'GAGAL: anak tidak kembali'
+  ? 'GAGAL: anak tidak kembali (pakai laporan lain yang ada)'
   : `ref=${r.ref} error=${r.error_kind || '-'} text=${r.text || ''} notes=${r.notes || ''}`).join('\n\n');
 const sintesis = await agent({ input: `Gabungkan 3 laporan ide Taman Ilmu jadi SATU backlog berperingkat, maks 12 ide. ` +
   `Tiap ide: judul, masalah (1 kalimat), usulan (maks 3 kalimat + lokasi pasang), effort S/M/L, dampak 1-5, ` +
   `sasaran (game/fitur), flag ustadz (ya/tidak: menyentuh teks Arab/fakta agama?). ` +
-  `Urut dampak-per-effort. Buang ide generik tanpa lokasi pasang. Sertakan unresolved tiap laporan.\n\n${gabung}`,
+  `Urut dampak-per-effort. Buang ide generik tanpa lokasi pasang. Sertakan unresolved tiap laporan. ` +
+  `WAJIB hasilkan daftar ide dari teks di bawah walau sebagian laporan GAGAL; JANGAN jawab kosong.\n\n${gabung}`,
   schema, label: 'sintesis-ide' });
-const hasil = sintesis === null ? 'SINTESIS GAGAL' : (sintesis.text || JSON.stringify(sintesis.data || {}));
+let hasil = sintesis === null ? '' : (sintesis.text || JSON.stringify(sintesis.data || {}));
+if (!hasil || hasil === '{}' || hasil === 'SINTESIS GAGAL') hasil = 'SINTESIS-KOSONG-FALLBACK:\n' + mentah.slice(0, 12000);
 return { summary: JSON.stringify({ hasil }) };

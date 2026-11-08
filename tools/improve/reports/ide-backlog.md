@@ -1,19 +1,27 @@
-# Backlog Ide Taman Ilmu (loop ide harian)
+# Backlog Ide Taman Ilmu (loop ide kontinu)
 
 Diurut dampak-per-effort. Status: TODO (siap dikerjakan watcher),
 GARAP (sedang dikerjakan), DONE (selesai + terukur), TOLAK (dengan alasan).
 Watcher 30 mnt mengambil 1 ide TODO teratas saat tidak ada batch murah.
 Effort L dan flag ustadz=ya TIDAK diambil otomatis.
 
-Format tiap ide: masalah 1 kalimat; usulan maks 3 kalimat + lokasi pasang;
-effort S/M/L; dampak 1-5; sasaran; ustadz ya/tidak.
+Sumber utama: tim ide 8 Nov 2026 (12 ide berperingkat + bukti file:baris).
+Format tiap ide: masalah 1 kalimat; usulan + lokasi pasang; effort S/M/L;
+dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Rekor Raja Taman.** Masalah: ujian 10 soal 3 nyawa datar, anak tak balik karena tak ada yang dikejar. Usulan: tampilkan "Rekor: X/10" di HUD awal (baca bintang/progress tersimpan) dan rayakan rekor baru saat finish. Lokasi: `games/100-raja-taman.js` main() HUD (l.80-98) + finish (l.122-127). Effort S, dampak 4, ustadz tidak.
-- **Toleransi salah Loncat TK.** Masalah: salah tekan "Sudah!" bola kembali ke awal dan hitungan nol (29-loncat.js:259-260), anak frustrasi. Usulan: tambah titik progresi per ketukan; saat salah, mundur hanya selisihnya (atau tawarkan "lanjut dari X"), bukan nol. Lokasi: `games/29-loncat.js` soalTK (l.243-260). Effort S, dampak 4, ustadz tidak.
-- **Jembatan ingatan Wujud.** Masalah: lab dan pilah dua babak lepas (19-wujud.js: lab l.181, sort l.283). Usulan: selipkan 1 pertanyaan kilat penghubung sebelum pilah ("tadi es jadi apa?"). Lokasi: `games/19-wujud.js` antara lab dan sort. Effort S, dampak 3, ustadz tidak.
-- **Tantangan harian.** Masalah: tak ada alasan buka tiap hari. Usulan: 1 game sorotan per hari di home + lacak via event challenge yang sudah ada di js/analytics.js. Lokasi: index.html home + js/analytics.js. Effort M, dampak 5, ustadz tidak.
+- **Coba 30 detik, tanpa daftar.** Orang tua harus pilih jenjang + isi nama sebelum tahu gamenya bagus. Satu tombol di home (bawah brand header, sebelum player strip) langsung mainkan 07-adab tanpa daftar; kartu akhir "Gratis, offline, tanpa iklan, pasang di HP anak". Pakai ulang route #/main + ctx.series. Effort S, dampak 5, ustadz tidak.
+- **Sirah-Urut: ajar dulu, baru uji.** Anak disuruh mengurutkan peristiwa sirah yang belum diajarkan = tebak-tebakan buta. Babak 1 jadi cerita bergambar diketuk satu per satu (Lahir s/d Fathu Mekah); babak 2 baru mengurutkan peristiwa yang sama. Lokasi: game sirah-urut. Effort S, dampak 5, ustadz tidak (fakta dari bank, tanpa teks Arab baru).
+- **Pojok Untuk Orang Tua.** Keunggulan (tanpa iklan, offline, tanpa data pribadi) tak terlihat calon pemasang. Satu layar #/orangtua dari footer home: tanpa iklan, offline kecuali papan juara, tanpa data pribadi, suara Indonesia. Effort S, dampak 4, ustadz tidak.
+- **Tantangan Keluarga via WA.** Tantangan anak-ke-anak, padahal yang aktif di grup WA keluarga orang tua. Tombol "Tantang Keluarga" di layar hasil 04-shalat + 07-adab: "Aisha (6 th) dapat 3 bintang, berani adu sama sepupu?" Pakai ulang challengeURL + kirim() yang ada. Effort S, dampak 4, ustadz tidak.
+- **Tombol Pamer Peringkat.** TI.Share.rank() (share.js:86) sudah ditulis tapi nol pemanggil. Tombol "Pamerkan" di baris "kamu" saat rank pekan <=10 + track('share'); teks beda rank 1-3 vs 4-10. Lokasi: #/papan (board.js). Effort S, dampak 4, ustadz tidak.
+- **Perisai kesempatan kedua Raja Taman.** Salah ketuk sekali langsung hilang 1 nyawa; mati di soal ke-3 = tutup game. Salah pertama picu petunjuk + tunjukkan jawaban benar, nyawa berkurang kalau salah 2x di soal yang sama. Lokasi: games/100-raja-taman.js. Effort S, dampak 3, ustadz tidak.
+- **Rapor Anak + Rekap Pekanan.** Dashboard #/statistik dev-sentris ("Salin data ke Brian"). Ubah jadi bahasa ortu: main X hari, selesai Y game, rata bintang, progres kategori, streak + tombol "Kirim Rapor via WA" lewat share.js gambarKartu(). Lokasi: js/analytics.js + share.js. Effort M, dampak 5, ustadz tidak.
+- **Duel Balasan.** Tantangan satu arah: penerima tak bisa tantang balik, loop viral putus. Buka ?tantang= simpan tantangan aktif; skor penerima >= penantang tampil "Kamu Menang!" + tombol Tantang Balik; event challenge_accept/duel_win di analytics.js. Lokasi: core.js tantangBanner (410-421) + layar hasil (946-948) + share.js. Effort M, dampak 5, ustadz tidak.
+- **Misi Harian Global.** Game Gratis Hari Ini sama untuk semua tapi tak ada alasan kembali/share. Tombol "Tantang" + "Kartu" di kartu beranda; badge/streak 3/7 hari; teks share "misi hari ini". Lokasi: kartu freeCard core.js:404-409, dailyGlobal() progress.js:118, badges.js. Effort M, dampak 5, ustadz tidak.
+- **Sertifikat cetak Shalat & Adab.** Tak ada artefak fisik dipamer keluarga. Varian kartu pamer "Sertifikat: Hafal 5 Waktu Shalat / Adab Baik" (nama, bintang, tanggal, lesson); unduh PNG via gambarKartu 1080x1350 + tombol Cetak. Lokasi: 04-shalat, 07-adab + galeri #/lencana. Effort M, dampak 4, ustadz tidak (lesson dari bank).
+- **Lab tanpa jeda baca (wujud + listrik).** Lab berhenti tiap tugas untuk kartu bacaan + Lanjut; anak 6 th tak baca paragraf. Hapus kartu per tugas, ganti 1 kalimat lisan + maju otomatis; 1 kartu ringkasan di akhir. Lokasi: game wujud + listrik. Effort M, dampak 4, ustadz tidak.
 
 ## GARAP
 
@@ -27,4 +35,5 @@ effort S/M/L; dampak 1-5; sasaran; ustadz ya/tidak.
 
 ## TOLAK
 
-(kosong)
+- **Tantangan harian (benih kabur, S68).** Diganti ide konkret #8 Duel Balasan + #9 Misi Harian Global dari tim ide (lokasi + bukti jelas).
+- **Hijaiyah selang-seling kuis-aksi.** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop (bukan debat kualitas ide).
