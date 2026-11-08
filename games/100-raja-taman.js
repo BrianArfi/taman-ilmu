@@ -82,8 +82,13 @@
         const hud = h('div', { class: 'rj-hud' });
         const hati = h('span', { class: 'rj-chip is-hati', 'aria-label': 'Nyawa' });
         const chipSoal = h('span', { class: 'rj-chip' });
+        // Rekor jawaban benar per jenjang: alasan balik main lagi.
+        const kunciRekor = 'raja-taman-' + (tk ? 'tk' : 'sd');
+        const bacaRekor = () => { try { return JSON.parse(localStorage.getItem('tamanIlmu.rekor.v1') || '{}')[kunciRekor] | 0; } catch (e) { return 0; } };
+        let rekor = bacaRekor();
+        const chipRekor = h('span', { class: 'rj-chip', 'aria-live': 'polite' }, 'Rekor: ' + rekor + '/' + soal.length);
         const ulang = h('button', { type: 'button', class: 'ti-btn is-ghost', 'aria-label': 'Ulangi pertanyaan' }, '🔊');
-        hud.append(hati, chipSoal, ulang);
+        hud.append(hati, chipSoal, chipRekor, ulang);
         ulang.addEventListener('click', () => { if (tanyaTerakhir) ctx.say(tanyaTerakhir); });
         // Kibor: angka 1-4 memilih jawaban (aksesibilitas desktop).
         ctx.on(document, 'keydown', (e) => {
@@ -107,6 +112,7 @@
           if (ok) {
             benar++;
             beruntun++;
+            if (benar > rekor) { rekor = benar; chipRekor.textContent = 'Rekor baru!'; }
             if (beruntun === 3) ctx.correct(null, { say: 'Tiga benar beruntun! Hebat!' });
           } else {
             nyawa--;
@@ -119,9 +125,10 @@
         }
         if (!ctx.alive) return;
         ctx.progress(soal.length, soal.length);
+        if (benar > bacaRekor()) { try { const semua = JSON.parse(localStorage.getItem('tamanIlmu.rekor.v1') || '{}'); semua[kunciRekor] = benar; localStorage.setItem('tamanIlmu.rekor.v1', JSON.stringify(semua)); } catch (e) { /* mode privat */ } }
         ctx.finish({
           stars: benar >= 9 ? 3 : benar >= 6 ? 2 : 1,
-          message: benar + ' dari ' + soal.length + ' benar!',
+          message: benar + ' dari ' + soal.length + ' benar!' + (benar > bacaRekor() ? ' Rekor baru! Kamu luar biasa!' : ''),
           celebrate: true,
           lesson: 'Kamu sudah belajar huruf hijaiyah, berhitung, langit ciptaan Allah, dan lawan kata. Kamu Raja Taman!',
         });
