@@ -3,21 +3,23 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "banjir-warna",
-   "title": "Banjir Warna",
-   "cat": "logika",
-   "file": "101-banjir-warna.js",
-   "static100": 100,
-   "dyn100": 96,
+   "id": "wujud",
+   "title": "Es, Air, Uap",
+   "cat": "sains",
+   "file": "19-wujud.js",
+   "static100": 86,
+   "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 238,
+   "avgActions": 61,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 98,
+   "fun": 92,
    "cls": "A",
-   "sug": []
+   "sug": [
+    "sesi 2 soal: ideal 6-10 soal (2-4 menit)"
+   ]
   }
  ]
 }
