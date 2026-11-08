@@ -22,6 +22,7 @@ effort S/M/L; dampak 1-5; sasaran; ustadz ya/tidak.
 ## DONE
 
 - **Rekor Raja Taman** (S68): chip rekor + selebrasi rekor baru. 92->92 (statis 86, smoke 100). Detail: `cycle-20261108-s68.md`.
+- **Toleransi salah Loncat TK** (S69): kurang lanjut, kebanyakan mundur selebihnya. 92->92 (statis 86, smoke 99). Detail: `cycle-20261108-s69.md`.
 
 ## TOLAK
 
