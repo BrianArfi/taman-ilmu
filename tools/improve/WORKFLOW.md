@@ -201,6 +201,12 @@ Aturan: ide tidak boleh mengubah teks Arab/fakta agama secara otomatis
   + scene acak; bagi-permen SD yang tadinya selalu tombol ke-2).
   Uji regresi `tools/cek-acakan.mjs` (gerbang 6) + `promo-skor.mjs` +
   `tren.mjs` rekursif. Detail: `reports/cycle-20261107-s51.md`.
+- **Siklus 68-69 (8 Nov 2026)**: eksekusi ide backlog #1-2 (rekor
+  raja-taman, toleransi loncat TK). Skor tetap 92. Loop ide rekursif
+  hidup (WORKFLOW bag 6, kron tiap 2 jam + watcher narik ide).
+- **Siklus 70 (8 Nov 2026)**: game baru #101 Banjir Warna (logika,
+  flood fill), A98 perdana. Aturan baru: backlog ide kosong =
+  bangun 1 game baru bernomor berikut.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar

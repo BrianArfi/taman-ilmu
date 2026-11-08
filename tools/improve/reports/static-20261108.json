@@ -808,7 +808,7 @@
    "id": "loncat",
    "title": "Loncat Angka",
    "cat": "mat",
-   "bytes": 21230,
+   "bytes": 21985,
    "soal": 8,
    "sig": {
     "aksi": 2,
@@ -1077,7 +1077,7 @@
    "id": "raja-taman",
    "title": "Raja Taman",
    "cat": "logika",
-   "bytes": 9051,
+   "bytes": 9904,
    "soal": 10,
    "sig": {
     "aksi": 2,
@@ -2051,6 +2051,25 @@
    "sug": [
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
+  },
+  {
+   "file": "101-banjir-warna.js",
+   "id": "banjir-warna",
+   "title": "Banjir Warna",
+   "cat": "logika",
+   "bytes": 7752,
+   "soal": 7,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 100,
+   "sug": []
   },
   {
    "file": "15-timbangan.js",

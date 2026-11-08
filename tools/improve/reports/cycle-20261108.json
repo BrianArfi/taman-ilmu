@@ -3,23 +3,21 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "loncat",
-   "title": "Loncat Angka",
-   "cat": "mat",
-   "file": "29-loncat.js",
-   "static100": 86,
-   "dyn100": 99,
+   "id": "banjir-warna",
+   "title": "Banjir Warna",
+   "cat": "logika",
+   "file": "101-banjir-warna.js",
+   "static100": 100,
+   "dyn100": 96,
    "plays": 4,
    "finished": 4,
-   "avgActions": 49,
+   "avgActions": 238,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 92,
+   "fun": 98,
    "cls": "A",
-   "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
-   ]
+   "sug": []
   }
  ]
 }
