@@ -202,7 +202,7 @@
     ctx.ask('Bola di angka ' + a + '. Loncat ' + b + ' kali!');
     const sg = sungai(ctx, { n: 11, tappable: false });
     const hasil = angka('?', 'lj-q');
-    const hitung = h('b', null, '0');
+    const hitung = h('b', null, '0 dari ' + b);
     const eq = persamaan([angka(a), op('+'), angka(b), op('='), hasil, h('p', { class: 'lj-count' }, 'Loncatan: ', hitung)]);
     const bLoncat = h('button', { type: 'button', class: 'ti-btn' }, 'Loncat!');
     const bSudah = h('button', { type: 'button', class: 'ti-btn', style: '--c:#0e9f6e' }, 'Sudah!');
@@ -222,7 +222,7 @@
         const dari = sg.cur;
         await sg.hop(dari, dari + 1, 300);
         sudah++;
-        hitung.textContent = String(sudah);
+        hitung.textContent = sudah + ' dari ' + b;
         ctx.say(kata(sudah));
       }
       jalan = null;
@@ -254,17 +254,29 @@
       }
       salah++;
       const kurang = sudah < b;
-      await ctx.wrong(sg.ballIn, { say: 'Kamu loncat ' + kata(sudah) + ' kali. Soalnya ' + kata(b) + ' kali. ' + (kurang ? 'Kurang.' : 'Kebanyakan.') + ' Coba hitung lagi.', min: 700 });
+      if (kurang) { // kurang: lanjut dari posisi sekarang, tanpa hukuman ulang
+        await ctx.wrong(sg.ballIn, { say: 'Kamu loncat ' + kata(sudah) + ' kali. Soalnya ' + kata(b) + ' kali. Kurang ' + kata(b - sudah) + ' lagi, lanjut loncat!', min: 700 });
+        kunciUI(false);
+        return;
+      }
+      if (salah === 1) { // kebanyakan pertama: mundur selebihnya saja, sisa satu lompatan
+        await ctx.wrong(sg.ballIn, { say: 'Kamu loncat ' + kata(sudah) + ' kali. Soalnya ' + kata(b) + ' kali. Kebanyakan. Mundur sedikit!', min: 700 });
+        await sg.hop(sg.cur, a + b - 1, 340);
+        sudah = b - 1; rencana = a + b - 1; hitung.textContent = sudah + ' dari ' + b;
+        kunciUI(false);
+        return;
+      }
+      await ctx.wrong(sg.ballIn, { say: 'Kamu loncat ' + kata(sudah) + ' kali. Soalnya ' + kata(b) + ' kali. Kebanyakan. Coba hitung lagi dari awal.', min: 700 });
       // Bola kembali ke awal.
       await sg.hop(sg.cur, a, 340);
-      sudah = 0; rencana = a; hitung.textContent = '0';
+      sudah = 0; rencana = a; hitung.textContent = '0 dari ' + b;
       if (salah >= 3) {
         // Tiga kali salah: bola melompat sendiri sambil menghitung.
         ctx.say('Lihat ya, bola melompat sendiri.');
         await ctx.wait(1300);
         for (let k = 1; k <= b; k++) {
           await sg.hop(a + k - 1, a + k, 460);
-          hitung.textContent = String(k);
+          hitung.textContent = k + ' dari ' + b;
           ctx.say(kata(k));
           await ctx.wait(420);
         }
