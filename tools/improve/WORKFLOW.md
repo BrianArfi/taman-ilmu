@@ -207,6 +207,17 @@ Aturan: ide tidak boleh mengubah teks Arab/fakta agama secara otomatis
 - **Siklus 70 (8 Nov 2026)**: game baru #101 Banjir Warna (logika,
   flood fill), A98 perdana. Aturan baru: backlog ide kosong =
   bangun 1 game baru bernomor berikut.
+
+## 7. Game baru (saat backlog ide kosong)
+
+Jika watcher tidak dapat batch murah DAN ide-backlog 0 TODO: bangun 1 game
+baru bernomor berikut (102, 103, ...) dalam siklus itu. Syarat: baca SPEC.md
+bag 1-5 + 1 game tetangga sekerabat sebagai pola; TK dan SD; 6-10 soal;
+fail-soft; patuhi semua gerbang (cek-acakan otomatis lolos bila tanpa
+ctx.choose urutan-tetap). Daftarkan 1 baris script di index.html (pengecualian
+SPEC 1 yang dicatat di laporan: pemuatan game baru tidak mungkin tanpanya).
+Pilih kategori tertipis + mekanik yang belum ada (cek daftar id per kategori
+dulu). Satu siklus = satu game.
 - **v1.3 (5 Nov 2026)**: puzzle dideteksi dari judul/deskripsi register
   (bukan kata di komentar); fail-soft hitung order/sort/place.
 - **v1.4 (5 Nov 2026)**: puzzle dibaca hanya sampai `start(ctx)` (komentar
