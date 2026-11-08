@@ -317,6 +317,18 @@
     closeGame();
     document.title = 'Taman Ilmu';
     try { if (TI.Stats) TI.Stats.track('home', {}); } catch (e) { /* abaikan */ }
+    // Mode coba (?coba=id): langsung main tanpa daftar, sekali jalan per sesi.
+    try {
+      const cobaId = new URLSearchParams(location.search).get('coba');
+      if (cobaId && byId(cobaId) && !sessionStorage.getItem('tamanIlmu.cobaDone')) {
+        sessionStorage.setItem('tamanIlmu.cobaDone', '1');
+        TI.cobaMode = true;
+        history.replaceState(null, '', location.pathname + location.hash);
+        openGame(byId(cobaId));
+        return;
+      }
+    } catch (e) { /* tanpa query */ }
+    TI.cobaMode = false;
     const app = root();
     app.replaceChildren();
     const promo = TI.Promo ? TI.Promo.banner() : null;
@@ -337,6 +349,11 @@
         h('div', { class: 'seg', role: 'group', 'aria-label': 'Pilih jenjang' }, lvlBtn('tk', 'TK'), lvlBtn('sd', 'SD')),
         soundBtn,
         h('div', { class: 'star-total', title: 'Bintang terkumpul' }, h('span', { class: 'star is-on' }, '★'), ' ', totalStars(), h('small', null, ' / ' + games.length * 3))));
+
+    // Coba 30 detik: tanpa daftar, langsung main (di bawah header, sebelum strip pemain).
+    const cobaBtn = h('a', { class: 'ti-btn coba-go pop-in', href: '#/main/adab',
+      onclick: () => { try { if (TI.Stats) TI.Stats.track('promo_click', { id: 'coba-30detik' }); } catch (e) {} TI.cobaMode = true; sfx('tap'); } },
+      '⚡ Coba 30 Detik!', h('span', { class: 'coba-sub' }, 'Tanpa daftar, langsung main'));
 
     // strip pemain: level + XP + nama + lencana + papan juara
     const Pr = TI.Progression;
@@ -467,7 +484,7 @@
     if (!list.length) grid.append(h('p', { class: 'empty' }, 'Belum ada game di kategori ini.'));
 
     if (promo) app.append(promo);
-    app.append(head, strip);
+    app.append(head, cobaBtn, strip);
     if (tantangan) app.append(tantangan);
     if (freeCard) app.append(freeCard);
     app.append(

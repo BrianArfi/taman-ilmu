@@ -71,7 +71,8 @@
     start(ctx) {
       TI.style('adab', CSS);
       // TK: 7 soal dari soal TK. SD: 8 soal acak dari semua.
-      const soal = ctx.isTK ? BANK.filter((b) => b.tk) : sample(BANK, 8).map((s) => Object.assign({ sulit: s.tk ? 0 : 1 }, s)).sort((a, b) => a.sulit - b.sulit); // gampang dulu
+      let soal = ctx.isTK ? BANK.filter((b) => b.tk) : sample(BANK, 8).map((s) => Object.assign({ sulit: s.tk ? 0 : 1 }, s)).sort((a, b) => a.sulit - b.sulit); // gampang dulu
+      if (TI.cobaMode) soal = soal.slice(0, 3); // mode coba: 3 soal saja
 
       let ke = 0; return ctx.series(soal, async (s) => {
         ke++; if (ke === 4) ctx.correct(null, { say: ctx.isTK ? 'Bagus! Setengah jalan!' : 'Bagus! Terus naik ke yang sulit.' }); ctx.ask(s.q);
@@ -96,6 +97,7 @@
           ctx.sfx('pop'); await ctx.next();
         }
       }, {
+        message: TI.cobaMode ? 'Gratis, offline, tanpa iklan, pasang di HP anak!' : undefined,
         lesson: 'Anak shalih membiasakan ucapan baik dan adab yang baik setiap hari.',
       });
     },

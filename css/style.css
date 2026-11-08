@@ -207,6 +207,10 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
 .tan-done { font-weight: 800; color: var(--good); animation: ti-pop 240ms var(--ease-pop); }
 .tan-go { min-height: 48px; padding: 6px 20px; font-size: 1rem; }
 
+/* ---------- coba 30 detik ---------- */
+.coba-go { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin: 0 0 10px; padding: 12px 16px; font-size: 1.15rem; }
+.coba-sub { font-weight: 400; font-size: 0.85rem; opacity: 0.85; }
+
 /* ---------- banner nama pertama kali ---------- */
 .nama-banner {
   display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
