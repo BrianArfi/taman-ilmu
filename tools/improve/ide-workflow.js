@@ -2,7 +2,7 @@
 // Dipakai sesi kron harian: baca file ini, teruskan isinya sebagai `script`
 // inline ke tool Workflow. 3 anak riset read-only + 1 sintesis.
 const repo = 'C:/Users/Brian/AppData/Roaming/com.aisecondbrain.desktop/workspace/taman-ilmu';
-const brief = `Repo: ${repo}. 100 game edukasi anak (TK/SD) di games/*.js, skor A99. ` +
+const brief = `Repo: ${repo}. 102 game edukasi anak (TK/SD) di games/*.js, skor A101. ` +
   `Kamu READ-ONLY: jangan tulis/edit file apa pun, jangan commit/push. ` +
   `Buka tiap badan kode yang kamu kutip (read_file), bukan cuma grep. ` +
   `Kembalikan complete/evidence/unresolved sesuai skema.`;
