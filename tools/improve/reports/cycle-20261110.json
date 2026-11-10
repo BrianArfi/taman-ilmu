@@ -3,22 +3,41 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "padam-lampu",
-   "title": "Padamkan Lampu",
-   "cat": "logika",
-   "file": "102-padam-lampu.js",
-   "static100": 100,
-   "dyn100": 98,
+   "id": "shalat",
+   "title": "Shalat 5 Waktu",
+   "cat": "islam",
+   "file": "04-shalat.js",
+   "static100": 86,
+   "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 97,
+   "avgActions": 32,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 99,
+   "fun": 92,
    "cls": "A",
    "sug": [
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  },
+  {
+   "id": "adab",
+   "title": "Ucapan & Adab Baik",
+   "cat": "islam",
+   "file": "07-adab.js",
+   "static100": 86,
+   "dyn100": 100,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 22,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 92,
+   "cls": "A",
+   "sug": [
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
    ]
   }
  ]

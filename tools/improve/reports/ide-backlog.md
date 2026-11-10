@@ -11,7 +11,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Tantangan Keluarga via WA.** Tantangan anak-ke-anak, padahal yang aktif di grup WA keluarga orang tua. Tombol "Tantang Keluarga" di layar hasil 04-shalat + 07-adab: "Aisha (6 th) dapat 3 bintang, berani adu sama sepupu?" Pakai ulang challengeURL + kirim() yang ada. Effort S, dampak 4, ustadz tidak.
 - **Tombol Pamer Peringkat.** TI.Share.rank() (share.js:86) sudah ditulis tapi nol pemanggil. Tombol "Pamerkan" di baris "kamu" saat rank pekan <=10 + track('share'); teks beda rank 1-3 vs 4-10. Lokasi: #/papan (board.js). Effort S, dampak 4, ustadz tidak.
 - **Perisai kesempatan kedua Raja Taman.** Salah ketuk sekali langsung hilang 1 nyawa; mati di soal ke-3 = tutup game. Salah pertama picu petunjuk + tunjukkan jawaban benar, nyawa berkurang kalau salah 2x di soal yang sama. Lokasi: games/100-raja-taman.js. Effort S, dampak 3, ustadz tidak.
 - **Rapor Anak + Rekap Pekanan.** Dashboard #/statistik dev-sentris ("Salin data ke Brian"). Ubah jadi bahasa ortu: main X hari, selesai Y game, rata bintang, progres kategori, streak + tombol "Kirim Rapor via WA" lewat share.js gambarKartu(). Lokasi: js/analytics.js + share.js. Effort M, dampak 5, ustadz tidak.
@@ -26,6 +25,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Tantangan Keluarga via WA** (S76): tombol fam di hasil shalat+adab + teks sepupu. 92/92 tetap, probe OK, ui.mjs 12/12. Detail: cycle-20261110-s76.md.
 - **Pojok Untuk Orang Tua** (S75): layar #/orangtua + tautan footer + CTA ajak + track tayang. Verifikasi: probe OK, ui.mjs 12/12. Detail: cycle-20261110-s75.md.
 - **Sirah-Urut: ajar dulu, baru uji** (S73): babak 1 cerita ketuk berurutan + babak 2 order. 92->92 (statis 86, smoke 100). Detail: cycle-20261110-s73.md.
 - **Rekor Raja Taman** (S68): chip rekor + selebrasi rekor baru. 92->92 (statis 86, smoke 100). Detail: `cycle-20261108-s68.md`.
