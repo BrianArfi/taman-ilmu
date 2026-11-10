@@ -11,7 +11,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Tombol Pamer Peringkat.** TI.Share.rank() (share.js:86) sudah ditulis tapi nol pemanggil. Tombol "Pamerkan" di baris "kamu" saat rank pekan <=10 + track('share'); teks beda rank 1-3 vs 4-10. Lokasi: #/papan (board.js). Effort S, dampak 4, ustadz tidak.
 - **Perisai kesempatan kedua Raja Taman.** Salah ketuk sekali langsung hilang 1 nyawa; mati di soal ke-3 = tutup game. Salah pertama picu petunjuk + tunjukkan jawaban benar, nyawa berkurang kalau salah 2x di soal yang sama. Lokasi: games/100-raja-taman.js. Effort S, dampak 3, ustadz tidak.
 - **Rapor Anak + Rekap Pekanan.** Dashboard #/statistik dev-sentris ("Salin data ke Brian"). Ubah jadi bahasa ortu: main X hari, selesai Y game, rata bintang, progres kategori, streak + tombol "Kirim Rapor via WA" lewat share.js gambarKartu(). Lokasi: js/analytics.js + share.js. Effort M, dampak 5, ustadz tidak.
 - **Duel Balasan.** Tantangan satu arah: penerima tak bisa tantang balik, loop viral putus. Buka ?tantang= simpan tantangan aktif; skor penerima >= penantang tampil "Kamu Menang!" + tombol Tantang Balik; event challenge_accept/duel_win di analytics.js. Lokasi: core.js tantangBanner (410-421) + layar hasil (946-948) + share.js. Effort M, dampak 5, ustadz tidak.
@@ -25,6 +24,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Tombol Pamer Peringkat** (S77): tombol Pamerkan di baris kamu rank pekan<=10 + teks 3-besar. Probe OK, gami 55/55. Detail: cycle-20261110-s77.md.
 - **Tantangan Keluarga via WA** (S76): tombol fam di hasil shalat+adab + teks sepupu. 92/92 tetap, probe OK, ui.mjs 12/12. Detail: cycle-20261110-s76.md.
 - **Pojok Untuk Orang Tua** (S75): layar #/orangtua + tautan footer + CTA ajak + track tayang. Verifikasi: probe OK, ui.mjs 12/12. Detail: cycle-20261110-s75.md.
 - **Sirah-Urut: ajar dulu, baru uji** (S73): babak 1 cerita ketuk berurutan + babak 2 order. 92->92 (statis 86, smoke 100). Detail: cycle-20261110-s73.md.
