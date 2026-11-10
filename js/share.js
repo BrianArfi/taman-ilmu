@@ -84,9 +84,10 @@
   }
 
   function rank(row) {
-    return bagikan('Papan Juara · Taman Ilmu',
-      'Aku peringkat ' + row.rank + ' papan pekan ini di Taman Ilmu (' + (TI.state.level === 'sd' ? 'SD' : 'TK') +
-      ') dengan ' + row.xp + ' XP! Ayo tantang aku: ' + inviteURL());
+    const jen = TI.state.level === 'sd' ? 'SD' : 'TK';
+    const inti = 'Aku peringkat ' + row.rank + ' papan pekan ini di Taman Ilmu (' + jen + ') dengan ' + row.xp + ' XP';
+    const ajak = row.rank <= 3 ? 'Masuk 3 besar! Berani tantang aku: ' : 'Ayo tantang aku: ';
+    return bagikan('Papan Juara · Taman Ilmu', inti + '! ' + ajak + inviteURL());
   }
 
   function invite() {

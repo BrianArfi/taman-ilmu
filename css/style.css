@@ -262,6 +262,7 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
 .board-name { flex: 1; min-width: 0; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .board-xp { flex: none; font-weight: 800; color: var(--good); }
 .board-stars { flex: none; color: var(--muted); font-weight: 700; font-size: 0.95rem; }
+.board-pamer { flex: none; padding: 8px 14px; font-size: 0.9rem; }
 .board-empty, .board-note { margin: 8px 2px; color: var(--muted); font-size: 0.95rem; }
 
 /* lencana */

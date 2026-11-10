@@ -80,11 +80,13 @@
       return host;
     }
     rows.forEach((r) => {
+      const pamer = mode === 'week' && r.me && r.rank <= 10 && TI.Share
+        ? TI.h('button', { type: 'button', class: 'ti-btn is-ghost board-pamer', onclick: () => TI.Share.rank({ rank: r.rank, xp: r.xp }) }, 'Pamerkan') : null;
       host.append(TI.h('div', { class: 'board-row' + (r.me ? ' is-me' : '') + (r.rank <= 3 ? ' is-top' : '') },
         TI.h('span', { class: 'board-rank' }, medal(r.rank)),
         TI.h('span', { class: 'board-name' }, (r.nickname || 'Tanpa nama') + (r.me ? ' (kamu)' : '')),
         TI.h('span', { class: 'board-xp' }, r.xp + ' XP'),
-        TI.h('span', { class: 'board-stars' }, '★ ' + r.stars)));
+        TI.h('span', { class: 'board-stars' }, '★ ' + r.stars), pamer));
     });
     return host;
   }
