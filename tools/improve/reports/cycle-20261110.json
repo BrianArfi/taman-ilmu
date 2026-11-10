@@ -1,0 +1,25 @@
+{
+ "date": "20261110",
+ "version": "improve-v1.0",
+ "rows": [
+  {
+   "id": "sirah-urut",
+   "title": "Urut Kisah Nabi",
+   "cat": "islam",
+   "file": "60-sirah-urut.js",
+   "static100": 86,
+   "dyn100": 100,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 29,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 92,
+   "cls": "A",
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
+   ]
+  }
+ ]
+}

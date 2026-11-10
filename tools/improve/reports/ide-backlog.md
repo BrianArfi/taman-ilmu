@@ -11,8 +11,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Coba 30 detik, tanpa daftar.** Orang tua harus pilih jenjang + isi nama sebelum tahu gamenya bagus. Satu tombol di home (bawah brand header, sebelum player strip) langsung mainkan 07-adab tanpa daftar; kartu akhir "Gratis, offline, tanpa iklan, pasang di HP anak". Pakai ulang route #/main + ctx.series. Effort S, dampak 5, ustadz tidak.
-- **Sirah-Urut: ajar dulu, baru uji.** Anak disuruh mengurutkan peristiwa sirah yang belum diajarkan = tebak-tebakan buta. Babak 1 jadi cerita bergambar diketuk satu per satu (Lahir s/d Fathu Mekah); babak 2 baru mengurutkan peristiwa yang sama. Lokasi: game sirah-urut. Effort S, dampak 5, ustadz tidak (fakta dari bank, tanpa teks Arab baru).
 - **Pojok Untuk Orang Tua.** Keunggulan (tanpa iklan, offline, tanpa data pribadi) tak terlihat calon pemasang. Satu layar #/orangtua dari footer home: tanpa iklan, offline kecuali papan juara, tanpa data pribadi, suara Indonesia. Effort S, dampak 4, ustadz tidak.
 - **Tantangan Keluarga via WA.** Tantangan anak-ke-anak, padahal yang aktif di grup WA keluarga orang tua. Tombol "Tantang Keluarga" di layar hasil 04-shalat + 07-adab: "Aisha (6 th) dapat 3 bintang, berani adu sama sepupu?" Pakai ulang challengeURL + kirim() yang ada. Effort S, dampak 4, ustadz tidak.
 - **Tombol Pamer Peringkat.** TI.Share.rank() (share.js:86) sudah ditulis tapi nol pemanggil. Tombol "Pamerkan" di baris "kamu" saat rank pekan <=10 + track('share'); teks beda rank 1-3 vs 4-10. Lokasi: #/papan (board.js). Effort S, dampak 4, ustadz tidak.
@@ -29,6 +27,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Sirah-Urut: ajar dulu, baru uji** (S73): babak 1 cerita ketuk berurutan + babak 2 order. 92->92 (statis 86, smoke 100). Detail: cycle-20261110-s73.md.
 - **Rekor Raja Taman** (S68): chip rekor + selebrasi rekor baru. 92->92 (statis 86, smoke 100). Detail: `cycle-20261108-s68.md`.
 - **Toleransi salah Loncat TK** (S69): kurang lanjut, kebanyakan mundur selebihnya. 92->92 (statis 86, smoke 99). Detail: `cycle-20261108-s69.md`.
 - **Jembatan ingatan Wujud** (S71): 1 kilat sebelum pilah. 92->92 (statis 86, smoke 99). Detail: `cycle-20261108-s71.md`.
