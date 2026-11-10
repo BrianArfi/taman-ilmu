@@ -1219,27 +1219,6 @@
    ]
   },
   {
-   "file": "60-sirah-urut.js",
-   "id": "sirah-urut",
-   "title": "Urut Kisah Nabi",
-   "cat": "islam",
-   "bytes": 3028,
-   "soal": null,
-   "sig": {
-    "aksi": 1,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 2,
-    "sesi": 1,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 86,
-   "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
-   ]
-  },
-  {
    "file": "72-sortir-bangun.js",
    "id": "sortir-bangun",
    "title": "Sortir Bangun",
@@ -1994,6 +1973,25 @@
    ]
   },
   {
+   "file": "60-sirah-urut.js",
+   "id": "sirah-urut",
+   "title": "Urut Kisah Nabi",
+   "cat": "islam",
+   "bytes": 4944,
+   "soal": null,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 1,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": []
+  },
+  {
    "file": "25-surat.js",
    "id": "surat",
    "title": "Surat Pendek",
@@ -2070,6 +2068,27 @@
    },
    "static100": 100,
    "sug": []
+  },
+  {
+   "file": "102-padam-lampu.js",
+   "id": "padam-lampu",
+   "title": "Padamkan Lampu",
+   "cat": "logika",
+   "bytes": 8220,
+   "soal": 7,
+   "sig": {
+    "aksi": 2,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 100,
+   "sug": [
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
   },
   {
    "file": "15-timbangan.js",
