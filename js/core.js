@@ -272,14 +272,14 @@
   let current = null; // sesi game aktif
 
   function route() {
-    const vm = location.hash.match(/^#\/(papan|lencana|nama|kelas|statistik)$/);
+    const vm = location.hash.match(/^#\/(papan|lencana|nama|kelas|statistik|orangtua)$/);
     if (vm && TI.VIEWS && TI.VIEWS[vm[1]]) { closeGame(); TI.VIEWS[vm[1]](); return; }
     const m = location.hash.match(/^#\/main\/([\w-]+)/);
     const g = m && byId(m[1]);
     if (g) openGame(g); else showHome();
   }
 
-  // Kerangka layar dalam (#/papan #/lencana #/nama). Dipakai modul lewat TI.page(...).
+  // Kerangka layar dalam (#/papan #/lencana #/nama #/orangtua). Dipakai modul lewat TI.page(...).
   TI.page = function (title, sub, ...kids) {
     document.title = title + ' · Taman Ilmu';
     const app = root();
@@ -498,6 +498,7 @@
         h('button', { type: 'button', class: 'ajak-btn', 'aria-label': 'Ajak teman main Taman Ilmu', onclick: () => { sfx('tap'); if (TI.Share) TI.Share.invite(); } }, '📣 Ajak teman main'),
         h('div', { class: 'foot-links' },
           h('a', { class: 'foot-link', href: '#/statistik', onclick: () => sfx('tap') }, '📊 Statistik'),
+          h('a', { class: 'foot-link', href: '#/orangtua', onclick: () => sfx('tap') }, '🛡️ Orang Tua'),
           h('button', { type: 'button', class: 'foot-link', onclick: () => { sfx('tap'); if (TI.Share) TI.Share.streak(); } }, '🔥 Pamer Rajin')),
         h('span', null, 'Dibuat untuk anak-anak. Tanpa iklan. Papan juara butuh internet, sisanya main offline.')));
   }
