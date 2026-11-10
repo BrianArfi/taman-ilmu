@@ -355,6 +355,12 @@
       onclick: () => { try { if (TI.Stats) TI.Stats.track('promo_click', { id: 'coba-30detik' }); } catch (e) {} TI.cobaMode = true; sfx('tap'); } },
       '⚡ Coba 30 Detik!', h('span', { class: 'coba-sub' }, 'Tanpa daftar, langsung main'));
 
+    // Strip kepercayaan: sinyal aman untuk orang tua dalam 10 detik pertama.
+    const trustStrip = h('a', { class: 'trust-strip pop-in', href: '#/orangtua',
+      'aria-label': 'Kenapa Taman Ilmu aman untuk anak',
+      onclick: () => { sfx('tap'); } },
+      '🛡️ Tanpa iklan · Main offline · Tanpa akun →');
+
     // strip pemain: level + XP + nama + lencana + papan juara
     const Pr = TI.Progression;
     const prof = state.profile;
@@ -484,7 +490,7 @@
     if (!list.length) grid.append(h('p', { class: 'empty' }, 'Belum ada game di kategori ini.'));
 
     if (promo) app.append(promo);
-    app.append(head, cobaBtn, strip);
+    app.append(head, trustStrip, cobaBtn, strip);
     if (tantangan) app.append(tantangan);
     if (freeCard) app.append(freeCard);
     app.append(
