@@ -677,7 +677,7 @@ Semua progres anak dihitung otomatis dari `ctx.finish()`; **game tidak perlu mem
 | 57 | doa-pasang | Pasangan Doa | islam | 💌 | Memory doa sehari-hari |
 | 58 | jam-shalat | Kapan Shalatnya | islam | 🌤️ | Cocokkan shalat dengan langit |
 | 59 | sedekah-warung | Warung Sedekah | islam | 🏪 | Bayar pas + sisihkan sedekah |
-| 60 | sirah-urut | Urut Kisah Nabi | islam | 📆 | Urutan 5 peristiwa sirah |
+| 60 | sirah-urut | Urut Kisah Nabi | islam | 📆 | Cerita ketuk berurutan lalu urut 5 peristiwa sirah |
 | 61 | halal-pilah | Halal atau Haram | islam | 🍽️ | Pilah makanan dan perbuatan |
 | 62 | tabung-infaq | Tabung Infaq | islam | 🏺 | Tangkap koin + hitung total |
 | 63 | balap-kali | Balap Kali-kali | mat | 🏁 | Balapan jawab perkalian |
