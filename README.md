@@ -63,6 +63,10 @@ Gelombang 3 (51-100, rincian di `SPEC.md` bagian 9):
 - Sains: Pancing Magnet, Roket Air, Tebak Bayangan, Rumah Makhluk, Koper Cuaca, Tubuhku, Tebak Bunyi, Daur Hidup Kacang, Mendarat di Bulan, Katrol dan Tuas, Sambung Pipa, Penunjuk Arah, Siang atau Malam.
 - Logika: Tebak Kode Warna, Labirin Es, Tangram Rumah, Parkir Pintar, Balik dan Ingat, Cermin Pola, Sambung Kabel, Teka-teki Siapa, Balok yang Pas, Pola Angka, Lawan Kata, Mana yang Beda, Raja Taman.
 
+Gelombang 4 (101+, di luar target awal 100):
+
+- Logika: Banjir Warna (101), Padamkan Lampu (102).
+
 ## Struktur
 
 - `index.html` memuat `js/pron.js` (kamus ucapan), `js/core.js` (menu, suara, bintang, helper kuis), `js/progress.js` + `js/badges.js` + `js/share.js` + `js/board.js` (gamifikasi, berbagi, dan papan juara, kontraknya di `SPEC.md` bagian 8), `js/analytics.js` (statistik + `#/statistik`), `js/promo.js` (banner + `#/kelas`), lalu `games/NN-id.js`.

@@ -718,3 +718,5 @@ Semua progres anak dihitung otomatis dari `ctx.finish()`; **game tidak perlu mem
 | 98 | lawan-kata | Lawan Kata | logika | 🌡️ | Memory lawan kata |
 | 99 | beda-satu | Mana yang Beda | logika | 🍒 | Odd-one-out cepat |
 | 100 | raja-taman | Raja Taman | logika | 🏆 | Final 10 soal campuran, 3 nyawa |
+| 101 | banjir-warna | Banjir Warna | logika | 🪣 | Banjir warna penuhi papan |
+| 102 | padam-lampu | Padamkan Lampu | logika | 🪔 | Ketuk lampu sampai semua padam |
