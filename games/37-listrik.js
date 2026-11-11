@@ -299,6 +299,19 @@
     });
   }
 
+  // Lanjut otomatis: catatan dibacakan (sayWait) lalu jalan sendiri; tombol Lanjut cuma pemercepat.
+  function lanjutOtomatis(ctx, parent, teks) {
+    return new Promise((resolve) => {
+      let done = false;
+      const go = () => { if (!done) { done = true; resolve(); } };
+      const b = h('button', { type: 'button', class: 'ti-btn is-ghost pop-in' }, 'Lanjut', ' ➜');
+      b.addEventListener('click', () => { TI.sfx('tap'); b.disabled = true; go(); });
+      parent.append(b);
+      ctx.onExit(go);
+      ctx.sayWait(teks).then(go);
+    });
+  }
+
   TI.register({
     id: 'listrik',
     title: 'Rangkaian Listrik',
@@ -346,14 +359,19 @@
       const cnt = [0, 0];
 
       return (async () => {
-        // ===== peringatan keselamatan (sekali, di awal) =====
-        ctx.ask('Hati-hati dengan listrik!');
-        const warn = h('div', { class: 'ls-box' });
-        ctx.el.append(warn);
-        ctx.note('Ingat ya, jangan pernah memasukkan benda ke stop kontak di rumah. Listrik rumah berbahaya! Di sini kita hanya memakai baterai kecil.', { title: 'Hati-hati!', into: warn });
-        await nextBtn(ctx, warn, 'Mengerti');
-        warn.remove();
-        if (!ctx.alive) return;
+        // ===== peringatan keselamatan (sekali-pernah, bukan tiap main) =====
+        let sudahAman = false;
+        try { sudahAman = localStorage.getItem('tamanIlmu.listrik.aman') === '1'; } catch (e) { /* mode privat */ }
+        if (!sudahAman) {
+          ctx.ask('Hati-hati dengan listrik!');
+          const warn = h('div', { class: 'ls-box' });
+          ctx.el.append(warn);
+          ctx.note('Ingat ya, jangan pernah memasukkan benda ke stop kontak di rumah. Listrik rumah berbahaya! Di sini kita hanya memakai baterai kecil.', { title: 'Hati-hati!', into: warn });
+          await nextBtn(ctx, warn, 'Mengerti');
+          try { localStorage.setItem('tamanIlmu.listrik.aman', '1'); } catch (e) { /* abaikan */ }
+          warn.remove();
+          if (!ctx.alive) return;
+        }
 
         const board = makeBoard(ctx);
         const tally = h('div', { class: 'ls-tally' },
@@ -389,8 +407,8 @@
           await ctx.correct(null, { say: 'Lampunya mati.' });
           const box = h('div', { class: 'ls-box' });
           ctx.el.append(box);
-          ctx.note('Lampu menyala kalau jalan listriknya tersambung. Kalau saklar dimatikan, jalannya terputus.', { title: 'Tahukah kamu?', into: box });
-          await nextBtn(ctx, box, 'Lanjut');
+          ctx.note('Lampu menyala kalau jalan listriknya tersambung. Kalau saklar dimatikan, jalannya terputus.', { title: 'Tahukah kamu?', into: box, speak: false });
+          await lanjutOtomatis(ctx, box, 'Lampu menyala kalau jalan listriknya tersambung. Kalau saklar dimatikan, jalannya terputus.');
           box.remove();
           step++; progress();
           board.swBtn.hidden = true;
@@ -429,8 +447,8 @@
           bump(it.ok ? 0 : 1);
 
           const tail = tk ? '' : (it.ok ? ' Benda yang menghantarkan listrik disebut konduktor.' : ' Benda yang tidak menghantarkan listrik disebut isolator.');
-          ctx.note(it.why + tail, { title: it.ok ? 'Menyala!' : 'Tidak menyala.', into: box });
-          await nextBtn(ctx, box, 'Lanjut');
+          ctx.note(it.why + tail, { title: it.ok ? 'Menyala!' : 'Tidak menyala.', into: box, speak: false });
+          await lanjutOtomatis(ctx, box, it.why + tail);
           box.remove();
           step++; progress();
         }
