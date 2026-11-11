@@ -12,6 +12,11 @@
       if (TI.Stats) TI.Stats.track('promo_click', { id: 'orangtua-ajak' });
       if (TI.Share) TI.Share.invite();
     } }, '📣 Ajak Keluarga Main');
+    const ajakOrtu = TI.h('button', { type: 'button', class: 'ti-btn is-ghost ortu-cta', onclick: () => {
+      TI.sfx('tap');
+      if (TI.Stats) TI.Stats.track('promo_click', { id: 'orangtua-wa-ortu' });
+      if (TI.Share) TI.Share.inviteOrtu();
+    } }, 'Bagikan ke grup WA');
     return TI.page('Untuk Orang Tua', 'Kenapa Taman Ilmu aman dipasang di HP anak.',
       TI.h('div', { class: 'ortu-hero pop-in' },
         TI.h('span', { class: 'ortu-icon', 'aria-hidden': 'true' }, '🛡️'),
@@ -23,6 +28,7 @@
           TI.h('li', null, '🔊 Suara Bahasa Indonesia. Semua soal dibacakan, cocok untuk anak yang belum lancar membaca.'),
           TI.h('li', null, '🕌 Ramah keluarga. Tanpa gambar wajah, tanpa musik, hanya efek suara pendek.')),
         ajak,
+        ajakOrtu,
         TI.h('p', { class: 'ortu-note' }, 'Ada ' + total + ' game untuk jenjang TK dan SD: agama Islam, matematika, sains, dan logika.')));
   }
 

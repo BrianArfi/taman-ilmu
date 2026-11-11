@@ -12,6 +12,8 @@
     return BASE + '?ajak=' + encodeURIComponent(nama);
   }
 
+  function totalGame() { return TI.games ? TI.games.length : 100; }
+
   function ringkas() {
     const info = TI.Progression.levelInfo(TI.state.profile.xp || 0);
     const t = TI.Progression.totals();
@@ -92,8 +94,16 @@
 
   function invite() {
     return bagikan('Taman Ilmu',
-      'Ayo main Taman Ilmu! 100 game seru belajar agama Islam, matematika, sains, dan logika untuk anak TK dan SD. ' +
+      'Ayo main Taman Ilmu! ' + totalGame() + ' game seru belajar agama Islam, matematika, sains, dan logika untuk anak TK dan SD. ' +
       'Gratis, langsung di browser: ' + inviteURL());
+  }
+
+  // Undangan bersuara orang tua: untuk diteruskan ke grup WA sekolah/keluarga.
+  function inviteOrtu() {
+    return bagikan('Taman Ilmu',
+      'Taman Ilmu: ' + totalGame() + ' game edukasi Islami untuk anak TK dan SD. ' +
+      'Tanpa iklan, bisa offline, tanpa akun. Anak saya sudah ' + ringkas() + '. ' +
+      'Coba gratis: ' + inviteURL());
   }
 
   // ---------- tantang teman: link ?tantang=gid&skor=N&dari=Nama ----------
@@ -215,7 +225,7 @@
     g.fillText(BASE.replace(/^https?:\/\//, ''), W / 2, 1155);
     g.fillStyle = '#6b6f86';
     g.font = '700 38px "Baloo 2", sans-serif';
-    g.fillText('100 game edukasi anak Islami', W / 2, 1275);
+    g.fillText(totalGame() + ' game edukasi anak Islami', W / 2, 1275);
     return cv;
   }
 
@@ -268,5 +278,5 @@
     return hasil;
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, tantangKeluarga };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, tantangKeluarga, inviteOrtu };
 })();
