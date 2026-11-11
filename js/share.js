@@ -162,6 +162,23 @@
         : 'Aku main Taman Ilmu! Sekarang ' + ringkas() + '. Ayo main juga: ' + inviteURL());
   }
 
+  // Laporan anak untuk pasangan/keluarga: ringkasan kemajuan jenjang aktif.
+  function laporan() {
+    const lvl = TI.state.level === 'sd' ? 'SD' : 'TK';
+    const nama = (TI.state.profile && TI.state.profile.nama) || 'Anak';
+    const m = TI.Stats ? TI.Stats.summary() : { lvlDone: 0, lvlTotal: 0, lvlAvg: '0', byCat: {} };
+    let topCat = '', topF = 0;
+    for (const c of Object.keys(m.byCat || {})) {
+      const f = m.byCat[c].f || 0;
+      if (f > topF) { topF = f; topCat = c; }
+    }
+    const catNama = { islam: 'Agama Islam', mat: 'Matematika', sains: 'Sains', logika: 'Logika' };
+    const rajin = topCat ? ' Paling rajin: ' + (catNama[topCat] || topCat) + '.' : '';
+    return bagikan('Laporan Anak · Taman Ilmu',
+      'Laporan main ' + nama + ' di Taman Ilmu (' + lvl + '): ' + m.lvlDone + '/' + m.lvlTotal +
+      ' game selesai, rata-rata ★' + m.lvlAvg + '.' + rajin + ' Ayo main juga: ' + inviteURL());
+  }
+
   // ---------- kartu pamer: gambar skor 1080x1350 untuk status WA/IG ----------
   function wrapText(g, text, cx, y, maxW, lh) {
     const words = String(text).split(/\s+/);
@@ -287,5 +304,5 @@
     return hasil;
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, tantangKeluarga, inviteOrtu, tantangPekan };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, tantangKeluarga, inviteOrtu, tantangPekan, laporan };
 })();

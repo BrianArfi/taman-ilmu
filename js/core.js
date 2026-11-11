@@ -504,7 +504,7 @@
       h('footer', { class: 'home-foot' },
         h('button', { type: 'button', class: 'ajak-btn', 'aria-label': 'Ajak teman main Taman Ilmu', onclick: () => { sfx('tap'); if (TI.Share) TI.Share.invite(); } }, '📣 Ajak teman main'),
         h('div', { class: 'foot-links' },
-          h('a', { class: 'foot-link', href: '#/statistik', onclick: () => sfx('tap') }, '📊 Statistik'),
+          h('a', { class: 'foot-link', href: '#/statistik', onclick: () => sfx('tap') }, '📊 Laporan Anak'),
           h('a', { class: 'foot-link', href: '#/orangtua', onclick: () => sfx('tap') }, '🛡️ Orang Tua'),
           h('button', { type: 'button', class: 'foot-link', onclick: () => { sfx('tap'); if (TI.Share) TI.Share.streak(); } }, '🔥 Pamer Rajin')),
         h('span', null, 'Dibuat untuk anak-anak. Tanpa iklan. Papan juara butuh internet, sisanya main offline.')));

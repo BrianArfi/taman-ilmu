@@ -114,6 +114,11 @@
       byCat[c] = byCat[c] || { s: 0, f: 0 };
       byCat[c].s += g.s; byCat[c].f += g.f;
     }
+    const lvl = TI.state.level === 'sd' ? 'sd' : 'tk';
+    const st = TI.state.stars || {};
+    const best = (TI.games || []).map((g) => ((st[g.id] || {})[lvl] || 0)).filter((s) => s > 0);
+    const lvlDone = best.length, lvlTotal = (TI.games || []).length;
+    const lvlAvg = best.length ? (best.reduce((a, b) => a + b, 0) / best.length).toFixed(1) : '0';
     let pv = 0, pc = 0;
     for (const k in S.promoViews) pv += S.promoViews[k];
     for (const k in S.promoClicks) pc += S.promoClicks[k];
@@ -125,6 +130,7 @@
       boardViews: S.boardViews, freePlays: S.freePlays,
       firstSeen: S.firstSeen, last7, top, byCat, promoViews: pv, promoClicks: pc,
       promoCTR: pv ? Math.round((100 * pc) / pv) : 0,
+      lvlDone, lvlTotal, lvlAvg,
     };
   }
 
@@ -185,7 +191,36 @@
   function render() {
     const m = summary();
     const byId = (id) => TI.games.find((g) => g.id === id);
-    const app = TI.page('Statistik', 'Perangkat ini' + (m.firstSeen ? ', main sejak ' + m.firstSeen : ''),
+    const lvl = TI.state.level === 'sd' ? 'sd' : 'tk';
+    const nama = (TI.state.profile && TI.state.profile.nama) || 'Anak';
+    const stars = TI.state.stars || {};
+    const selesai = (gid) => ((stars[gid] || {})[lvl] || 0) > 0;
+    const barisKat = Object.keys(TI.CATS).map((c) => {
+      const list = TI.games.filter((g) => g.cat === c);
+      const d = list.filter((g) => selesai(g.id)).length;
+      const p = list.length ? Math.round((100 * d) / list.length) : 0;
+      return TI.h('div', { class: 'stat-barow' },
+        TI.h('span', { class: 'stat-barlabel' }, TI.CATS[c].icon + ' ' + TI.CATS[c].label),
+        TI.h('span', { class: 'stat-barnum' }, d + '/' + list.length),
+        TI.h('div', { class: 'stat-track', role: 'progressbar', 'aria-label': TI.CATS[c].label + ' ' + d + ' dari ' + list.length, 'aria-valuenow': String(d), 'aria-valuemax': String(list.length) },
+          TI.h('i', { class: 'stat-fill', style: 'width:' + p + '%;background:' + TI.CATS[c].color })));
+    });
+    const app = TI.page('Laporan Anak', 'Kemajuan ' + nama + ' · ' + lvl.toUpperCase() + (m.firstSeen ? ', main sejak ' + m.firstSeen : ''),
+      TI.h('div', { class: 'stat-hero pop-in' },
+        TI.h('b', { class: 'stat-besar' }, m.lvlDone + ' / ' + m.lvlTotal),
+        TI.h('span', { class: 'stat-herosub' }, 'game selesai di jenjang ' + lvl.toUpperCase()),
+        TI.h('span', { class: 'stat-herosub' }, '★' + m.lvlAvg + ' rata-rata · ' + m.daysActive + ' hari aktif')),
+      TI.h('div', { class: 'stat-bars' }, barisKat),
+      TI.h('p', null, TI.Share ? TI.h('button', { type: 'button', class: 'ti-btn', onclick: () => { TI.sfx('tap'); TI.Share.laporan(); } }, 'Bagikan laporan ke pasangan') : null),
+      TI.h('h3', { class: 'stat-h' }, 'Aktif 7 hari terakhir'),
+      TI.h('div', { class: 'stat-week' }, m.last7.map((d) =>
+        TI.h('span', { class: 'stat-day' + (d.n ? ' is-on' : ''), title: d.day + ': ' + d.n + ' kunjungan' }, d.day.slice(3)))),
+      TI.h('h3', { class: 'stat-h' }, 'Game paling sering dimainkan'),
+      m.top.length ? TI.h('ol', { class: 'stat-top' }, m.top.map((t) => {
+        const g = byId(t.gid);
+        return TI.h('li', null, (g ? g.icon + ' ' + g.title : t.gid) + ' (' + t.s + ' main, ★' + t.b + ')');
+      })) : TI.h('p', { class: 'board-note' }, 'Belum ada. Main dulu yuk.'),
+      TI.h('h3', { class: 'stat-h' }, 'Untuk pengembang'),
       TI.h('div', { class: 'stat-grid' },
         TI.h('div', { class: 'stat-card' }, TI.h('b', null, String(m.visits)), TI.h('span', null, 'Kunjungan')),
         TI.h('div', { class: 'stat-card' }, TI.h('b', null, String(m.daysActive)), TI.h('span', null, 'Hari aktif')),
@@ -195,14 +230,6 @@
         TI.h('div', { class: 'stat-card' }, TI.h('b', null, '★ ' + m.avgStars), TI.h('span', null, 'Rata-rata bintang')),
         TI.h('div', { class: 'stat-card' }, TI.h('b', null, String(m.shares)), TI.h('span', null, 'Bagikan')),
         TI.h('div', { class: 'stat-card' }, TI.h('b', null, String(m.freePlays)), TI.h('span', null, 'Main gratis harian'))),
-      TI.h('h3', { class: 'stat-h' }, 'Aktif 7 hari terakhir'),
-      TI.h('div', { class: 'stat-week' }, m.last7.map((d) =>
-        TI.h('span', { class: 'stat-day' + (d.n ? ' is-on' : ''), title: d.day + ': ' + d.n + ' kunjungan' }, d.day.slice(3)))),
-      TI.h('h3', { class: 'stat-h' }, 'Game paling sering dimainkan'),
-      m.top.length ? TI.h('ol', { class: 'stat-top' }, m.top.map((t) => {
-        const g = byId(t.gid);
-        return TI.h('li', null, (g ? g.icon + ' ' + g.title : t.gid) + ' (' + t.s + ' main, ★' + t.b + ')');
-      })) : TI.h('p', { class: 'board-note' }, 'Belum ada. Main dulu yuk.'),
       TI.h('h3', { class: 'stat-h' }, 'Banner promosi'),
       TI.h('p', { class: 'board-note' }, 'Dilihat ' + m.promoViews + ' kali, diklik ' + m.promoClicks + ' kali (' + m.promoCTR + '%).'),
       TI.h('h3', { class: 'stat-h' }, 'Kirim data ke Brian'),
