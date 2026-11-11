@@ -13,7 +13,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Listrik: pangkas gerbang baca wajib.** Anak diadang layar peringatan + Mengerti sebelum main dan note + Lanjut tiap benda (skor promo 71). Peringatan jadi sekali-pernah (flag lokal), note tiap ronde non-blokir tanpa tombol Lanjut wajib. Lokasi: games/37-listrik.js:348-356 + 426-434. Effort S, dampak 4, ustadz tidak.
 - **Loncat: boleh lewati tayangan/suara saat benar.** Jawaban benar memaksa anak menonton tunjukkan + sayWait kalimat penuh tanpa skip (skor 79). Tombol Lewati pada tunjukkan/sayWait dan persingkat correct minimum TK. Lokasi: games/29-loncat.js:360-372 (SD) + 243-253 (TK). Effort S, dampak 4, ustadz tidak.
 - **Perayaan streak di layar hasil.** Streak cuma tombol kecil di footer yang jarang terlihat sehingga momen 3/7/30 hari lewat tanpa perayaan. Saat streak sentuh 3/7/30 hari tampilkan chip "N hari beruntun!" + tombol share ke Share.streak() di layar hasil. Lokasi: js/core.js showResult 959-977 baca streak.count progress.js:73-79. Effort S, dampak 3, ustadz tidak.
 - **Perisai kesempatan kedua Raja Taman.** Salah ketuk sekali langsung hilang 1 nyawa; mati di soal ke-3 = tutup game. Salah pertama picu petunjuk + tunjukkan jawaban benar, nyawa berkurang kalau salah 2x di soal yang sama. Lokasi: games/100-raja-taman.js. Effort S, dampak 3, ustadz tidak.
@@ -29,6 +28,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Listrik: pangkas gerbang baca** (S81): peringatan sekali-pernah + note auto-lanjut. 92 tetap, probe OK. Detail: cycle-20261111-s81.md.
 - **Bagikan Tantangan Pekan** (S80): tombol Ajak di strip + label + tantangPekan jujur. Probe OK, ui 12/12, gami 55/55. Detail: cycle-20261111-s80.md.
 - **Template bagikan suara ortu** (S79): inviteOrtu + tombol WA ortu + hitungan dinamis. Probe OK, gami 55/55. Detail: cycle-20261111-s79.md.
 - **Strip kepercayaan di home atas** (S78): 1 baris link #/orangtua di bawah header. Probe OK, ui.mjs 12/12. Detail: cycle-20261110-s78.md.
