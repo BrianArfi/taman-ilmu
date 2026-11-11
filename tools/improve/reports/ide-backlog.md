@@ -13,7 +13,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Template bagikan bersuara orang tua.** Semua teks share bersuara anak (Aku dapat...) sehingga canggung diteruskan orang tua ke grup WA sekolah/keluarga. Fungsi share baru sejajar invite() berteks suara ortu + tombol kedua "Bagikan ke grup WA ortu" di halaman ortu; sekalian betulkan hardcode '100 game' jadi dinamis (share.js:95,218; pola ortu.js:9). Lokasi: js/share.js sejajar invite() 93-96 + tombol js/ortu.js:10-14. Effort S, dampak 4, ustadz tidak.
 - **Bagikan Tantangan Pekan.** Momen semua anak se-Indonesia main game yang sama minggu ini belum punya tombol share ke grup WA. Tombol "Ajak Teman Tantangan Pekan" di strip beranda dan label selesai, panggil Share.challenge(challengeGame(), stars). Lokasi: js/core.js:384-394 + label 974; rotasi progress.js:50-55. Effort S, dampak 4, ustadz tidak.
 - **Listrik: pangkas gerbang baca wajib.** Anak diadang layar peringatan + Mengerti sebelum main dan note + Lanjut tiap benda (skor promo 71). Peringatan jadi sekali-pernah (flag lokal), note tiap ronde non-blokir tanpa tombol Lanjut wajib. Lokasi: games/37-listrik.js:348-356 + 426-434. Effort S, dampak 4, ustadz tidak.
 - **Loncat: boleh lewati tayangan/suara saat benar.** Jawaban benar memaksa anak menonton tunjukkan + sayWait kalimat penuh tanpa skip (skor 79). Tombol Lewati pada tunjukkan/sayWait dan persingkat correct minimum TK. Lokasi: games/29-loncat.js:360-372 (SD) + 243-253 (TK). Effort S, dampak 4, ustadz tidak.
@@ -31,6 +30,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Template bagikan suara ortu** (S79): inviteOrtu + tombol WA ortu + hitungan dinamis. Probe OK, gami 55/55. Detail: cycle-20261111-s79.md.
 - **Strip kepercayaan di home atas** (S78): 1 baris link #/orangtua di bawah header. Probe OK, ui.mjs 12/12. Detail: cycle-20261110-s78.md.
 - **Tombol Pamer Peringkat** (S77): tombol Pamerkan di baris kamu rank pekan<=10 + teks 3-besar. Probe OK, gami 55/55. Detail: cycle-20261110-s77.md.
 - **Tantangan Keluarga via WA** (S76): tombol fam di hasil shalat+adab + teks sepupu. 92/92 tetap, probe OK, ui.mjs 12/12. Detail: cycle-20261110-s76.md.
