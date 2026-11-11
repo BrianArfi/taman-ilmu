@@ -2,7 +2,7 @@
 
 Diurut dampak-per-effort. Status: TODO (siap dikerjakan watcher),
 GARAP (sedang dikerjakan), DONE (selesai + terukur), TOLAK (dengan alasan).
-Watcher 30 mnt mengambil 1 ide TODO teratas saat tidak ada batch murah.
+Watcher 1 jam mengambil 1 ide TODO teratas saat tidak ada batch murah.
 Effort L dan flag ustadz=ya TIDAK diambil otomatis.
 
 Sumber utama: tim ide 8 Nov 2026 (12 ide berperingkat + bukti file:baris).

@@ -67,7 +67,7 @@ perbaikan, diurut dari skor terbawah, tiap game bawa 3 saran konkret).
 ## 6. Loop Ide (rekursif, kontinu)
 
 Eksekusi pola murah ada plafonnya (A99). Supaya naik terus, ide baru dicari
-nonstop oleh tim multi-agent, lalu dieksekusi loop 30 mnt:
+nonstop oleh tim multi-agent, lalu dieksekusi loop 1 jam:
 
 1. **Cari**: kron `Loop Ide Taman Ilmu` (tiap 2 jam) memanggil Workflow
    dengan skrip kanonis `tools/improve/ide-workflow.js` (3 anak read-only:
@@ -78,11 +78,11 @@ nonstop oleh tim multi-agent, lalu dieksekusi loop 30 mnt:
    tandai DONE yang sudah dibangun via git log, urut dampak-per-effort,
    maks 12 TODO). Hapus `.ide-lock`. Commit + push (berkas md saja, tanpa
    cek live; jika push ditolak: `pull --rebase`, ulangi sekali).
-3. **Kerjakan**: watcher 30 mnt, jika tidak ada batch murah, ambil 1 ide
+3. **Kerjakan**: watcher 1 jam, jika tidak ada batch murah, ambil 1 ide
    TODO teratas (lewati effort L dan flag ustadz=ya) sebagai siklus itu,
    lalu tandai DONE + catat hasilnya di laporan siklus. Serah terima
    otomatis: ide yang dicatat loop ide langsung bisa ditarik watcher
-   berikutnya (maks 30 mnt kemudian).
+   berikutnya (maks 1 jam kemudian).
 4. **Ukur**: hasilnya terlihat di `tren.jsonl` + `promo-*.json` + stats HP,
    dan loop ide berikutnya membaca semuanya. Ini rekursinya: ide habis
    dimakan eksekutor -> gate terbuka -> ide baru dicari lagi.
