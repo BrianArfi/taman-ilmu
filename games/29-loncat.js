@@ -22,6 +22,7 @@
 
   const CSS = `
     & .lj-wrap { width: 100%; max-width: 860px; display: flex; flex-direction: column; align-items: center; gap: 12px; flex: none; }
+    & .lj-lewati { align-self: center; min-height: 48px; }
     & .lj-eq { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 12px; padding: 10px 18px; width: auto; min-width: 220px; }
     & .lj-num { display: inline-grid; place-items: center; min-width: 1.3em; font-size: 2.3rem; font-weight: 800; line-height: 1.1; }
     & .lj-op { font-size: 2rem; font-weight: 800; color: var(--c); line-height: 1; }
@@ -197,6 +198,20 @@
   const angka = (v, cls) => h('span', { class: 'lj-num' + (cls ? ' ' + cls : '') }, String(v));
   const op = (t) => h('span', { class: 'lj-op', 'aria-hidden': 'true' }, t);
 
+  // Tombol Lewati sekali-pakai selama rayuan benar: demo berhenti, kalimat jadi pendek.
+  function pasangLewati(ctx, parent) {
+    let lewati = false;
+    const tunggu = [];
+    const b = h('button', { type: 'button', class: 'ti-btn is-ghost lj-lewati pop-in' }, 'Lewati');
+    b.addEventListener('click', () => { lewati = true; TI.sfx('tap'); b.disabled = true; tunggu.forEach((r) => r()); });
+    parent.append(b);
+    return {
+      skipped: () => lewati,
+      ditunggu: () => new Promise((res) => { if (lewati) res(); else tunggu.push(res); }),
+      lepas: () => b.remove(),
+    };
+  }
+
   // ---------- TK ----------
   async function soalTK(ctx, { a, b }) {
     ctx.ask('Bola di angka ' + a + '. Loncat ' + b + ' kali!');
@@ -247,8 +262,10 @@
       if (sudah === 0) { kunciUI(false); ctx.say('Ketuk Loncat dulu ya.'); return; }
       if (sudah === b) {
         selesaiBenar();
-        await ctx.correct(null, { say: false, min: 500 });
-        await ctx.sayWait(ucapan() + '!');
+        const lw = pasangLewati(ctx, wrap);
+        await ctx.correct(null, { say: false, min: 250 });
+        await (lw.skipped() ? ctx.sayWait('Hebat!') : Promise.race([ctx.sayWait(ucapan() + '!'), lw.ditunggu()]));
+        lw.lepas();
         done();
         return;
       }
@@ -335,7 +352,8 @@
     ctx.ask(teks, { say: ucapAwal });
     const sg = sungai(ctx, { n: 21, tappable: true });
     const tip = h('p', { class: 'lj-hint' }, q.tipe === 'kali' ? q.x + ' lompatan, tiap lompatan ' + q.y + ' angka. Ketuk batu tempat bola mendarat.' : 'Ketuk batu tempat bola mendarat.');
-    ctx.el.append(h('div', { class: 'lj-wrap' }, persamaan(bagian), sg.scene, tip));
+    const wrap = h('div', { class: 'lj-wrap' }, persamaan(bagian), sg.scene, tip);
+    ctx.el.append(wrap);
     sg.layout();
     sg.place(mulai);
     sg.stones[mulai].classList.add('is-start');
@@ -344,9 +362,10 @@
     let salah = 0, sibuk = false;
     const kunciUI = (ya) => { sibuk = ya; sg.stones.forEach((st) => { if (ya) st.setAttribute('aria-disabled', 'true'); else st.removeAttribute('aria-disabled'); }); };
     // Bola menunjukkan caranya.
-    async function tunjukkan() {
+    async function tunjukkan(stop) {
       if (q.tipe === 'kali') {
         for (let k = 1; k <= q.x; k++) {
+          if (stop && stop()) return;
           await sg.hop((k - 1) * q.y, k * q.y, 560 + q.y * 30, 40 + q.y * 5);
           sg.tag(k * q.y, String(k * q.y));
           ctx.say(kata(k * q.y));
@@ -354,7 +373,10 @@
         }
       } else {
         const arah = q.tipe === 'tambah' ? 1 : -1;
-        for (let k = 0; k < q.b; k++) await sg.hop(q.a + arah * k, q.a + arah * (k + 1), 300);
+        for (let k = 0; k < q.b; k++) {
+          if (stop && stop()) return;
+          await sg.hop(q.a + arah * k, q.a + arah * (k + 1), 300);
+        }
       }
     }
     await new Promise((resolve) => {
@@ -365,9 +387,11 @@
           if (v === q.ans) {
             st.classList.add('is-correct');
             hasil.textContent = String(q.ans); hasil.classList.add('is-done');
+            const lw = pasangLewati(ctx, wrap);
             await ctx.correct(null, { say: false, min: 350 });
-            await tunjukkan();
-            await ctx.sayWait(ucapHasil + '!');
+            await tunjukkan(() => lw.skipped());
+            await (lw.skipped() ? ctx.sayWait('Hebat!') : Promise.race([ctx.sayWait(ucapHasil + '!'), lw.ditunggu()]));
+            lw.lepas();
             resolve();
             return;
           }
