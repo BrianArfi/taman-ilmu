@@ -132,6 +132,15 @@
       'Aku dapat ' + bintang + ' di game ' + game.title + '! Berani terima tantanganku? ' +
       'Kalahkan skorku di sini: ' + challengeURL(game, stars));
   }
+  // Tantangan pekan: teks jujur ikut status main (belum main = ajakan, sudah = adu skor).
+  function tantangPekan(game, best) {
+    try { if (TI.Stats) TI.Stats.track('challenge', {}); } catch (e) { /* abaikan */ }
+    const bintang = '⭐'.repeat(Math.max(1, best)) + ' (' + Math.max(1, best) + '/3)';
+    const teks = best > 0
+      ? 'Aku dapat ' + bintang + ' di game ' + game.title + ' (Tantangan Pekan Ini)! Berani terima tantanganku? Kalahkan skorku di sini: ' + challengeURL(game, best)
+      : 'Tantangan Pekan Ini: game ' + game.title + '! Semua anak main game yang sama minggu ini. Ikut main dan tantang aku: ' + challengeURL(game, 1);
+    return bagikan('Tantangan Pekan · Taman Ilmu', teks);
+  }
   // Tantang keluarga: dibagikan orang tua ke grup WA keluarga, sudut pandang nama anak.
   function tantangKeluarga(game, stars) {
     try { if (TI.Stats) TI.Stats.track('challenge', {}); } catch (e) { /* abaikan */ }
@@ -278,5 +287,5 @@
     return hasil;
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, tantangKeluarga, inviteOrtu };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, tantangKeluarga, inviteOrtu, tantangPekan };
 })();

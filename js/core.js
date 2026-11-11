@@ -396,7 +396,8 @@
         h('b', null, 'Tantangan Pekan Ini: ' + ch.title),
         h('span', { class: 'tan-note' }, 'Raih 2 bintang di game ini untuk +40 XP')),
       chDone ? h('span', { class: 'tan-done' }, '✓ Selesai')
-        : h('a', { class: 'ti-btn tan-go', href: '#/main/' + ch.id, onclick: () => sfx('tap') }, 'Main'))
+        : h('a', { class: 'ti-btn tan-go', href: '#/main/' + ch.id, onclick: () => sfx('tap') }, 'Main'),
+      TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.tantangPekan(ch, ((state.stars[ch.id] || {})[state.level]) || 0) }, '⚔️ Ajak') : null)
       : null;
 
     const tabs = [['semua', 'Semua', '✨'], ...Object.entries(CATS).map(([k, c]) => [k, c.label, c.icon])];
@@ -977,7 +978,7 @@
         big,
         gain && gain.xp > 0 ? h('p', { class: 'xp-chip pop-in' }, '+' + gain.xp + ' XP') : null,
         gain && gain.levelUp ? h('p', { class: 'level-up pop-in' }, 'Naik ke Level ' + gain.level + '!') : null,
-        gain && gain.challengeDone ? h('p', { class: 'challenge-done pop-in' }, 'Tantangan pekan selesai!') : null,
+        gain && gain.challengeDone ? h('div', { class: 'challenge-done pop-in' }, h('span', null, 'Tantangan pekan selesai!'), TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.tantangPekan(ctx.game, stars) }, '⚔️ Ajak Teman') : null) : null,
         h('h2', null, msg),
         opts.lesson ? h('p', { class: 'result-lesson' }, h('b', null, 'Pelajaran hari ini: '), opts.lesson) : null,
         h('div', { class: 'result-actions' }, again, share, tantang, fam, kartu, menu)));
