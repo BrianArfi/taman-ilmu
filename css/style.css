@@ -310,6 +310,7 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
 .streak-party { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 6px 0 0; }
 .streak-chip { font-weight: 800; font-size: 1.05rem; }
 .challenge-done { margin: 4px 0 0; font-weight: 800; color: #9a6b00; font-size: 1rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.duel-result { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 6px 0 0; padding: 10px 14px; border-radius: var(--radius); background: #fff4cc; border: 2px dashed #f2c94c; font-weight: 800; }
 
 /* ---------- toast lencana ---------- */
 .ti-toast {
