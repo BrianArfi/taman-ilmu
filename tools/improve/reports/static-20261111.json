@@ -1077,7 +1077,7 @@
    "id": "raja-taman",
    "title": "Raja Taman",
    "cat": "logika",
-   "bytes": 9904,
+   "bytes": 11261,
    "soal": 10,
    "sig": {
     "aksi": 2,
@@ -1090,8 +1090,7 @@
    },
    "static100": 86,
    "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
    ]
   },
   {
