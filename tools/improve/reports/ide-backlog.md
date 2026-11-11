@@ -13,7 +13,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Perayaan streak di layar hasil.** Streak cuma tombol kecil di footer yang jarang terlihat sehingga momen 3/7/30 hari lewat tanpa perayaan. Saat streak sentuh 3/7/30 hari tampilkan chip "N hari beruntun!" + tombol share ke Share.streak() di layar hasil. Lokasi: js/core.js showResult 959-977 baca streak.count progress.js:73-79. Effort S, dampak 3, ustadz tidak.
 - **Perisai kesempatan kedua Raja Taman.** Salah ketuk sekali langsung hilang 1 nyawa; mati di soal ke-3 = tutup game. Salah pertama picu petunjuk + tunjukkan jawaban benar, nyawa berkurang kalau salah 2x di soal yang sama. Lokasi: games/100-raja-taman.js. Effort S, dampak 3, ustadz tidak.
 - **Laporan Anak (ganti dasbor statistik).** Dasbor kini berorientasi dev (kunjungan, promo CTR, salin-ke-Brian), bukan bukti anak belajar apa. Kartu teratas "X/102 game selesai" + 4 bar progres per kategori (byCat sudah dihitung tapi tak dirender) + tombol "Bagikan laporan ke pasangan"; pindahkan Salin data + Banner promosi ke bawah berlabel "Untuk pengembang". Lokasi: js/analytics.js render() 185-215 (byCat 110-116). Effort M, dampak 5, ustadz tidak.
 - **Tantangan berbalas (rematch loop).** Banner tantangan inbound cuma Terima/Tutup lalu hilang, loop viral putus satu arah. Simpan tantangan inbound yang diterima; saat anak selesai di game yang sama bandingkan bintang vs skor penantang, tampilkan "Kamu menang lawan [dari]!" + tombol "Balas Tantangan" ke Share.challenge(). Lokasi: js/core.js showResult 959-977 + share.js parseChallenge 106-117. Effort M, dampak 5, ustadz tidak.
@@ -27,6 +26,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Perayaan streak di layar hasil** (S83): chip N hari + Pamerkan saat 3/7/30. Probe OK, ui 12/12. Detail: cycle-20261111-s83.md.
 - **Loncat: boleh lewati** (S82): tombol Lewati demo+kalimat, min TK 250. 92 tetap, probe OK. Detail: cycle-20261111-s82.md.
 - **Listrik: pangkas gerbang baca** (S81): peringatan sekali-pernah + note auto-lanjut. 92 tetap, probe OK. Detail: cycle-20261111-s81.md.
 - **Bagikan Tantangan Pekan** (S80): tombol Ajak di strip + label + tantangPekan jujur. Probe OK, ui 12/12, gami 55/55. Detail: cycle-20261111-s80.md.
