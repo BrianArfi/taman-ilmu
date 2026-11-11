@@ -3,22 +3,23 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "loncat",
-   "title": "Loncat Angka",
-   "cat": "mat",
-   "file": "29-loncat.js",
+   "id": "raja-taman",
+   "title": "Raja Taman",
+   "cat": "logika",
+   "file": "100-raja-taman.js",
    "static100": 86,
    "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 49,
+   "avgActions": 32,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
    "fun": 92,
    "cls": "A",
    "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)",
+    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
    ]
   }
  ]
