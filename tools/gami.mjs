@@ -106,7 +106,7 @@ async function makePage(v1 = {}) {
         unlocked: [...TI.Progression.unlockedSet()],
         free: TI.Progression.dailyFree(),
         chip: document.querySelector('.xp-chip') && document.querySelector('.xp-chip').textContent,
-        acts: document.querySelectorAll('.result-actions > *').length,
+        acts: [...document.querySelectorAll('.result-actions > *')].map((el) => (el.textContent || '').trim()),
       };
     });
     check('finish: bintang v2 === v1', r.s1 === r.s2 && r.s1 >= 1, `(s=${r.s1})`);
@@ -115,7 +115,7 @@ async function makePage(v1 = {}) {
     // rantai: bintang di hijaiyah membuka wudhu (slot ke-2); rukun baru terbuka setelah wudhu dapat bintang
     check('finish: wudhu terbuka, rukun dikunci (kecuali gratis hari ini)', r.unlocked.includes('wudhu') && (!r.unlocked.includes('rukun') || r.free === 'rukun'));
     check('finish: chip XP tampil di layar hasil', !!r.chip && /\+\d+ XP/.test(r.chip), `(${r.chip})`);
-    check('finish: hasil punya 5 tombol (lagi, bagikan, tantang, kartu, pilih)', r.acts === 5, `(${r.acts})`);
+    check('finish: hasil punya 7 tombol (lagi, bagikan, tantang, keluarga, sekelas, kartu, pilih)', JSON.stringify(r.acts) === JSON.stringify(['Main Lagi', '📣 Bagikan', '🏆 Tantang', '🏠 Tantang Keluarga', '🏫 Tantang Sekelas', '🖼️ Kartu', 'Pilih Game']), `(${r.acts.join('|')})`);
   }
   check('main: tanpa error JS', page.errors.length === 0, page.errors.join(' | '));
   await ctx.close();

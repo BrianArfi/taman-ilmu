@@ -159,6 +159,17 @@
       siapa + ' di game ' + game.title + '! Berani adu sama sepupu? ' +
       'Kalahkan ' + lawan + ' di sini: ' + challengeURL(game, stars));
   }
+  // Tantang sekelas: untuk diteruskan ke grup WA sekolah/kelas.
+  function tantangKelas(game, stars) {
+    try { if (TI.Stats) TI.Stats.track('challenge', {}); } catch (e) { /* abaikan */ }
+    const nama = (TI.state.profile && TI.state.profile.nama) || '';
+    const bintang = '⭐'.repeat(Math.max(1, stars)) + ' (' + stars + '/3)';
+    const siapa = nama ? nama + ' dapat ' + bintang : 'Aku dapat ' + bintang;
+    const lawan = nama ? 'skornya' : 'skorku';
+    return bagikan('Tantangan Sekelas · Taman Ilmu',
+      siapa + ' di game ' + game.title + '! Anak sekelas ada yang berani adu? ' +
+      'Kalahkan ' + lawan + ' di sini: ' + challengeURL(game, stars));
+  }
 
   // Pamer rajin main: rentetan hari beruntun.
   function streak() {
@@ -311,5 +322,5 @@
     return hasil;
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, tantangKeluarga, inviteOrtu, tantangPekan, laporan };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan };
 })();

@@ -973,7 +973,8 @@
     const again = h('button', { type: 'button', class: 'ti-btn', onclick: () => { sfx('tap'); openGame(ctx.game); } }, 'Main Lagi');
     const share = TI.Share ? h('button', { type: 'button', class: 'ti-btn', onclick: () => TI.Share.scoreResult(ctx.game, stars, gain) }, '📣 Bagikan') : null;
     const tantang = TI.Share ? h('button', { type: 'button', class: 'ti-btn', onclick: () => TI.Share.challenge(ctx.game, stars) }, '🏆 Tantang') : null;
-    const fam = TI.Share && (ctx.game.id === 'shalat' || ctx.game.id === 'adab') ? h('button', { type: 'button', class: 'ti-btn', onclick: () => TI.Share.tantangKeluarga(ctx.game, stars) }, '🏠 Tantang Keluarga') : null;
+    const fam = TI.Share ? h('button', { type: 'button', class: 'ti-btn', onclick: () => TI.Share.tantangKeluarga(ctx.game, stars) }, '🏠 Tantang Keluarga') : null;
+    const kelas = TI.Share ? h('button', { type: 'button', class: 'ti-btn', onclick: () => TI.Share.tantangKelas(ctx.game, stars) }, '🏫 Tantang Sekelas') : null;
     const kartu = TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost', onclick: () => TI.Share.card(ctx.game, stars) }, '🖼️ Kartu') : null;
     const menu = h('a', { class: 'ti-btn is-ghost', href: '#/', onclick: () => sfx('tap') }, 'Pilih Game');
     const sc = (state.streak && state.streak.count) || 0;
@@ -1010,7 +1011,7 @@
         duelUi,
         h('h2', null, msg),
         opts.lesson ? h('p', { class: 'result-lesson' }, h('b', null, 'Pelajaran hari ini: '), opts.lesson) : null,
-        h('div', { class: 'result-actions' }, again, share, tantang, fam, kartu, menu)));
+        h('div', { class: 'result-actions' }, again, share, tantang, fam, kelas, kartu, menu)));
     els.shell.append(dlg);
     again.focus({ preventScroll: true });
     // Perayaan penuh untuk 2-3 bintang; 1 bintang (mis. kalah balapan) cukup disemangati.
