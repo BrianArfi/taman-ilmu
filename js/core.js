@@ -515,7 +515,13 @@
     if (!list.length) grid.append(h('p', { class: 'empty' }, 'Belum ada game di kategori ini.'));
 
     if (promo) app.append(promo);
-    app.append(head, trustStrip, cobaBtn, strip);
+    const sum = TI.Stats ? TI.Stats.summary() : null;
+    const laporMini = sum && TI.Share ? h('button', { type: 'button', class: 'lapor-mini pop-in', 'aria-label': 'Bagikan laporan anak ke pasangan', onclick: () => { sfx('tap'); TI.Share.laporan(); } },
+      h('span', null, '📊 ' + sum.lvlDone + '/' + sum.lvlTotal + ' · ★' + sum.lvlAvg),
+      h('b', null, 'Bagikan')) : null;
+    app.append(head, trustStrip, cobaBtn);
+    if (laporMini) app.append(laporMini);
+    app.append(strip);
     if (tantangan) app.append(tantangan);
     if (freeCard) app.append(freeCard);
     app.append(
