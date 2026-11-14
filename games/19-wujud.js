@@ -133,14 +133,20 @@
     return lab;
   }
 
-  // Satu kotak "lanjut" di bawah lab: catatan istilah + tombol.
+  // Satu kotak "lanjut" di bawah lab: dibacakan lalu jalan sendiri; tombol cuma pemercepat.
   async function afterNote(ctx, text, title) {
     const box = h('div', { class: 'wj-after' });
     ctx.el.append(box);
-    ctx.note(text, { title, into: box });
-    const go = h('button', { type: 'button', class: 'ti-btn pop-in' }, 'Lanjut ➜');
-    box.append(go);
-    await new Promise((res) => go.addEventListener('click', () => { TI.sfx('tap'); go.disabled = true; res(); }, { once: true }));
+    ctx.note(text, { title, into: box, speak: false });
+    await new Promise((resolve) => {
+      let done = false;
+      const lanjut = () => { if (!done) { done = true; resolve(); } };
+      const b = h('button', { type: 'button', class: 'ti-btn is-ghost pop-in' }, 'Lanjut ➜');
+      b.addEventListener('click', () => { TI.sfx('tap'); b.disabled = true; lanjut(); });
+      box.append(b);
+      ctx.onExit(lanjut);
+      ctx.sayWait(text).then(lanjut);
+    });
     box.remove();
   }
 
