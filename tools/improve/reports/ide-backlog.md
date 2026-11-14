@@ -15,7 +15,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Tantang Keluarga/Sekelas semua game.** tantangKeluarga cuma di 2 game; grup WA keluarga/sekolah = K-factor terbesar. Perluas tombol ke semua game + template "tantang sekelas" (nama anak + game + link ?tantang=). Lokasi: core.js:973 (hapus filter 2 game) + share.js tantangKeluarga/baru tantangKelas. Effort S, dampak 5, ustadz tidak.
 - **Badge 102 game di header + meta.** Angka + jaminan aman tak ada di judul yang pertama dibaca; meta description masih tulis 100. Tambah baris "102 game TK/SD · Tanpa iklan · Bisa offline" + tombol Pasang/Bookmark di bawah judul; betulkan meta. Lokasi: core.js head/brand (344-351) + index.html L10. Effort S, dampak 5, ustadz tidak.
 - **Kartu forward ortu siap salin.** Tombol WA ortu cuma invite umum; ortu butuh teks alasan aman untuk grup sekolah. Tombol "Salin info buat grup WA" (5 poin aman + jumlah game + link). Lokasi: ortu.js ajakOrtu (15-19) + fungsi baru share.js dekat inviteOrtu. Effort S, dampak 5, ustadz tidak.
 - **Label Nilai Islami di kartu game.** Diferensiasi vs game umum tak terlihat di grid. Label nilai per game islam dari desc/lesson yang sudah ada (mis. hijaiyah "Bekal baca Quran"). Lokasi: grid home core.js L460-469 desc. Effort S, dampak 5, ustadz tidak (pakai ulang string).
@@ -33,6 +32,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Tantang Keluarga/Sekelas semua game** (S88): fam semua game + template sekelas; kontrak uji 5->7 tombol. Probe OK, gami 55/55. Detail: cycle-20261114-s88.md.
 - **Duel berbalas lanjutan** (S87): &lawan + skor seri + banner balas. Probe 2 HP OK, gami 55/55. Detail: cycle-20261114-s87.md.
 - **Tantangan berbalas** (S86): duel tersimpan + menang/balas di hasil. Probe OK, gami 55/55. Detail: cycle-20261111-s86.md.
 - **Laporan Anak** (S85): hero X/102 + bar kategori + bagikan; dev ke bawah. Probe OK, gami 55/55. Detail: cycle-20261111-s85.md.
