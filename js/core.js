@@ -428,6 +428,10 @@
     // banner ajakan dari link ?ajak=Nama (hasil tombol Bagikan teman)
     let ajak = null;
     try { ajak = new URLSearchParams(location.search).get('ajak'); } catch (e) { /* tanpa query */ }
+    if (ajak && !state.ajakDari && ajak.trim().toLowerCase() !== ((prof.nama || '').trim().toLowerCase())) {
+      state.ajakDari = ajak;
+      saveState();
+    }
     const ajakBanner = ajak && state.ajakSeen !== ajak
       ? h('div', { class: 'ajak-banner pop-in', role: 'status' },
         h('span', { class: 'ajak-txt' }, '🌟 ', h('b', null, ajak), ' mengajakmu main Taman Ilmu! Pilih jenjangmu, lalu mainkan gamenya.'),
@@ -1019,6 +1023,7 @@
       h('div', { class: 'result-card' },
         big,
         gain && gain.xp > 0 ? h('p', { class: 'xp-chip pop-in' }, '+' + gain.xp + ' XP') : null,
+        gain && gain.bonusTeman ? h('p', { class: 'teman-bonus pop-in' }, '🎁 Bonus Teman +10 XP!') : null,
         gain && gain.levelUp ? h('p', { class: 'level-up pop-in' }, 'Naik ke Level ' + gain.level + '!') : null,
         rayakan,
         gain && gain.challengeDone ? h('div', { class: 'challenge-done pop-in' }, h('span', null, 'Tantangan pekan selesai!'), TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.tantangPekan(ctx.game, stars) }, '⚔️ Ajak Teman') : null) : null,

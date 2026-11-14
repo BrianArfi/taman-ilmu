@@ -211,6 +211,12 @@
     const n = (day[game.id] || 0) + 1;
     day[game.id] = n;
     xp += n <= 3 ? 2 : n <= 5 ? 1 : 0;               // bonus dasar menurun, anti farming
+    let bonusTeman = false;
+    if (st.ajakDari && !st.ajakBonusDone) {
+      st.ajakBonusDone = true;
+      xp += 10;
+      bonusTeman = true;
+    }
 
     const w = ensureWeekly();
     w.xp[jen] = (w.xp[jen] || 0) + xp;
@@ -236,7 +242,7 @@
     pruneDayLog();
 
     const newBadges = TI.Badges ? TI.Badges.evaluate(true) : [];
-    return { xp, levelUp, level: lv, badges: newBadges, challengeDone };
+    return { xp, levelUp, level: lv, badges: newBadges, challengeDone, bonusTeman };
   }
 
   function totals() {
@@ -261,6 +267,7 @@
     const st = TI.state;
     const dk = dayKey();
     const s = (st.share = st.share || {});
+    s.total = (s.total || 0) + 1;
     if (s.last === dk) return { xp: 0, levelUp: false, level: st.profile.level };
     s.last = dk;
     st.profile.xp += 5;

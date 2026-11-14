@@ -309,6 +309,7 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
 }
 .result-card { display: flex; flex-direction: column; align-items: center; }
 .level-up { margin: 6px 0 0; font-weight: 800; color: var(--good); font-size: 1.15rem; }
+.teman-bonus { margin: 6px 0 0; font-weight: 800; color: #9a6b00; font-size: 1rem; }
 .streak-party { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 6px 0 0; }
 .streak-chip { font-weight: 800; font-size: 1.05rem; }
 .challenge-done { margin: 4px 0 0; font-weight: 800; color: #9a6b00; font-size: 1rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }

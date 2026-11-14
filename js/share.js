@@ -65,6 +65,7 @@
     if (hasil === 'share' || hasil === 'salin') {
       try { bonus = TI.Progression.onShare(); } catch (e) { /* bonus gagal diam saja */ }
       try { if (TI.Stats) TI.Stats.track('share', {}); } catch (e) { /* abaikan */ }
+      try { if (TI.Badges) TI.Badges.evaluate(true); } catch (e) { /* abaikan */ }
       if (TI.save) TI.save();
     }
     TI.sfx(hasil === 'gagal' ? 'salah' : 'menang');

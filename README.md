@@ -13,7 +13,7 @@ Buka https://brianarfi.github.io/taman-ilmu/ (atau klik dua kali `index.html` un
 
 ## Level, lencana, papan juara
 
-Anak naik level (Kecambah sampai Penjaga Taman) dari XP: menyelesaikan game, memperbaiki rekor bintang, dan rajin main tiap hari. Game terkunci terbuka berantai setelah game sebelumnya di kategori yang sama dapat bintang, jadi ada tantangan yang bisa dikejar. Ada 18 lencana, tantangan pekan yang berotasi, dan bonus semangat harian.
+Anak naik level (Kecambah sampai Penjaga Taman) dari XP: menyelesaikan game, memperbaiki rekor bintang, dan rajin main tiap hari. Game terkunci terbuka berantai setelah game sebelumnya di kategori yang sama dapat bintang, jadi ada tantangan yang bisa dikejar. Ada 19 lencana, tantangan pekan yang berotasi, dan bonus semangat harian.
 
 Papan juara (tombol 🏆) punya dua mode: **Pekan Ini** (reset tiap Senin) dan **Sepanjang Waktu**, dipisah TK dan SD. Butuh internet; tanpa internet semua game tetap jalan penuh. Nama di papan cuma panggilan 2-16 huruf (boleh emoji bintang dan sejenisnya), tanpa nama asli; papan tidak minta akun dan hanya menyimpan ID acak di browser.
 
