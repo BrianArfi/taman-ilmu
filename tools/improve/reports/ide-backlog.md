@@ -15,7 +15,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Puasa: progres per kartu.** 8 kartu diurutkan tanpa umpan progres (progress per babak saja). Tambah onStep di ctx.order untuk teks "N dari 8 terpasang" + progress. Lokasi: 55-puasa-sehari.js L67 (onStep core.js L700). Effort S, dampak 3, ustadz tidak.
 - **Ajak teman berhadiah dua sisi (lokal).** Banner ajak inbound tanpa bonus sehingga undangan tak memberi alasan bagi tamu maupun pengirim. Tamu via link ajak yang selesaikan game pertama dapat "Bonus Teman +10 XP"; pengirim dapat lencana "Pengajak Teman" setelah N share lokal. Varian server lintas-perangkat = effort L, JANGAN diambil. Lokasi: js/core.js:409-416 + progress.js:260-271 + badges.js DEFS + catat ajakSeen (atribusi dua arah, putaran 3). Effort M, dampak 5, ustadz tidak.
 - **Misi Harian Global.** Game Gratis Hari Ini sama untuk semua tapi tak ada alasan kembali/share. Tombol "Tantang" + "Kartu" di kartu beranda; badge/streak 3/7 hari; teks share "misi hari ini". Lokasi: kartu freeCard core.js:404-409, dailyGlobal() progress.js:118, badges.js. Effort M, dampak 5, ustadz tidak.
 - **Sertifikat cetak Shalat & Adab.** Tak ada artefak fisik dipamer keluarga. Varian kartu pamer "Sertifikat: Hafal 5 Waktu Shalat / Adab Baik" (nama, bintang, tanggal, lesson); unduh PNG via gambarKartu 1080x1350 + tombol Cetak. Lokasi: 04-shalat, 07-adab + galeri #/lencana. Effort M, dampak 4, ustadz tidak (lesson dari bank).
@@ -26,6 +25,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Puasa: progres per kartu** (S95): counter onStep + bar fraksional. 92 tetap, probe OK. Detail: cycle-20261114-s95.md.
 - **Wujud: auto-lanjut** (S94): afterNote sayWait + skip opsional. 92 tetap, probe OK. Detail: cycle-20261114-s94.md.
 - **Loncat: demo penuh seperlunya** (S93): penuh hanya salah-dulu/tiap ke-3. 92 tetap, probe OK. Detail: cycle-20261114-s93.md.
 - **Listrik: demo terpandu** (S92): benda pertama ditunjukkan, tebak mulai kedua. 92 tetap, probe OK. Detail: cycle-20261114-s92.md.
