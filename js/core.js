@@ -441,12 +441,15 @@
     const list = games.filter((g) => state.tab === 'semua' || g.cat === state.tab);
     const unlocked = Pr.unlockedSet();
     const freeInfo = Pr.dailyFreeInfo ? Pr.dailyFreeInfo() : null;
+    const freeBest = freeInfo ? ((state.stars[freeInfo.gid] || {})[state.level] || 0) : 0;
     const freeCard = freeInfo && freeInfo.isNew ? h('div', { class: 'free-card pop-in' },
       h('span', { class: 'free-icon', 'aria-hidden': 'true' }, freeInfo.game.icon || '🎁'),
       h('div', { class: 'free-body' },
         h('b', null, 'Game Gratis Hari Ini: ' + freeInfo.game.title),
         h('span', { class: 'free-note' }, 'Terbuka hari ini saja, besok ganti game lain. Selesaikan untuk lencana Pemburu Gratisan.')),
-      h('a', { class: 'ti-btn free-go', href: '#/main/' + freeInfo.gid, onclick: () => sfx('tap') }, 'Main Gratis')) : null;
+      h('a', { class: 'ti-btn free-go', href: '#/main/' + freeInfo.gid, onclick: () => sfx('tap') }, 'Main Gratis'),
+      TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost free-share', onclick: () => TI.Share.misiHarian(freeInfo.game, freeBest) }, '⚔️ Tantang') : null,
+      TI.Share && freeBest > 0 ? h('button', { type: 'button', class: 'ti-btn is-ghost free-share', onclick: () => TI.Share.card(freeInfo.game, freeBest) }, '🖼️ Kartu') : null) : null;
     let tantangBanner = null;
     try {
       const tc = TI.Share ? TI.Share.parseChallenge() : null;

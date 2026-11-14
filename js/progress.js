@@ -237,7 +237,15 @@
     const lv = levelOf(p.xp);
     const levelUp = lv > p.level;
     p.level = lv;
-    try { if (game.id === dailyFree()) st.dailyFree.doneDay = dk; } catch (e) { /* abaikan */ }
+    try {
+      if (game.id === dailyFree()) {
+        const df = st.dailyFree;
+        const km = new Date(Date.now() + 7 * 3600 * 1000 - 86400000).toISOString().slice(0, 10);
+        df.runtun = df.lastDay === km ? (df.runtun || 0) + 1 : 1;
+        df.lastDay = dk;
+        df.doneDay = dk;
+      }
+    } catch (e) { /* abaikan */ }
     updateStreak(dk);
     pruneDayLog();
 
