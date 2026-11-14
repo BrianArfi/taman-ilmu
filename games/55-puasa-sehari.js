@@ -64,7 +64,11 @@ ${P} .ps-sort .choice { min-height: 72px; }`;
       const w1 = h('div', { class: 'ps-order pop-in' });
       ctx.el.append(w1);
       ctx.sfx('pop');
-      await ctx.order({ items: TK ? URUT_TK : URUT_SD, guide: TK ? 'always' : 'after-wrong', into: w1 });
+      const items1 = TK ? URUT_TK : URUT_SD;
+      const hitung1 = h('p', { class: 'ti-label', 'aria-live': 'polite' }, '0 dari ' + items1.length + ' terpasang');
+      w1.append(hitung1);
+      await ctx.order({ items: items1, guide: TK ? 'always' : 'after-wrong', into: w1,
+        onStep: (n, t) => { hitung1.textContent = n + ' dari ' + t + ' terpasang'; ctx.progress(n / t, 2); } });
       if (!ctx.alive) return;
       ctx.progress(1, 2);
       ctx.correct(null, { say: 'Bagus! Terus naik ke babak 2.' });
