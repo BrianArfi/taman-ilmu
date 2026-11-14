@@ -344,7 +344,7 @@
     const head = h('header', { class: 'home-head' },
       h('div', { class: 'brand' },
         h('span', { class: 'brand-mark', 'aria-hidden': 'true' }, '🌙'),
-        h('div', null, h('h1', null, 'Taman Ilmu'), h('p', null, 'Main sambil belajar agama, matematika, dan sains'))),
+        h('div', null, h('h1', null, 'Taman Ilmu'), h('p', null, 'Main sambil belajar agama, matematika, dan sains'), h('span', { class: 'brand-count' }, games.length + ' game TK/SD'))),
       h('div', { class: 'head-tools' },
         h('div', { class: 'seg', role: 'group', 'aria-label': 'Pilih jenjang' }, lvlBtn('tk', 'TK'), lvlBtn('sd', 'SD')),
         soundBtn,
