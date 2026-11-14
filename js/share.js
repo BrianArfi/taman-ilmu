@@ -107,10 +107,13 @@
   }
 
   // ---------- tantang teman: link ?tantang=gid&skor=N&dari=Nama ----------
-  function challengeURL(game, stars) {
+  function challengeURL(game, stars, lawan, seri) {
     const nama = (TI.state.profile && TI.state.profile.nama) || '';
-    return BASE + '?tantang=' + encodeURIComponent(game.id) + '&skor=' + stars +
+    let u = BASE + '?tantang=' + encodeURIComponent(game.id) + '&skor=' + stars +
       '&dari=' + encodeURIComponent(nama);
+    if (lawan) u += '&lawan=' + encodeURIComponent(lawan);
+    if (seri) u += '&seri=' + encodeURIComponent(seri);
+    return u;
   }
   // Baca tantangan dari URL. null kalau tidak ada atau gamenya tidak dikenal.
   function parseChallenge() {
@@ -122,15 +125,19 @@
       if (!game) return null;
       const dari = String(q.get('dari') || 'Temanmu').slice(0, 16);
       const skor = Math.max(1, Math.min(3, parseInt(q.get('skor') || '1', 10) || 1));
-      return { game, dari, skor, key: gid + ':' + skor + ':' + dari };
+      const lawan = String(q.get('lawan') || '').slice(0, 16);
+      const seri = /^\d{1,2}-\d{1,2}$/.test(q.get('seri') || '') ? q.get('seri') : '';
+      const key = gid + ':' + skor + ':' + dari + ((lawan || seri) ? ':' + lawan + ':' + seri : '');
+      return { game, dari, skor, lawan, seri, key };
     } catch (e) { return null; }
   }
-  function challenge(game, stars) {
+  function challenge(game, stars, lawan, seri) {
     try { if (TI.Stats) TI.Stats.track('challenge', {}); } catch (e) { /* abaikan */ }
     const bintang = '⭐'.repeat(Math.max(1, stars)) + ' (' + stars + '/3)';
     return bagikan('Tantangan · Taman Ilmu',
       'Aku dapat ' + bintang + ' di game ' + game.title + '! Berani terima tantanganku? ' +
-      'Kalahkan skorku di sini: ' + challengeURL(game, stars));
+      (lawan && seri ? 'Duel lawan ' + lawan + ': ' + seri + ' untukku. ' : '') +
+      'Kalahkan skorku di sini: ' + challengeURL(game, stars, lawan, seri));
   }
   // Tantangan pekan: teks jujur ikut status main (belum main = ajakan, sudah = adu skor).
   function tantangPekan(game, best) {

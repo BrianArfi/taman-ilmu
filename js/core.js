@@ -435,9 +435,12 @@
     try {
       const tc = TI.Share ? TI.Share.parseChallenge() : null;
       if (tc && state.tantangSeen !== tc.key) {
+        const seriBalasan = tc.lawan && tc.seri ? tc.seri.split('-') : null;
+        const ajakTxt = seriBalasan
+          ? ['🔥 ', h('b', null, tc.dari), ' membalas tantanganmu di ' + tc.game.title + '! Skor duel: kamu ' + seriBalasan[1] + ' - ' + seriBalasan[0] + ' ' + tc.dari + '. Berani balas?']
+          : ['🔥 ', h('b', null, tc.dari), ' menantangmu di ' + tc.game.title + ' (' + tc.skor + ' bintang)! Berani terima?'];
         tantangBanner = h('div', { class: 'tantang-banner pop-in', role: 'status' },
-          h('span', { class: 'tantang-txt' }, '🔥 ', h('b', null, tc.dari), ' menantangmu di ' + tc.game.title +
-            ' (' + tc.skor + ' bintang)! Berani terima?'),
+          h('span', { class: 'tantang-txt' }, ...ajakTxt),
           h('a', { class: 'ti-btn tantang-go', href: '#/main/' + tc.game.id, onclick: () => { sfx('tap'); state.duel = { gid: tc.game.id, skor: tc.skor, dari: tc.dari }; saveState(); } }, 'Terima'),
           h('button', { type: 'button', class: 'nama-later', 'aria-label': 'Tutup',
             onclick: () => { state.tantangSeen = tc.key; saveState(); showHome(); } }, 'Tutup'));
@@ -980,15 +983,21 @@
     const duel = state.duel && state.duel.gid === ctx.game.id ? state.duel : null;
     let duelUi = null;
     if (duel) {
+      const skey = duel.gid + ':' + duel.dari;
+      const seri = ((state.duelSeri = state.duelSeri || {})[skey] = state.duelSeri[skey] || { aku: 0, dia: 0 });
       if (stars >= duel.skor) {
+        seri.aku++;
+        const skorTxt = seri.aku + '-' + seri.dia;
         duelUi = h('div', { class: 'duel-result pop-in' },
-          h('span', null, '🎉 Kamu menang lawan ' + duel.dari + '! (' + stars + ' vs ' + duel.skor + ')'),
-          TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.challenge(ctx.game, stars) }, 'Balas Tantangan') : null);
+          h('span', null, '🎉 Kamu menang lawan ' + duel.dari + '! (' + stars + ' vs ' + duel.skor + ') Duel: ' + skorTxt + '.'),
+          TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.challenge(ctx.game, stars, duel.dari, skorTxt) }, 'Balas Tantangan') : null);
         state.duel = null;
         saveState();
       } else {
+        seri.dia++;
+        saveState();
         duelUi = h('div', { class: 'duel-result pop-in' },
-          h('span', null, duel.dari + ' masih menang (' + duel.skor + ' vs ' + stars + '). Main lagi untuk balas!'));
+          h('span', null, duel.dari + ' masih menang (' + duel.skor + ' vs ' + stars + '). Duel: ' + seri.aku + '-' + seri.dia + '. Main lagi untuk balas!'));
       }
     }
     const dlg = h('div', { class: 'result', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Hasil' },
