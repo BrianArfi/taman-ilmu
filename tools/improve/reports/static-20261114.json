@@ -765,7 +765,7 @@
    "id": "listrik",
    "title": "Rangkaian Listrik",
    "cat": "sains",
-   "bytes": 29671,
+   "bytes": 30786,
    "soal": 2,
    "sig": {
     "aksi": 2,
@@ -778,7 +778,6 @@
    },
    "static100": 86,
    "sug": [
-    "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut",
     "sesi 2 soal: ideal 6-10 soal (2-4 menit)"
    ]
   },
@@ -808,7 +807,7 @@
    "id": "loncat",
    "title": "Loncat Angka",
    "cat": "mat",
-   "bytes": 23085,
+   "bytes": 23434,
    "soal": 8,
    "sig": {
     "aksi": 2,
