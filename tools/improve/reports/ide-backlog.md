@@ -15,7 +15,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Kartu forward ortu siap salin.** Tombol WA ortu cuma invite umum; ortu butuh teks alasan aman untuk grup sekolah. Tombol "Salin info buat grup WA" (5 poin aman + jumlah game + link). Lokasi: ortu.js ajakOrtu (15-19) + fungsi baru share.js dekat inviteOrtu. Effort S, dampak 5, ustadz tidak.
 - **Label Nilai Islami di kartu game.** Diferensiasi vs game umum tak terlihat di grid. Label nilai per game islam dari desc/lesson yang sudah ada (mis. hijaiyah "Bekal baca Quran"). Lokasi: grid home core.js L460-469 desc. Effort S, dampak 5, ustadz tidak (pakai ulang string).
 - **Listrik: demo terpandu benda pertama.** Tiap benda diawali tebakan buta 50/50 padahal anak belum kenal konduktor. Benda pertama jadi demo terpandu tanpa tebakan; tebakan mulai benda kedua. Lokasi: 37-listrik.js loop benda (419-454, lewati askGuess saat ke===1). Effort S, dampak 4, ustadz tidak.
 - **Loncat: demo penuh seperlunya.** Tiap benar dibayar demo ulang penuh + TTS lengkap di 8 soal. Demo penuh hanya saat salah-dulu-lalu-benar atau tiap soal ke-3; benar firstTry cukup rayuan singkat. Lokasi: 29-loncat.js handler SD (387-396) + TK (263-270). Effort S, dampak 4, ustadz tidak.
@@ -31,6 +30,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Kartu forward ortu** (S90): POIN satu sumber + tombol salin + infoOrtu. Probe OK, gami 55/55. Detail: cycle-20261114-s90.md.
 - **Badge 102 game di header + meta** (S89): badge dinamis + meta 102 (tombol Pasang skip jujur). Probe OK, ui 12/12. Detail: cycle-20261114-s89.md.
 - **Tantang Keluarga/Sekelas semua game** (S88): fam semua game + template sekelas; kontrak uji 5->7 tombol. Probe OK, gami 55/55. Detail: cycle-20261114-s88.md.
 - **Duel berbalas lanjutan** (S87): &lawan + skor seri + banner balas. Probe 2 HP OK, gami 55/55. Detail: cycle-20261114-s87.md.
