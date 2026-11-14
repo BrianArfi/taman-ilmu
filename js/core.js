@@ -12,6 +12,18 @@
     sains: { label: 'Sains', icon: '🔬', color: '#9b4dde' },
     logika: { label: 'Logika', icon: '🧩', color: '#e8590c' },
   };
+  // Label nilai tiap game islam: diringkas dari desc/lesson game itu, tanpa fakta baru.
+  const NILAI = {
+    hijaiyah: 'Bekal baca Al-Quran', adab: 'Bismillah & salam', bangun: 'Bangun masjid',
+    'doa-pasang': 'Doa + artinya', haji: 'Thawaf & Sai', 'halal-pilah': 'Halal atau haram',
+    'jam-shalat': 'Waktu shalat', kartu: 'Kartu kitab & malaikat', 'kisah-clue': 'Nabi dari petunjuk',
+    labirin: 'Ke masjid + wudhu', 'lari-masjid': 'Lari ke masjid', nabi: 'Cerita nabi',
+    'puasa-sehari': 'Sahur sampai buka', 'sedekah-warung': 'Jajan + sedekah', shalat: 'Waktu & rakaat',
+    'tabung-infaq': 'Hitung sedekah', tangkap: 'Tangkap hijaiyah', 'tertib-shalat': 'Takbir sampai salam',
+    wudhu: 'Niat sampai doa', 'zakat-fitrah': 'Takar beras zakat', 'asma-buru': 'Nama-nama Allah',
+    hijriah: 'Bulan Hijriah', kiblat: 'Menghadap Ka\'bah', puzzle: 'Masjid terkenal',
+    rukun: 'Rukun Islam & Iman', 'sirah-urut': 'Sirah Nabi', surat: 'Surat pendek',
+  };
   const LEVELS = { tk: 'TK (4-6 tahun)', sd: 'SD (7-12 tahun)' };
 
   const state = loadState();
@@ -467,7 +479,8 @@
         h('span', { class: 'card-body' },
           h('span', { class: 'card-cat' }, c.label),
           h('span', { class: 'card-title' }, g.title),
-          h('span', { class: 'card-desc' }, g.desc || '')),
+          h('span', { class: 'card-desc' }, g.desc || ''),
+          NILAI[g.id] ? h('span', { class: 'card-nilai' }, NILAI[g.id]) : null),
         h('span', { class: 'card-foot' }, pips(Pr.tier(g.id, state.level)),
           h('span', { class: 'card-best', 'aria-label': 'Bintang terbaik di jenjang ini' }, best ? '★' + best : ''))));
       } else {
@@ -486,7 +499,8 @@
         h('span', { class: 'card-body' },
           h('span', { class: 'card-cat' }, c.label),
           h('span', { class: 'card-title' }, g.title),
-          h('span', { class: 'card-desc' }, g.desc || '')),
+          h('span', { class: 'card-desc' }, g.desc || ''),
+          NILAI[g.id] ? h('span', { class: 'card-nilai' }, NILAI[g.id]) : null),
         h('span', { class: 'card-lock', 'aria-hidden': 'true' }, '🔒'),
         h('span', { class: 'card-req' }, req)));
       }
