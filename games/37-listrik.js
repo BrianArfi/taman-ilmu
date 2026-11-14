@@ -421,6 +421,26 @@
           board.fill(null); board.set({ closed: true });
           const box = h('div', { class: 'ls-box' });
           ctx.el.append(box);
+          if (ke === 1) {
+            // Demo terpandu: benda pertama ditunjukkan, tanpa tebakan buta.
+            ctx.ask('Perhatikan! ' + it.name + ' dipasang di celah.', { say: 'Perhatikan! ' + it.name + ' dipasang di celah. Lihat lampunya!' });
+            const card0 = itemCard(it);
+            box.append(card0);
+            await ctx.wait(1200);
+            if (!ctx.alive) return;
+            card0.remove();
+            board.fill(it);
+            await ctx.wait(1500);
+            if (!ctx.alive) return;
+            await ctx.correct(null, { say: it.ok ? 'Lihat! Lampunya menyala.' : 'Lihat! Lampunya tidak menyala.' });
+            bump(it.ok ? 0 : 1);
+            const tail0 = tk ? '' : (it.ok ? ' Benda yang menghantarkan listrik disebut konduktor.' : ' Benda yang tidak menghantarkan listrik disebut isolator.');
+            ctx.note(it.why + tail0, { title: it.ok ? 'Menyala!' : 'Tidak menyala.', into: box, speak: false });
+            await lanjutOtomatis(ctx, box, it.why + tail0);
+            box.remove();
+            step++; progress();
+            continue;
+          }
           ctx.ask('Kalau ' + it.name.toLowerCase() + ' dipasang di celah, lampu menyala?');
           const card = itemCard(it);
           box.append(card);
