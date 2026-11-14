@@ -42,6 +42,6 @@ const sintesis = await agent({ input: `Gabungkan 3 laporan ide Taman Ilmu jadi S
   `Urut dampak-per-effort. Buang ide generik tanpa lokasi pasang. Sertakan unresolved tiap laporan. ` +
   `WAJIB hasilkan daftar ide dari teks di bawah walau sebagian laporan GAGAL; JANGAN jawab kosong.\n\n${gabung}`,
   schema, label: 'sintesis-ide' });
-let hasil = sintesis === null ? '' : (sintesis.text || JSON.stringify(sintesis.data || {}));
-if (!hasil || hasil === '{}' || hasil === 'SINTESIS GAGAL') hasil = 'SINTESIS-KOSONG-FALLBACK:\n' + mentah.slice(0, 12000);
-return { summary: JSON.stringify({ hasil }) };
+const pick = (r) => r === null ? null : { text: r.text || '', notes: r.notes || '', data: r.data || null, error_kind: r.error_kind || null };
+const report = { main: pick(main), viral: pick(viral), ortu: pick(ortu), sintesis: pick(sintesis) };
+return { summary: JSON.stringify(report) };

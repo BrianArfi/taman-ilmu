@@ -8,12 +8,23 @@ Effort L dan flag ustadz=ya TIDAK diambil otomatis.
 Sumber utama: tim ide 8 Nov 2026 (12 ide berperingkat + bukti file:baris).
 Putaran 2 (10 Nov malam): 12 ide baru, gabung-dedup jadi 12 TODO (3 entri
 lama diganti versi lebih spesifik, 2 TAHAN butuh ustadz, 1 TOLAK hijaiyah).
+Putaran 3 (14 Nov): 16 ide (6 game + 5 viral + 5 ortu), gabung manual jadi
+9 TODO baru (sintesis gagal ranking); 1 TOLAK hijaiyah, 6 parkir catatan.
 Format tiap ide: masalah 1 kalimat; usulan + lokasi pasang; effort S/M/L;
 dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Ajak teman berhadiah dua sisi (lokal).** Banner ajak inbound tanpa bonus sehingga undangan tak memberi alasan bagi tamu maupun pengirim. Tamu via link ajak yang selesaikan game pertama dapat "Bonus Teman +10 XP"; pengirim dapat lencana "Pengajak Teman" setelah N share lokal. Varian server lintas-perangkat = effort L, JANGAN diambil. Lokasi: js/core.js:409-416 + progress.js:260-271. Effort M, dampak 5, ustadz tidak.
+- **Duel berbalas lanjutan (&lawan= + skor duel).** Tombol Balas generik tanpa konteks duel lanjutan; satu share berhenti di 1 sesi balasan. Tambah &lawan= di challengeURL + banner "kamu kalah dari X, balas?" + skor duel (menang 2-0). Lokasi: share.js challengeURL/parseChallenge (110-127) + core.js duelUi (980-993). Effort S, dampak 5, ustadz tidak.
+- **Tantang Keluarga/Sekelas semua game.** tantangKeluarga cuma di 2 game; grup WA keluarga/sekolah = K-factor terbesar. Perluas tombol ke semua game + template "tantang sekelas" (nama anak + game + link ?tantang=). Lokasi: core.js:973 (hapus filter 2 game) + share.js tantangKeluarga/baru tantangKelas. Effort S, dampak 5, ustadz tidak.
+- **Badge 102 game di header + meta.** Angka + jaminan aman tak ada di judul yang pertama dibaca; meta description masih tulis 100. Tambah baris "102 game TK/SD · Tanpa iklan · Bisa offline" + tombol Pasang/Bookmark di bawah judul; betulkan meta. Lokasi: core.js head/brand (344-351) + index.html L10. Effort S, dampak 5, ustadz tidak.
+- **Kartu forward ortu siap salin.** Tombol WA ortu cuma invite umum; ortu butuh teks alasan aman untuk grup sekolah. Tombol "Salin info buat grup WA" (5 poin aman + jumlah game + link). Lokasi: ortu.js ajakOrtu (15-19) + fungsi baru share.js dekat inviteOrtu. Effort S, dampak 5, ustadz tidak.
+- **Label Nilai Islami di kartu game.** Diferensiasi vs game umum tak terlihat di grid. Label nilai per game islam dari desc/lesson yang sudah ada (mis. hijaiyah "Bekal baca Quran"). Lokasi: grid home core.js L460-469 desc. Effort S, dampak 5, ustadz tidak (pakai ulang string).
+- **Listrik: demo terpandu benda pertama.** Tiap benda diawali tebakan buta 50/50 padahal anak belum kenal konduktor. Benda pertama jadi demo terpandu tanpa tebakan; tebakan mulai benda kedua. Lokasi: 37-listrik.js loop benda (419-454, lewati askGuess saat ke===1). Effort S, dampak 4, ustadz tidak.
+- **Loncat: demo penuh seperlunya.** Tiap benar dibayar demo ulang penuh + TTS lengkap di 8 soal. Demo penuh hanya saat salah-dulu-lalu-benar atau tiap soal ke-3; benar firstTry cukup rayuan singkat. Lokasi: 29-loncat.js handler SD (387-396) + TK (263-270). Effort S, dampak 4, ustadz tidak.
+- **Wujud: auto-lanjut ala listrik.** Tiap tugas lab ditutup gerbang catatan + Lanjut wajib (3-4x). Majukan otomatis setelah TTS (pola lanjutOtomatis), Lanjut jadi pemercepat. Lokasi: 19-wujud.js afterNote (137-145). Effort S, dampak 3, ustadz tidak.
+- **Puasa: progres per kartu.** 8 kartu diurutkan tanpa umpan progres (progress per babak saja). Tambah onStep di ctx.order untuk teks "N dari 8 terpasang" + progress. Lokasi: 55-puasa-sehari.js L67 (onStep core.js L700). Effort S, dampak 3, ustadz tidak.
+- **Ajak teman berhadiah dua sisi (lokal).** Banner ajak inbound tanpa bonus sehingga undangan tak memberi alasan bagi tamu maupun pengirim. Tamu via link ajak yang selesaikan game pertama dapat "Bonus Teman +10 XP"; pengirim dapat lencana "Pengajak Teman" setelah N share lokal. Varian server lintas-perangkat = effort L, JANGAN diambil. Lokasi: js/core.js:409-416 + progress.js:260-271 + badges.js DEFS + catat ajakSeen (atribusi dua arah, putaran 3). Effort M, dampak 5, ustadz tidak.
 - **Misi Harian Global.** Game Gratis Hari Ini sama untuk semua tapi tak ada alasan kembali/share. Tombol "Tantang" + "Kartu" di kartu beranda; badge/streak 3/7 hari; teks share "misi hari ini". Lokasi: kartu freeCard core.js:404-409, dailyGlobal() progress.js:118, badges.js. Effort M, dampak 5, ustadz tidak.
 - **Sertifikat cetak Shalat & Adab.** Tak ada artefak fisik dipamer keluarga. Varian kartu pamer "Sertifikat: Hafal 5 Waktu Shalat / Adab Baik" (nama, bintang, tanggal, lesson); unduh PNG via gambarKartu 1080x1350 + tombol Cetak. Lokasi: 04-shalat, 07-adab + galeri #/lencana. Effort M, dampak 4, ustadz tidak (lesson dari bank).
 
@@ -48,3 +59,4 @@ dampak 1-5; ustadz ya/tidak.
 - **TAHAN ustadz: Adab gerbang arti opsional (10 Nov malam).** Tiap jawaban memaksa note arti + next (07-adab.js:92-98); usulan bagus tapi menyentuh ucapan + arti adab. Tahan sampai review ustadz, bukan tolak permanen.
 - **TAHAN ustadz: Praktik di rumah selepas game islam (10 Nov malam).** Checklist wudhu + hijaiyah (02-wudhu.js:123, 01-hijaiyah.js:48). Tahan: butuh review ustadz (urutan wudhu, rujukan Iqra), bukan tolak permanen.
 - **Hijaiyah variasi aksi (10 Nov malam).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop (sama seperti entri hijaiyah di atas).
+- **Hijaiyah rayakan beruntun (14 Nov).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.

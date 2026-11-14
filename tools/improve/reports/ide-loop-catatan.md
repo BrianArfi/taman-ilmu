@@ -45,3 +45,22 @@
 - Pelajaran: resume-workflow dgn tail baru berhasil menarik notes+data
   anak tanpa re-run (4 panggilan replay dari jurnal). Skrip kanonis
   sebaiknya return evidence penuh sejak awal (TODO).
+
+## Putaran kron 14 Nov 2026 — BERHASIL SEBAGIAN, DIGABUNG MANUAL
+- 3 anak selesai penuh (33+14+13 calls): 6 ide game + 5 viral + 5 ortu,
+  semua berlokasi file:baris. Sintesis GAGAL ranking (tak bisa baca 1
+  handoff, output cuma metadata); parent menggabung manual dari 3 laporan.
+- Gabung ke 9 TODO baru + 3 lama = 12: 5 S/5, 2 S/4, 2 S/3 di atas; 3 M
+  lama di bawah. V4 (atribusi ajakan) didedup ke entri Ajak yg sudah ada
+  (tambah lokasi badges.js + ajakSeen).
+- TOLAK: hijaiyah rayakan (contoh SPEC, permanen).
+- Parkir cap-12 untuk putaran berikut: (a) Raja HP bar (100-raja-taman
+  L82-91+104-127, M/5); (b) Papan Teman lokal-only (board.js render +
+  ajakBanner, M/4); (c) Rekap Nilai Islami pekanan (analytics render,
+  M/5); (d) Kartu gambar papan+pekan (share.js gambarKartu, M/4);
+  (e) Laporan bergambar+saran (analytics+share laporan, M/4);
+  (f) Mode Ortu 1 menit (home/core ajakBanner, M/4).
+- Unresolved: effort 6 ide game diestimasi parent (S, raja M); R3 tanpa
+  smoke; peringkat-6 promo dihitung manual (laporan cuma top5+bawah5).
+- Pelajaran: skrip luncuran putaran ini SUDAH pakai tail evidence-penuh
+  (tanpa resume). Kanonis ide-workflow.js diperbarui ikut pola ini.
