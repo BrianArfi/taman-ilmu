@@ -213,7 +213,7 @@
   }
 
   // ---------- TK ----------
-  async function soalTK(ctx, { a, b }) {
+  async function soalTK(ctx, { a, b }, qi) {
     ctx.ask('Bola di angka ' + a + '. Loncat ' + b + ' kali!');
     const sg = sungai(ctx, { n: 11, tappable: false });
     const hasil = angka('?', 'lj-q');
@@ -262,6 +262,8 @@
       if (sudah === 0) { kunciUI(false); ctx.say('Ketuk Loncat dulu ya.'); return; }
       if (sudah === b) {
         selesaiBenar();
+        const penuhTK = salah > 0 || qi % 3 === 2;
+        if (!penuhTK) { await ctx.correct(null, { say: 'Hebat!' }); done(); return; }
         const lw = pasangLewati(ctx, wrap);
         await ctx.correct(null, { say: false, min: 250 });
         await (lw.skipped() ? ctx.sayWait('Hebat!') : Promise.race([ctx.sayWait(ucapan() + '!'), lw.ditunggu()]));
@@ -326,7 +328,7 @@
     return tipe === 'kali' ? { tipe, x: 3, y: 4, ans: 12 } : { tipe, a: 7, b: 5, ans: tipe === 'tambah' ? 12 : 2 };
   }
 
-  async function soalSD(ctx, q) {
+  async function soalSD(ctx, q, qi) {
     const mulai = q.tipe === 'kali' ? 0 : q.a;
     let teks, ucapAwal, ucapHasil, bagian;
     const hasil = angka('?', 'lj-q');
@@ -387,11 +389,16 @@
           if (v === q.ans) {
             st.classList.add('is-correct');
             hasil.textContent = String(q.ans); hasil.classList.add('is-done');
-            const lw = pasangLewati(ctx, wrap);
-            await ctx.correct(null, { say: false, min: 350 });
-            await tunjukkan(() => lw.skipped());
-            await (lw.skipped() ? ctx.sayWait('Hebat!') : Promise.race([ctx.sayWait(ucapHasil + '!'), lw.ditunggu()]));
-            lw.lepas();
+            const penuhSD = salah > 0 || qi % 3 === 2;
+            if (penuhSD) {
+              const lw = pasangLewati(ctx, wrap);
+              await ctx.correct(null, { say: false, min: 350 });
+              await tunjukkan(() => lw.skipped());
+              await (lw.skipped() ? ctx.sayWait('Hebat!') : Promise.race([ctx.sayWait(ucapHasil + '!'), lw.ditunggu()]));
+              lw.lepas();
+            } else {
+              await ctx.correct(null, { say: 'Hebat!' });
+            }
             resolve();
             return;
           }
@@ -424,12 +431,12 @@
       if (ctx.isTK) {
         // 8 soal: loncatan makin banyak. Bola mulai di angka a, loncat b kali, a + b <= 10.
         const bs = [1, 2, 2, 3, 3, 4, 4, 5];
-        soal = bs.map((b) => ({ a: rand(0, Math.min(5, 10 - b)), b })).map((s) => () => soalTK(ctx, s));
+        soal = bs.map((b) => ({ a: rand(0, Math.min(5, 10 - b)), b })).map((s) => (i) => soalTK(ctx, s, i));
       } else {
         const urut = ['tambah', 'tambah', 'kurang', 'tambah', 'kurang', 'kali', 'kali', 'kali'];
-        soal = urut.map((t) => buatSoalSD(t)).map((q) => () => soalSD(ctx, q));
+        soal = urut.map((t) => buatSoalSD(t)).map((q) => (i) => soalSD(ctx, q, i));
       }
-      return ctx.series(soal, (jalankan) => jalankan(), {
+      return ctx.series(soal, (jalankan, i) => jalankan(i), {
         lesson: 'Menambah artinya maju di garis bilangan, mengurangi artinya mundur.',
       });
     },
