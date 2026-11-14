@@ -197,6 +197,15 @@
       ' game selesai, rata-rata ★' + m.lvlAvg + '.' + rajin + ' Ayo main juga: ' + inviteURL());
   }
 
+  // Kartu info ortu: teks alasan aman siap forward ke grup WA.
+  function infoOrtu() {
+    const poin = TI.OrtuPoin || [];
+    const isi = poin.length ? '\n' + poin.join('\n') : '';
+    return bagikan('Taman Ilmu',
+      'Taman Ilmu: ' + totalGame() + ' game edukasi Islami TK/SD.' + isi +
+      '\nCoba gratis: ' + inviteURL());
+  }
+
   // ---------- kartu pamer: gambar skor 1080x1350 untuk status WA/IG ----------
   function wrapText(g, text, cx, y, maxW, lh) {
     const words = String(text).split(/\s+/);
@@ -322,5 +331,5 @@
     return hasil;
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, infoOrtu };
 })();
