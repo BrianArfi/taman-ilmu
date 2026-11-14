@@ -15,7 +15,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Label Nilai Islami di kartu game.** Diferensiasi vs game umum tak terlihat di grid. Label nilai per game islam dari desc/lesson yang sudah ada (mis. hijaiyah "Bekal baca Quran"). Lokasi: grid home core.js L460-469 desc. Effort S, dampak 5, ustadz tidak (pakai ulang string).
 - **Listrik: demo terpandu benda pertama.** Tiap benda diawali tebakan buta 50/50 padahal anak belum kenal konduktor. Benda pertama jadi demo terpandu tanpa tebakan; tebakan mulai benda kedua. Lokasi: 37-listrik.js loop benda (419-454, lewati askGuess saat ke===1). Effort S, dampak 4, ustadz tidak.
 - **Loncat: demo penuh seperlunya.** Tiap benar dibayar demo ulang penuh + TTS lengkap di 8 soal. Demo penuh hanya saat salah-dulu-lalu-benar atau tiap soal ke-3; benar firstTry cukup rayuan singkat. Lokasi: 29-loncat.js handler SD (387-396) + TK (263-270). Effort S, dampak 4, ustadz tidak.
 - **Wujud: auto-lanjut ala listrik.** Tiap tugas lab ditutup gerbang catatan + Lanjut wajib (3-4x). Majukan otomatis setelah TTS (pola lanjutOtomatis), Lanjut jadi pemercepat. Lokasi: 19-wujud.js afterNote (137-145). Effort S, dampak 3, ustadz tidak.
@@ -30,6 +29,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Label Nilai Islami** (S91): map NILAI 27 game + label kartu buka/kunci. Probe OK, ui 12/12. Detail: cycle-20261114-s91.md.
 - **Kartu forward ortu** (S90): POIN satu sumber + tombol salin + infoOrtu. Probe OK, gami 55/55. Detail: cycle-20261114-s90.md.
 - **Badge 102 game di header + meta** (S89): badge dinamis + meta 102 (tombol Pasang skip jujur). Probe OK, ui 12/12. Detail: cycle-20261114-s89.md.
 - **Tantang Keluarga/Sekelas semua game** (S88): fam semua game + template sekelas; kontrak uji 5->7 tombol. Probe OK, gami 55/55. Detail: cycle-20261114-s88.md.
