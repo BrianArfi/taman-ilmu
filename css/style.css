@@ -279,6 +279,13 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
 .badge-ic { font-size: 2.1rem; line-height: 1.2; }
 .badge-name { font-size: 1.05rem; }
 .badge-how { color: var(--muted); font-size: 0.88rem; }
+.serti-list { display: grid; gap: 8px; }
+.serti-row { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 18px; background: var(--card); box-shadow: 0 3px 0 var(--shadow); }
+.serti-ic { font-size: 1.8rem; }
+.serti-nama { flex: 1; font-weight: 800; }
+.serti-aksi { display: flex; gap: 8px; }
+.serti-aksi .ti-btn { min-height: 44px; padding: 4px 14px; font-size: 0.95rem; }
+.serti-note { color: var(--muted); font-size: 0.88rem; font-weight: 700; }
 .badge-when { color: #9a6b00; font-size: 0.8rem; font-weight: 700; }
 .badge-card:not(.is-earned) .badge-ic { filter: grayscale(1); opacity: 0.5; }
 .badge-card:not(.is-earned) .badge-name { color: var(--muted); }

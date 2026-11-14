@@ -126,6 +126,20 @@
           TI.h('span', { class: 'badge-when' }, when ? 'Didapat ' + when : 'Belum terkumpul'),
           when && TI.Share ? TI.h('button', { type: 'button', class: 'badge-share', 'aria-label': 'Bagikan lencana ' + d.name, onclick: () => TI.Share.badge(d) }, '📣 Bagikan') : null);
       })));
+    const SERTI = ['shalat', 'adab'];
+    const baris = SERTI.map((gid) => {
+      const g = TI.games.find((x) => x.id === gid);
+      const b = Math.max(((TI.state.stars[gid] || {}).tk || 0), ((TI.state.stars[gid] || {}).sd || 0));
+      return TI.h('div', { class: 'serti-row' },
+        TI.h('span', { class: 'serti-ic', 'aria-hidden': 'true' }, g ? g.icon : '🎓'),
+        TI.h('span', { class: 'serti-nama' }, g ? g.title : gid),
+        b >= 3 && TI.Share
+          ? TI.h('span', { class: 'serti-aksi' },
+            TI.h('button', { type: 'button', class: 'ti-btn is-ghost', onclick: () => TI.Share.card(g, b, 'sertifikat') }, 'Unduh'),
+            TI.h('button', { type: 'button', class: 'ti-btn is-ghost', onclick: () => TI.Share.cetak(g, b) }, 'Cetak'))
+          : TI.h('span', { class: 'serti-note' }, 'Dapatkan 3 bintang untuk membuka'));
+    });
+    app.append(TI.h('h3', { class: 'stat-h' }, 'Sertifikatku'), TI.h('div', { class: 'serti-list' }, baris));
     return app;
   }
 

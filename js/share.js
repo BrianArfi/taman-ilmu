@@ -292,19 +292,78 @@
     return cv;
   }
 
-  async function card(game, stars) {
+  const SERTIFIKAT = {
+    shalat: { judul: 'Hafal 5 Waktu Shalat', lesson: 'Shalat wajib ada 5 waktu: Subuh, Zuhur, Ashar, Maghrib, Isya. Jumlahnya 17 rakaat sehari.' },
+    adab: { judul: 'Adab Baik', lesson: 'Anak shalih membiasakan ucapan baik dan adab yang baik setiap hari.' },
+  };
+  const BULAN_ID = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+  function tanggalID() {
+    const d = new Date(Date.now() + 7 * 3600 * 1000);
+    return d.getUTCDate() + ' ' + BULAN_ID[d.getUTCMonth()] + ' ' + d.getUTCFullYear();
+  }
+  async function gambarSertifikat(game, stars) {
+    const W = 1080, H = 1350;
+    const cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    const g = cv.getContext('2d');
+    try { await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1200))]); } catch (e) { /* font sistem */ }
+    const bg = g.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, '#fffdf4'); bg.addColorStop(1, '#f7ecd4');
+    g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    g.strokeStyle = '#d4a017'; g.lineWidth = 14;
+    rr(g, 40, 40, W - 80, H - 80, 40); g.stroke();
+    g.strokeStyle = '#d4a017'; g.lineWidth = 4;
+    rr(g, 70, 70, W - 140, H - 140, 28); g.stroke();
+    g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+    const nama = (TI.state.profile && TI.state.profile.nama) || 'Anak Hebat';
+    const info = SERTIFIKAT[game.id] || { judul: game.title, lesson: '' };
+    g.fillStyle = '#2b2d42';
+    g.font = '800 60px "Baloo 2", sans-serif';
+    g.fillText('🌙 Taman Ilmu', W / 2, 190);
+    g.fillStyle = '#9a6b00';
+    g.font = '800 84px "Baloo 2", sans-serif';
+    g.fillText('SERTIFIKAT', W / 2, 320);
+    g.fillStyle = '#2b2d42';
+    g.font = '700 54px "Baloo 2", sans-serif';
+    g.fillText('Penghargaan untuk', W / 2, 420);
+    g.fillStyle = '#0e9f6e';
+    g.font = '800 76px "Baloo 2", sans-serif';
+    wrapText(g, nama, W / 2, 540, 880, 90);
+    g.fillStyle = '#2b2d42';
+    g.font = '700 48px "Baloo 2", sans-serif';
+    wrapText(g, info.judul + ' · ' + game.title, W / 2, 660, 880, 60);
+    g.font = '120px "Baloo 2", sans-serif';
+    for (let i = 0; i < 3; i++) {
+      g.fillStyle = i < stars ? '#ffc93c' : '#d9d2c3';
+      g.fillText('★', W / 2 - 150 + i * 150, 820);
+    }
+    g.fillStyle = '#6b6f86';
+    g.font = '700 44px "Baloo 2", sans-serif';
+    wrapText(g, info.lesson, W / 2, 930, 860, 56);
+    g.fillStyle = '#6b6f86';
+    g.font = '700 44px "Baloo 2", sans-serif';
+    g.fillText(tanggalID(), W / 2, 1150);
+    g.fillStyle = '#2f6fed';
+    g.font = '700 38px monospace';
+    g.fillText(BASE.replace(/^https?:\/\//, ''), W / 2, 1220);
+    return cv;
+  }
+  async function card(game, stars, jenis) {
     let blob = null;
     try {
-      const cv = await gambarKartu(game, stars);
+      const cv = await (jenis === 'sertifikat' && SERTIFIKAT[game.id] ? gambarSertifikat(game, stars) : gambarKartu(game, stars));
       blob = await new Promise((res) => cv.toBlob(res, 'image/png'));
     } catch (e) { blob = null; }
     if (!blob) { TI.toast('🖼️', 'Gagal bikin gambar, coba lagi ya'); TI.sfx('salah'); return 'gagal'; }
-    const file = new File([blob], 'taman-ilmu-' + game.id + '.png', { type: 'image/png' });
-    const teks = teksScore(game, stars, false, (TI.state.profile && TI.state.profile.level) || 1);
+    const file = new File([blob], 'taman-ilmu-' + (jenis === 'sertifikat' ? 'sertifikat-' : '') + game.id + '.png', { type: 'image/png' });
+    const isSerti = jenis === 'sertifikat' && SERTIFIKAT[game.id];
+    const teks = isSerti
+      ? 'Aku dapat sertifikat ' + SERTIFIKAT[game.id].judul + ' (' + stars + '/3) di Taman Ilmu! Ayo main juga: ' + inviteURL()
+      : teksScore(game, stars, false, (TI.state.profile && TI.state.profile.level) || 1);
     let hasil = 'gagal';
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
       try {
-        await navigator.share({ files: [file], title: game.title + ' · Taman Ilmu', text: teks });
+        await navigator.share({ files: [file], title: (isSerti ? 'Sertifikat ' : '') + game.title + ' · Taman Ilmu', text: teks });
         hasil = 'share';
       } catch (e) {
         if (e && e.name === 'AbortError') return 'batal';
@@ -315,7 +374,7 @@
       try {
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = 'taman-ilmu-' + game.id + '.png';
+        a.download = file.name;
         document.body.append(a);
         a.click();
         a.remove();
@@ -341,5 +400,28 @@
     return hasil;
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, infoOrtu, misiHarian };
+  // Cetak sertifikat: buka gambar di jendela baru + dialog cetak; gagal = unduh saja.
+  async function cetak(game, stars) {
+    let url = '';
+    try {
+      const cv = await gambarSertifikat(game, stars);
+      const blob = await new Promise((res) => cv.toBlob(res, 'image/png'));
+      if (!blob) throw new Error('kanvas');
+      url = URL.createObjectURL(blob);
+      const w = window.open('', '_blank');
+      if (!w) throw new Error('popup');
+      w.document.write('<!doctype html><html><head><title>Sertifikat ' + game.title + '</title></head>' +
+        '<body style="margin:0;text-align:center"><img src="' + url + '" style="width:100%" onload="window.print()"></body></html>');
+      w.document.close();
+      TI.sfx('menang');
+      TI.toast('🖨️', 'Siap dicetak! Atur kertas A4 portrait ya');
+    } catch (e) {
+      if (url) URL.revokeObjectURL(url);
+      TI.sfx('salah');
+      TI.toast('🖨️', 'Unduh dulu, lalu cetak dari galeri ya');
+      card(game, stars, 'sertifikat');
+    }
+  }
+
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, infoOrtu, misiHarian };
 })();
