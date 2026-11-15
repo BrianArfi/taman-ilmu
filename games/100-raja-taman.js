@@ -1,5 +1,6 @@
 /* 100 Raja Taman. Ujian terakhir: 10 soal campuran 4 kategori, 3 nyawa. Fakta hanya dari bank SPEC dan game lama.
-   Kategori selang-seling seimbang. Tiap soal teks ada ikon kategorinya. Perisai: salah pertama dapat petunjuk samar + satu opsi salah disingkirkan, nyawa hilang kalau salah 2x. */
+   Kategori selang-seling seimbang. Tiap soal teks ada ikon kategorinya. Perisai: salah pertama dapat petunjuk samar + satu opsi salah disingkirkan, nyawa hilang kalau salah 2x.
+   HP Raja: 10, berkurang 1 tiap jawaban benar percobaan pertama; nol = Raja kalah. */
 (function () {
   const { h, shuffle, sample } = TI;
 
@@ -15,6 +16,9 @@
 .play[data-game="raja-taman"] .rj-bank-hitung { border-left-color: #3b82f6; }
 .play[data-game="raja-taman"] .rj-bank-langit { border-left-color: #f59e0b; }
 .play[data-game="raja-taman"] .rj-bank-lawan { border-left-color: #22c55e; }
+.play[data-game="raja-taman"] .rj-bos { display: inline-flex; align-items: center; gap: 6px; }
+.play[data-game="raja-taman"] .rj-bos-luar { display: inline-block; width: 90px; height: 12px; border-radius: 999px; background: var(--shadow); overflow: hidden; }
+.play[data-game="raja-taman"] .rj-bos-isi { display: block; height: 100%; width: 100%; border-radius: 999px; background: linear-gradient(90deg, #ff6b6b, #c92a2a); transition: width var(--dur-ui) var(--ease-out); }
 `;
 
   const arab = (x) => h('span', { class: 'ti-arabic' }, x);
@@ -67,7 +71,7 @@
     title: 'Raja Taman',
     cat: 'logika',
     icon: '🏆',
-    desc: 'Ujian terakhir: 10 soal, 3 nyawa, kesempatan kedua.',
+    desc: 'Kalahkan HP Raja: 10 soal, 3 nyawa, kesempatan kedua.',
     start(ctx) {
       TI.style('raja-taman', CSS);
       const tk = ctx.isTK;
@@ -101,7 +105,17 @@
         let rekor = bacaRekor();
         const chipRekor = h('span', { class: 'rj-chip', 'aria-live': 'polite' }, 'Rekor: ' + rekor + '/' + soal.length);
         const ulang = h('button', { type: 'button', class: 'ti-btn is-ghost', 'aria-label': 'Ulangi pertanyaan' }, '🔊');
-        hud.append(hati, chipSoal, chipRekor, ulang);
+        // HP Raja: penuh di awal, -1 tiap benar percobaan pertama.
+        const bosIsi = h('span', { class: 'rj-bos-isi' });
+        const bos = h('span', { class: 'rj-chip rj-bos', 'aria-label': 'Nyawa Raja: ' + soal.length },
+          '👑', h('span', { class: 'rj-bos-luar' }, bosIsi));
+        let bosHP = soal.length, rajaKalah = false;
+        const gambarBos = () => {
+          bosHP = Math.max(0, bosHP);
+          bosIsi.style.width = (bosHP / soal.length) * 100 + '%';
+          bos.setAttribute('aria-label', 'Nyawa Raja: ' + bosHP);
+        };
+        hud.append(hati, chipSoal, chipRekor, ulang, bos);
         ulang.addEventListener('click', () => { if (tanyaTerakhir) ctx.say(tanyaTerakhir); });
         // Kibor: angka 1-4 memilih jawaban (aksesibilitas desktop).
         ctx.on(document, 'keydown', (e) => {
@@ -125,6 +139,8 @@
           if (hasilSoal === 'benar') {
             benar++;
             beruntun++;
+            bosHP--; gambarBos();
+            if (bosHP <= 0 && !rajaKalah) { rajaKalah = true; ctx.correct(null, { say: 'Raja kalah! Kamu pemenangnya!' }); }
             if (benar > rekor) { rekor = benar; chipRekor.textContent = 'Rekor baru!'; }
             if (beruntun === 3) ctx.correct(null, { say: 'Tiga benar beruntun! Hebat!' });
           } else {
@@ -143,7 +159,7 @@
         if (benar > bacaRekor()) { try { const semua = JSON.parse(localStorage.getItem('tamanIlmu.rekor.v1') || '{}'); semua[kunciRekor] = benar; localStorage.setItem('tamanIlmu.rekor.v1', JSON.stringify(semua)); } catch (e) { /* mode privat */ } }
         ctx.finish({
           stars: benar >= 9 ? 3 : benar >= 6 ? 2 : 1,
-          message: benar + ' dari ' + soal.length + ' benar!' + (benar > bacaRekor() ? ' Rekor baru! Kamu luar biasa!' : ''),
+          message: (rajaKalah ? 'Raja Taman kalah! ' : '') + benar + ' dari ' + soal.length + ' benar!' + (benar > bacaRekor() ? ' Rekor baru! Kamu luar biasa!' : ''),
           celebrate: true,
           lesson: 'Kamu sudah belajar huruf hijaiyah, berhitung, langit ciptaan Allah, dan lawan kata. Kamu Raja Taman!',
         });
