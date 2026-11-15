@@ -25,11 +25,31 @@ kill switch, lolos QA story-time, klaim jujur.
    bawah), catat ke log, notifikasi satu baris via tg-send bulan.
 6. Update rotasi. Deliver MP4 + cover + sheet ke inbox dated folder.
 
-## Upload (perintah terbukti)
+## Upload (perintah terbukti video 1, 15 Nov 2026)
 
-> Diisi sesudah video 1 terbukti terupload (putaran perdana 15 Nov 2026).
-
-- Alat:
-- Channel/akun:
-- Perintah:
-- Verifikasi:
+- Alat: post.py di Mac mini via `ssh macmini`. Token kisah HANYA ada di
+  mini (`~/Brobri/skills/post/youtube_token_kisah.json`); JANGAN coba
+  upload dari PC/WSL.
+- Channel: Kisah Islam Anak, alias `kisah`, privacy `public`, format `yt_short`.
+- Perintah (contoh slug taman-ilmu-short1):
+  1. `ssh macmini 'mkdir -p ~/kids/inbox/<slug>'`
+  2. `scp out.mp4 macmini:~/kids/inbox/<slug>/out.mp4`
+     + caption.txt ke folder yang sama
+  3. Antre: `ssh macmini "cd ~/Brobri && ~/kids/py/bin/python
+     skills/post/post.py preview --account kisah --platforms youtube
+     --type video --media ~/kids/inbox/<slug>/out.mp4
+     --caption-file ~/kids/inbox/<slug>/caption.txt
+     --schedule 'YYYY-MM-DD HH:MM'"` lalu catat id antre.
+  4. Kirim: `ssh macmini 'cd /Users/openclawmacmini1/Brobri &&
+     /Users/openclawmacmini1/kids/py/bin/python skills/post/post.py
+     send --id <id> --yes --yt-privacy public'`
+- ATURAN KUTIP SSH: jangan pakai tanda kutip ganda di dalam perintah
+  remote dari PowerShell (dilucuti lapisan ssh Windows). Perintah remote
+  tanpa kutip ganda, atau bungkus PS kutip ganda + remote kutip tunggal.
+- Verifikasi: `status: sent` di queue json + baris post_log
+  (`~/Brobri/data/post_log.jsonl`) + buka URL youtu.be (HTTP 200, judul
+  ketemu di HTML). Status sent = sah meski ssh sempat "Connection reset".
+- Insiden 15 Nov: flip post.py 13:43 tanpa cover_title.py merusak SEMUA
+  send video mini; diperbaiki 14:13 dengan menyalin modul dari repo live.
+  Kalau send gagal ModuleNotFoundError: salin modul yang hilang dari
+  `/home/brobri/antigravity-projects/Brobri/skills/post/` ke mini.
