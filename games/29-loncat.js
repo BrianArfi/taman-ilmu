@@ -1,7 +1,7 @@
 /* 29 Loncat Angka.
    Batu bundar bernomor di atas sungai membentuk garis bilangan. Bola melompat dengan lintasan busur (ctx.loop,
    transform), mendarat dengan percikan kecil dan bunyi tap.
-   TK: batu 0-10, ketuk "Loncat!" sebanyak yang diminta lalu "Sudah!". SD: batu 0-20 (berkelok di HP), ketuk batu
+   TK: batu 0-10, ketuk "Loncat!" sebanyak yang diminta (otomatis dinilai saat pas; "Sudah!" untuk koreksi). SD: batu 0-20 (berkelok di HP), ketuk batu
    tempat bola mendarat: tambah (maju), kurang (mundur), kali (lompatan besar berulang dari 0). */
 (function () {
   const { h, rand } = TI;
@@ -228,17 +228,32 @@
     sg.stones[a].classList.add('is-start');
     ctx.on(window, 'resize', sg.layout);
 
-    let sudah = 0, antre = 0, salah = 0, kunci = false, jalan = null, rencana = a; // rencana = batu tujuan setelah semua lompatan dalam antrean
+    let sudah = 0, antre = 0, salah = 0, kunci = false, jalan = null, rencana = a, selesai = false; // rencana = batu tujuan setelah semua lompatan dalam antrean
     const kunciUI = (ya) => { kunci = ya; bLoncat.disabled = ya; bSudah.disabled = ya; };
+    // Nilai otomatis: hitungan pas = benar tanpa perlu ketuk Sudah (Sudah untuk koreksi).
+    async function rayakanBenar() {
+      if (selesai) return;
+      selesai = true;
+      kunciUI(true);
+      selesaiBenar();
+      const penuhTK = salah > 0 || qi % 3 === 2;
+      if (!penuhTK) { await ctx.correct(null, { say: 'Hebat!' }); done(); return; }
+      const lw = pasangLewati(ctx, wrap);
+      await ctx.correct(null, { say: false, min: 250 });
+      await (lw.skipped() ? ctx.sayWait('Hebat!') : Promise.race([ctx.sayWait(ucapan() + '!'), lw.ditunggu()]));
+      lw.lepas();
+      done();
+    }
     // Antrean lompatan: ketukan cepat tidak hilang, bola melompat satu per satu.
     async function proses() {
-      while (antre > 0 && ctx.alive) {
+      while (antre > 0 && ctx.alive && !selesai) {
         antre--;
         const dari = sg.cur;
         await sg.hop(dari, dari + 1, 300);
         sudah++;
         hitung.textContent = sudah + ' dari ' + b;
         ctx.say(kata(sudah));
+        if (sudah === b && !selesai) rayakanBenar();
       }
       jalan = null;
     }
@@ -261,14 +276,7 @@
       if (jalan) await jalan;
       if (sudah === 0) { kunciUI(false); ctx.say('Ketuk Loncat dulu ya.'); return; }
       if (sudah === b) {
-        selesaiBenar();
-        const penuhTK = salah > 0 || qi % 3 === 2;
-        if (!penuhTK) { await ctx.correct(null, { say: 'Hebat!' }); done(); return; }
-        const lw = pasangLewati(ctx, wrap);
-        await ctx.correct(null, { say: false, min: 250 });
-        await (lw.skipped() ? ctx.sayWait('Hebat!') : Promise.race([ctx.sayWait(ucapan() + '!'), lw.ditunggu()]));
-        lw.lepas();
-        done();
+        await rayakanBenar();
         return;
       }
       salah++;
