@@ -1,0 +1,25 @@
+{
+ "date": "20261115",
+ "version": "improve-v1.0",
+ "rows": [
+  {
+   "id": "raja-taman",
+   "title": "Raja Taman",
+   "cat": "logika",
+   "file": "100-raja-taman.js",
+   "static100": 86,
+   "dyn100": 99,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 31,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 92,
+   "cls": "A",
+   "sug": [
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+   ]
+  }
+ ]
+}

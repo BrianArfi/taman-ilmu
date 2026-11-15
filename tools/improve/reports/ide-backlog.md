@@ -16,7 +16,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Raja: tutup bocoran + variasi kartu.** Petunjuk perisai membocorkan jawaban lalu menanya ulang; kartu soal teks identik. Ganti bocoran jadi petunjuk samar bertahap + bedakan visual kartu. Lokasi: 100-raja-taman.js:150-156,166,196 + kartu :188-189. Effort S, dampak 4, ustadz tidak.
 - **Momen 3-bintang pertama per kategori.** Milestone sunyi; Kartu ghost. Saat 3 bintang pertama tiap kategori: tawarkan kartu pamer kategori via renderer ada. Lokasi: showResult (streak-party), totals().byCat progress.js:256-270, Share.card. Effort S, dampak 3, ustadz tidak.
 - **PWA installable + banner Pasang.** Tanpa manifest tak bisa Add to Home Screen. Tambah manifest + service worker + ikon/splash + banner home & ortu. Lokasi: index.html:3-18 + core.js:371 + ortu. Effort M, dampak 5, ustadz tidak.
 - **Bonus pengundang dua arah.** Cuma invitee dapat +10; pengundang tak termotivasi. Klaim balik: pengundang +20 XP + lencana Duta + kartu pamer. Lokasi: progress.js:214-219 + core.js:435-439 + badges.js + share.js:96-100. Effort M, dampak 5, ustadz tidak.
@@ -34,6 +33,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Raja: tutup bocoran + variasi kartu** (S100): petunjuk samar + 1 opsi disingkirkan, kartu border+label bank. Probe 10/10, ui 12/12. Detail: cycle-20261115-s100.md.
 - **Laporan Anak naik ke home** (S99): mini N/M + Bagikan langsung. Probe OK, ui 12/12. Detail: cycle-20261114-s99.md.
 - **Sertifikat Shalat & Adab** (S98): kartu sertifikat + tombol hasil 3bintang + galeri unduh/cetak. Probe OK, gami 55/55 ui 12/12. Detail: cycle-20261114-s98.md.
 - **Misi Harian Global** (S97): tantang+kartu di kartu gratis + runtun + 2 lencana. Probe OK, gami 55/55 ui 12/12. Detail: cycle-20261114-s97.md.
