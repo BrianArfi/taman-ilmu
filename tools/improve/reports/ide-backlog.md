@@ -17,7 +17,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Loncat: satu tombol menilai.** Anak TK bingung dua tombol (Loncat b-kali lalu Sudah; salah urutan ditegur/reset). Loncat! otomatis menilai saat hitungan pas, Sudah jadi koreksi saja. Lokasi: 29-loncat.js:222-224,258-262. Effort S, dampak 5, ustadz tidak.
 - **Pasang selalu tampil.** Banner PWA hidden sampai browser menawar; ortu dari link WA tak pernah lihat. Tampilkan selalu dengan petunjuk manual per browser (ikuti pola iOS). Lokasi: core.js showHome pwaBanner + ortu.js:35-42. Effort S, dampak 5, ustadz tidak.
 - **Raja: intro Perisai.** Mekanik salah-1-gratis tak dijelaskan; anak kaget soal tak lanjut. Kartu intro sebelum soal 1 + ikon perisai di HUD. Lokasi: 100-raja-taman.js:97-131. Effort S, dampak 4, ustadz tidak.
 - **Progres Duta terlihat.** Referral tak terlihat sampai klaim masuk. Strip "ajak N/5 teman" di home + tier Duta Emas dari klaimDari. Lokasi: core.js strip + badges.js DEFS + progress klaimBonus. Effort S, dampak 4, ustadz tidak.
@@ -36,6 +35,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Loncat: satu tombol menilai** (S106): hitungan pas otomatis benar, Sudah untuk koreksi. Probe 5/5. Detail: cycle-20261115-s106.md.
 - **Raja: HP bar bos** (S105): HP 10 di HUD, -1 per firstTry-benar, rayaan + pesan kalah. Probe 6/6. Detail: cycle-20261115-s105.md.
 - **Bonus pengundang dua arah** (S104): klaim balik ?klaim +20 XP sekali/nama + lencana Duta ke-22. Probe 12/12, ui 12/12, gami 60/60. Detail: cycle-20261115-s104.md.
 - **PWA installable + banner Pasang** (S103): manifest + SW tanpa-cache + 4 ikon + banner home & ortu + iOS. Probe 10/10, ui 12/12, gami 55/55. Detail: cycle-20261115-s103.md.
