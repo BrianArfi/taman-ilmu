@@ -74,3 +74,12 @@
   target mingguan ortu (L/4). Parkir putaran 3 habis terpakai.
 - Unresolved: 4 temuan game tak jadi ide (loncat/listrik/wujud/kabel);
   effort game diestimasi; peringkat-6 promo dihitung manual.
+
+## Putaran 5 (15 Nov) — 3 anak OK, sintesis kosong, GABUNG MANUAL
+- 16 ide (6 game + 5 viral + 5 ortu) jadi 12 TODO. 1 TOLAK hijaiyah
+  (Ronde Kilat); sertifikat-semua-islam dupe TAHAN P7 (tidak diulang).
+- Skip L (tak diambil watcher): tantang kelas berkode (server papan),
+  mode dampingan ortu (kontrol waktu).
+- Parkir 6 (hidupkan saat TODO < 8): Rivalku strip duel (diganti versi
+  kartu gambar), Papan Teman lokal, Laporan bergambar + saran, Mode Ortu
+  1 menit, Kartu gambar rank/lencana/streak, Kartu pamer edisi ortu.

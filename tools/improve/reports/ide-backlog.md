@@ -11,17 +11,24 @@ lama diganti versi lebih spesifik, 2 TAHAN butuh ustadz, 1 TOLAK hijaiyah).
 Putaran 3 (14 Nov): 16 ide (6 game + 5 viral + 5 ortu), gabung manual jadi
 9 TODO baru (sintesis gagal ranking); 1 TOLAK hijaiyah, 6 parkir catatan.
 Putaran 4 (14 Nov): 12 sintesis (5 ortu + 5 viral + 2 game) + 5 hidupkan parkir; 2 TAHAN ustadz, 1 TOLAK hijaiyah, 2 parkir (L).
+Putaran 5 (15 Nov): 16 ide (6 game + 5 viral + 5 ortu), gabung manual jadi 12 TODO (sintesis kosong lagi); 1 TOLAK hijaiyah, 1 dupe TAHAN-sertifikat, 2 skip L, 6 parkir catatan.
 Format tiap ide: masalah 1 kalimat; usulan + lokasi pasang; effort S/M/L;
 dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
+- **Loncat: satu tombol menilai.** Anak TK bingung dua tombol (Loncat b-kali lalu Sudah; salah urutan ditegur/reset). Loncat! otomatis menilai saat hitungan pas, Sudah jadi koreksi saja. Lokasi: 29-loncat.js:222-224,258-262. Effort S, dampak 5, ustadz tidak.
+- **Pasang selalu tampil.** Banner PWA hidden sampai browser menawar; ortu dari link WA tak pernah lihat. Tampilkan selalu dengan petunjuk manual per browser (ikuti pola iOS). Lokasi: core.js showHome pwaBanner + ortu.js:35-42. Effort S, dampak 5, ustadz tidak.
+- **Raja: intro Perisai.** Mekanik salah-1-gratis tak dijelaskan; anak kaget soal tak lanjut. Kartu intro sebelum soal 1 + ikon perisai di HUD. Lokasi: 100-raja-taman.js:97-131. Effort S, dampak 4, ustadz tidak.
+- **Progres Duta terlihat.** Referral tak terlihat sampai klaim masuk. Strip "ajak N/5 teman" di home + tier Duta Emas dari klaimDari. Lokasi: core.js strip + badges.js DEFS + progress klaimBonus. Effort S, dampak 4, ustadz tidak.
+- **Tantang per baris papan.** Papan pasif, rival tak bisa diapa-apakan. Tiap baris di atasmu dapat tombol Tantang (link lawan+seri ada). Lokasi: board.js:82-89 + share.js:121-128. Effort S, dampak 4, ustadz tidak.
+- **Laporan mingguan teks forward.** Laporan() cuma snapshot tanpa tren. Tombol bikin ringkasan 7 hari (aktif, selesai, top kategori) + ajakan pasang. Lokasi: analytics.js:208-217 + share.js:195-209. Effort S, dampak 4, ustadz tidak.
+- **Wujud: toast + Kok bisa.** afterNote wajib habis dibaca tiap tugas (3-4x). Ganti toast 1 kalimat hilang-sendiri + tombol opsional penjelasan penuh. Lokasi: 19-wujud.js:137-151,281. Effort S, dampak 4, ustadz tidak.
+- **Puasa: strip langit.** Babak 1 susun label abstrak tanpa rasa hari. Strip pagi-maghrib, matahari bergeser tiap item terpasang. Lokasi: 55-puasa-sehari.js:64-71. Effort S, dampak 3, ustadz tidak.
+- **Listrik: 60 detik interaktif.** Tembok ceramah + demo pasif sebelum sentuh apa pun. Peringatan jadi toast sesudah sukses pertama; demo benda-1 diketuk anak (lanjutan S81/S92). Lokasi: 37-listrik.js:361-443. Effort M, dampak 5, ustadz tidak.
+- **Kartu skor duel + Duel Ulang.** Duel tak terlihat dari beranda. gambarDuel() kartu skor seri + kartu Duel Ulang di home saat duelSeri aktif. Lokasi: share.js gambarKartu + core.js home. Effort M, dampak 5, ustadz tidak.
 - **Rekap Nilai Islami pekanan.** Ortu tak tahu nilai apa masuk. Dashboard baris "Pekan ini: ..." dari lesson game selesai. Lokasi: analytics.js render(). Effort M, dampak 5, ustadz tidak (tampil ulang lesson; parkir putaran 3).
 - **Kartu rekap pekan WA.** Tak ada alasan share mingguan. Template gambarRekap (summary+rank) + tombol statistik + pemicu Senin. Lokasi: share.js + analytics.js:208-214 + config.js:5. Effort M, dampak 4, ustadz tidak.
-- **Rivalku: strip duel home.** Seri duel hilang sesudah result. Strip duel aktif + Balas ke game + share tiap balasan. Lokasi: core.js showHome + duelSeri + challengeURL. Effort M, dampak 4, ustadz tidak.
-- **Papan Teman lokal.** Anak peduli vs keluarga, bukan global. Link ?ajak daftarkan lingkaran localStorage + tab Teman. Varian server = L, JANGAN. Lokasi: board.js + ajakBanner (parkir putaran 3). Effort M, dampak 4, ustadz tidak.
-- **Laporan bergambar + saran.** Laporan teks kalah menarik. Kartu gambar (x/102, bintang, hari) + 1 saran main bareng via gambarKartu. Lokasi: analytics.js + share.js laporan() (parkir putaran 3). Effort M, dampak 4, ustadz tidak.
-- **Mode Ortu 1 menit.** Ortu tak pernah diajak setup. Kartu kunjungan pertama: jenjang + kunci keluar + kirim info (parkir putaran 3). Lokasi: home/banner pemain baru + ortu. Effort M, dampak 4, ustadz tidak.
 
 ## GARAP
 
@@ -33,6 +40,7 @@ dampak 1-5; ustadz ya/tidak.
 - **Bonus pengundang dua arah** (S104): klaim balik ?klaim +20 XP sekali/nama + lencana Duta ke-22. Probe 12/12, ui 12/12, gami 60/60. Detail: cycle-20261115-s104.md.
 - **PWA installable + banner Pasang** (S103): manifest + SW tanpa-cache + 4 ikon + banner home & ortu + iOS. Probe 10/10, ui 12/12, gami 55/55. Detail: cycle-20261115-s103.md.
 - **Momen 3-bintang pertama per kategori** (S101): blok rayaan sekali-per-kategori + Pamerkan kartu kategori. Probe 9/9, ui 12/12, gami 55/55. Detail: cycle-20261115-s101.md.
+- **Cabut kunci game** (S102, permintaan langsung): semua 102 terbuka, 3 lencana tier bintang, dasbor Bintang 3. Probe 11/11, ui 12/12, gami 55/55. Detail: cycle-20261115-s102.md.
 - **Raja: tutup bocoran + variasi kartu** (S100): petunjuk samar + 1 opsi disingkirkan, kartu border+label bank. Probe 10/10, ui 12/12. Detail: cycle-20261115-s100.md.
 - **Laporan Anak naik ke home** (S99): mini N/M + Bagikan langsung. Probe OK, ui 12/12. Detail: cycle-20261114-s99.md.
 - **Sertifikat Shalat & Adab** (S98): kartu sertifikat + tombol hasil 3bintang + galeri unduh/cetak. Probe OK, gami 55/55 ui 12/12. Detail: cycle-20261114-s98.md.
@@ -77,3 +85,4 @@ dampak 1-5; ustadz ya/tidak.
 - **TAHAN ustadz: Teks forward capaian islam (14 Nov, P2).** Capaian konkret + fakta shalat; tahan sampai review ustadz, bukan tolak permanen.
 - **TAHAN ustadz: Sertifikat semua game islam (14 Nov, P7).** Melibatkan teks Arab/fakta agama; tahan sampai review ustadz, bukan tolak permanen.
 - **Hijaiyah variasi+streak (14 Nov, P10).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
+- **Hijaiyah Ronde Kilat (15 Nov, putaran 5).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
