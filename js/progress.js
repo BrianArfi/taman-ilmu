@@ -78,98 +78,9 @@
     s.last = dk;
   }
 
-  // ---------- unlock ----------
-  function catOrder() {
-    const byCat = {};
-    for (const g of TI.games) (byCat[g.cat] = byCat[g.cat] || []).push(g);
-    return byCat;
-  }
-  function baseUnlocked() {
-    const st = TI.state;
-    const lvl = (st.profile && st.profile.level) || 1;
-    const out = new Set();
-    const byCat = catOrder();
-    for (const cat in byCat) {
-      const arr = byCat[cat];
-      arr.forEach((g, i) => {
-        const k = i + 1;
-        if (k <= 2 || k <= lvl + 1) { out.add(g.id); return; }
-        const ps = st.stars[arr[i - 1].id] || {};
-        if ((ps.tk || 0) >= 1 || (ps.sd || 0) >= 1) out.add(g.id);
-      });
-    }
-    return out;
-  }
-  // Semua yang terbuka = jalur biasa + Game Gratis Hari Ini.
-  function unlockedSet() {
-    const out = baseUnlocked();
-    const free = dailyFree();
-    if (free) out.add(free);
-    return out;
-  }
+  // Semua game selalu terbuka (15 Nov 2026: sistem kunci dicabut; engagement dari bintang).
 
-  // ---------- Game Gratis Hari Ini: tiap hari satu game terkunci dibuka acak ----------
-  function hashStr(s) {
-    let x = 0;
-    for (let i = 0; i < s.length; i++) x = (x * 31 + s.charCodeAt(i)) | 0;
-    return Math.abs(x);
-  }
-  // Pilihan global hari ini, sama untuk semua anak (bahan pamer dan obrolan).
-  function dailyGlobal() {
-    if (!TI.games.length) return null;
-    const list = TI.games.slice().sort((a, b) => (a.id < b.id ? -1 : 1));
-    return list[hashStr('gratis-' + dayKey()) % list.length].id;
-  }
-  // Game gratis untuk pemain ini hari ini. Kalau pilihan global sudah terbuka
-  // untuknya, diganti satu game terkunci acak miliknya (stabil sehari penuh).
-  // null kalau semua game sudah terbuka (tidak ada yang perlu digratiskan).
-  function dailyFree() {
-    const st = TI.state;
-    if (!TI.games.length) return null;
-    const dk = dayKey();
-    const df = (st.dailyFree = st.dailyFree || {});
-    if (df.day === dk && df.gid && TI.games.some((g) => g.id === df.gid)) return df.gid || null;
-    const base = baseUnlocked();
-    let gid = dailyGlobal();
-    if (gid && base.has(gid)) {
-      const hist = (st.dailyFreeHist = st.dailyFreeHist || []);
-      let locked = TI.games.map((g) => g.id).filter((id) => !base.has(id));
-      const fresh = locked.filter((id) => !hist.includes(id));
-      if (fresh.length) locked = fresh;
-      if (!locked.length) { df.day = dk; df.gid = null; return null; }
-      const pid = (st.profile && st.profile.playerId) || '';
-      gid = locked[hashStr('milik-' + dk + pid) % locked.length];
-      hist.push(gid);
-      st.dailyFreeHist = hist.slice(-14);
-    }
-    if (!gid) { df.day = dk; df.gid = null; return null; }
-    df.day = dk; df.gid = gid;
-    if (df.doneDay !== dk) df.doneDay = null;
-    try { if (TI.save) TI.save(); } catch (e) { /* simpan gagal diam saja */ }
-    return gid;
-  }
-  // Info kartu gratis: gid + apakah game itu memang terkunci untuk pemain ini.
-  function dailyFreeInfo() {
-    const gid = dailyFree();
-    if (!gid) return null;
-    const g = TI.games.find((x) => x.id === gid);
-    if (!g) return null;
-    return { gid, game: g, isNew: !baseUnlocked().has(gid) };
-  }
-
-  // Teks cara membuka untuk kartu terkunci (tampil + dibacakan).
-  function reqText(g) {
-    const arr = catOrder()[g.cat] || [];
-    const i = arr.indexOf(g);
-    const st = TI.state;
-    const lvl = (st.profile && st.profile.level) || 1;
-    if (i > 0) {
-      const prev = arr[i - 1];
-      const ps = st.stars[prev.id] || {};
-      if (!((ps.tk || 0) >= 1 || (ps.sd || 0) >= 1)) return 'Buka: raih 1 bintang di ' + prev.title;
-    }
-    return 'Buka: naik ke level ' + i + ' (' + LEVEL_NAMES[i - 1] + ')';
-  }
+  // (gratis harian + teks cara membuka dicabut 15 Nov 2026 bersama sistem kunci)
 
   // ---------- mastery per (game, jenjang): 0 baru, 1 perunggu, 2 perak, 3 emas, 4 berlian ----------
   function tier(gid, jen) {
@@ -237,15 +148,6 @@
     const lv = levelOf(p.xp);
     const levelUp = lv > p.level;
     p.level = lv;
-    try {
-      if (game.id === dailyFree()) {
-        const df = st.dailyFree;
-        const km = new Date(Date.now() + 7 * 3600 * 1000 - 86400000).toISOString().slice(0, 10);
-        df.runtun = df.lastDay === km ? (df.runtun || 0) + 1 : 1;
-        df.lastDay = dk;
-        df.doneDay = dk;
-      }
-    } catch (e) { /* abaikan */ }
     updateStreak(dk);
     pruneDayLog();
 
@@ -297,8 +199,6 @@
     }
     st.profile.level = levelOf(st.profile.xp || 0);
     if (!st.share) st.share = {};
-    if (!st.dailyFree) st.dailyFree = {};
-    if (!st.dailyFreeHist) st.dailyFreeHist = [];
     if (!st.promoOff) st.promoOff = {};
     ensureWeekly();
     pruneDayLog();
@@ -335,8 +235,8 @@
 
   TI.Progression = {
     XP_LEVELS, LEVEL_NAMES, levelOf, levelInfo, dayKey, weekKey, nextWeekStart,
-    challengeGame, ensureWeekly, unlockedSet, baseUnlocked, dailyFree, dailyGlobal, dailyFreeInfo,
-    reqText, tier, cleanName, nameValid,
+    challengeGame, ensureWeekly,
+    tier, cleanName, nameValid,
     onFinish, totals, onShare, init,
   };
   TI.VIEWS = TI.VIEWS || {};

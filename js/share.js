@@ -149,15 +149,6 @@
       : 'Tantangan Pekan Ini: game ' + game.title + '! Semua anak main game yang sama minggu ini. Ikut main dan tantang aku: ' + challengeURL(game, 1);
     return bagikan('Tantangan Pekan · Taman Ilmu', teks);
   }
-  // Misi Harian Global: game gratis hari ini sama untuk semua anak.
-  function misiHarian(game, best) {
-    try { if (TI.Stats) TI.Stats.track('challenge', {}); } catch (e) { /* abaikan */ }
-    const bintang = '⭐'.repeat(Math.max(1, best)) + ' (' + Math.max(1, best) + '/3)';
-    const teks = best > 0
-      ? 'Aku dapat ' + bintang + ' di Misi Hari Ini: game ' + game.title + '! Semua anak dapat misi yang sama. Ikut main dan tantang aku: ' + challengeURL(game, best)
-      : 'Misi Hari Ini: game ' + game.title + '! Semua anak dapat misi yang sama hari ini. Ikut main dan tantang aku: ' + challengeURL(game, 1);
-    return bagikan('Misi Harian · Taman Ilmu', teks);
-  }
   // Tantang keluarga: dibagikan orang tua ke grup WA keluarga, sudut pandang nama anak.
   function tantangKeluarga(game, stars) {
     try { if (TI.Stats) TI.Stats.track('challenge', {}); } catch (e) { /* abaikan */ }
@@ -425,5 +416,5 @@
     }
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, infoOrtu, misiHarian };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, infoOrtu };
 })();

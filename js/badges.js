@@ -35,18 +35,18 @@
     { id: 'tantangan-tuntas', icon: '🎯', name: 'Tantangan Tuntas', how: 'Selesaikan tantangan pekan ini',
       test: (t, st) => !!(st.weekly && st.weekly.tantanganDone) },
     { id: 'juara-pekan', icon: '🏆', name: 'Juara Pekan', how: 'Masuk 10 besar papan pekan ini', board: true },
-    { id: 'gratis-harian', icon: '🎁', name: 'Pemburu Gratisan', how: 'Selesaikan Game Gratis Hari Ini',
-      test: (t, st) => !!(st.dailyFree && st.dailyFree.doneDay) },
+    { id: 'bintang-50', icon: '💫', name: 'Bintang Lima Puluh', how: 'Kumpulkan 50 bintang',
+      test: (t) => t.stars >= 50 },
     { id: 'pamer-kartu', icon: '🖼️', name: 'Tukang Pamer', how: 'Bagikan kartu pamer ke teman',
       test: (t, st) => !!(st.share && st.share.cardAt) },
     { id: 'penjaga-taman', icon: '🌳', name: 'Penjaga Taman', how: 'Capai level 12',
       test: (t, st) => (st.profile.level || 1) >= 12 },
     { id: 'pengajak-teman', icon: '🤝', name: 'Pengajak Teman', how: 'Bagikan Taman Ilmu 3 kali',
       test: (t, st) => ((st.share && st.share.total) || 0) >= 3 },
-    { id: 'misi-3-hari', icon: '📅', name: 'Misi 3 Hari', how: 'Selesaikan misi harian 3 hari berturut-turut',
-      test: (t, st) => ((st.dailyFree && st.dailyFree.runtun) || 0) >= 3 },
-    { id: 'misi-7-hari', icon: '🗓️', name: 'Misi 7 Hari', how: 'Selesaikan misi harian 7 hari berturut-turut',
-      test: (t, st) => ((st.dailyFree && st.dailyFree.runtun) || 0) >= 7 },
+    { id: 'penuh-lima', icon: '🌠', name: 'Lima Sempurna', how: 'Dapat 3 bintang di 5 game',
+      test: (t) => t.full >= 5 },
+    { id: 'emas-dua-lima', icon: '👑', name: 'Raja Bintang', how: 'Dapat 3 bintang di 25 game',
+      test: (t) => t.full >= 25 },
   ];
 
   const earned = (st) => st.profile.badges || {};
@@ -115,7 +115,7 @@
     const st = TI.state;
     const got = earned(st);
     const list = DEFS;
-    const n = Object.keys(got).length;
+    const n = list.filter((d) => got[d.id]).length;
     const app = TI.page('Lencana', n + ' dari ' + list.length + ' lencana terkumpul',
       TI.h('div', { class: 'badge-grid' }, list.map((d) => {
         const when = got[d.id];

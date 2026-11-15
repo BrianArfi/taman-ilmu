@@ -1,5 +1,5 @@
-// Uji gamifikasi Taman Ilmu: migrasi v1 ke v2, XP, level, unlock, tantangan pekan,
-// lencana, anti-farming, dan papan offline. Tidak mengubah smoke.mjs dan ui.mjs.
+// Uji gamifikasi Taman Ilmu: migrasi v1 ke v2, XP, level, semua-terbuka,
+// tantangan pekan, lencana, anti-farming, dan papan offline. Tidak mengubah smoke.mjs dan ui.mjs.
 // Pakai: node tools/gami.mjs  (opsional PLIVE=1 untuk cek papan live)
 import { createRequire } from 'node:module';
 import path from 'node:path';
@@ -38,17 +38,18 @@ async function makePage(v1 = {}) {
   await page.waitForSelector('.grid');
   const r = await page.evaluate(() => ({
     xp: TI.state.profile.xp, nama: TI.state.profile.nama, pid: !!TI.state.profile.playerId,
-    unlocked: TI.Progression.unlockedSet().size,
-    base: TI.Progression.baseUnlocked().size,
-    free: TI.Progression.dailyFree(),
+    cards: document.querySelectorAll('a.card').length, all: TI.games.length,
+    locked: document.querySelectorAll('.card.is-locked').length,
+    noApi: !TI.Progression.unlockedSet && !TI.Progression.dailyFree,
     freeCard: !!document.querySelector('.free-card'),
     promo: !!document.querySelector('.promo-banner'),
     strip: !!document.querySelector('.player-strip'), tantangan: !!document.querySelector('.tantangan'),
     banner: !!document.querySelector('.nama-banner'), xpBar: !!document.querySelector('.xp-bar'),
   }));
   check('pemain baru: v2 terbentuk, xp 0', r.xp === 0 && r.nama && r.pid);
-  check('pemain baru: 8 jalur biasa + 1 gratis harian', r.base === 8 && r.unlocked === 9 && !!r.free, `(base=${r.base},total=${r.unlocked},free=${r.free})`);
-  check('beranda: strip + tantangan + nama + gratis + promo', r.strip && r.tantangan && r.banner && r.xpBar && r.freeCard && r.promo);
+  check('pemain baru: semua game terbuka, tanpa kartu gratis', r.cards === r.all && r.locked === 0 && !r.freeCard, `(buka=${r.cards}/${r.all})`);
+  check('pemain baru: API kunci sudah dicabut', r.noApi);
+  check('beranda: strip + tantangan + nama + promo', r.strip && r.tantangan && r.banner && r.xpBar && r.promo);
   check('pemain baru: tanpa error JS', page.errors.length === 0, page.errors.join(' | '));
   await ctx.close();
 }
@@ -103,8 +104,8 @@ async function makePage(v1 = {}) {
       return {
         s1, s2, plays: TI.state.plays.hijaiyah.tk, wk: TI.state.weekly.weekKey,
         wkNow: TI.Progression.weekKey(), wxp: TI.state.weekly.xp.tk,
-        unlocked: [...TI.Progression.unlockedSet()],
-        free: TI.Progression.dailyFree(),
+        noApi: !TI.Progression.unlockedSet && !TI.Progression.dailyFree,
+        // (API kunci dicabut)
         chip: document.querySelector('.xp-chip') && document.querySelector('.xp-chip').textContent,
         acts: [...document.querySelectorAll('.result-actions > *')].map((el) => (el.textContent || '').trim()),
       };
@@ -112,8 +113,8 @@ async function makePage(v1 = {}) {
     check('finish: bintang v2 === v1', r.s1 === r.s2 && r.s1 >= 1, `(s=${r.s1})`);
     check('finish: plays + weekly.weekKey', r.plays === 1 && r.wk === r.wkNow);
     check('finish: xp formula 15+10s+2', r.wxp === 15 + 10 * r.s1 + 2, `(weekly=${r.wxp})`);
-    // rantai: bintang di hijaiyah membuka wudhu (slot ke-2); rukun baru terbuka setelah wudhu dapat bintang
-    check('finish: wudhu terbuka, rukun dikunci (kecuali gratis hari ini)', r.unlocked.includes('wudhu') && (!r.unlocked.includes('rukun') || r.free === 'rukun'));
+    // (rantai unlock dicabut; semua game selalu terbuka)
+    check('finish: API kunci tidak ada', r.noApi);
     check('finish: chip XP tampil di layar hasil', !!r.chip && /\+\d+ XP/.test(r.chip), `(${r.chip})`);
     check('finish: hasil punya 7 tombol (lagi, bagikan, tantang, keluarga, sekelas, kartu, pilih)', JSON.stringify(r.acts) === JSON.stringify(['Main Lagi', '📣 Bagikan', '🏆 Tantang', '🏠 Tantang Keluarga', '🏫 Tantang Sekelas', '🖼️ Kartu', 'Pilih Game']), `(${r.acts.join('|')})`);
   }
@@ -121,33 +122,23 @@ async function makePage(v1 = {}) {
   await ctx.close();
 }
 
-// 4. Unlock exact per level
+// 4. Tanpa kunci: semua terbuka di level berapa pun
 {
   const { ctx, page } = await makePage();
   await page.goto(url);
   await page.waitForSelector('.grid');
   const r = await page.evaluate(() => {
-    const byCat = {};
-    for (const g of TI.games) (byCat[g.cat] = byCat[g.cat] || []).push(g.id);
-    const atLevel = (lv) => {
-      TI.state.profile.level = lv;
-      const out = new Set();
-      for (const cat in byCat) byCat[cat].forEach((id, i) => { if (i + 1 <= 2 || i + 1 <= lv + 1) out.add(id); });
-      return out.size;
-    };
-    const l1 = [...TI.Progression.baseUnlocked()];
+    const all = TI.games.length;
+    const open = () => document.querySelectorAll('a.card').length;
+    const locked = () => document.querySelectorAll('.card.is-locked').length;
     TI.state.profile.level = 1;
-    const exact8 = l1.length === 8 && l1.includes('hijaiyah') && l1.includes('sudoku') && !l1.includes('mobil');
-    // taman terpanjang 27 game: jalur level membuka semua saat level 30 (k <= 31)
+    const l1 = { open: open(), locked: locked() };
     TI.state.profile.level = 30;
-    const l30 = TI.Progression.baseUnlocked().size === TI.games.length;
-    TI.state.profile.level = 1; const tot1 = TI.Progression.unlockedSet().size;
-    return { n1: atLevel(1), n5: atLevel(5), exact8, l30, tot1 };
+    const l30 = { open: open(), locked: locked() };
+    return { all, l1, l30 };
   });
-  check('unlock: level 1 jalur biasa tepat 8 game', r.exact8 && r.n1 === 8, `(n1=${r.n1})`);
-  check('unlock: level 1 total 9 dengan gratis harian', r.tot1 === 9, `(tot=${r.tot1})`);
-  check('unlock: level 5 tepat 24 game', r.n5 === 24, `(n5=${r.n5})`);
-  check('unlock: level 30 buka semua', r.l30);
+  check('terbuka: level 1 semua kartu terbuka', r.l1.open === r.all && r.l1.locked === 0, `(buka=${r.l1.open}/${r.all})`);
+  check('terbuka: level 30 tetap semua terbuka', r.l30.open === r.all && r.l30.locked === 0);
   await ctx.close();
 }
 
@@ -209,6 +200,7 @@ async function makePage(v1 = {}) {
   });
   const has = (id) => r.fresh.includes(id);
   check('lencana: hafizh-kecil, semangat-3-hari, bintang-100', has('hafizh-kecil') && has('semangat-3-hari') && has('bintang-100'), `(${r.fresh.length} lencana)`);
+  check('lencana: tier bintang baru (50, lima, dua-lima)', has('bintang-50') && has('penuh-lima') && has('emas-dua-lima'));
   check('lencana: evaluate(false) tidak mencatat', r.stamped === 0);
   check('lencana: grant juara-pekan mencatat', r.juara);
   await ctx.close();
@@ -324,24 +316,21 @@ if (process.env.PLIVE === '1') {
   await ctx.close();
 }
 
-// 14. Gratis harian: stabil sehari, terbuka, kartu tampil, kartu bertanda
+// 14. Keterbukaan + pips kemahiran: tanpa kartu gratis, pips tampil
 {
   const { ctx, page } = await makePage();
   await page.goto(url);
   await page.waitForSelector('.grid');
-  const r = await page.evaluate(() => {
-    const a = TI.Progression.dailyFree();
-    const b = TI.Progression.dailyFree();
-    const info = TI.Progression.dailyFreeInfo();
-    return { a, b, same: a === b, inGames: TI.games.some((g) => g.id === a),
-      unlocked: TI.Progression.unlockedSet().has(a),
-      card: !!document.querySelector('.free-card'),
-      marked: !!document.querySelector('.card.is-free'),
-      infoNew: info && info.isNew };
-  });
-  check('gratis: stabil sehari dan id sah', r.same && r.inGames, `(${r.a})`);
-  check('gratis: terbuka + kartu + tanda', r.unlocked && r.card && r.marked && r.infoNew);
-  check('gratis: tanpa error JS', page.errors.length === 0, page.errors.join(' | '));
+  const r = await page.evaluate(() => ({
+    cards: document.querySelectorAll('a.card').length, all: TI.games.length,
+    locked: document.querySelectorAll('.card.is-locked').length,
+    card: !!document.querySelector('.free-card'),
+    pips: document.querySelectorAll('.card .pips').length,
+    noApi: !TI.Progression.dailyFree && !TI.Progression.dailyFreeInfo && !TI.Share.misiHarian,
+  }));
+  check('terbuka: semua kartu tautan, tanpa terkunci', r.cards === r.all && r.locked === 0, `(${r.cards}/${r.all})`);
+  check('terbuka: tanpa kartu gratis + pips tiap kartu', !r.card && r.pips === r.all && r.noApi, `(pips=${r.pips})`);
+  check('terbuka: tanpa error JS', page.errors.length === 0, page.errors.join(' | '));
   await ctx.close();
 }
 

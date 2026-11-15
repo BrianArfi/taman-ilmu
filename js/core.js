@@ -319,12 +319,6 @@
     for (let i = 0; i < 4; i++) w.append(h('i', { class: i < t ? 'is-on' : '' }));
     return w;
   }
-  let lastUnlocked = null; // baseline unlock tiap sesi: kartu yang baru terbuka dapat animasi pop
-  let freshSfxAt = 0;
-  function sfxOnce(name) {
-    const t = Date.now();
-    if (t - freshSfxAt > 700) { freshSfxAt = t; sfx(name); }
-  }
   function showHome() {
     closeGame();
     document.title = 'Taman Ilmu';
@@ -439,17 +433,6 @@
       : null;
 
     const list = games.filter((g) => state.tab === 'semua' || g.cat === state.tab);
-    const unlocked = Pr.unlockedSet();
-    const freeInfo = Pr.dailyFreeInfo ? Pr.dailyFreeInfo() : null;
-    const freeBest = freeInfo ? ((state.stars[freeInfo.gid] || {})[state.level] || 0) : 0;
-    const freeCard = freeInfo && freeInfo.isNew ? h('div', { class: 'free-card pop-in' },
-      h('span', { class: 'free-icon', 'aria-hidden': 'true' }, freeInfo.game.icon || '🎁'),
-      h('div', { class: 'free-body' },
-        h('b', null, 'Game Gratis Hari Ini: ' + freeInfo.game.title),
-        h('span', { class: 'free-note' }, 'Terbuka hari ini saja, besok ganti game lain. Selesaikan untuk lencana Pemburu Gratisan.')),
-      h('a', { class: 'ti-btn free-go', href: '#/main/' + freeInfo.gid, onclick: () => sfx('tap') }, 'Main Gratis'),
-      TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost free-share', onclick: () => TI.Share.misiHarian(freeInfo.game, freeBest) }, '⚔️ Tantang') : null,
-      TI.Share && freeBest > 0 ? h('button', { type: 'button', class: 'ti-btn is-ghost free-share', onclick: () => TI.Share.card(freeInfo.game, freeBest) }, '🖼️ Kartu') : null) : null;
     let tantangBanner = null;
     try {
       const tc = TI.Share ? TI.Share.parseChallenge() : null;
@@ -465,52 +448,23 @@
             onclick: () => { state.tantangSeen = tc.key; saveState(); showHome(); } }, 'Tutup'));
       }
     } catch (e) { /* abaikan */ }
-    const freshOpen = [];
-    if (lastUnlocked) for (const id of unlocked) if (!lastUnlocked.has(id)) freshOpen.push(id);
-    lastUnlocked = unlocked;
     const grid = h('section', { class: 'grid', 'aria-label': 'Daftar game' });
     list.forEach((g, i) => {
       const c = catOf(g);
-      const open = unlocked.has(g.id);
-      const isFree = !!(freeInfo && g.id === freeInfo.gid && freeInfo.isNew);
       const best = (state.stars[g.id] || {})[state.level] || 0;
       const arabicIcon = /[؀-ۿ]/.test(g.icon || '');
-      if (open) {
-        const isNew = freshOpen.includes(g.id);
-        if (isNew) sfxOnce('benar');
-        grid.append(h('a', {
-          class: 'card' + (isNew ? ' pop-new' : '') + (isFree ? ' is-free' : ''), href: '#/main/' + g.id, style: '--c:' + c.color + ';--i:' + i,
-          onclick: () => sfx('tap'),
-        },
-        h('span', { class: 'card-icon' + (arabicIcon ? ' ti-arabic' : ''), 'aria-hidden': 'true' }, g.icon || c.icon),
-        h('span', { class: 'card-body' },
-          h('span', { class: 'card-cat' }, c.label),
-          h('span', { class: 'card-title' }, g.title),
-          h('span', { class: 'card-desc' }, g.desc || ''),
-          NILAI[g.id] ? h('span', { class: 'card-nilai' }, NILAI[g.id]) : null),
-        h('span', { class: 'card-foot' }, pips(Pr.tier(g.id, state.level)),
-          h('span', { class: 'card-best', 'aria-label': 'Bintang terbaik di jenjang ini' }, best ? '★' + best : ''))));
-      } else {
-        const req = Pr.reqText(g);
-        grid.append(h('button', {
-          type: 'button', class: 'card is-locked', style: '--c:' + c.color + ';--i:' + i,
-          'aria-label': g.title + ', terkunci. ' + req,
-          onclick: (ev) => {
-            sfx('salah');
-            say(req);
-            const el = ev.currentTarget;
-            el.classList.remove('is-shake'); void el.offsetWidth; el.classList.add('is-shake');
-          },
-        },
-        h('span', { class: 'card-icon is-dim' + (arabicIcon ? ' ti-arabic' : ''), 'aria-hidden': 'true' }, g.icon || c.icon),
-        h('span', { class: 'card-body' },
-          h('span', { class: 'card-cat' }, c.label),
-          h('span', { class: 'card-title' }, g.title),
-          h('span', { class: 'card-desc' }, g.desc || ''),
-          NILAI[g.id] ? h('span', { class: 'card-nilai' }, NILAI[g.id]) : null),
-        h('span', { class: 'card-lock', 'aria-hidden': 'true' }, '🔒'),
-        h('span', { class: 'card-req' }, req)));
-      }
+      grid.append(h('a', {
+        class: 'card', href: '#/main/' + g.id, style: '--c:' + c.color + ';--i:' + i,
+        onclick: () => sfx('tap'),
+      },
+      h('span', { class: 'card-icon' + (arabicIcon ? ' ti-arabic' : ''), 'aria-hidden': 'true' }, g.icon || c.icon),
+      h('span', { class: 'card-body' },
+        h('span', { class: 'card-cat' }, c.label),
+        h('span', { class: 'card-title' }, g.title),
+        h('span', { class: 'card-desc' }, g.desc || ''),
+        NILAI[g.id] ? h('span', { class: 'card-nilai' }, NILAI[g.id]) : null),
+      h('span', { class: 'card-foot' }, pips(Pr.tier(g.id, state.level)),
+        h('span', { class: 'card-best', 'aria-label': 'Bintang terbaik di jenjang ini' }, best ? '★' + best : ''))));
     });
     if (!list.length) grid.append(h('p', { class: 'empty' }, 'Belum ada game di kategori ini.'));
 
@@ -523,7 +477,6 @@
     if (laporMini) app.append(laporMini);
     app.append(strip);
     if (tantangan) app.append(tantangan);
-    if (freeCard) app.append(freeCard);
     app.append(
       h('p', { class: 'level-note' }, 'Jenjang: ', h('b', null, LEVELS[state.level]), '. Soal menyesuaikan jenjang ini.'),
       nav);
@@ -577,7 +530,7 @@
     const ctx = makeCtx(g, level, { stage, promptText, bar, shell, session });
     session.ctx = ctx;
     current = session;
-    try { if (TI.Stats) TI.Stats.track('game_start', { gid: g.id, jen: level, free: !!(TI.Progression && TI.Progression.dailyFree && TI.Progression.dailyFree() === g.id) }); } catch (e) { /* abaikan */ }
+    try { if (TI.Stats) TI.Stats.track('game_start', { gid: g.id, jen: level }); } catch (e) { /* abaikan */ }
 
     try {
       const ret = g.start(ctx);

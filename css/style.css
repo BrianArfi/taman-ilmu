@@ -230,24 +230,12 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
   font-weight: 700; text-decoration: underline; padding: 8px;
 }
 
-/* ---------- kartu game: pips kemahiran dan terkunci ---------- */
+/* ---------- kartu game: pips kemahiran ---------- */
 .card-foot { position: absolute; right: 14px; bottom: 6px; display: inline-flex; align-items: center; gap: 8px; }
 .pips { display: inline-flex; gap: 3px; }
 .pips i { width: 9px; height: 9px; background: #e6dfcf; transform: rotate(45deg) scale(0.85); border-radius: 2px; }
 .pips i.is-on { background: var(--c); }
 .card-best { font-size: 0.85rem; color: var(--muted); font-weight: 800; }
-.card.is-locked { cursor: pointer; border-top-color: var(--line); }
-.card.is-locked .card-icon.is-dim { filter: grayscale(1); opacity: 0.55; }
-.card.is-locked .card-title { color: var(--muted); }
-.card.is-locked .card-desc { visibility: hidden; }
-.card-lock { position: absolute; top: 10px; right: 12px; font-size: 1rem; }
-.card-req {
-  position: absolute; left: 14px; right: 40px; bottom: 6px;
-  color: var(--muted); font-size: 0.78rem; font-weight: 700;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: right;
-}
-.card.is-shake { animation: ti-shake var(--dur-ui-max) var(--ease-in-out); }
-.card.pop-new { animation: ti-pop 240ms var(--ease-pop); }
 
 /* ---------- layar dalam (papan, lencana, nama) ---------- */
 .page-head { display: flex; align-items: center; gap: 12px; padding: 6px 2px 14px; }
@@ -507,9 +495,9 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
   }
-  .pop-in, .pop-new, .ti-slot.is-filled, .result-card, .rstar.is-on, .tan-done,
+  .pop-in, .ti-slot.is-filled, .result-card, .rstar.is-on, .tan-done,
   .ti-toast, .xp-chip, .level-up, .challenge-done { animation-name: ti-fade !important; animation-delay: 0s !important; }
-  .choice.is-wrong, .choice.is-correct, .choice.is-hint, .card.is-shake { animation: none !important; }
+  .choice.is-wrong, .choice.is-correct, .choice.is-hint { animation: none !important; }
 }
 
 /* ---------- banner promosi ---------- */
@@ -526,24 +514,6 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
 .promo-go { min-height: 48px; padding: 6px 20px; font-size: 1rem; background: #ffc93c; color: #2b2d42; box-shadow: 0 5px 0 #b78a00; }
 .promo-x { border: 0; background: rgba(255, 255, 255, 0.2); color: #fff; width: 44px; height: 44px; border-radius: 14px; font-size: 1.1rem; cursor: pointer; transition: transform var(--dur-press) var(--ease-out); }
 .promo-x:active { transform: scale(0.92); }
-
-/* ---------- kartu gratis harian ---------- */
-.free-card {
-  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-  margin-top: 10px; padding: 10px 14px;
-  border-radius: var(--radius); background: #e7f9ef; border: 2px solid var(--good);
-}
-.free-icon { font-size: 2.2rem; line-height: 1; }
-.free-body { display: grid; gap: 1px; flex: 1 1 220px; min-width: 0; }
-.free-body b { font-size: 1.02rem; }
-.free-note { color: var(--muted); font-size: 0.88rem; }
-.free-go { min-height: 48px; padding: 6px 20px; font-size: 1rem; }
-.free-share { min-height: 48px; padding: 6px 14px; font-size: 1rem; }
-.card.is-free { border-top-color: var(--good); }
-.card.is-free::after {
-  content: '🎁 Hari ini'; position: absolute; top: 8px; right: 10px;
-  font-size: 0.72rem; font-weight: 800; color: var(--good);
-}
 
 /* ---------- banner tantangan teman ---------- */
 .tantang-banner {

@@ -14,7 +14,7 @@
 
   function blank() {
     return { v: 1, firstSeen: null, visits: 0, days: {}, plays: 0, finishes: 0, starsSum: 0,
-      shares: 0, challenges: 0, cards: 0, boardViews: 0, freePlays: 0,
+      shares: 0, challenges: 0, cards: 0, boardViews: 0,
       promoViews: {}, promoClicks: {}, perGame: {} };
   }
   let S = blank();
@@ -46,7 +46,6 @@
           visits: S.visits, days_active: Object.keys(S.days).length,
           plays: S.plays, finishes: S.finishes, stars: S.starsSum,
           shares: S.shares, challenges: S.challenges, cards: S.cards,
-          free_plays: S.freePlays,
           per_game: S.perGame, client_time: Date.now(),
         };
         fetch(CFG.BOARD_URL + '/stats', { method: 'POST', mode: 'no-cors',
@@ -70,7 +69,6 @@
           S.plays++;
           const g = gstat(d.gid);
           g.s++;
-          if (d.free) S.freePlays++;
           break;
         }
         case 'game_finish': {
@@ -119,6 +117,8 @@
     const best = (TI.games || []).map((g) => ((st[g.id] || {})[lvl] || 0)).filter((s) => s > 0);
     const lvlDone = best.length, lvlTotal = (TI.games || []).length;
     const lvlAvg = best.length ? (best.reduce((a, b) => a + b, 0) / best.length).toFixed(1) : '0';
+    let full3 = 0;
+    for (const g of (TI.games || [])) { const r = st[g.id] || {}; if (r.tk === 3) full3++; if (r.sd === 3) full3++; }
     let pv = 0, pc = 0;
     for (const k in S.promoViews) pv += S.promoViews[k];
     for (const k in S.promoClicks) pc += S.promoClicks[k];
@@ -127,7 +127,7 @@
       finishRate: S.plays ? Math.round((100 * S.finishes) / S.plays) : 0,
       avgStars: S.finishes ? (S.starsSum / S.finishes).toFixed(1) : '0',
       shares: S.shares, challenges: S.challenges, cards: S.cards,
-      boardViews: S.boardViews, freePlays: S.freePlays,
+      boardViews: S.boardViews, full3,
       firstSeen: S.firstSeen, last7, top, byCat, promoViews: pv, promoClicks: pc,
       promoCTR: pv ? Math.round((100 * pc) / pv) : 0,
       lvlDone, lvlTotal, lvlAvg,
@@ -229,7 +229,7 @@
         TI.h('div', { class: 'stat-card' }, TI.h('b', null, m.finishRate + '%'), TI.h('span', null, 'Tingkat selesai')),
         TI.h('div', { class: 'stat-card' }, TI.h('b', null, '★ ' + m.avgStars), TI.h('span', null, 'Rata-rata bintang')),
         TI.h('div', { class: 'stat-card' }, TI.h('b', null, String(m.shares)), TI.h('span', null, 'Bagikan')),
-        TI.h('div', { class: 'stat-card' }, TI.h('b', null, String(m.freePlays)), TI.h('span', null, 'Main gratis harian'))),
+        TI.h('div', { class: 'stat-card' }, TI.h('b', null, String(m.full3)), TI.h('span', null, 'Bintang 3 penuh'))),
       TI.h('h3', { class: 'stat-h' }, 'Banner promosi'),
       TI.h('p', { class: 'board-note' }, 'Dilihat ' + m.promoViews + ' kali, diklik ' + m.promoClicks + ' kali (' + m.promoCTR + '%).'),
       TI.h('h3', { class: 'stat-h' }, 'Kirim data ke Brian'),
