@@ -1,5 +1,5 @@
 /* 100 Raja Taman. Ujian terakhir: 10 soal campuran 4 kategori, 3 nyawa. Fakta hanya dari bank SPEC dan game lama.
-   Kategori selang-seling seimbang. Tiap soal teks ada ikon kategorinya. Perisai: salah pertama dimaafkan + ditunjukkan jawaban, nyawa hilang kalau salah 2x. */
+   Kategori selang-seling seimbang. Tiap soal teks ada ikon kategorinya. Perisai: salah pertama dapat petunjuk samar + satu opsi salah disingkirkan, nyawa hilang kalau salah 2x. */
 (function () {
   const { h, shuffle, sample } = TI;
 
@@ -8,8 +8,13 @@
 .play[data-game="raja-taman"] .rj-hud { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 .play[data-game="raja-taman"] .rj-chip { padding: 5px 14px; border-radius: 999px; background: var(--card); box-shadow: 0 3px 0 var(--shadow); font-weight: 800; font-size: 1.1rem; }
 .play[data-game="raja-taman"] .rj-chip.is-hati { font-size: 1.3rem; letter-spacing: 2px; }
-.play[data-game="raja-taman"] .rj-card { padding: 14px 22px; border-radius: 22px; background: var(--card); box-shadow: 0 5px 0 var(--shadow); }
+.play[data-game="raja-taman"] .rj-card { padding: 14px 22px; border-radius: 22px; background: var(--card); box-shadow: 0 5px 0 var(--shadow); border-left: 8px solid var(--shadow); }
 .play[data-game="raja-taman"] .rj-big { margin: 0; font-size: 4rem; line-height: 1; text-align: center; }
+.play[data-game="raja-taman"] .rj-bank { margin: 4px 0 0; font-size: .85rem; font-weight: 700; text-align: center; opacity: .65; }
+.play[data-game="raja-taman"] .rj-bank-hijaiyah { border-left-color: #8b5cf6; }
+.play[data-game="raja-taman"] .rj-bank-hitung { border-left-color: #3b82f6; }
+.play[data-game="raja-taman"] .rj-bank-langit { border-left-color: #f59e0b; }
+.play[data-game="raja-taman"] .rj-bank-lawan { border-left-color: #22c55e; }
 `;
 
   const arab = (x) => h('span', { class: 'ti-arabic' }, x);
@@ -76,6 +81,14 @@
       const soal = [];
       for (let g = 0; g < 3; g++) for (const bank of grup) if (bank[g]) soal.push(bank[g]);
       const IKON = { hijaiyah: '📜', hitung: '🔢', langit: '🌤️', lawan: '🔀' };
+      const BANK_NAMA = { hijaiyah: 'Huruf Hijaiyah', hitung: 'Berhitung', langit: 'Langit', lawan: 'Lawan Kata' };
+      // Petunjuk samar per bank: mengarah tanpa membocorkan jawaban.
+      const PETUNJUK = {
+        hijaiyah: 'Ingat-ingat lagi pelajarannya.',
+        hitung: 'Hitung pelan-pelan dengan jarimu.',
+        langit: 'Ingat-ingat lagi langitnya.',
+        lawan: 'Bayangkan kebalikannya.',
+      };
 
       const main = async () => {
         let nyawa = 3, benar = 0, beruntun = 0;
@@ -146,24 +159,27 @@
           }
           opsi = opsi.slice(0, nOpsi);
         }
-        // Perisai: salah pertama ditunjukkan jawaban + coba lagi; nyawa hilang hanya jika salah 2x.
-        async function duaKesempatan(tanyaUlang, petunjuk) {
-          const r1 = await tanyaUlang();
+        // Perisai: salah pertama tidak membocorkan jawaban. Anak dapat petunjuk
+        // samar + satu opsi salah disingkirkan, lalu coba lagi. Nyawa hilang
+        // hanya jika salah 2x.
+        async function duaKesempatan(opsiAwal, bikin, petunjuk) {
+          const r1 = await bikin(opsiAwal);
           if (r1.firstTry) return 'benar';
           petunjuk();
-          const r2 = await tanyaUlang();
+          const buang = opsiAwal.find((o) => o !== s.jawab);
+          const r2 = await bikin(opsiAwal.filter((o) => o !== buang));
           return r2.firstTry ? 'lolos' : 'salah';
         }
 
         if (s.kind === 'lihat') {
           tanya('Huruf apa ini?');
-          ctx.el.append(h('div', { class: 'rj-card pop-in' }, h('p', { class: 'rj-big ti-arabic' }, s.ar)));
+          ctx.el.append(h('div', { class: 'rj-card pop-in rj-bank-' + s.bank }, h('p', { class: 'rj-big ti-arabic' }, s.ar), h('p', { class: 'rj-bank' }, BANK_NAMA[s.bank])));
           const box = h('div');
           ctx.el.append(box);
-          const out = await duaKesempatan(() => {
+          const out = await duaKesempatan(opsi, (ops) => {
             box.replaceChildren();
-            return ctx.choose({ options: shuffle(opsi), answer: s.jawab, speakLabel: true, retry: false, into: box });
-          }, () => ctx.say('Jawabannya ' + s.jawab + '. Coba lagi!'));
+            return ctx.choose({ options: shuffle(ops), answer: s.jawab, speakLabel: true, retry: false, into: box });
+          }, () => ctx.say('Lihat lagi bentuk hurufnya. Satu jawaban salah sudah hilang. Coba lagi!'));
           box.remove();
           return out;
         }
@@ -172,28 +188,28 @@
           const NAMA = { 'ا': 'Alif', 'ب': 'Ba', 'ت': 'Ta', 'م': 'Mim', 'ن': 'Nun', 'و': 'Wau', 'ل': 'Lam' };
           const box2 = h('div');
           ctx.el.append(box2);
-          const out2 = await duaKesempatan(() => {
+          const out2 = await duaKesempatan(opsi, (ops) => {
             box2.replaceChildren();
             return ctx.choose({
-              options: shuffle(opsi.map((o) => ({ node: arab(o), value: o, say: 'Huruf ' + (NAMA[o] || o), aria: 'Huruf ' + (NAMA[o] || o) }))),
+              options: shuffle(ops.map((o) => ({ node: arab(o), value: o, say: 'Huruf ' + (NAMA[o] || o), aria: 'Huruf ' + (NAMA[o] || o) }))),
               answer: s.jawab,
               speakLabel: true,
               retry: false,
               into: box2,
             });
-          }, () => tanya('Mana huruf ' + s.nama + '?'));
+          }, () => ctx.say('Dengarkan lagi baik-baik. Satu jawaban salah sudah hilang. Coba lagi!'));
           box2.remove();
           return out2;
         }
         tanya(s.soal);
-        ctx.el.append(h('div', { class: 'rj-card pop-in' }, h('p', { class: 'rj-big', 'aria-hidden': 'true' }, IKON[s.bank])));
+        ctx.el.append(h('div', { class: 'rj-card pop-in rj-bank-' + s.bank }, h('p', { class: 'rj-big', 'aria-hidden': 'true' }, IKON[s.bank]), h('p', { class: 'rj-bank' }, BANK_NAMA[s.bank])));
         ctx.sfx('pop');
         const box3 = h('div');
         ctx.el.append(box3);
-        const out3 = await duaKesempatan(() => {
+        const out3 = await duaKesempatan(opsi, (ops) => {
           box3.replaceChildren();
-          return ctx.choose({ options: shuffle(opsi), answer: s.jawab, speakLabel: true, retry: false, into: box3 });
-        }, () => ctx.say('Jawabannya ' + s.jawab + '. Coba lagi!'));
+          return ctx.choose({ options: shuffle(ops), answer: s.jawab, speakLabel: true, retry: false, into: box3 });
+        }, () => ctx.say((PETUNJUK[s.bank] || 'Pikirkan lagi.') + ' Satu jawaban salah sudah hilang. Coba lagi!'));
         box3.remove();
         return out3;
       }
