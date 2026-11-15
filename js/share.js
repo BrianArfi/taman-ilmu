@@ -98,6 +98,16 @@
       'Ayo main Taman Ilmu! ' + totalGame() + ' game seru belajar agama Islam, matematika, sains, dan logika untuk anak TK dan SD. ' +
       'Gratis, langsung di browser: ' + inviteURL());
   }
+  function klaimURL() {
+    const nama = (TI.state.profile && TI.state.profile.nama) || '';
+    return BASE + '?klaim=' + encodeURIComponent(nama);
+  }
+  // Klaim balik: yang diajak main mengirim tautan klaim ke pengundangnya.
+  function klaimBalik() {
+    const dari = TI.state.ajakDari || 'temanmu';
+    return bagikan('Terima kasih · Taman Ilmu',
+      'Aku sudah main Taman Ilmu berkat ajakan ' + dari + '! Klik tautan ini biar +20 XP masuk dan lencana Duta kebuka: ' + klaimURL());
+  }
 
   // Undangan bersuara orang tua: untuk diteruskan ke grup WA sekolah/keluarga.
   function inviteOrtu() {
@@ -416,5 +426,5 @@
     }
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, infoOrtu };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, infoOrtu, klaimURL, klaimBalik };
 })();

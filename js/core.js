@@ -439,6 +439,29 @@
         h('span', { class: 'ajak-txt' }, '🌟 ', h('b', null, ajak), ' mengajakmu main Taman Ilmu! Pilih jenjangmu, lalu mainkan gamenya.'),
         h('button', { type: 'button', class: 'nama-later', 'aria-label': 'Tutup', onclick: () => { state.ajakSeen = ajak; saveState(); showHome(); } }, 'Tutup'))
       : null;
+    // Kirim klaim balik: yang diajak sudah main, tawarkan kirim +20 XP ke pengundang (sekali).
+    const klaimKirim = (!state.ajakKlaimKirim && state.ajakDari && state.ajakBonusDone)
+      ? h('div', { class: 'ajak-banner pop-in', role: 'status' },
+        h('span', { class: 'ajak-txt' }, '🎁 ', h('b', null, state.ajakDari), ' mengajakmu dan kamu sudah main! Kirim klaim +20 XP buat dia.'),
+        h('button', { type: 'button', class: 'ti-btn tantang-go', onclick: () => { state.ajakKlaimKirim = true; saveState(); if (TI.Share) TI.Share.klaimBalik(); showHome(); } }, 'Kirim'),
+        h('button', { type: 'button', class: 'nama-later', 'aria-label': 'Tutup', onclick: () => { state.ajakKlaimKirim = true; saveState(); showHome(); } }, 'Tutup'))
+      : null;
+    // Klaim masuk: pengundang membuka tautan ?klaim=Nama, tebus +20 XP sekali per nama.
+    let klaim = null;
+    try { klaim = new URLSearchParams(location.search).get('klaim'); } catch (e) { /* tanpa query */ }
+    const klaimNama = klaim ? klaim.trim() : '';
+    const klaimSdh = klaimNama && state.klaimDari && state.klaimDari[klaimNama.toLowerCase()];
+    const klaimSendiri = klaimNama && klaimNama.toLowerCase() === ((prof.nama || '').trim().toLowerCase());
+    const klaimBanner = (klaimNama && !klaimSdh && !klaimSendiri)
+      ? h('div', { class: 'klaim-banner pop-in', role: 'status' },
+        h('span', { class: 'ajak-txt' }, '🎉 ', h('b', null, klaimNama), ' sudah main berkat ajakanmu! Tebus +20 XP dan lencana Duta.'),
+        h('button', { type: 'button', class: 'ti-btn tantang-go', onclick: () => {
+          const g = Pr.klaimBonus(klaimNama);
+          if (g.xp) { sfx('menang'); TI.toast('🎁', '+20 XP! ' + klaimNama + ' main berkat kamu. Lencana Duta kebuka!'); }
+          else sfx('tap');
+          showHome();
+        } }, 'Klaim +20 XP'))
+      : null;
 
     const list = games.filter((g) => state.tab === 'semua' || g.cat === state.tab);
     let tantangBanner = null;
@@ -492,6 +515,8 @@
       nav);
     if (banner) app.append(banner);
     if (ajakBanner) app.append(ajakBanner);
+    if (klaimKirim) app.append(klaimKirim);
+    if (klaimBanner) app.append(klaimBanner);
     if (tantangBanner) app.append(tantangBanner);
     app.append(grid,
       h('footer', { class: 'home-foot' },

@@ -187,6 +187,26 @@
     return { xp: 5, levelUp, level: lv };
   }
 
+  // Klaim balik pengundang: +20 XP sekali per nama yang diajak main.
+  // Nolak nama kosong, nama sendiri, dan klaim ganda.
+  function klaimBonus(nama) {
+    const st = TI.state;
+    const k = (nama || '').trim();
+    if (!k) return { xp: 0 };
+    const aku = ((st.profile && st.profile.nama) || '').trim().toLowerCase();
+    if (k.toLowerCase() === aku) return { xp: 0 };
+    const m = (st.klaimDari = st.klaimDari || {});
+    if (m[k.toLowerCase()]) return { xp: 0 };
+    m[k.toLowerCase()] = dayKey();
+    st.profile.xp += 20;
+    const lv = levelOf(st.profile.xp);
+    const levelUp = lv > st.profile.level;
+    st.profile.level = lv;
+    if (TI.Badges) TI.Badges.grant('duta');
+    if (TI.save) TI.save();
+    return { xp: 20, levelUp, level: lv };
+  }
+
   function init() {
     const st = TI.state;
     if (!st.profile) st.profile = { nama: 'Bintang ' + (10 + Math.floor(Math.random() * 90)), playerId: '', xp: 0, level: 1, badges: {}, namaChanged: false, seenNama: false, createdAt: dayKey() };
@@ -237,7 +257,7 @@
     XP_LEVELS, LEVEL_NAMES, levelOf, levelInfo, dayKey, weekKey, nextWeekStart,
     challengeGame, ensureWeekly,
     tier, cleanName, nameValid,
-    onFinish, totals, onShare, init,
+    onFinish, totals, onShare, klaimBonus, init,
   };
   TI.VIEWS = TI.VIEWS || {};
   TI.VIEWS.nama = nameScreen;

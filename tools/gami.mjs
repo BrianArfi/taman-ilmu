@@ -395,6 +395,38 @@ if (process.env.PLIVE === '1') {
   await ctx.close();
 }
 
+// 18. Klaim balik pengundang: banner ?klaim, +20 sekali, tolak ganda/diri
+{
+  const { ctx, page } = await makePage();
+  await page.goto(url + '?klaim=Ani');
+  await page.waitForSelector('.grid');
+  let r = await page.evaluate(() => ({
+    banner: !!document.querySelector('.klaim-banner'),
+    txt: (document.querySelector('.klaim-banner') || {}).textContent || '',
+  }));
+  check('klaim: banner Ani tampil', r.banner && r.txt.includes('Ani') && r.txt.includes('+20 XP'));
+  await page.click('.klaim-banner .tantang-go');
+  await page.waitForSelector('.grid');
+  r = await page.evaluate(() => ({
+    xp: TI.state.profile.xp, duta: !!TI.state.profile.badges.duta,
+    banner: !!document.querySelector('.klaim-banner'),
+    lagi: TI.Progression.klaimBonus('Ani'),
+    diri: TI.Progression.klaimBonus(TI.state.profile.nama),
+    kosong: TI.Progression.klaimBonus('  '),
+  }));
+  check('klaim: +20 XP + lencana Duta, banner hilang', r.xp === 20 && r.duta && !r.banner, `(xp=${r.xp})`);
+  check('klaim: tolak ganda, diri, kosong', r.lagi.xp === 0 && r.diri.xp === 0 && r.kosong.xp === 0);
+  await page.evaluate(() => { TI.state.ajakDari = 'Budi'; TI.state.ajakBonusDone = true; });
+  await page.getByRole('button', { name: /Matematika/ }).click();
+  await page.waitForSelector('.grid');
+  r = await page.evaluate(() => ({
+    kirim: [...document.querySelectorAll('.ajak-banner')].some((el) => (el.textContent || '').includes('Kirim klaim')),
+  }));
+  check('klaim: invitee ditawari kirim klaim', r.kirim);
+  check('klaim: tanpa error JS', page.errors.length === 0, page.errors.join(' | '));
+  await ctx.close();
+}
+
 await browser.close();
 const bad = results.filter((x) => !x).length;
 console.log(`\n${results.length - bad}/${results.length} lolos`);

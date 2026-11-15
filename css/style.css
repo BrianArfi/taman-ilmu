@@ -153,6 +153,7 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
 .ajak-btn { display: inline-flex; align-items: center; gap: 6px; border: 2px solid var(--line); border-radius: 999px; background: var(--card); padding: 8px 18px; font: inherit; font-weight: 800; color: var(--ink); cursor: pointer; box-shadow: 0 3px 0 var(--shadow); transition: transform var(--dur-press) var(--ease-out); }
 .ajak-btn:active { transform: scale(0.96); }
 .ajak-banner { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 0 0 10px; padding: 12px 16px; border-radius: var(--radius); background: #fff4cc; border: 2px solid #f2c94c; }
+.klaim-banner { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 0 0 10px; padding: 12px 16px; border-radius: var(--radius); background: #e7f9ef; border: 2px solid var(--good); }
 .ajak-txt { flex: 1 1 260px; min-width: 0; font-weight: 700; }
 .badge-share { margin-top: 6px; border: 0; border-radius: 999px; background: #fff4cc; cursor: pointer; padding: 6px 14px; font: inherit; font-size: 0.85rem; font-weight: 800; color: #9a6b00; box-shadow: 0 3px 0 #ecd9a0; transition: transform var(--dur-press) var(--ease-out); }
 .badge-share:active { transform: scale(0.96); }
