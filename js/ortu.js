@@ -32,7 +32,15 @@
       if (TI.Stats) TI.Stats.track('promo_click', { id: 'orangtua-salin' });
       if (TI.Share) TI.Share.infoOrtu();
     } }, 'Salin info buat grup WA');
-    return TI.page('Untuk Orang Tua', 'Kenapa Taman Ilmu aman dipasang di HP anak.',
+    const pasang = TI.PWA && !TI.PWA.mandiri() && !TI.PWA.ios()
+      ? TI.h('button', { type: 'button', class: 'ti-btn ortu-cta', 'data-pwa': 'pasang', hidden: true, onclick: () => {
+        TI.sfx('tap');
+        if (TI.Stats) TI.Stats.track('promo_click', { id: 'orangtua-pasang' });
+        TI.PWA.pasang();
+      } }, '📲 Pasang ke Layar Utama') : null;
+    const pasangIos = TI.PWA && !TI.PWA.mandiri() && TI.PWA.ios()
+      ? TI.h('p', { class: 'ortu-note' }, '📲 Pasang ke Layar Utama: ketuk Bagikan di Safari, lalu Tambah ke Layar Utama.') : null;
+    const hal = TI.page('Untuk Orang Tua', 'Kenapa Taman Ilmu aman dipasang di HP anak.',
       TI.h('div', { class: 'ortu-hero pop-in' },
         TI.h('span', { class: 'ortu-icon', 'aria-hidden': 'true' }, '🛡️'),
         TI.h('p', { class: 'ortu-lead' }, 'Taman Ilmu dibuat supaya anak main sambil belajar dan orang tua tetap tenang. Tanpa jebakan klik, tanpa tagihan kaget.'),
@@ -40,7 +48,11 @@
         ajak,
         ajakOrtu,
         salin,
+        pasang,
+        pasangIos,
         TI.h('p', { class: 'ortu-note' }, 'Ada ' + total + ' game untuk jenjang TK dan SD: agama Islam, matematika, sains, dan logika.')));
+    if (TI.PWA) TI.PWA.paint();
+    return hal;
   }
 
   TI.VIEWS = TI.VIEWS || {};

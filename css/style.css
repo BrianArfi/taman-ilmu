@@ -515,6 +515,12 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
 .promo-x { border: 0; background: rgba(255, 255, 255, 0.2); color: #fff; width: 44px; height: 44px; border-radius: 14px; font-size: 1.1rem; cursor: pointer; transition: transform var(--dur-press) var(--ease-out); }
 .promo-x:active { transform: scale(0.92); }
 
+/* ---------- banner pasang PWA ---------- */
+.pwa-banner { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 0 10px; padding: 10px 14px; border-radius: var(--radius); background: #e8f0fe; border: 2px solid #2f6fed; }
+.pwa-banner[hidden] { display: none; }
+.pwa-txt { flex: 1 1 220px; min-width: 0; font-weight: 700; font-size: 0.95rem; }
+.pwa-go { min-height: 44px; padding: 4px 18px; font-size: 0.95rem; }
+
 /* ---------- banner tantangan teman ---------- */
 .tantang-banner {
   display: flex; align-items: center; gap: 12px; flex-wrap: wrap;

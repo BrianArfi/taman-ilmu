@@ -361,6 +361,14 @@
       onclick: () => { try { if (TI.Stats) TI.Stats.track('promo_click', { id: 'coba-30detik' }); } catch (e) {} TI.cobaMode = true; sfx('tap'); } },
       '⚡ Coba 30 Detik!', h('span', { class: 'coba-sub' }, 'Tanpa daftar, langsung main'));
 
+    // Banner pasang PWA: tombol muncul saat browser menawar (Android/desktop),
+    // petunjuk manual untuk iPhone/iPad yang tanpa dialog pasang.
+    const pwaBanner = h('div', { class: 'pwa-banner pop-in', hidden: true, 'data-pwa': 'pasang' },
+      h('span', { class: 'pwa-txt' }, '📲 Pasang Taman Ilmu di layar utama biar gampang dibuka.'),
+      h('button', { type: 'button', class: 'ti-btn pwa-go', onclick: () => { sfx('tap'); pwaPasang(); } }, 'Pasang'));
+    const pwaIosEl = (!pwaStandalone() && pwaIos())
+      ? h('div', { class: 'pwa-banner pop-in' }, h('span', { class: 'pwa-txt' }, '📲 Pasang ke Layar Utama: ketuk Bagikan, lalu Tambah ke Layar Utama.')) : null;
+
     // Strip kepercayaan: sinyal aman untuk orang tua dalam 10 detik pertama.
     const trustStrip = h('a', { class: 'trust-strip pop-in', href: '#/orangtua',
       'aria-label': 'Kenapa Taman Ilmu aman untuk anak',
@@ -473,7 +481,9 @@
     const laporMini = sum && TI.Share ? h('button', { type: 'button', class: 'lapor-mini pop-in', 'aria-label': 'Bagikan laporan anak ke pasangan', onclick: () => { sfx('tap'); TI.Share.laporan(); } },
       h('span', null, '📊 ' + sum.lvlDone + '/' + sum.lvlTotal + ' · ★' + sum.lvlAvg),
       h('b', null, 'Bagikan')) : null;
-    app.append(head, trustStrip, cobaBtn);
+    app.append(head, trustStrip, pwaBanner);
+    if (pwaIosEl) app.append(pwaIosEl);
+    app.append(cobaBtn);
     if (laporMini) app.append(laporMini);
     app.append(strip);
     if (tantangan) app.append(tantangan);
@@ -491,6 +501,7 @@
           h('a', { class: 'foot-link', href: '#/orangtua', onclick: () => sfx('tap') }, '🛡️ Orang Tua'),
           h('button', { type: 'button', class: 'foot-link', onclick: () => { sfx('tap'); if (TI.Share) TI.Share.streak(); } }, '🔥 Pamer Rajin')),
         h('span', null, 'Dibuat untuk anak-anak. Tanpa iklan. Papan juara butuh internet, sisanya main offline.')));
+    pwaPaint();
   }
 
   // ---------- layar game ----------
@@ -1053,10 +1064,53 @@
     ctx.onExit(() => cv.remove());
   }
 
+  // ---------- PWA: pasang ke layar utama ----------
+  const PWA = { prompt: null, done: false };
+  function pwaStandalone() {
+    try {
+      if (window.matchMedia && matchMedia('(display-mode: standalone)').matches) return true;
+      if (window.navigator && navigator.standalone) return true;
+    } catch (e) { /* abaikan */ }
+    return false;
+  }
+  function pwaIos() {
+    try { return /iphone|ipad|ipod/i.test(navigator.userAgent || ''); } catch (e) { return false; }
+  }
+  function pwaBisa() { return !!PWA.prompt && !PWA.done && !pwaStandalone(); }
+  function pwaPaint() {
+    try {
+      document.querySelectorAll('[data-pwa="pasang"]').forEach((el) => { el.hidden = !pwaBisa(); });
+    } catch (e) { /* abaikan */ }
+  }
+  async function pwaPasang() {
+    const p = PWA.prompt;
+    if (!p) return 'tidak';
+    try {
+      p.prompt();
+      const c = await p.userChoice;
+      const out = (c && c.outcome) || 'dismissed';
+      if (out === 'accepted') PWA.done = true;
+      PWA.prompt = null;
+      pwaPaint();
+      return out;
+    } catch (e) { return 'gagal'; }
+  }
+  function pwaInit() {
+    try {
+      if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      }
+    } catch (e) { /* file:// atau privat: lewati */ }
+    window.addEventListener('beforeinstallprompt', (e) => { try { e.preventDefault(); } catch (err) { /* abaikan */ } PWA.prompt = e; pwaPaint(); });
+    window.addEventListener('appinstalled', () => { PWA.done = true; PWA.prompt = null; pwaPaint(); });
+  }
+  TI.PWA = { bisa: pwaBisa, pasang: pwaPasang, paint: pwaPaint, ios: pwaIos, mandiri: pwaStandalone };
+
   // ---------- keyboard: Escape langsung kembali ----------
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && current) { e.preventDefault(); location.hash = '#/'; }
   });
+  pwaInit();
   window.addEventListener('hashchange', route);
   document.addEventListener('visibilitychange', () => { if (document.hidden) hush(); });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', route); else setTimeout(route, 0);
