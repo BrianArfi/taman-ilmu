@@ -1009,6 +1009,30 @@
     const rayakan = (sc === 3 || sc === 7 || sc === 30) ? h('div', { class: 'streak-party pop-in' },
       h('span', { class: 'streak-chip' }, '🔥 ' + sc + ' hari beruntun!'),
       TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.streak() }, 'Pamerkan') : null) : null;
+    // Momen 3-bintang pertama per kategori: rayakan sekali per kategori + tawarkan kartu pamer.
+    // Flag dicatat saat dicek supaya pemain lama yang sudah punya 3 tidak dapat rayaan palsu.
+    const cat = ctx.game.cat;
+    const infoKat = CATS[cat] || { label: 'kategori ini', icon: '⭐' };
+    state.momenKat = state.momenKat || {};
+    let momenKat = null;
+    if (stars === 3 && !state.momenKat[cat]) {
+      let lain = 0;
+      for (const g of games) {
+        if (g.cat !== cat) continue;
+        const r = state.stars[g.id] || {};
+        for (const jen of ['tk', 'sd']) {
+          if (g.id === ctx.game.id && jen === state.level) continue;
+          if ((r[jen] || 0) === 3) lain++;
+        }
+      }
+      state.momenKat[cat] = 1; saveState();
+      if (lain === 0) {
+        const pseudo = { id: 'kategori-' + cat, title: 'Bintang 3 ' + infoKat.label, icon: infoKat.icon };
+        momenKat = h('div', { class: 'streak-party pop-in momen-kat' },
+          h('span', { class: 'streak-chip' }, '🌟 Bintang 3 pertamamu di ' + infoKat.label + '!'),
+          TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.card(pseudo, 3, 'kategori') }, 'Pamerkan') : null);
+      }
+    }
     const duel = state.duel && state.duel.gid === ctx.game.id ? state.duel : null;
     let duelUi = null;
     if (duel) {
@@ -1036,6 +1060,7 @@
         gain && gain.bonusTeman ? h('p', { class: 'teman-bonus pop-in' }, '🎁 Bonus Teman +10 XP!') : null,
         gain && gain.levelUp ? h('p', { class: 'level-up pop-in' }, 'Naik ke Level ' + gain.level + '!') : null,
         rayakan,
+        momenKat,
         gain && gain.challengeDone ? h('div', { class: 'challenge-done pop-in' }, h('span', null, 'Tantangan pekan selesai!'), TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.tantangPekan(ctx.game, stars) }, '⚔️ Ajak Teman') : null) : null,
         duelUi,
         h('h2', null, msg),
@@ -1046,7 +1071,7 @@
     // Perayaan penuh untuk 2-3 bintang; 1 bintang (mis. kalah balapan) cukup disemangati.
     const celebrate = opts.celebrate != null ? opts.celebrate : stars >= 2;
     sfx(celebrate ? 'menang' : 'pop');
-    say(msg + (opts.lesson ? '. ' + opts.lesson : ''));
+    say(msg + (momenKat ? ' Bintang 3 pertamamu di ' + infoKat.label + '!' : '') + (opts.lesson ? '. ' + opts.lesson : ''));
     if (celebrate && !reduced()) confetti(ctx, els.shell);
   }
 

@@ -359,7 +359,9 @@
     const isSerti = jenis === 'sertifikat' && SERTIFIKAT[game.id];
     const teks = isSerti
       ? 'Aku dapat sertifikat ' + SERTIFIKAT[game.id].judul + ' (' + stars + '/3) di Taman Ilmu! Ayo main juga: ' + inviteURL()
-      : teksScore(game, stars, false, (TI.state.profile && TI.state.profile.level) || 1);
+      : jenis === 'kategori'
+        ? 'Aku dapat ' + game.title + ' pertamaku di Taman Ilmu! Sekarang ' + ringkas() + '. Ayo main juga: ' + inviteURL()
+        : teksScore(game, stars, false, (TI.state.profile && TI.state.profile.level) || 1);
     let hasil = 'gagal';
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
       try {
