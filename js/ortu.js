@@ -33,11 +33,13 @@
       if (TI.Share) TI.Share.infoOrtu();
     } }, 'Salin info buat grup WA');
     const pasang = TI.PWA && !TI.PWA.mandiri() && !TI.PWA.ios()
-      ? TI.h('button', { type: 'button', class: 'ti-btn ortu-cta', 'data-pwa': 'pasang', hidden: true, onclick: () => {
-        TI.sfx('tap');
-        if (TI.Stats) TI.Stats.track('promo_click', { id: 'orangtua-pasang' });
-        TI.PWA.pasang();
-      } }, '📲 Pasang ke Layar Utama') : null;
+      ? TI.h('span', { class: 'ortu-pasang' },
+        TI.h('button', { type: 'button', class: 'ti-btn ortu-cta', 'data-pwa': 'pasang', hidden: true, onclick: () => {
+          TI.sfx('tap');
+          if (TI.Stats) TI.Stats.track('promo_click', { id: 'orangtua-pasang' });
+          TI.PWA.pasang();
+        } }, '📲 Pasang ke Layar Utama'),
+        TI.h('span', { class: 'ortu-note', 'data-pwa': 'manual' }, '📲 ' + (TI.PWA.manual() || ''))) : null;
     const pasangIos = TI.PWA && !TI.PWA.mandiri() && TI.PWA.ios()
       ? TI.h('p', { class: 'ortu-note' }, '📲 Pasang ke Layar Utama: ketuk Bagikan di Safari, lalu Tambah ke Layar Utama.') : null;
     const hal = TI.page('Untuk Orang Tua', 'Kenapa Taman Ilmu aman dipasang di HP anak.',

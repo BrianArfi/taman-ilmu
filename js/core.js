@@ -361,11 +361,13 @@
       onclick: () => { try { if (TI.Stats) TI.Stats.track('promo_click', { id: 'coba-30detik' }); } catch (e) {} TI.cobaMode = true; sfx('tap'); } },
       '⚡ Coba 30 Detik!', h('span', { class: 'coba-sub' }, 'Tanpa daftar, langsung main'));
 
-    // Banner pasang PWA: tombol muncul saat browser menawar (Android/desktop),
-    // petunjuk manual untuk iPhone/iPad yang tanpa dialog pasang.
-    const pwaBanner = h('div', { class: 'pwa-banner pop-in', hidden: true, 'data-pwa': 'pasang' },
-      h('span', { class: 'pwa-txt' }, '📲 Pasang Taman Ilmu di layar utama biar gampang dibuka.'),
-      h('button', { type: 'button', class: 'ti-btn pwa-go', onclick: () => { sfx('tap'); pwaPasang(); } }, 'Pasang'));
+    // Banner pasang PWA selalu tampil: tombol saat browser menawar,
+    // petunjuk manual bila tidak; iPhone/iPad punya petunjuk sendiri.
+    const pwaBanner = (!pwaStandalone() && !pwaIos())
+      ? h('div', { class: 'pwa-banner pop-in' },
+        h('span', { class: 'pwa-txt' }, '📲 Pasang Taman Ilmu di layar utama biar gampang dibuka.'),
+        h('button', { type: 'button', class: 'ti-btn pwa-go', 'data-pwa': 'pasang', hidden: true, onclick: () => { sfx('tap'); pwaPasang(); } }, 'Pasang'),
+        h('span', { class: 'pwa-manual', 'data-pwa': 'manual' }, pwaManual() || '')) : null;
     const pwaIosEl = (!pwaStandalone() && pwaIos())
       ? h('div', { class: 'pwa-banner pop-in' }, h('span', { class: 'pwa-txt' }, '📲 Pasang ke Layar Utama: ketuk Bagikan, lalu Tambah ke Layar Utama.')) : null;
 
@@ -504,7 +506,8 @@
     const laporMini = sum && TI.Share ? h('button', { type: 'button', class: 'lapor-mini pop-in', 'aria-label': 'Bagikan laporan anak ke pasangan', onclick: () => { sfx('tap'); TI.Share.laporan(); } },
       h('span', null, '📊 ' + sum.lvlDone + '/' + sum.lvlTotal + ' · ★' + sum.lvlAvg),
       h('b', null, 'Bagikan')) : null;
-    app.append(head, trustStrip, pwaBanner);
+    app.append(head, trustStrip);
+    if (pwaBanner) app.append(pwaBanner);
     if (pwaIosEl) app.append(pwaIosEl);
     app.append(cobaBtn);
     if (laporMini) app.append(laporMini);
@@ -1102,9 +1105,16 @@
     try { return /iphone|ipad|ipod/i.test(navigator.userAgent || ''); } catch (e) { return false; }
   }
   function pwaBisa() { return !!PWA.prompt && !PWA.done && !pwaStandalone(); }
+  // Petunjuk manual saat browser tak menawar pasang (null = tak perlu: standalone/iOS).
+  function pwaManual() {
+    if (pwaStandalone() || pwaIos()) return null;
+    try { if (/android/i.test(navigator.userAgent || '')) return 'Ketuk menu ⋮ browser lalu Tambah ke Layar Utama.'; } catch (e) { /* abaikan */ }
+    return 'Klik menu ⋮ browser lalu Install aplikasi.';
+  }
   function pwaPaint() {
     try {
       document.querySelectorAll('[data-pwa="pasang"]').forEach((el) => { el.hidden = !pwaBisa(); });
+      document.querySelectorAll('[data-pwa="manual"]').forEach((el) => { el.hidden = pwaBisa() || pwaStandalone(); });
     } catch (e) { /* abaikan */ }
   }
   async function pwaPasang() {
@@ -1129,7 +1139,7 @@
     window.addEventListener('beforeinstallprompt', (e) => { try { e.preventDefault(); } catch (err) { /* abaikan */ } PWA.prompt = e; pwaPaint(); });
     window.addEventListener('appinstalled', () => { PWA.done = true; PWA.prompt = null; pwaPaint(); });
   }
-  TI.PWA = { bisa: pwaBisa, pasang: pwaPasang, paint: pwaPaint, ios: pwaIos, mandiri: pwaStandalone };
+  TI.PWA = { bisa: pwaBisa, pasang: pwaPasang, paint: pwaPaint, ios: pwaIos, mandiri: pwaStandalone, manual: pwaManual };
 
   // ---------- keyboard: Escape langsung kembali ----------
   document.addEventListener('keydown', (e) => {

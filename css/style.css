@@ -521,6 +521,9 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
 .pwa-banner[hidden] { display: none; }
 .pwa-txt { flex: 1 1 220px; min-width: 0; font-weight: 700; font-size: 0.95rem; }
 .pwa-go { min-height: 44px; padding: 4px 18px; font-size: 0.95rem; }
+.pwa-manual { font-size: 0.85rem; color: var(--muted); font-weight: 700; }
+.pwa-manual[hidden], .pwa-go[hidden], .ortu-pasang [hidden] { display: none; }
+.ortu-pasang { display: contents; }
 
 /* ---------- banner tantangan teman ---------- */
 .tantang-banner {
