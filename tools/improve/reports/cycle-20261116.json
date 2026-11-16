@@ -3,22 +3,22 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "raja-taman",
-   "title": "Raja Taman",
-   "cat": "logika",
-   "file": "100-raja-taman.js",
+   "id": "adab",
+   "title": "Ucapan & Adab Baik",
+   "cat": "islam",
+   "file": "07-adab.js",
    "static100": 86,
-   "dyn100": 99,
+   "dyn100": 100,
    "plays": 4,
    "finished": 4,
-   "avgActions": 41,
+   "avgActions": 17,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
    "fun": 92,
    "cls": "A",
    "sug": [
-    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
+    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
    ]
   }
  ]
