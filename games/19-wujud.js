@@ -82,7 +82,7 @@
         svg('text', { x: 316, y, 'text-anchor': 'end', 'dominant-baseline': 'central', 'font-size': 14, 'font-weight': 800, fill: '#5d6b82', text: txt })];
     };
     const readout = svg('text', { x: 340, y: 34, 'text-anchor': 'middle', 'font-size': 24, 'font-weight': 800, fill: INK, text: '' });
-    const label = svg('text', { x: 170, y: 314, 'text-anchor': 'middle', 'font-size': 26, 'font-weight': 800, fill: INK, text: '' });
+    const label = svg('text', { class: 'wj-wujud', x: 170, y: 314, 'text-anchor': 'middle', 'font-size': 26, 'font-weight': 800, fill: INK, text: '' });
 
     const root = svg('svg', { class: 'wj-svg', viewBox: '0 0 420 330', preserveAspectRatio: 'xMidYMid meet', role: 'img', 'aria-label': 'Gelas di atas kompor dan termometer' },
       svg('defs', null,
@@ -121,6 +121,7 @@
         if (dir !== undefined) lab.fx(dir);
       },
       fx(dir) { show(flames, dir > 0); show(frost, dir < 0); },
+      dekat() { label.classList.remove('is-dekat'); void label.getBoundingClientRect(); label.classList.add('is-dekat'); },
       stop: null,
     };
     if (!reduced) {
@@ -184,6 +185,8 @@
 .play[data-game="wujud"] .wj-tugas { margin: 0; width: 100%; max-width: 560px; text-align: center; font-weight: 800; color: var(--muted); }
 .play[data-game="wujud"] .wj-after { display: grid; justify-items: center; gap: 14px; width: 100%; max-width: 760px; }
 .play[data-game="wujud"] .wj-toast { border: 0; border-radius: 999px; background: var(--card); box-shadow: 0 4px 0 var(--shadow); padding: 10px 18px; font: inherit; font-weight: 800; max-width: 100%; cursor: pointer; }
+.play[data-game="wujud"] .wj-wujud.is-dekat { animation: wj-dekat 300ms var(--ease-in-out); }
+@keyframes wj-dekat { 50% { opacity: 0.35; } }
 @media (prefers-reduced-motion: reduce) { .play[data-game="wujud"] .wj-ctl .ti-btn.is-hint { animation: none; outline: 4px solid var(--sun); } }
 `);
       const tasks = ctx.isTK ? TK_TASKS : SD_TASKS;
@@ -259,11 +262,18 @@
         // SD: geser slider, dicek saat dilepas (change). Setelah 4 cek yang salah, suhu diisi otomatis.
         function solveSD(task) {
           return new Promise((resolve) => {
-            let checks = 0, done = false, prev = task.start;
+            let checks = 0, done = false, prev = task.start, lastTick = 0;
             const apply = (T) => { tempVal.textContent = String(T); lab.set(T); };
             const onInput = () => {
               if (done) return;
               const T = +slider.value; fxPulse(Math.sign(T - prev)); prev = T; apply(T);
+              // Hampir benar: denyut label + tick (maks 1/detik) selagi di wujud goal.
+              const now = Date.now();
+              if (stateOf(T) === task.goal && now - lastTick > 1000) {
+                lastTick = now;
+                lab.dekat();
+                ctx.sfx('klik');
+              }
             };
             const onChange = async () => {
               if (done) return;
