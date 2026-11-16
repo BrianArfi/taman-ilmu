@@ -291,14 +291,6 @@
     });
   }
 
-  function nextBtn(ctx, parent, label) {
-    return new Promise((resolve) => {
-      const b = h('button', { type: 'button', class: 'ti-btn pop-in' }, label || 'Lanjut', ' ➜');
-      b.addEventListener('click', () => { TI.sfx('tap'); b.disabled = true; resolve(); });
-      parent.append(b);
-    });
-  }
-
   // Lanjut otomatis: catatan dibacakan (sayWait) lalu jalan sendiri; tombol Lanjut cuma pemercepat.
   function lanjutOtomatis(ctx, parent, teks) {
     return new Promise((resolve) => {
@@ -335,6 +327,7 @@
 @keyframes ls-pulse { 50% { transform: scale(1.06); background: rgba(255, 255, 255, 0.2); } }
 .play[data-game="listrik"] .ls-gap { position: absolute; left: 37%; top: 64%; width: 26%; height: 30%; border: 3px dashed rgba(255, 255, 255, 0.6); border-radius: 16px; background: rgba(255, 255, 255, 0.06); cursor: pointer; }
 .play[data-game="listrik"] .ls-gap.is-filled { border-color: transparent; background: transparent; }
+.play[data-game="listrik"] .ls-gap.is-hint { animation: ls-pulse 1100ms var(--ease-in-out) infinite; border-color: #ffd23f; }
 .play[data-game="listrik"] .ls-gap:active { background: rgba(255, 255, 255, 0.2); }
 .play[data-game="listrik"] .ls-box { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; max-width: 640px; }
 .play[data-game="listrik"] .ls-card { display: grid; justify-items: center; gap: 2px; padding: 6px 16px; width: auto; }
@@ -347,7 +340,7 @@
 .play[data-game="listrik"] .ls-pill b { color: var(--c); }
 .play[data-game="listrik"] .ls-spark { position: absolute; width: 9px; height: 9px; border-radius: 50%; pointer-events: none; z-index: 5; }
 .play[data-game="listrik"] .ls-tray { min-height: 0; }
-@media (prefers-reduced-motion: reduce) { .play[data-game="listrik"] .ls-sw.is-hint { animation: none; border-style: solid; border-color: #ffd23f; } }
+@media (prefers-reduced-motion: reduce) { .play[data-game="listrik"] .ls-sw.is-hint, .play[data-game="listrik"] .ls-gap.is-hint { animation: none; border-style: solid; border-color: #ffd23f; } }
 `);
 
       const tk = ctx.isTK;
@@ -359,18 +352,20 @@
       const cnt = [0, 0];
 
       return (async () => {
-        // ===== peringatan keselamatan (sekali-pernah, bukan tiap main) =====
-        let sudahAman = false;
-        try { sudahAman = localStorage.getItem('tamanIlmu.listrik.aman') === '1'; } catch (e) { /* mode privat */ }
-        if (!sudahAman) {
+        // ===== peringatan keselamatan (sekali-pernah, tampil sesudah sukses pertama) =====
+        let perluAman = true;
+        try { perluAman = localStorage.getItem('tamanIlmu.listrik.aman') !== '1'; } catch (e) { /* mode privat */ }
+        const TEKS_AMAN = 'Ingat ya, jangan pernah memasukkan benda ke stop kontak di rumah. Listrik rumah berbahaya! Di sini kita hanya memakai baterai kecil.';
+        async function tunjukAman() {
+          if (!perluAman || !ctx.alive) return;
+          perluAman = false;
+          const wbox = h('div', { class: 'ls-box' });
+          ctx.el.append(wbox);
           ctx.ask('Hati-hati dengan listrik!');
-          const warn = h('div', { class: 'ls-box' });
-          ctx.el.append(warn);
-          ctx.note('Ingat ya, jangan pernah memasukkan benda ke stop kontak di rumah. Listrik rumah berbahaya! Di sini kita hanya memakai baterai kecil.', { title: 'Hati-hati!', into: warn });
-          await nextBtn(ctx, warn, 'Mengerti');
+          ctx.note(TEKS_AMAN, { title: 'Hati-hati!', into: wbox, speak: false });
+          await lanjutOtomatis(ctx, wbox, TEKS_AMAN);
+          wbox.remove();
           try { localStorage.setItem('tamanIlmu.listrik.aman', '1'); } catch (e) { /* abaikan */ }
-          warn.remove();
-          if (!ctx.alive) return;
         }
 
         const board = makeBoard(ctx);
@@ -422,23 +417,35 @@
           const box = h('div', { class: 'ls-box' });
           ctx.el.append(box);
           if (ke === 1) {
-            // Demo terpandu: benda pertama ditunjukkan, tanpa tebakan buta.
-            ctx.ask('Perhatikan! ' + it.name + ' dipasang di celah.', { say: 'Perhatikan! ' + it.name + ' dipasang di celah. Lihat lampunya!' });
+            // Demo terpandu-interaktif: tebak dulu, lalu pasang sendiri ke celah berdenyut.
+            ctx.ask('Menurutmu, kalau ' + it.name.toLowerCase() + ' dipasang, lampu menyala?');
             const card0 = itemCard(it);
             box.append(card0);
-            await ctx.wait(1200);
+            const guess0 = await askGuess(ctx, box);
             if (!ctx.alive) return;
             card0.remove();
-            board.fill(it);
-            await ctx.wait(1500);
+            ctx.ask('Sekarang pasang ' + it.name.toLowerCase() + ' ke celah yang berdenyut! Ketuk bendanya, lalu ketuk celah.', { say: 'Sekarang pasang ke celah yang berdenyut. Ketuk bendanya, lalu ketuk celah.' });
+            const tray0 = h('div', { class: 'ti-tray ls-tray' });
+            box.append(tray0);
+            const gap0 = board.newGap();
+            gap0.classList.add('is-hint');
+            await ctx.place({
+              pieces: [{ id: it.id, label: it.name, node: itemSvg(it, 112), target: 'gap', say: it.name }],
+              slots: [{ id: 'gap', el: gap0, label: 'Celah rangkaian' }],
+              tray: tray0, move: false,
+              onPlace: async () => { board.fill(it); await ctx.wait(1300); },
+            });
             if (!ctx.alive) return;
-            await ctx.correct(null, { say: it.ok ? 'Lihat! Lampunya menyala.' : 'Lihat! Lampunya tidak menyala.' });
+            tray0.remove();
             bump(it.ok ? 0 : 1);
+            await ctx.correct(null, { say: (guess0 === it.ok ? 'Tebakanmu benar! ' : 'Lihat hasilnya! ') + (it.ok ? 'Lampunya menyala.' : 'Lampunya tidak menyala.') });
             const tail0 = tk ? '' : (it.ok ? ' Benda yang menghantarkan listrik disebut konduktor.' : ' Benda yang tidak menghantarkan listrik disebut isolator.');
             ctx.note(it.why + tail0, { title: it.ok ? 'Menyala!' : 'Tidak menyala.', into: box, speak: false });
             await lanjutOtomatis(ctx, box, it.why + tail0);
             box.remove();
             step++; progress();
+            await tunjukAman();
+            if (!ctx.alive) return;
             continue;
           }
           ctx.ask('Kalau ' + it.name.toLowerCase() + ' dipasang di celah, lampu menyala?');
