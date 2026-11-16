@@ -44,6 +44,8 @@
     & .lj-stone.is-hit { animation: lj-hit 260ms var(--ease-out); }
     @keyframes lj-hit { 35% { transform: translateY(4px); } }
     & .lj-stone.is-wrong { animation: ti-shake var(--dur-ui-max) var(--ease-in-out); }
+    & .lj-stone.is-arah { animation: lj-arah 600ms var(--ease-in-out) 3; } /* motion-ok: denyut petunjuk arah 3 kali, jarang muncul */
+    @keyframes lj-arah { 50% { transform: scale(1.12); box-shadow: 0 4px 0 #8e8672, 0 0 0 5px #ffd23f; } }
     & .lj-stone.is-correct { background: radial-gradient(circle at 34% 28%, #eafff3, #9fe3bf 58%, #5fc08f); box-shadow: 0 4px 0 #3f9d6d, 0 0 0 5px #fff; }
     & .lj-ball { position: absolute; left: 0; top: 0; z-index: 3; pointer-events: none; will-change: transform; }
     & .lj-ball-in { width: 100%; height: 100%; transform-origin: 50% 100%; }
@@ -389,6 +391,16 @@
         }
       }
     }
+    // Denyut maksimal 3 batu ke arah jawaban (batunya sendiri tak disentuh).
+    function denyutArah(v, ans) {
+      const step = v > ans ? -1 : 1;
+      for (let k = 1; k <= 3; k++) {
+        const t = v + step * k;
+        if (t < 0 || t >= sg.stones.length || t === ans) break;
+        sg.stones[t].classList.add('is-arah');
+        ctx.after(1900, () => sg.stones[t].classList.remove('is-arah'));
+      }
+    }
     await new Promise((resolve) => {
       sg.stones.forEach((st, v) => {
         st.addEventListener('click', async () => {
@@ -420,7 +432,12 @@
             resolve();
             return;
           }
-          await ctx.wrong(st, { say: salah >= 2 ? petunjuk : 'Belum tepat. Coba lagi ya.' });
+          if (salah === 1) {
+            denyutArah(v, q.ans);
+            await ctx.wrong(st, { say: v > q.ans ? 'Kebesaran, coba yang lebih kecil.' : 'Kekecilan, coba yang lebih besar.' });
+          } else {
+            await ctx.wrong(st, { say: petunjuk });
+          }
           kunciUI(false);
         });
       });
