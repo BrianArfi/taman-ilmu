@@ -20,7 +20,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Listrik: ceramah hanya bila salah.** Tebakan benar pun dipaksa dengar ceramah penuh tiap benda. Penjelasan penuh hanya bila salah; bila benar 1 kalimat + tombol Lanjut tanpa sayWait. Lokasi: 37-listrik.js:441-444 + 471-478 + lanjutOtomatis. Effort S, dampak 5, ustadz tidak (P9).
 - **Banding: tombol Lanjut sejajar narasi.** Jawaban benar diikuti narasi + jeda paksa 1,1 dtk tiap soal. Tombol Lanjut tampil bersamaan narasi biar bisa skip. Lokasi: 10-banding.js:114 + 202. Effort S, dampak 4, ustadz tidak (P9).
 - **Loncat: demo ulang hanya bila salah.** Jawaban benar dipaksa nonton demo ulang tiap soal ke-3. Demo ulang hanya bila salah; buang klausul qi%3==2. Lokasi: 29-loncat.js:253 + 424. Effort S, dampak 4, ustadz tidak (P9).
 - **Wujud: afterNote hemat.** Tiap tugas lab dipotong ceramah 2,8 dtk. afterNote hanya tugas pertama + terakhir; tugas tengah cukup Hebat singkat. Lokasi: 19-wujud.js:315-316. Effort S, dampak 4, ustadz tidak (P9).
@@ -39,6 +38,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Listrik: ceramah hanya bila salah** (S135): benar = 1 kalimat + tombol manual, salah = ceramah penuh. Probe 5/5, skor A92 tetap. Detail: cycle-20261116-s135.md.
 - **Jumat: tonjolkan ringkasan** (S134): tiap Jumat WIB tombol dasbor primer + label Jumat + catatan rekap. Probe 2/2, ui 12/12, gami 62/62. Detail: cycle-20261116-s134.md.
 - **Lencana Juara Duel** (S133): DEFS juara-duel + grant saat final best-of-3 dimenangkan, hitungan 25. Probe 1/1, ui 12/12, gami 62/62. Detail: cycle-20261116-s133.md.
 - **Laporan guru TPA** (S132): teks kualitatif tanpa skor (status 3 game islam + hari main) + tombol dasbor. Probe 1/1, ui 12/12, gami 62/62. Detail: cycle-20261116-s132.md.
