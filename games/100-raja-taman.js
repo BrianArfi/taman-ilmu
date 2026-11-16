@@ -1,6 +1,6 @@
 /* 100 Raja Taman. Ujian terakhir: 10 soal campuran 4 kategori, 3 nyawa. Fakta hanya dari bank SPEC dan game lama.
    Kategori selang-seling seimbang. Tiap soal teks ada ikon kategorinya. Perisai: salah pertama dapat petunjuk samar + satu opsi salah disingkirkan, nyawa hilang kalau salah 2x.
-   HP Raja: 10, berkurang 1 tiap jawaban benar percobaan pertama; nol = Raja kalah. */
+   HP Raja: 10, berkurang 1 tiap jawaban benar (firstTry maupun lolos) + bunyi damage; nol = Raja kalah. */
 (function () {
   const { h, shuffle, sample } = TI;
 
@@ -149,16 +149,20 @@
           gambarHati();
           chipSoal.textContent = 'Soal ' + (i + 1) + ' dari ' + soal.length;
           const hasilSoal = await satu(soal[i]); // 'benar' | 'lolos' | 'salah'
+          const damage = () => {
+            bosHP--; gambarBos(); ctx.sfx('pop');
+            if (bosHP <= 0 && !rajaKalah) { rajaKalah = true; ctx.correct(null, { say: 'Raja kalah! Kamu pemenangnya!' }); }
+          };
           if (hasilSoal === 'benar') {
             benar++;
             beruntun++;
-            bosHP--; gambarBos();
-            if (bosHP <= 0 && !rajaKalah) { rajaKalah = true; ctx.correct(null, { say: 'Raja kalah! Kamu pemenangnya!' }); }
+            damage();
             if (benar > rekor) { rekor = benar; chipRekor.textContent = 'Rekor baru!'; }
             if (beruntun === 3) ctx.correct(null, { say: 'Tiga benar beruntun! Hebat!' });
           } else {
             beruntun = 0;
-            if (hasilSoal === 'salah') {
+            if (hasilSoal === 'lolos') damage();
+            else if (hasilSoal === 'salah') {
               nyawa--;
               gambarHati();
               if (nyawa <= 0) { await ctx.wait(600); break; }
