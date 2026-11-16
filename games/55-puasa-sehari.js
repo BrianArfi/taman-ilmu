@@ -1,5 +1,6 @@
 /* 55 Sehari Berpuasa. Babak 1: urutkan dari sahur sampai buka (ctx.order).
-   Babak 2: pilah yang membatalkan dan tidak (ctx.sort).
+   Babak 2: pilah yang membatalkan dan tidak (ctx.sort); SD + keranjang
+   ketiga "Lakukan saat puasa" untuk 2 item sepanjang-hari (adil, bukan urutan).
    Dua babak berlabel; naik ke babak pilah setelah urutan. */
 (function () {
   const { h } = TI;
@@ -15,17 +16,21 @@
     { label: 'Sahur', icon: '🍚' },
     { label: 'Niat', icon: '✨' },
     { label: 'Menahan lapar dan haus', icon: '🍽️' },
-    { label: 'Menahan marah, berkata baik', icon: '💬' },
-    { label: 'Tetap shalat dan belajar', icon: '📖' },
     { label: 'Berbuka saat magrib', icon: '🌙' },
     { label: 'Makan secukupnya', icon: '🥛' },
     { label: 'Shalat Magrib', icon: '🕌' },
+  ];
+  // Sepanjang-hari (bukan titik urutan): dipilah, bukan diurutkan.
+  const LAKU_SD = [
+    { label: 'Menahan marah, berkata baik', icon: '💬' },
+    { label: 'Tetap shalat dan belajar', icon: '📖' },
   ];
 
   const BINS = [
     { id: 'batal', label: 'Membatalkan', icon: '🚫' },
     { id: 'tidak', label: 'Tidak membatalkan', icon: '✅' },
   ];
+  const BINS_SD = [...BINS, { id: 'laku', label: 'Lakukan saat puasa', icon: '💪' }];
   const SORT_TK = [
     { label: 'Makan siang', icon: '🍚', bin: 'batal' },
     { label: 'Minum', icon: '🥛', bin: 'batal' },
@@ -90,11 +95,13 @@ ${P} .ps-matahari { position: absolute; top: 50%; left: 8%; transform: translate
       if (!ctx.alive) return;
 
       ctx.clear();
-      ctx.ask('Babak 2: mana yang membatalkan puasa? Ketuk keranjang yang benar!');
+      ctx.ask(TK ? 'Babak 2: mana yang membatalkan puasa? Ketuk keranjang yang benar!'
+        : 'Babak 2: pilah ke keranjang yang benar!');
       const w2 = h('div', { class: 'ps-sort pop-in' });
       ctx.el.append(w2);
       ctx.sfx('pop');
-      await ctx.sort({ items: TK ? SORT_TK : SORT_SD, bins: BINS, into: w2 });
+      const sortSD = [...SORT_SD, ...LAKU_SD.map((x) => ({ ...x, bin: 'laku' }))];
+      await ctx.sort({ items: TK ? SORT_TK : sortSD, bins: TK ? BINS : BINS_SD, into: w2 });
       if (!ctx.alive) return;
       ctx.progress(2, 2);
       ctx.finish({ lesson: 'Puasa melatih kita menahan lapar, haus, dan marah dari subuh sampai magrib.' });
