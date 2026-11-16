@@ -55,6 +55,19 @@
     }, 5000);
   }
 
+  // Event per game ke server (best-effort, langsung, tanpa antre).
+  function kirimEvent(gid, kind, stars) {
+    if (!online() || !gid) return;
+    try {
+      fetch(CFG.BOARD_URL + '/stats/event', {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ player_id: me(), gid, kind, stars: stars || 0 }),
+        signal: AbortSignal.timeout(6000),
+      }).catch(() => {});
+    } catch (e) { /* statistik gagal tidak boleh mengganggu main */ }
+  }
+
   function track(name, d) {
     d = d || {};
     try {
@@ -69,6 +82,7 @@
           S.plays++;
           const g = gstat(d.gid);
           g.s++;
+          kirimEvent(d.gid, 'play', 0);
           break;
         }
         case 'game_finish': {
@@ -77,6 +91,7 @@
           const g = gstat(d.gid);
           g.f++;
           if ((d.stars || 0) > (g.b || 0)) g.b = d.stars;
+          kirimEvent(d.gid, 'finish', d.stars || 0);
           break;
         }
         case 'share': S.shares++; break;

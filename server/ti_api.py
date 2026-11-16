@@ -465,12 +465,14 @@ class Handler(BaseHTTPRequestHandler):
                 " FROM (%s)" % latest
             ).fetchone()
             ev_day = c.execute(
-                "SELECT COUNT(DISTINCT player_id) p, COUNT(*) n,"
+                "SELECT COUNT(DISTINCT player_id) p,"
+                " COALESCE(SUM(kind='play'),0) n,"
                 " COALESCE(SUM(kind='finish'),0) f FROM ti_events WHERE day=?",
                 (day,),
             ).fetchone()
             ev_week = c.execute(
-                "SELECT COUNT(DISTINCT player_id) p, COUNT(*) n,"
+                "SELECT COUNT(DISTINCT player_id) p,"
+                " COALESCE(SUM(kind='play'),0) n,"
                 " COALESCE(SUM(kind='finish'),0) f FROM ti_events WHERE week_key=?",
                 (wk,),
             ).fetchone()
@@ -501,7 +503,7 @@ class Handler(BaseHTTPRequestHandler):
             where, args = "1=1", ()
         with db() as c:
             rows = c.execute(
-                "SELECT gid, COUNT(*) plays,"
+                "SELECT gid, COALESCE(SUM(kind='play'),0) plays,"
                 " COALESCE(SUM(kind='finish'),0) finishes,"
                 " COUNT(DISTINCT player_id) players FROM ti_events"
                 " WHERE %s GROUP BY gid"
@@ -521,7 +523,8 @@ class Handler(BaseHTTPRequestHandler):
             n = 7
         with db() as c:
             rows = c.execute(
-                "SELECT day, COUNT(DISTINCT player_id) players, COUNT(*) plays,"
+                "SELECT day, COUNT(DISTINCT player_id) players,"
+                " COALESCE(SUM(kind='play'),0) plays,"
                 " COALESCE(SUM(kind='finish'),0) finishes FROM ti_events"
                 " GROUP BY day ORDER BY day DESC LIMIT ?", (n,),
             ).fetchall()
