@@ -19,7 +19,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Panduan pasang ke WA-ku.** Ortu non-teknis gagal pasang. Tombol kirim panduan pasang ke WA sendiri (teks per platform). Lokasi: core.js banner + ortu.js:35-44. Effort S, dampak 4, ustadz tidak.
 - **Adab: arti auto-lanjut.** Tiap soal wajib ketuk Lanjut sesudah arti (8x). Arti dibacakan otomatis lalu lanjut sendiri. Lokasi: 07-adab.js:91-98. Effort S, dampak 3, ustadz tidak (tanpa ubah teks).
 - **Tantangan pekan beruntun.** Streak pekan tak dicatat. Catat tantanganDone beruntun + lencana 4 Pekan + sebut di teks tantang. Lokasi: progress.js:57-64 + badges.js + share.js:154-161. Effort S, dampak 3, ustadz tidak.
 - **Listrik: 60 detik interaktif.** Tembok ceramah + demo pasif sebelum sentuh apa pun. Peringatan jadi toast sesudah sukses pertama; demo benda-1 diketuk anak (lanjutan S81/S92). Lokasi: 37-listrik.js:361-443. Effort M, dampak 5, ustadz tidak.
@@ -35,6 +34,7 @@ dampak 1-5; ustadz ya/tidak.
 
 - **TPA: tombol Tantangan Kelas** (S116): preset 3 game islam + teks jujur best-0. Probe 5/5, ui 12/12, gami 61/61. Detail: cycle-20261116-s116.md.
 - **CTA Ajak level-up + bonus 3** (S115): CTA hasil + klaim ke-3 +35. Probe 7/7, ui 12/12, gami 61/61. Detail: cycle-20261116-s115.md.
+- **Panduan pasang ke WA-ku** (S123): teks langkah ios/android/desktop + tombol home & ortu. Probe 8/8, ui 12/12, gami 61/61. Detail: cycle-20261116-s123.md.
 - **Loncat: panah ular SD** (S120): panah ujung baris selang-seling. Probe 4/4. Detail: cycle-20261116-s120.md.
 - **Wujud: bintang per tugas** (S119): chip Tugas i/n + ★/☆/·. Probe 6/6. Detail: cycle-20261116-s119.md.
 - **Preview kartu inline** (S122): thumbnail kategori di momen (streak/levelUp teks dikecualikan jujur). Probe 3/3, ui 12/12, gami 61/61. Detail: cycle-20261116-s122.md.
