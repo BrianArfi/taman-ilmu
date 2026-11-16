@@ -236,6 +236,7 @@
         const best = ((TI.state.stars[gid] || {})[lvl]) || 0;
         return TI.h('button', { type: 'button', class: 'ti-btn is-ghost', onclick: () => { TI.sfx('tap'); TI.Share.tantangKelas(g, best); } }, '⚔️ ' + g.icon + ' ' + g.title);
       })),
+      TI.h('p', null, TI.Share ? TI.h('button', { type: 'button', class: 'ti-btn', onclick: () => { TI.sfx('tap'); TI.Share.laporanTPA(); } }, 'Bagikan laporan TPA ke grup') : null),
       TI.h('h3', { class: 'stat-h' }, 'Game paling sering dimainkan'),
       m.top.length ? TI.h('ol', { class: 'stat-top' }, m.top.map((t) => {
         const g = byId(t.gid);

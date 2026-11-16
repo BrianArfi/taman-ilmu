@@ -304,6 +304,23 @@
       ' game selesai, rata-rata ★' + m.lvlAvg + '.' + rajin + ' Ayo main juga: ' + inviteURL());
   }
 
+  // Laporan TPA: kualitatif tanpa skor (Hijaiyah/Shalat/Wudhu + hari main).
+  function laporanTPA() {
+    const nama = (TI.state.profile && TI.state.profile.nama) || 'Anak';
+    const lvl = TI.state.level === 'sd' ? 'sd' : 'tk';
+    const kata = ['belum dicoba', 'mulai coba', 'hampir lancar', 'lancar'];
+    const status = ['hijaiyah', 'shalat', 'wudhu'].map((gid) => {
+      const g = (TI.games || []).find((x) => x.id === gid) || { title: gid };
+      const b = Math.max(0, Math.min(3, ((TI.state.stars[gid] || {})[lvl]) || 0));
+      return g.title + ' ' + kata[b];
+    }).join(', ');
+    const m = TI.Stats ? TI.Stats.summary() : null;
+    const aktif7 = m && m.last7 ? m.last7.filter((d) => d.n > 0).length : 0;
+    return bagikan('Laporan TPA · Taman Ilmu',
+      'Laporan TPA ' + nama + ': ' + status + '. Main ' + aktif7 + ' hari minggu ini. ' +
+      'Ayo main juga: ' + inviteURL());
+  }
+
   // Laporan mingguan siap-forward: tren 7 hari + total + ajakan pasang.
   function laporanMingguan() {
     const nama = (TI.state.profile && TI.state.profile.nama) || 'Anak';
@@ -631,5 +648,5 @@
     }
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, streakCard, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, laporanMingguan, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang, duelCard };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, streakCard, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, laporanMingguan, laporanTPA, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang, duelCard };
 })();
