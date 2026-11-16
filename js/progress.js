@@ -198,14 +198,15 @@
     const m = (st.klaimDari = st.klaimDari || {});
     if (m[k.toLowerCase()]) return { xp: 0 };
     m[k.toLowerCase()] = dayKey();
-    st.profile.xp += 20;
+    const bonus3 = Object.keys(m).length === 3;
+    st.profile.xp += bonus3 ? 35 : 20;
     const lv = levelOf(st.profile.xp);
     const levelUp = lv > st.profile.level;
     st.profile.level = lv;
     if (TI.Badges) TI.Badges.grant('duta');
     if (TI.Badges) TI.Badges.evaluate(true);
     if (TI.save) TI.save();
-    return { xp: 20, levelUp, level: lv };
+    return { xp: bonus3 ? 35 : 20, bonus3, levelUp, level: lv };
   }
 
   function init() {

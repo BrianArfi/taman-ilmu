@@ -461,7 +461,7 @@
         h('span', { class: 'ajak-txt' }, '🎉 ', h('b', null, klaimNama), ' sudah main berkat ajakanmu! Tebus +20 XP dan lencana Duta.'),
         h('button', { type: 'button', class: 'ti-btn tantang-go', onclick: () => {
           const g = Pr.klaimBonus(klaimNama);
-          if (g.xp) { sfx('menang'); TI.toast('🎁', '+20 XP! ' + klaimNama + ' main berkat kamu. Lencana Duta kebuka!'); }
+          if (g.xp) { sfx('menang'); TI.toast('🎁', '+' + g.xp + ' XP! ' + klaimNama + ' main berkat kamu.' + (g.bonus3 ? ' Bonus 3 teman!' : ' Lencana Duta kebuka!')); }
           else sfx('tap');
           showHome();
         } }, 'Klaim +20 XP'))
@@ -1053,6 +1053,7 @@
         gain && gain.xp > 0 ? h('p', { class: 'xp-chip pop-in' }, '+' + gain.xp + ' XP') : null,
         gain && gain.bonusTeman ? h('p', { class: 'teman-bonus pop-in' }, '🎁 Bonus Teman +10 XP!') : null,
         gain && gain.levelUp ? h('p', { class: 'level-up pop-in' }, 'Naik ke Level ' + gain.level + '!') : null,
+        gain && gain.levelUp ? h('div', { class: 'level-ajak pop-in' }, h('span', null, 'Momen menang! Ajak temanmu ikut main.'), TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.invite() }, '📣 Ajak') : null) : null,
         rayakan,
         momenKat,
         gain && gain.challengeDone ? h('div', { class: 'challenge-done pop-in' }, h('span', null, 'Tantangan pekan selesai!'), TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.tantangPekan(ctx.game, stars) }, '⚔️ Ajak Teman') : null) : null,

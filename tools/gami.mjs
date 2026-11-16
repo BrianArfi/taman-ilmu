@@ -416,6 +416,12 @@ if (process.env.PLIVE === '1') {
   }));
   check('klaim: +20 XP + lencana Duta, banner hilang', r.xp === 20 && r.duta && !r.banner, `(xp=${r.xp})`);
   check('klaim: tolak ganda, diri, kosong', r.lagi.xp === 0 && r.diri.xp === 0 && r.kosong.xp === 0);
+  r = await page.evaluate(() => {
+    const b = TI.Progression.klaimBonus('Cici');
+    const c = TI.Progression.klaimBonus('Dodi');
+    return { b: b.xp, c: c.xp, bonus: c.bonus3 };
+  });
+  check('klaim: bonus 3 (+35 di klaim ke-3)', r.b === 20 && r.c === 35 && r.bonus === true, `(${r.b},${r.c})`);
   await page.evaluate(() => { TI.state.ajakDari = 'Budi'; TI.state.ajakBonusDone = true; });
   await page.getByRole('button', { name: /Matematika/ }).click();
   await page.waitForSelector('.grid');
