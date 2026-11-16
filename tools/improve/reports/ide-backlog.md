@@ -20,7 +20,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Wujud: hampir-benar saat geser.** SD: jawaban dicek saat slider dilepas, digeser tanpa reaksi. Saat onInput capai goal: denyut label Wujud + tick. Lokasi: 19-wujud.js:262-267. Effort S, dampak 4, ustadz tidak.
 - **Kartu streak visual.** streak() teks saja. Varian gambarKartu (angka + 7 titik + nama) di streak-party + Pamer Rajin. Lokasi: share.js:267-331 + core.js:1005-1007. Effort S, dampak 4, ustadz tidak.
 - **Laporan guru TPA.** Dashboard tanpa angka untuk guru. Varian teks: Hijaiyah/Shalat/Wudhu + hari main, forward grup TPA. Lokasi: analytics.js:219-225 + share.js:199-231. Effort S, dampak 4, ustadz tidak.
 - **Lencana Juara Duel.** Juara best-of-3 tanpa lencana. Grant badge saat final dimenangkan. Lokasi: core.js duelUi + badges.js DEFS. Effort S, dampak 3, ustadz tidak.
@@ -50,6 +49,7 @@ dampak 1-5; ustadz ya/tidak.
 - **Wujud: bintang per tugas** (S119): chip Tugas i/n + ★/☆/·. Probe 6/6. Detail: cycle-20261116-s119.md.
 - **Preview kartu inline** (S122): thumbnail kategori di momen (streak/levelUp teks dikecualikan jujur). Probe 3/3, ui 12/12, gami 61/61. Detail: cycle-20261116-s122.md.
 - **Raja: banner bos hidup** (S121): goyang damage + ejek nyawa. Probe 4/4. Detail: cycle-20261116-s121.md.
+- **Wujud: hampir-benar saat geser** (S130): denyut label + tick 1/dtk. Probe 3/3. Detail: cycle-20261116-s130.md.
 - **Wujud timer ctx.after** (S128, batch B79→A92): regresi S113 diperbaiki. Probe 7/7. Detail: cycle-20261116-s128.md.
 - **Puasa: adilkan babak urut** (S118): 2 item jadi bin "Lakukan saat puasa". Probe 5/5. Detail: cycle-20261116-s118.md.
 - **Puasa: strip langit** (S117): matahari 8→92% + aria tahap. Probe 4/4. Detail: cycle-20261116-s117.md.
