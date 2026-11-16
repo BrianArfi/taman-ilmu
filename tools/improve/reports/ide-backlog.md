@@ -26,7 +26,6 @@ dampak 1-5; ustadz ya/tidak.
 - **Lencana Juara Duel.** Juara best-of-3 tanpa lencana. Grant badge saat final dimenangkan. Lokasi: core.js duelUi + badges.js DEFS. Effort S, dampak 3, ustadz tidak.
 - **Jumat: tonjolkan ringkasan.** Laporan mingguan pasif menunggu dibuka. Tiap Jumat tonjolkan tombol ringkasan (bukan kirim otomatis). Lokasi: analytics.js + share laporanMingguan. Effort S, dampak 3, ustadz tidak (revive parkir P7).
 - **Tautkan ortu dari statistik.** Dashboard tak menautkan poin aman/pasang. Tautan + tombol ke #/orangtua. Lokasi: analytics.js render + ortu.js:8-14. Effort S, dampak 3, ustadz tidak (revive parkir P7).
-- **Rekap Nilai Islami pekanan.** Ortu tak tahu nilai apa masuk. Dashboard baris "Pekan ini: ..." dari lesson game selesai. Lokasi: analytics.js render(). Effort M, dampak 5, ustadz tidak (tampil ulang lesson; parkir putaran 3).
 - **Kartu prestasi dashboard.** Ortu tak bisa pamerkan kemajuan. Tombol "Buat kartu prestasi" di statistik via gambarKartu. Lokasi: analytics.js:191-250 + share.js:267+. Effort M, dampak 5, ustadz tidak.
 - **Loncat SD: demo terpandu.** 21 batu langsung tanpa pemanasan. Soal 1: bola tunjukkan jawaban via tunjukkan() sebelum ketuk. Lokasi: 29-loncat.js:389-416. Effort M, dampak 5, ustadz tidak.
 - **Badge pekan FOMO.** Badge tantangan sama tiap pekan. Badge unik per weekKey, koleksi terkunci permanen. Lokasi: badges.js + progress.js:28-55 + core.js:410-420. Effort M, dampak 4, ustadz tidak.
@@ -41,6 +40,7 @@ dampak 1-5; ustadz ya/tidak.
 
 - **TPA: tombol Tantangan Kelas** (S116): preset 3 game islam + teks jujur best-0. Probe 5/5, ui 12/12, gami 61/61. Detail: cycle-20261116-s116.md.
 - **CTA Ajak level-up + bonus 3** (S115): CTA hasil + klaim ke-3 +35. Probe 7/7, ui 12/12, gami 61/61. Detail: cycle-20261116-s115.md.
+- **Rekap Nilai Islami pekanan** (S129): baris Pekan ini NILAI+judul+counter. Probe 4/4, ui 12/12, gami 62/62. Detail: cycle-20261116-s129.md.
 - **Listrik: 60 detik interaktif** (S126): tebak+pasang benda-1, aman sesudah sukses. Probe 6/6. Detail: cycle-20261116-s126.md.
 - **Kartu duel + Duel Ulang + final** (S127): gambarDuel + kartu home + best-of-3. Probe 9/9, ui 12/12, gami 62/62. Detail: cycle-20261116-s127.md.
 - **Tantangan pekan beruntun** (S125): runtun lintas pekan + lencana + teks. Probe 6/6, ui 12/12, gami 62/62. Detail: cycle-20261116-s125.md.
