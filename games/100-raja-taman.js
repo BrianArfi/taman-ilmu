@@ -21,6 +21,9 @@
 .play[data-game="raja-taman"] .rj-bos-isi { display: block; height: 100%; width: 100%; border-radius: 999px; background: linear-gradient(90deg, #ff6b6b, #c92a2a); transition: width var(--dur-ui) var(--ease-out); }
 .play[data-game="raja-taman"] .rj-intro { max-width: 430px; text-align: center; }
 .play[data-game="raja-taman"] .rj-intro p { margin: 6px 0; font-weight: 700; }
+.play[data-game="raja-taman"] .rj-bos-goyang { animation: rj-goyang 300ms var(--ease-in-out); }
+@keyframes rj-goyang { 25% { transform: rotate(-6deg) scale(1.05); } 75% { transform: rotate(6deg) scale(1.05); } }
+.play[data-game="raja-taman"] .rj-ejek { margin: 4px 0 0; padding: 8px 16px; border-radius: 999px; background: var(--card); box-shadow: 0 3px 0 var(--shadow); font-weight: 800; text-align: center; }
 `;
 
   const arab = (x) => h('span', { class: 'ti-arabic' }, x);
@@ -151,7 +154,14 @@
           const hasilSoal = await satu(soal[i]); // 'benar' | 'lolos' | 'salah'
           const damage = () => {
             bosHP--; gambarBos(); ctx.sfx('pop');
+            bos.classList.remove('rj-bos-goyang'); void bos.offsetWidth; bos.classList.add('rj-bos-goyang');
             if (bosHP <= 0 && !rajaKalah) { rajaKalah = true; ctx.correct(null, { say: 'Raja kalah! Kamu pemenangnya!' }); }
+          };
+          const ejekRaja = () => {
+            ctx.el.querySelectorAll('.rj-ejek').forEach((el) => el.remove());
+            const kata2 = ['Haha! Ayo coba lagi!', 'Belum kena! Semangat!', 'Raja masih kuat! Coba lagi!'];
+            ctx.el.append(h('p', { class: 'rj-ejek pop-in' }, '👑 ' + kata2[nyawa % kata2.length]));
+            ctx.after(2200, () => ctx.el.querySelectorAll('.rj-ejek').forEach((el) => el.remove()));
           };
           if (hasilSoal === 'benar') {
             benar++;
@@ -165,6 +175,7 @@
             else if (hasilSoal === 'salah') {
               nyawa--;
               gambarHati();
+              if (nyawa > 0) { ejekRaja(); await ctx.wait(1400); }
               if (nyawa <= 0) { await ctx.wait(600); break; }
             }
           }
