@@ -199,6 +199,8 @@
     if (voice) u.voice = voice;
     u.rate = opts.rate || (state.level === 'tk' ? 0.9 : 1);
     u.pitch = opts.pitch || 1.1;
+    // Dibuka otomasi (probe Playwright): jangan bersuara. --mute-audio Chrome tidak membungkam TTS sistem Windows.
+    if (navigator.webdriver) u.volume = 0;
     return new Promise((res) => {
       u.onend = u.onerror = () => res();
       speechSynthesis.speak(u);
@@ -485,6 +487,23 @@
             onclick: () => { state.tantangSeen = tc.key; saveState(); showHome(); } }, 'Tutup'));
       }
     } catch (e) { /* abaikan */ }
+    // Duel Ulang: seri aktif terbaru tampil di beranda (main + kartu skor).
+    let duelUlang = null;
+    try {
+      const ds = state.duelSeri || {};
+      const keys = Object.keys(ds).filter((k) => ds[k] && (ds[k].aku + ds[k].dia) > 0 && ds[k].aku < 2 && ds[k].dia < 2);
+      if (keys.length && TI.Share) {
+        const skey = keys[keys.length - 1];
+        const gid = skey.split(':')[0];
+        const g = byId(gid);
+        const lawan = skey.split(':').slice(1).join(':') || 'Temanmu';
+        const seri = ds[skey];
+        if (g) duelUlang = h('div', { class: 'duel-ulang pop-in', role: 'status' },
+          h('span', { class: 'tantang-txt' }, '⚔️ Duel vs ', h('b', null, lawan), ' di ' + g.title + ': kamu ' + seri.aku + '-' + seri.dia + '.'),
+          h('a', { class: 'ti-btn tantang-go', href: '#/main/' + gid, onclick: () => sfx('tap') }, 'Main'),
+          h('button', { type: 'button', class: 'ti-btn is-ghost', onclick: () => TI.Share.duelCard(skey) }, '🖼️ Kartu'));
+      }
+    } catch (e) { /* abaikan */ }
     const grid = h('section', { class: 'grid', 'aria-label': 'Daftar game' });
     list.forEach((g, i) => {
       const c = catOf(g);
@@ -525,6 +544,7 @@
     if (klaimKirim) app.append(klaimKirim);
     if (klaimBanner) app.append(klaimBanner);
     if (tantangBanner) app.append(tantangBanner);
+    if (duelUlang) app.append(duelUlang);
     app.append(grid,
       h('footer', { class: 'home-foot' },
         h('button', { type: 'button', class: 'ajak-btn', 'aria-label': 'Ajak teman main Taman Ilmu', onclick: () => { sfx('tap'); if (TI.Share) TI.Share.invite(); } }, '📣 Ajak teman main'),
@@ -1040,16 +1060,32 @@
       if (stars >= duel.skor) {
         seri.aku++;
         const skorTxt = seri.aku + '-' + seri.dia;
-        duelUi = h('div', { class: 'duel-result pop-in' },
-          h('span', null, '🎉 Kamu menang lawan ' + duel.dari + '! (' + stars + ' vs ' + duel.skor + ') Duel: ' + skorTxt + '.'),
-          TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.challenge(ctx.game, stars, duel.dari, skorTxt) }, 'Balas Tantangan') : null);
+        if (seri.aku >= 2) {
+          duelUi = h('div', { class: 'duel-result pop-in' },
+            h('span', null, '🏆 Kamu juara duel lawan ' + duel.dari + '! (' + skorTxt + ') Seri baru dimulai lagi.'),
+            TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.duelCard(skey, { aku: seri.aku, dia: seri.dia }) }, 'Kartu Juara') : null,
+            TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.challenge(ctx.game, stars, duel.dari) }, 'Duel Lagi') : null);
+          TI.toast('🏆', 'Juara duel lawan ' + duel.dari + '!');
+        } else {
+          duelUi = h('div', { class: 'duel-result pop-in' },
+            h('span', null, '🎉 Kamu menang lawan ' + duel.dari + '! (' + stars + ' vs ' + duel.skor + ') Duel: ' + skorTxt + '.'),
+            TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.challenge(ctx.game, stars, duel.dari, skorTxt) }, 'Balas Tantangan') : null);
+        }
         state.duel = null;
+        if (seri.aku >= 2) delete state.duelSeri[skey];
         saveState();
       } else {
         seri.dia++;
+        if (seri.dia >= 2) {
+          duelUi = h('div', { class: 'duel-result pop-in' },
+            h('span', null, '😔 ' + duel.dari + ' juara duel (' + seri.aku + '-' + seri.dia + '). Ayo tantang duel baru!'),
+            TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.challenge(ctx.game, stars) }, 'Duel Baru') : null);
+          delete state.duelSeri[skey];
+        } else {
+          duelUi = h('div', { class: 'duel-result pop-in' },
+            h('span', null, duel.dari + ' masih menang (' + duel.skor + ' vs ' + stars + '). Duel: ' + seri.aku + '-' + seri.dia + '. Main lagi untuk balas!'));
+        }
         saveState();
-        duelUi = h('div', { class: 'duel-result pop-in' },
-          h('span', null, duel.dari + ' masih menang (' + duel.skor + ' vs ' + stars + '). Duel: ' + seri.aku + '-' + seri.dia + '. Main lagi untuk balas!'));
       }
     }
     const dlg = h('div', { class: 'result', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Hasil' },

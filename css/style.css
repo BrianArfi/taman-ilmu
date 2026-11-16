@@ -534,6 +534,7 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
   border-radius: var(--radius); background: #ffe9e9; border: 2px solid #ff6b6b;
 }
 .tantang-txt { flex: 1 1 260px; min-width: 0; font-weight: 700; }
+.duel-ulang { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 0 0 10px; padding: 12px 16px; border-radius: var(--radius); background: #f3e8ff; border: 2px solid #9b4dde; }
 .tantang-go { min-height: 48px; padding: 6px 20px; font-size: 1rem; }
 
 /* ---------- footer ---------- */

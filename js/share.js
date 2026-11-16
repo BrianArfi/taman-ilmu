@@ -332,6 +332,52 @@
     return cv;
   }
 
+  async function gambarDuel(game, aku, dia, lawan) {
+    const W = 1080, H = 1350;
+    const cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    const g = cv.getContext('2d');
+    try { await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1200))]); } catch (e) { /* font sistem */ }
+    const bg = g.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, '#fff8ec'); bg.addColorStop(1, '#ffe9c2');
+    g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    const cols = ['#ffd23f', '#0e9f6e', '#2f6fed', '#ff6b6b', '#9b4dde', '#ff9f1c'];
+    for (let i = 0; i < 90; i++) {
+      g.fillStyle = cols[i % cols.length]; g.globalAlpha = 0.45;
+      const s = 10 + ((i * 37) % 22);
+      g.fillRect((i * 167) % W, (i * 251) % H, s, s * 0.6);
+    }
+    g.globalAlpha = 1;
+    g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+    g.fillStyle = '#2b2d42';
+    g.font = '800 64px "Baloo 2", sans-serif';
+    g.fillText('⚔️ Duel Taman Ilmu', W / 2, 140);
+    g.font = '160px "Baloo 2", "Noto Naskh Arabic", sans-serif';
+    g.fillText(game.icon || '🎮', W / 2, 360);
+    g.fillStyle = '#2b2d42';
+    g.font = '800 72px "Baloo 2", sans-serif';
+    wrapText(g, game.title, W / 2, 500, 920, 86);
+    const namaAku = (TI.state.profile && TI.state.profile.nama) || 'Aku';
+    g.fillStyle = '#c92a2a';
+    g.font = '800 230px "Baloo 2", sans-serif';
+    g.fillText(aku + ' - ' + dia, W / 2, 780);
+    g.fillStyle = '#0e9f6e';
+    g.font = '800 58px "Baloo 2", sans-serif';
+    wrapText(g, namaAku + ' lawan ' + lawan, W / 2, 880, 920, 70);
+    g.fillStyle = '#9a6b00';
+    g.font = '800 54px "Baloo 2", sans-serif';
+    g.fillText(aku > dia ? '🏆 ' + namaAku + ' menang!' : dia > aku ? lawan + ' menang!' : 'Seri!', W / 2, 970);
+    g.fillStyle = '#ffffff';
+    rr(g, 90, 1030, W - 180, 170, 36); g.fill();
+    g.fillStyle = '#2b2d42';
+    g.font = '700 44px "Baloo 2", sans-serif';
+    g.fillText('Ayo main juga, gratis!', W / 2, 1105);
+    g.fillStyle = '#2f6fed';
+    g.font = '700 38px monospace';
+    g.fillText(BASE.replace(/^https?:\/\//, ''), W / 2, 1160);
+    return cv;
+  }
+
   const SERTIFIKAT = {
     shalat: { judul: 'Hafal 5 Waktu Shalat', lesson: 'Shalat wajib ada 5 waktu: Subuh, Zuhur, Ashar, Maghrib, Isya. Jumlahnya 17 rakaat sehari.' },
     adab: { judul: 'Adab Baik', lesson: 'Anak shalih membiasakan ucapan baik dan adab yang baik setiap hari.' },
@@ -412,10 +458,13 @@
       : jenis === 'kategori'
         ? 'Aku dapat ' + game.title + ' pertamaku di Taman Ilmu! Sekarang ' + ringkas() + '. Ayo main juga: ' + inviteURL()
         : teksScore(game, stars, false, (TI.state.profile && TI.state.profile.level) || 1);
+    return kirimGambar(file, blob, (isSerti ? 'Sertifikat ' : '') + game.title + ' · Taman Ilmu', teks);
+  }
+  async function kirimGambar(file, blob, judul, teks) {
     let hasil = 'gagal';
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
       try {
-        await navigator.share({ files: [file], title: (isSerti ? 'Sertifikat ' : '') + game.title + ' · Taman Ilmu', text: teks });
+        await navigator.share({ files: [file], title: judul, text: teks });
         hasil = 'share';
       } catch (e) {
         if (e && e.name === 'AbortError') return 'batal';
@@ -451,6 +500,23 @@
     }
     return hasil;
   }
+  // Kartu skor duel (gambar) untuk satu seri aktif (snap = skor final bila seri sudah ditutup).
+  async function duelCard(skey, snap) {
+    const seri = snap || (TI.state.duelSeri || {})[skey];
+    if (!seri) { TI.toast('🖼️', 'Duel tidak ketemu'); return 'gagal'; }
+    const gid = String(skey).split(':')[0];
+    const game = TI.games.find((g) => g.id === gid) || { id: gid, title: gid, icon: '🎮' };
+    const lawan = String(skey).split(':').slice(1).join(':') || 'Temanmu';
+    let blob = null;
+    try {
+      const cv = await gambarDuel(game, seri.aku, seri.dia, lawan);
+      blob = await new Promise((res) => cv.toBlob(res, 'image/png'));
+    } catch (e) { blob = null; }
+    if (!blob) { TI.toast('🖼️', 'Gagal bikin gambar, coba lagi ya'); TI.sfx('salah'); return 'gagal'; }
+    const file = new File([blob], 'taman-ilmu-duel-' + gid + '.png', { type: 'image/png' });
+    const teks = 'Duel ' + game.title + ': aku ' + seri.aku + '-' + seri.dia + ' ' + lawan + '! Ayo main juga: ' + inviteURL();
+    return kirimGambar(file, blob, 'Duel ' + game.title + ' · Taman Ilmu', teks);
+  }
 
   // Cetak sertifikat: buka gambar di jendela baru + dialog cetak; gagal = unduh saja.
   async function cetak(game, stars) {
@@ -475,5 +541,5 @@
     }
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, laporanMingguan, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, laporanMingguan, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang, duelCard };
 })();
