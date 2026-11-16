@@ -304,6 +304,18 @@
     });
   }
 
+  // Lanjut manual: tombol saja tanpa dibacakan; untuk tebakan benar (hemat waktu).
+  function lanjutManual(ctx, parent) {
+    return new Promise((resolve) => {
+      let done = false;
+      const go = () => { if (!done) { done = true; resolve(); } };
+      const b = h('button', { type: 'button', class: 'ti-btn is-ghost pop-in' }, 'Lanjut', ' ➜');
+      b.addEventListener('click', () => { TI.sfx('tap'); b.disabled = true; go(); });
+      parent.append(b);
+      ctx.onExit(go);
+    });
+  }
+
   TI.register({
     id: 'listrik',
     title: 'Rangkaian Listrik',
@@ -366,6 +378,18 @@
           await lanjutOtomatis(ctx, wbox, TEKS_AMAN);
           wbox.remove();
           try { localStorage.setItem('tamanIlmu.listrik.aman', '1'); } catch (e) { /* abaikan */ }
+        }
+
+        // Sesudah tebak: benar = 1 kalimat + tombol manual; salah = ceramah penuh dibacakan.
+        async function sesudahTebak(box, it, right, tail) {
+          const judul = it.ok ? 'Menyala!' : 'Tidak menyala.';
+          if (right) {
+            ctx.note(it.why.split('. ')[0] + '.' + tail, { title: judul, into: box, speak: false });
+            await lanjutManual(ctx, box);
+          } else {
+            ctx.note(it.why + tail, { title: judul, into: box, speak: false });
+            await lanjutOtomatis(ctx, box, it.why + tail);
+          }
         }
 
         const board = makeBoard(ctx);
@@ -440,8 +464,7 @@
             bump(it.ok ? 0 : 1);
             await ctx.correct(null, { say: (guess0 === it.ok ? 'Tebakanmu benar! ' : 'Lihat hasilnya! ') + (it.ok ? 'Lampunya menyala.' : 'Lampunya tidak menyala.') });
             const tail0 = tk ? '' : (it.ok ? ' Benda yang menghantarkan listrik disebut konduktor.' : ' Benda yang tidak menghantarkan listrik disebut isolator.');
-            ctx.note(it.why + tail0, { title: it.ok ? 'Menyala!' : 'Tidak menyala.', into: box, speak: false });
-            await lanjutOtomatis(ctx, box, it.why + tail0);
+            await sesudahTebak(box, it, guess0 === it.ok, tail0);
             box.remove();
             step++; progress();
             await tunjukAman();
@@ -474,8 +497,7 @@
           bump(it.ok ? 0 : 1);
 
           const tail = tk ? '' : (it.ok ? ' Benda yang menghantarkan listrik disebut konduktor.' : ' Benda yang tidak menghantarkan listrik disebut isolator.');
-          ctx.note(it.why + tail, { title: it.ok ? 'Menyala!' : 'Tidak menyala.', into: box, speak: false });
-          await lanjutOtomatis(ctx, box, it.why + tail);
+          await sesudahTebak(box, it, right, tail);
           box.remove();
           step++; progress();
         }
