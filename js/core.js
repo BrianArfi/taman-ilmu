@@ -68,6 +68,7 @@
 
   const games = [];
   const TI = (window.TI = { games, CATS, LEVELS, state });
+  TI.NILAI = NILAI;
 
   // ---------- helper umum ----------
   function h(tag, props, ...kids) {

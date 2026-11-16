@@ -188,6 +188,18 @@
     viaClip().then((ok) => done(ok || viaTeks()));
   }
 
+  // Rekap pekanan: nilai game islam (NILAI) + judul game lain yang selesai minggu ini.
+  function rekapPekan() {
+    const wg = (TI.state.weekly && TI.state.weekly.games) || {};
+    const labels = [];
+    for (const g of (TI.games || [])) {
+      if (!(wg[g.id] > 0)) continue;
+      labels.push((TI.NILAI && TI.NILAI[g.id]) || g.title);
+    }
+    const teks = !labels.length ? 'belum ada game selesai minggu ini'
+      : labels.slice(0, 3).join(', ') + (labels.length > 3 ? ' dan ' + (labels.length - 3) + ' lainnya' : '');
+    return TI.h('p', { class: 'stat-pekan' }, TI.h('b', null, 'Pekan ini: '), teks);
+  }
   function render() {
     const m = summary();
     const byId = (id) => TI.games.find((g) => g.id === id);
@@ -211,6 +223,7 @@
         TI.h('span', { class: 'stat-herosub' }, 'game selesai di jenjang ' + lvl.toUpperCase()),
         TI.h('span', { class: 'stat-herosub' }, '★' + m.lvlAvg + ' rata-rata · ' + m.daysActive + ' hari aktif')),
       TI.h('div', { class: 'stat-bars' }, barisKat),
+      rekapPekan(),
       TI.h('p', null, TI.Share ? TI.h('button', { type: 'button', class: 'ti-btn', onclick: () => { TI.sfx('tap'); TI.Share.laporan(); } }, 'Bagikan laporan ke pasangan') : null),
       TI.h('h3', { class: 'stat-h' }, 'Aktif 7 hari terakhir'),
       TI.h('div', { class: 'stat-week' }, m.last7.map((d) =>
