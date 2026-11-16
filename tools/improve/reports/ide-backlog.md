@@ -18,7 +18,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **CTA Ajak saat level-up + bonus 3.** Momen menang tak dipakai ajak. Tombol Ajak di hasil saat levelUp + bonus XP klaim ke-3 (sisa ide P6; strip+tier DONE S109). Lokasi: core.js showResult + progress klaimBonus. Effort S, dampak 4, ustadz tidak.
 - **TPA: tombol Tantangan Kelas.** tantangKelas tersembunyi di kode. Tombol di statistik + preset game islam buat guru sebar ke grup WA. Lokasi: analytics.js render + share.js:174-183. Effort S, dampak 4, ustadz tidak.
 - **Puasa: strip langit.** Babak 1 susun label abstrak tanpa rasa hari. Strip pagi-maghrib, matahari bergeser tiap item terpasang. Lokasi: 55-puasa-sehari.js:64-71. Effort S, dampak 3, ustadz tidak.
 - **Adab: arti auto-lanjut.** Tiap soal wajib ketuk Lanjut sesudah arti (8x). Arti dibacakan otomatis lalu lanjut sendiri. Lokasi: 07-adab.js:91-98. Effort S, dampak 3, ustadz tidak (tanpa ubah teks).
@@ -34,6 +33,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **CTA Ajak level-up + bonus 3** (S115): CTA hasil + klaim ke-3 +35. Probe 7/7, ui 12/12, gami 61/61. Detail: cycle-20261116-s115.md.
 - **Loncat SD: petunjuk arah** (S114): ucapan kebesaran/kekecilan + denyut 3 batu. Probe 6/6 (2x). Detail: cycle-20261116-s114.md.
 - **Wujud: toast + Kok bisa** (S113): toast 1 kalimat 2,8 dtk + Kok bisa penuh. Probe 7/7. Detail: cycle-20261116-s113.md.
 - **Raja: lolos ikut damage** (S112): lolos -1 HP + pop tiap damage. Probe 6/6. Detail: cycle-20261116-s112.md.
