@@ -92,3 +92,10 @@
   sisa CTA+bonus-3 jadi TODO).
 - Parkir 2: Kartu rekap pekan WA, Kartu 7 Hari Tanpa Iklan (syarat
   7 hari aktif; klaim dari data nyata).
+
+## Putaran 7 (16 Nov) — 3 anak OK, sintesis kosong, GABUNG MANUAL
+- 16 ide (6 game + 5 viral + 5 ortu) jadi 12 TODO. 1 TOLAK hijaiyah
+  (kombo); 0 TAHAN baru; 1 skip L (Trio-Challenge).
+- Dupe-drop 4: listrik-askGuess (TODO P5), sertifikat-massal (TAHAN P7),
+  tantang-sepupu (DONE S88), senin-pengingat (parkir bareng Jumat).
+- Parkir 2: Jumat tonjolkan ringkasan, Tautkan ortu dari statistik.

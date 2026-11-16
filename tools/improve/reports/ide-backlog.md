@@ -13,17 +13,24 @@ Putaran 3 (14 Nov): 16 ide (6 game + 5 viral + 5 ortu), gabung manual jadi
 Putaran 4 (14 Nov): 12 sintesis (5 ortu + 5 viral + 2 game) + 5 hidupkan parkir; 2 TAHAN ustadz, 1 TOLAK hijaiyah, 2 parkir (L).
 Putaran 5 (15 Nov): 16 ide (6 game + 5 viral + 5 ortu), gabung manual jadi 12 TODO (sintesis kosong lagi); 1 TOLAK hijaiyah, 1 dupe TAHAN-sertifikat, 2 skip L, 6 parkir catatan.
 Putaran 6 (16 Nov): 16 ide (6 game + 5 viral + 5 ortu), gabung manual jadi 12 TODO (sintesis kosong lagi); 1 TOLAK hijaiyah, 1 TAHAN khatam, 1 skip L, 2 parkir, 4 dupe-drop.
+Putaran 7 (16 Nov): 16 ide (6 game + 5 viral + 5 ortu), gabung manual jadi 12 TODO (sintesis kosong lagi); 1 TOLAK hijaiyah, 0 TAHAN baru, 1 skip L, 2 parkir, 4 dupe-drop.
 Format tiap ide: masalah 1 kalimat; usulan + lokasi pasang; effort S/M/L;
 dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
+- **Puasa: adilkan babak urut.** 2 item SD sepanjang-hari bikin urutan ambigu dan anak dihukum salah. Keluarkan jadi bin ketiga babak pilah. Lokasi: 55-puasa-sehari.js:14-45. Effort S, dampak 5, ustadz tidak.
+- **Wujud: bintang per tugas.** 3-4 tugas lab tanpa skor terlihat. Baris bintang per tugas (penuh tanpa auto-fill) + chip Tugas i/n. Lokasi: 19-wujud.js:283-296. Effort S, dampak 4, ustadz tidak.
+- **Loncat: panah ular SD.** Grid serpentine bikin garis bilangan patah. Panah arah kecil di ujung tiap baris. Lokasi: 29-loncat.js:123-127. Effort S, dampak 4, ustadz tidak.
+- **Raja: banner bos hidup.** 10 soal tanpa sosok Raja. Banner bos bergoyang saat damage + ejek kid-safe saat nyawa hilang. Lokasi: 100-raja-taman.js:144-173. Effort S, dampak 4, ustadz tidak.
+- **Preview kartu inline.** Momen streak/kategori/levelUp cuma tombol teks. Render thumbnail canvas sebelum tombol (reuse gambarKartu). Lokasi: core.js showResult + share.js:267-316. Effort S, dampak 4, ustadz tidak.
+- **Panduan pasang ke WA-ku.** Ortu non-teknis gagal pasang. Tombol kirim panduan pasang ke WA sendiri (teks per platform). Lokasi: core.js banner + ortu.js:35-44. Effort S, dampak 4, ustadz tidak.
 - **Adab: arti auto-lanjut.** Tiap soal wajib ketuk Lanjut sesudah arti (8x). Arti dibacakan otomatis lalu lanjut sendiri. Lokasi: 07-adab.js:91-98. Effort S, dampak 3, ustadz tidak (tanpa ubah teks).
 - **Tantangan pekan beruntun.** Streak pekan tak dicatat. Catat tantanganDone beruntun + lencana 4 Pekan + sebut di teks tantang. Lokasi: progress.js:57-64 + badges.js + share.js:154-161. Effort S, dampak 3, ustadz tidak.
-- **Jumat: tonjolkan ringkasan.** Laporan mingguan pasif menunggu dibuka. Tiap Jumat tonjolkan tombol ringkasan (bukan kirim otomatis). Lokasi: analytics.js + share laporanMingguan. Effort S, dampak 3, ustadz tidak.
 - **Listrik: 60 detik interaktif.** Tembok ceramah + demo pasif sebelum sentuh apa pun. Peringatan jadi toast sesudah sukses pertama; demo benda-1 diketuk anak (lanjutan S81/S92). Lokasi: 37-listrik.js:361-443. Effort M, dampak 5, ustadz tidak.
 - **Kartu skor duel + Duel Ulang + final.** Duel tak terlihat dari beranda. gambarDuel() kartu skor seri + kartu Duel Ulang di home + final best-of-3 + kartu juara (gabung P5+P6). Lokasi: share.js + core.js home + duelSeri. Effort M, dampak 5, ustadz tidak.
 - **Rekap Nilai Islami pekanan.** Ortu tak tahu nilai apa masuk. Dashboard baris "Pekan ini: ..." dari lesson game selesai. Lokasi: analytics.js render(). Effort M, dampak 5, ustadz tidak (tampil ulang lesson; parkir putaran 3).
+- **Kartu prestasi dashboard.** Ortu tak bisa pamerkan kemajuan. Tombol "Buat kartu prestasi" di statistik via gambarKartu. Lokasi: analytics.js:191-250 + share.js:267+. Effort M, dampak 5, ustadz tidak.
 
 ## GARAP
 
@@ -95,3 +102,4 @@ dampak 1-5; ustadz ya/tidak.
 - **Hijaiyah Ronde Kilat (15 Nov, putaran 5).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
 - **Hijaiyah ronde aksi 15 detik (16 Nov, putaran 6).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
 - **TAHAN ustadz: Sertifikat Khatam hijaiyah/wudhu (16 Nov, putaran 6).** Teks sertifikat agama baru + sentuh game hijaiyah; tahan sampai review ustadz, bukan tolak permanen.
+- **Hijaiyah kombo + ronde kilat (16 Nov, putaran 7).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
