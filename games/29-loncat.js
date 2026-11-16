@@ -250,7 +250,7 @@
       selesai = true;
       kunciUI(true);
       selesaiBenar();
-      const penuhTK = salah > 0 || qi % 3 === 2;
+      const penuhTK = salah > 0;
       if (!penuhTK) { await ctx.correct(null, { say: 'Hebat!' }); done(); return; }
       const lw = pasangLewati(ctx, wrap);
       await ctx.correct(null, { say: false, min: 250 });
@@ -421,7 +421,7 @@
           if (v === q.ans) {
             st.classList.add('is-correct');
             hasil.textContent = String(q.ans); hasil.classList.add('is-done');
-            const penuhSD = salah > 0 || qi % 3 === 2;
+            const penuhSD = salah > 0;
             if (penuhSD) {
               const lw = pasangLewati(ctx, wrap);
               await ctx.correct(null, { say: false, min: 350 });
