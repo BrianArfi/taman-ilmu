@@ -18,7 +18,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Puasa: strip langit.** Babak 1 susun label abstrak tanpa rasa hari. Strip pagi-maghrib, matahari bergeser tiap item terpasang. Lokasi: 55-puasa-sehari.js:64-71. Effort S, dampak 3, ustadz tidak.
 - **Adab: arti auto-lanjut.** Tiap soal wajib ketuk Lanjut sesudah arti (8x). Arti dibacakan otomatis lalu lanjut sendiri. Lokasi: 07-adab.js:91-98. Effort S, dampak 3, ustadz tidak (tanpa ubah teks).
 - **Tantangan pekan beruntun.** Streak pekan tak dicatat. Catat tantanganDone beruntun + lencana 4 Pekan + sebut di teks tantang. Lokasi: progress.js:57-64 + badges.js + share.js:154-161. Effort S, dampak 3, ustadz tidak.
 - **Jumat: tonjolkan ringkasan.** Laporan mingguan pasif menunggu dibuka. Tiap Jumat tonjolkan tombol ringkasan (bukan kirim otomatis). Lokasi: analytics.js + share laporanMingguan. Effort S, dampak 3, ustadz tidak.
@@ -34,6 +33,7 @@ dampak 1-5; ustadz ya/tidak.
 
 - **TPA: tombol Tantangan Kelas** (S116): preset 3 game islam + teks jujur best-0. Probe 5/5, ui 12/12, gami 61/61. Detail: cycle-20261116-s116.md.
 - **CTA Ajak level-up + bonus 3** (S115): CTA hasil + klaim ke-3 +35. Probe 7/7, ui 12/12, gami 61/61. Detail: cycle-20261116-s115.md.
+- **Puasa: strip langit** (S117): matahari 8→92% + aria tahap. Probe 4/4. Detail: cycle-20261116-s117.md.
 - **Loncat SD: petunjuk arah** (S114): ucapan kebesaran/kekecilan + denyut 3 batu. Probe 6/6 (2x). Detail: cycle-20261116-s114.md.
 - **Wujud: toast + Kok bisa** (S113): toast 1 kalimat 2,8 dtk + Kok bisa penuh. Probe 7/7. Detail: cycle-20261116-s113.md.
 - **Raja: lolos ikut damage** (S112): lolos -1 HP + pop tiap damage. Probe 6/6. Detail: cycle-20261116-s112.md.
