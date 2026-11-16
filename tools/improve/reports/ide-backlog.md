@@ -17,7 +17,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Progres Duta terlihat.** Referral tak terlihat sampai klaim masuk. Strip "ajak N/5 teman" di home + tier Duta Emas dari klaimDari. Lokasi: core.js strip + badges.js DEFS + progress klaimBonus. Effort S, dampak 4, ustadz tidak.
 - **Tantang per baris papan.** Papan pasif, rival tak bisa diapa-apakan. Tiap baris di atasmu dapat tombol Tantang (link lawan+seri ada). Lokasi: board.js:82-89 + share.js:121-128. Effort S, dampak 4, ustadz tidak.
 - **Laporan mingguan teks forward.** Laporan() cuma snapshot tanpa tren. Tombol bikin ringkasan 7 hari (aktif, selesai, top kategori) + ajakan pasang. Lokasi: analytics.js:208-217 + share.js:195-209. Effort S, dampak 4, ustadz tidak.
 - **Wujud: toast + Kok bisa.** afterNote wajib habis dibaca tiap tugas (3-4x). Ganti toast 1 kalimat hilang-sendiri + tombol opsional penjelasan penuh. Lokasi: 19-wujud.js:137-151,281. Effort S, dampak 4, ustadz tidak.
@@ -33,6 +32,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Progres Duta terlihat** (S109): strip Ajak N/5 + lencana Duta Emas ke-23. Probe 5/5, ui 12/12, gami 60/60. Detail: cycle-20261116-s109.md.
 - **Raja: intro Perisai** (S108): kartu intro + ikon perisai HUD. Probe 4/4. Detail: cycle-20261116-s108.md.
 - **Pasang selalu tampil** (S107): banner selalu tampil + manual Android/desktop + paint. Probe 8/8, ui 12/12, gami 60/60. Detail: cycle-20261115-s107.md.
 - **Loncat: satu tombol menilai** (S106): hitungan pas otomatis benar, Sudah untuk koreksi. Probe 5/5. Detail: cycle-20261115-s106.md.
