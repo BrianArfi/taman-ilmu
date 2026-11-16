@@ -19,6 +19,8 @@
 .play[data-game="raja-taman"] .rj-bos { display: inline-flex; align-items: center; gap: 6px; }
 .play[data-game="raja-taman"] .rj-bos-luar { display: inline-block; width: 90px; height: 12px; border-radius: 999px; background: var(--shadow); overflow: hidden; }
 .play[data-game="raja-taman"] .rj-bos-isi { display: block; height: 100%; width: 100%; border-radius: 999px; background: linear-gradient(90deg, #ff6b6b, #c92a2a); transition: width var(--dur-ui) var(--ease-out); }
+.play[data-game="raja-taman"] .rj-intro { max-width: 430px; text-align: center; }
+.play[data-game="raja-taman"] .rj-intro p { margin: 6px 0; font-weight: 700; }
 `;
 
   const arab = (x) => h('span', { class: 'ti-arabic' }, x);
@@ -115,7 +117,8 @@
           bosIsi.style.width = (bosHP / soal.length) * 100 + '%';
           bos.setAttribute('aria-label', 'Nyawa Raja: ' + bosHP);
         };
-        hud.append(hati, chipSoal, chipRekor, ulang, bos);
+        const perisai = h('span', { class: 'rj-chip', role: 'img', 'aria-label': 'Perisai: salah pertama tidak mengurangi nyawa', title: 'Perisai: salah pertama aman' }, '🛡️');
+        hud.append(hati, chipSoal, chipRekor, ulang, bos, perisai);
         ulang.addEventListener('click', () => { if (tanyaTerakhir) ctx.say(tanyaTerakhir); });
         // Kibor: angka 1-4 memilih jawaban (aksesibilitas desktop).
         ctx.on(document, 'keydown', (e) => {
@@ -127,6 +130,16 @@
         });
         const gambarHati = () => { hati.textContent = '❤️'.repeat(nyawa) + '🤍'.repeat(3 - nyawa); };
         gambarHati();
+        // Kartu intro: jelaskan Perisai sebelum soal 1 agar tak kaget.
+        tanya('Dengarkan dulu aturan Raja!');
+        ctx.el.append(h('div', { class: 'rj-wrap' },
+          h('div', { class: 'rj-card pop-in rj-intro' },
+            h('p', { class: 'rj-big', 'aria-hidden': 'true' }, '🛡️'),
+            h('p', null, 'Perisai Raja melindungimu!'),
+            h('p', null, 'Salah pertama tidak mengurangi nyawa.'),
+            h('p', null, '1 jawaban salah hilang, lalu coba lagi!'))));
+        await ctx.next('Mulai!');
+        if (!ctx.alive) return;
 
         for (let i = 0; i < soal.length && ctx.alive; i++) {
           if (nyawa <= 0) break;
