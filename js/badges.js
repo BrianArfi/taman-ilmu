@@ -1,4 +1,4 @@
-/* Taman Ilmu: lencana (23), layar #/lencana, dan toast lencana baru.
+/* Taman Ilmu: lencana (24), layar #/lencana, dan toast lencana baru.
    Semua ikon benda atau tumbuhan, tanpa wajah dan tanpa mata (aturan SPEC bagian 3). */
 (function () {
   'use strict';
@@ -34,6 +34,8 @@
       test: (t, st) => (st.streak.count || 0) >= 3 },
     { id: 'tantangan-tuntas', icon: '🎯', name: 'Tantangan Tuntas', how: 'Selesaikan tantangan pekan ini',
       test: (t, st) => !!(st.weekly && st.weekly.tantanganDone) },
+    { id: 'pekan-4', icon: '📆', name: '4 Pekan Beruntun', how: 'Selesaikan tantangan 4 pekan berturut-turut',
+      test: (t, st) => ((st.tantangRuntun && st.tantangRuntun.count) || 0) >= 4 },
     { id: 'juara-pekan', icon: '🏆', name: 'Juara Pekan', how: 'Masuk 10 besar papan pekan ini', board: true },
     { id: 'bintang-50', icon: '💫', name: 'Bintang Lima Puluh', how: 'Kumpulkan 50 bintang',
       test: (t) => t.stars >= 50 },

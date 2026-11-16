@@ -177,10 +177,11 @@ async function makePage(v1 = {}) {
     TI.state.stars = {};
     const a = TI.Progression.onFinish(c1, 'tk', 2, 0);
     const b = TI.Progression.onFinish(c1, 'tk', 2, 2);
-    return { same: c1.id === c2.id, inGames: TI.games.some((g) => g.id === c1.id), aD: a.challengeDone, aXp: a.xp, bD: b.challengeDone, bXp: b.xp };
+    return { same: c1.id === c2.id, inGames: TI.games.some((g) => g.id === c1.id), aD: a.challengeDone, aXp: a.xp, bD: b.challengeDone, bXp: b.xp, runt: TI.state.tantangRuntun };
   });
   check('tantangan: rotasi stabil dan id sah', r.same && r.inGames);
   check('tantangan: bonus +40 cuma sekali', r.aD && r.aXp === 77 && !r.bD && r.bXp === 2, `(a=${r.aXp},b=${r.bXp})`);
+  check('tantangan: runtun pekan 1 tercatat', r.runt && r.runt.count === 1 && !!r.runt.lastWeek, '(runtun=1)');
   await ctx.close();
 }
 

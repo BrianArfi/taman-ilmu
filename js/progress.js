@@ -142,6 +142,11 @@
       xp += 40;
       challengeDone = true;
       w.xp[jen] += 40;
+      // Runtun pekan: lanjut bila pekan lalu juga selesai.
+      const tr = (st.tantangRuntun = st.tantangRuntun || {});
+      const prevWk = weekKey(new Date(Date.now() - 7 * 86400000));
+      tr.count = (tr.lastWeek === prevWk) ? (tr.count || 0) + 1 : 1;
+      tr.lastWeek = w.weekKey;
     }
 
     p.xp += xp;
@@ -152,7 +157,7 @@
     pruneDayLog();
 
     const newBadges = TI.Badges ? TI.Badges.evaluate(true) : [];
-    return { xp, levelUp, level: lv, badges: newBadges, challengeDone, bonusTeman };
+    return { xp, levelUp, level: lv, badges: newBadges, challengeDone, bonusTeman, runtun: (st.tantangRuntun || {}).count || 0 };
   }
 
   function totals() {

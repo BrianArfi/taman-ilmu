@@ -154,9 +154,11 @@
   function tantangPekan(game, best) {
     try { if (TI.Stats) TI.Stats.track('challenge', {}); } catch (e) { /* abaikan */ }
     const bintang = '⭐'.repeat(Math.max(1, best)) + ' (' + Math.max(1, best) + '/3)';
+    const runtun = (TI.state.tantangRuntun && TI.state.tantangRuntun.count) || 0;
+    const sr = runtun >= 2 ? ' Sudah ' + runtun + ' pekan beruntun, berani putus?' : '';
     const teks = best > 0
-      ? 'Aku dapat ' + bintang + ' di game ' + game.title + ' (Tantangan Pekan Ini)! Berani terima tantanganku? Kalahkan skorku di sini: ' + challengeURL(game, best)
-      : 'Tantangan Pekan Ini: game ' + game.title + '! Semua anak main game yang sama minggu ini. Ikut main dan tantang aku: ' + challengeURL(game, 1);
+      ? 'Aku dapat ' + bintang + ' di game ' + game.title + ' (Tantangan Pekan Ini)! Berani terima tantanganku?' + sr + ' Kalahkan skorku di sini: ' + challengeURL(game, best)
+      : 'Tantangan Pekan Ini: game ' + game.title + '! Semua anak main game yang sama minggu ini.' + sr + ' Ikut main dan tantang aku: ' + challengeURL(game, 1);
     return bagikan('Tantangan Pekan · Taman Ilmu', teks);
   }
   // Tantang keluarga: dibagikan orang tua ke grup WA keluarga, sudut pandang nama anak.
