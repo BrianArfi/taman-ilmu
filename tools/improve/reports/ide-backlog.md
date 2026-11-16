@@ -20,12 +20,18 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
+- **Listrik: ceramah hanya bila salah.** Tebakan benar pun dipaksa dengar ceramah penuh tiap benda. Penjelasan penuh hanya bila salah; bila benar 1 kalimat + tombol Lanjut tanpa sayWait. Lokasi: 37-listrik.js:441-444 + 471-478 + lanjutOtomatis. Effort S, dampak 5, ustadz tidak (P9).
+- **Banding: tombol Lanjut sejajar narasi.** Jawaban benar diikuti narasi + jeda paksa 1,1 dtk tiap soal. Tombol Lanjut tampil bersamaan narasi biar bisa skip. Lokasi: 10-banding.js:114 + 202. Effort S, dampak 4, ustadz tidak (P9).
+- **Loncat: demo ulang hanya bila salah.** Jawaban benar dipaksa nonton demo ulang tiap soal ke-3. Demo ulang hanya bila salah; buang klausul qi%3==2. Lokasi: 29-loncat.js:253 + 424. Effort S, dampak 4, ustadz tidak (P9).
+- **Wujud: afterNote hemat.** Tiap tugas lab dipotong ceramah 2,8 dtk. afterNote hanya tugas pertama + terakhir; tugas tengah cukup Hebat singkat. Lokasi: 19-wujud.js:315-316. Effort S, dampak 4, ustadz tidak (P9).
 - **Tautkan ortu dari statistik.** Dashboard tak menautkan poin aman/pasang. Tautan + tombol ke #/orangtua. Lokasi: analytics.js render + ortu.js:8-14. Effort S, dampak 3, ustadz tidak (revive parkir P7).
+- **Adu Rajin 7 Hari.** Duel sekali-putus, tak ada alasan balik harian. Duel konsistensi 7 hari via dayLog + kartu juara pola gambarDuel. Lokasi: share.js:121-144 + core.js:1056-1092. Effort M, dampak 5, ustadz tidak (P9).
+- **Kartu Jumat mingguan.** Momen Jumat belum bisa diforward sebagai gambar. Kartu 1 ketuk: 7 titik + game islam pekan ini + ajakan. Lokasi: core.js:555 + share.js gambarStreak + analytics.js:220-233. Effort M, dampak 5, ustadz tidak (P9, gabung 2 ide).
 - **Kartu prestasi dashboard.** Ortu tak bisa pamerkan kemajuan. Tombol "Buat kartu prestasi" di statistik via gambarKartu. Lokasi: analytics.js:191-250 + share.js:267+. Effort M, dampak 5, ustadz tidak.
 - **Loncat SD: demo terpandu.** 21 batu langsung tanpa pemanasan. Soal 1: bola tunjukkan jawaban via tunjukkan() sebelum ketuk. Lokasi: 29-loncat.js:389-416. Effort M, dampak 5, ustadz tidak.
 - **Badge pekan FOMO.** Badge tantangan sama tiap pekan. Badge unik per weekKey, koleksi terkunci permanen. Lokasi: badges.js + progress.js:28-55 + core.js:410-420. Effort M, dampak 4, ustadz tidak.
-- **Mode Ortu 1 menit.** Ortu tak pernah diajak setup. Kartu kunjungan pertama: jenjang + kunci keluar + kirim info. Lokasi: home/banner pemain baru + ortu. Effort M, dampak 4, ustadz tidak (revive parkir).
 - **Kartu pamer edisi ortu.** Kartu skor tak layak pajang grup pengajian. Varian NILAI + lesson + bingkai sertifikat. Lokasi: share.js gambarKartu + core.js NILAI. Effort M, dampak 4, ustadz tidak (revive parkir P5).
+- **Mode Ortu 1 menit.** Ortu tak pernah diajak setup. Kartu kunjungan pertama: jenjang + kunci keluar + kirim info. Lokasi: home/banner pemain baru + ortu. Effort M, dampak 4, ustadz tidak (revive parkir).
 
 ## GARAP
 
@@ -118,3 +124,14 @@ dampak 1-5; ustadz ya/tidak.
 - **Hijaiyah chip streak (16 Nov, putaran 8).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
 - **TAHAN ustadz: Puasa gabung Niat+Sahur (16 Nov, putaran 8).** Urutan Niat vs Sahur diperdebatkan fikih; tahan sampai review ustadz.
 - **TAHAN ustadz: Sertifikat Hijaiyah + Siap TPA (16 Nov, putaran 8).** Teks sertifikat agama baru; tahan sampai review ustadz.
+- **Hijaiyah ronde aksi tiap 2 soal (16 Nov, putaran 9).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
+- **TAHAN ustadz: Sertifikat mini per game islam (16 Nov, putaran 9).** Teks capaian agama per game (mis. hafal urutan wudhu); tahan sampai review ustadz.
+
+## PARKIR
+
+- **Balapan Duta (P9, S3).** Kartu Pamer Duta + Top Pengajak mingguan. Lokasi: share.js pola rank + board.js + badges.js. Parkir: kalah slot 12.
+- **Raja-taman ajar Perisai saat kejadian (P9, S3).** Hapus kartu aturan 3 paragraf; ajarkan saat salah pertama. Lokasi: 100-raja-taman.js:136-145 + 209-216. Parkir: kalah slot 12.
+- **Tombol Pamer mid-play (P9, M4).** Tombol pamer saat rekor pecah di tengah game. Lokasi: helper core.js + 3-5 game skor. Parkir: kalah slot 12.
+- **Liga Sepupu (P9, L5).** Kode liga multipemain keluarga. Parkir: effort L dilewati watcher.
+- **Kunci Ortu PIN + batas waktu (P9, L5).** PIN + durasi harian + kunci papan. Parkir: effort L dilewati watcher.
+- **Pasang + panduan WA 1 ketuk (P9).** SUDAH DIBANGUN di S123; tidak masuk TODO.
