@@ -44,6 +44,7 @@
     & .lj-stone.is-hit { animation: lj-hit 260ms var(--ease-out); }
     @keyframes lj-hit { 35% { transform: translateY(4px); } }
     & .lj-stone.is-wrong { animation: ti-shake var(--dur-ui-max) var(--ease-in-out); }
+    & .lj-arahpanah { position: absolute; z-index: 1; transform: translate(-50%, -50%); font-size: 1.15rem; line-height: 1; opacity: 0.8; pointer-events: none; }
     & .lj-stone.is-arah { animation: lj-arah 600ms var(--ease-in-out) 3; } /* motion-ok: denyut petunjuk arah 3 kali, jarang muncul */
     @keyframes lj-arah { 50% { transform: scale(1.12); box-shadow: 0 4px 0 #8e8672, 0 0 0 5px #ffd23f; } }
     & .lj-stone.is-correct { background: radial-gradient(circle at 34% 28%, #eafff3, #9fe3bf 58%, #5fc08f); box-shadow: 0 4px 0 #3f9d6d, 0 0 0 5px #fff; }
@@ -77,7 +78,7 @@
     const scene = h('div', { class: 'ti-scene lj-scene' });
     const waves = h('div', { html: GELOMBANG }).firstElementChild;
     scene.append(waves);
-    const stones = [], pos = [];
+    const stones = [], pos = [], panah = [];
     for (let i = 0; i < n; i++) {
       const el = tappable
         ? h('button', { type: 'button', class: 'lj-stone', 'aria-label': 'Angka ' + i }, String(i))
@@ -123,6 +124,17 @@
         for (let i = 0; i < n; i++) {
           const r = Math.floor(i / perRow), c = i % perRow, col = r % 2 ? perRow - 1 - c : c;
           pos[i] = { x: 10 + cell * (col + 0.5), y: head + r * pitch };
+        }
+        // Panah kecil di ujung tiap baris: alur ular terlihat.
+        panah.forEach((el) => el.remove());
+        panah.length = 0;
+        for (let r = 0; r < rows; r++) {
+          const kanan = r % 2 === 0;
+          const el = h('span', { class: 'lj-arahpanah', 'aria-hidden': 'true' }, kanan ? '➡️' : '⬅️');
+          el.style.left = (kanan ? W - 12 : 12) + 'px';
+          el.style.top = (head + r * pitch) + 'px';
+          scene.append(el);
+          panah.push(el);
         }
         H = head + (rows - 1) * pitch + api.d / 2 + 24;
       }
