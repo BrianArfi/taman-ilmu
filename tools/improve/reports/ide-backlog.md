@@ -12,17 +12,24 @@ Putaran 3 (14 Nov): 16 ide (6 game + 5 viral + 5 ortu), gabung manual jadi
 9 TODO baru (sintesis gagal ranking); 1 TOLAK hijaiyah, 6 parkir catatan.
 Putaran 4 (14 Nov): 12 sintesis (5 ortu + 5 viral + 2 game) + 5 hidupkan parkir; 2 TAHAN ustadz, 1 TOLAK hijaiyah, 2 parkir (L).
 Putaran 5 (15 Nov): 16 ide (6 game + 5 viral + 5 ortu), gabung manual jadi 12 TODO (sintesis kosong lagi); 1 TOLAK hijaiyah, 1 dupe TAHAN-sertifikat, 2 skip L, 6 parkir catatan.
+Putaran 6 (16 Nov): 16 ide (6 game + 5 viral + 5 ortu), gabung manual jadi 12 TODO (sintesis kosong lagi); 1 TOLAK hijaiyah, 1 TAHAN khatam, 1 skip L, 2 parkir, 4 dupe-drop.
 Format tiap ide: masalah 1 kalimat; usulan + lokasi pasang; effort S/M/L;
 dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
+- **Raja: lolos ikut damage.** HP Raja praktis tak terkalahkan (butuh 10/10 firstTry). Revisi S105: hasil lolos ikut -1 HP + sfx tiap damage. Lokasi: 100-raja-taman.js gambarBos + loop. Effort S, dampak 5, ustadz tidak.
 - **Wujud: toast + Kok bisa.** afterNote wajib habis dibaca tiap tugas (3-4x). Ganti toast 1 kalimat hilang-sendiri + tombol opsional penjelasan penuh. Lokasi: 19-wujud.js:137-151,281. Effort S, dampak 4, ustadz tidak.
+- **Loncat SD: petunjuk arah.** Salah-1 di 21 batu cuma "Belum tepat" tanpa arah. Ucapkan kebesaran/kekecilan + denyutkan 3 batu arah benar. Lokasi: 29-loncat.js:423. Effort S, dampak 4, ustadz tidak.
+- **CTA Ajak saat level-up + bonus 3.** Momen menang tak dipakai ajak. Tombol Ajak di hasil saat levelUp + bonus XP klaim ke-3 (sisa ide P6; strip+tier DONE S109). Lokasi: core.js showResult + progress klaimBonus. Effort S, dampak 4, ustadz tidak.
+- **TPA: tombol Tantangan Kelas.** tantangKelas tersembunyi di kode. Tombol di statistik + preset game islam buat guru sebar ke grup WA. Lokasi: analytics.js render + share.js:174-183. Effort S, dampak 4, ustadz tidak.
 - **Puasa: strip langit.** Babak 1 susun label abstrak tanpa rasa hari. Strip pagi-maghrib, matahari bergeser tiap item terpasang. Lokasi: 55-puasa-sehari.js:64-71. Effort S, dampak 3, ustadz tidak.
+- **Adab: arti auto-lanjut.** Tiap soal wajib ketuk Lanjut sesudah arti (8x). Arti dibacakan otomatis lalu lanjut sendiri. Lokasi: 07-adab.js:91-98. Effort S, dampak 3, ustadz tidak (tanpa ubah teks).
+- **Tantangan pekan beruntun.** Streak pekan tak dicatat. Catat tantanganDone beruntun + lencana 4 Pekan + sebut di teks tantang. Lokasi: progress.js:57-64 + badges.js + share.js:154-161. Effort S, dampak 3, ustadz tidak.
+- **Jumat: tonjolkan ringkasan.** Laporan mingguan pasif menunggu dibuka. Tiap Jumat tonjolkan tombol ringkasan (bukan kirim otomatis). Lokasi: analytics.js + share laporanMingguan. Effort S, dampak 3, ustadz tidak.
 - **Listrik: 60 detik interaktif.** Tembok ceramah + demo pasif sebelum sentuh apa pun. Peringatan jadi toast sesudah sukses pertama; demo benda-1 diketuk anak (lanjutan S81/S92). Lokasi: 37-listrik.js:361-443. Effort M, dampak 5, ustadz tidak.
-- **Kartu skor duel + Duel Ulang.** Duel tak terlihat dari beranda. gambarDuel() kartu skor seri + kartu Duel Ulang di home saat duelSeri aktif. Lokasi: share.js gambarKartu + core.js home. Effort M, dampak 5, ustadz tidak.
+- **Kartu skor duel + Duel Ulang + final.** Duel tak terlihat dari beranda. gambarDuel() kartu skor seri + kartu Duel Ulang di home + final best-of-3 + kartu juara (gabung P5+P6). Lokasi: share.js + core.js home + duelSeri. Effort M, dampak 5, ustadz tidak.
 - **Rekap Nilai Islami pekanan.** Ortu tak tahu nilai apa masuk. Dashboard baris "Pekan ini: ..." dari lesson game selesai. Lokasi: analytics.js render(). Effort M, dampak 5, ustadz tidak (tampil ulang lesson; parkir putaran 3).
-- **Kartu rekap pekan WA.** Tak ada alasan share mingguan. Template gambarRekap (summary+rank) + tombol statistik + pemicu Senin. Lokasi: share.js + analytics.js:208-214 + config.js:5. Effort M, dampak 4, ustadz tidak.
 
 ## GARAP
 
@@ -86,3 +93,5 @@ dampak 1-5; ustadz ya/tidak.
 - **TAHAN ustadz: Sertifikat semua game islam (14 Nov, P7).** Melibatkan teks Arab/fakta agama; tahan sampai review ustadz, bukan tolak permanen.
 - **Hijaiyah variasi+streak (14 Nov, P10).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
 - **Hijaiyah Ronde Kilat (15 Nov, putaran 5).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
+- **Hijaiyah ronde aksi 15 detik (16 Nov, putaran 6).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
+- **TAHAN ustadz: Sertifikat Khatam hijaiyah/wudhu (16 Nov, putaran 6).** Teks sertifikat agama baru + sentuh game hijaiyah; tahan sampai review ustadz, bukan tolak permanen.

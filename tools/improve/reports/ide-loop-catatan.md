@@ -83,3 +83,12 @@
 - Parkir 6 (hidupkan saat TODO < 8): Rivalku strip duel (diganti versi
   kartu gambar), Papan Teman lokal, Laporan bergambar + saran, Mode Ortu
   1 menit, Kartu gambar rank/lencana/streak, Kartu pamer edisi ortu.
+
+## Putaran 6 (16 Nov) — 3 anak OK, sintesis kosong, GABUNG MANUAL
+- 16 ide (6 game + 5 viral + 5 ortu) jadi 12 TODO. 1 TOLAK hijaiyah
+  (ronde aksi); 1 TAHAN khatam; 1 skip L (Papan Lingkaran).
+- Dupe-drop 4: listrik-interaktif (TODO P5), wujud-gabung (TODO toast),
+  sertifikat-semua (TAHAN P7), milestone-ajak strip+tier (DONE S109,
+  sisa CTA+bonus-3 jadi TODO).
+- Parkir 2: Kartu rekap pekan WA, Kartu 7 Hari Tanpa Iklan (syarat
+  7 hari aktif; klaim dari data nyata).
