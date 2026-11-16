@@ -20,7 +20,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Jumat: tonjolkan ringkasan.** Laporan mingguan pasif menunggu dibuka. Tiap Jumat tonjolkan tombol ringkasan (bukan kirim otomatis). Lokasi: analytics.js + share laporanMingguan. Effort S, dampak 3, ustadz tidak (revive parkir P7).
 - **Tautkan ortu dari statistik.** Dashboard tak menautkan poin aman/pasang. Tautan + tombol ke #/orangtua. Lokasi: analytics.js render + ortu.js:8-14. Effort S, dampak 3, ustadz tidak (revive parkir P7).
 - **Kartu prestasi dashboard.** Ortu tak bisa pamerkan kemajuan. Tombol "Buat kartu prestasi" di statistik via gambarKartu. Lokasi: analytics.js:191-250 + share.js:267+. Effort M, dampak 5, ustadz tidak.
 - **Loncat SD: demo terpandu.** 21 batu langsung tanpa pemanasan. Soal 1: bola tunjukkan jawaban via tunjukkan() sebelum ketuk. Lokasi: 29-loncat.js:389-416. Effort M, dampak 5, ustadz tidak.
@@ -34,6 +33,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Jumat: tonjolkan ringkasan** (S134): tiap Jumat WIB tombol dasbor primer + label Jumat + catatan rekap. Probe 2/2, ui 12/12, gami 62/62. Detail: cycle-20261116-s134.md.
 - **Lencana Juara Duel** (S133): DEFS juara-duel + grant saat final best-of-3 dimenangkan, hitungan 25. Probe 1/1, ui 12/12, gami 62/62. Detail: cycle-20261116-s133.md.
 - **Laporan guru TPA** (S132): teks kualitatif tanpa skor (status 3 game islam + hari main) + tombol dasbor. Probe 1/1, ui 12/12, gami 62/62. Detail: cycle-20261116-s132.md.
 - **Kartu streak visual + unlock total terverifikasi** (S131): gambarStreak 1080x1350 (angka+7 titik+nama) di streak-party + Pamer Rajin, pruneDayLog 7 hari, gembok lencana jadi ikon abu-abu. Probe 2/2 + critic 0 major, ui 12/12, gami 62/62. Detail: cycle-20261116-s131.md.
