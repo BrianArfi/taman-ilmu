@@ -47,7 +47,10 @@
   const P = '.play[data-game="puasa-sehari"]';
   const CSS = `
 ${P} .ps-order .choice { min-height: 64px; font-size: 1.08rem; }
-${P} .ps-sort .choice { min-height: 72px; }`;
+${P} .ps-sort .choice { min-height: 72px; }
+${P} .ps-langit { position: relative; display: flex; align-items: center; justify-content: space-between; height: 46px; padding: 0 10px; margin-bottom: 8px; border-radius: 999px; background: linear-gradient(90deg, #ffe9a8, #ffd23f 45%, #ff9f1c 75%, #7b5ea7); overflow: hidden; }
+${P} .ps-langit-tepi { font-size: .8rem; font-weight: 800; color: #5b4a00; z-index: 1; }
+${P} .ps-matahari { position: absolute; top: 50%; left: 8%; transform: translate(-50%, -50%); font-size: 1.6rem; line-height: 1; transition: left var(--dur-ui) var(--ease-out); }`;
 
   TI.register({
     id: 'puasa-sehari',
@@ -66,9 +69,19 @@ ${P} .ps-sort .choice { min-height: 72px; }`;
       ctx.sfx('pop');
       const items1 = TK ? URUT_TK : URUT_SD;
       const hitung1 = h('p', { class: 'ti-label', 'aria-live': 'polite' }, '0 dari ' + items1.length + ' terpasang');
-      w1.append(hitung1);
+      // Strip langit: matahari bergeser tiap item terpasang (menyusun = menjalani hari).
+      const cca = h('span', { class: 'ps-matahari', 'aria-hidden': 'true' }, '☀️');
+      const langit = h('div', { class: 'ps-langit', role: 'img', 'aria-label': 'Perjalanan hari: pagi' },
+        h('span', { class: 'ps-langit-tepi' }, '🌅 Pagi'), cca, h('span', { class: 'ps-langit-tepi' }, 'Magrib 🌙'));
+      const tahap = (f) => f <= 0 ? 'pagi' : f < 0.5 ? 'siang' : f < 1 ? 'sore' : 'magrib';
+      w1.append(hitung1, langit);
       await ctx.order({ items: items1, guide: TK ? 'always' : 'after-wrong', into: w1,
-        onStep: (n, t) => { hitung1.textContent = n + ' dari ' + t + ' terpasang'; ctx.progress(n / t, 2); } });
+        onStep: (n, t) => {
+          hitung1.textContent = n + ' dari ' + t + ' terpasang'; ctx.progress(n / t, 2);
+          const f = t ? n / t : 0;
+          cca.style.left = 'calc(' + (8 + f * 84) + '%)';
+          langit.setAttribute('aria-label', 'Perjalanan hari: ' + tahap(f));
+        } });
       if (!ctx.alive) return;
       ctx.progress(1, 2);
       ctx.correct(null, { say: 'Bagus! Terus naik ke babak 2.' });
