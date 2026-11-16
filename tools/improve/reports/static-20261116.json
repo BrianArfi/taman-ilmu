@@ -131,27 +131,6 @@
    ]
   },
   {
-   "file": "10-banding.js",
-   "id": "banding",
-   "title": "Lebih Besar, Lebih Kecil",
-   "cat": "mat",
-   "bytes": 11330,
-   "soal": 8,
-   "sig": {
-    "aksi": 0,
-    "feedback": 2,
-    "ramp": 2,
-    "failsoft": 2,
-    "sesi": 2,
-    "tk": 2,
-    "polish": 2
-   },
-   "static100": 86,
-   "sug": [
-    "kuis murni: selipkan aksi (tangkap/seret/susun/pecah) di sela soal"
-   ]
-  },
-  {
    "file": "26-bangun.js",
    "id": "bangun",
    "title": "Bangun Masjid",
@@ -765,7 +744,7 @@
    "id": "listrik",
    "title": "Rangkaian Listrik",
    "cat": "sains",
-   "bytes": 31597,
+   "bytes": 32456,
    "soal": 2,
    "sig": {
     "aksi": 2,
@@ -1693,6 +1672,27 @@
    "static100": 93,
    "sug": [
     "setelah 3x gagal di satu tantangan: tunjukkan cara benar lalu lanjut"
+   ]
+  },
+  {
+   "file": "10-banding.js",
+   "id": "banding",
+   "title": "Lebih Besar, Lebih Kecil",
+   "cat": "mat",
+   "bytes": 11720,
+   "soal": 8,
+   "sig": {
+    "aksi": 1,
+    "feedback": 2,
+    "ramp": 2,
+    "failsoft": 2,
+    "sesi": 2,
+    "tk": 2,
+    "polish": 2
+   },
+   "static100": 93,
+   "sug": [
+    "tambah variasi aksi kedua biar tidak monoton"
    ]
   },
   {
