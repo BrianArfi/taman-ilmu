@@ -20,8 +20,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Loncat: umpan kelebihan langsung.** Ketuk Loncat kelebihan tanpa umpan balik sampai tekan Sudah. Saat sudah>b: bola goyang + sfx + say Kebanyakan di ketukan itu. Lokasi: 29-loncat.js:262-273. Effort S, dampak 4, ustadz tidak (P10).
-- **Pamer Rekor Baru.** isBest dihitung tapi tak dipakai; momen menang terbuang. Chip Rekor Baru + tombol sekali-ketuk kirim kartu skor. Lokasi: core.js:1023 + 1117-1130 + share.js card. Effort S, dampak 4, ustadz tidak (P10).
 - **Pasang di statistik.** Momen yakin ortu tanpa CTA pasang. Banner Pasang di bawah hero + reuse pwaPaint. Lokasi: analytics.js:261-265 + core.js pwaPaint. Effort S, dampak 4, ustadz tidak (P10).
 - **Tangga Duta progresif.** Bonus ajak datar +20. Tangga 1/3/5/10 teman (XP 20/35/50/100) + progres di banner klaim. Lokasi: progress.js:197-215 + core.js:464-473. Effort S, dampak 4, ustadz tidak (P10).
 - **Adu Rajin 7 Hari.** Duel sekali-putus, tak ada alasan balik harian. Duel konsistensi 7 hari via dayLog + kartu juara pola gambarDuel. Lokasi: share.js:121-144 + core.js:1056-1092. Effort M, dampak 5, ustadz tidak (P9).
@@ -38,6 +36,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Pamer Rekor Baru** (S144): chip + tombol kartu saat rekor pecah (bukan main pertama). Probe 2/2, ui 12/12, gami 62/62. Detail: cycle-20261117-s144.md.
 - **Listrik: saklar note jadi toast** (S143): note intro 1 kalimat + lanjut manual. Probe 3/3, A92 tetap. Detail: cycle-20261117-s143.md.
 - **Tautkan ortu dari statistik** (S142): baris kepercayaan + tautan #/orangtua di dasbor. Probe 1/1, ui 12/12, gami 62/62. Detail: cycle-20261117-s142.md.
 - **Wujud: afterNote hemat** (S141): ceramah hanya tugas pertama+terakhir, tengah cukup Hebat. Probe 3/3, A92 tetap. Detail: cycle-20261116-s141.md.
@@ -136,6 +135,8 @@ dampak 1-5; ustadz ya/tidak.
 - **TAHAN ustadz: Puasa gabung gate babak (17 Nov, putaran 10).** Menggabung kalimat fakta puasa; tahan sampai review ustadz.
 - **TAHAN ustadz: Sertifikat Hijaiyah + Wudhu (17 Nov, putaran 10).** Perluasan pola sertifikat ke game hijaiyah; tahan sampai review ustadz.
 - **Kartu gambar Laporan Mingguan (P10).** SUDAH TERCakup TODO Kartu Jumat mingguan (P9); tidak diduplikat.
+
+- **Loncat umpan kelebihan langsung (17 Nov, S144).** Premis gugur: sudah tak pernah > b (rayakanBenar mengunci sinkron); terbukti probe. Bukan tolak kualitas.
 
 ## PARKIR
 
