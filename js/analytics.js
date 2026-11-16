@@ -217,6 +217,7 @@
         TI.h('div', { class: 'stat-track', role: 'progressbar', 'aria-label': TI.CATS[c].label + ' ' + d + ' dari ' + list.length, 'aria-valuenow': String(d), 'aria-valuemax': String(list.length) },
           TI.h('i', { class: 'stat-fill', style: 'width:' + p + '%;background:' + TI.CATS[c].color })));
     });
+    const jumat = new Date(Date.now() + 7 * 3600 * 1000).getUTCDay() === 5;
     const app = TI.page('Laporan Anak', 'Kemajuan ' + nama + ' · ' + lvl.toUpperCase() + (m.firstSeen ? ', main sejak ' + m.firstSeen : ''),
       TI.h('div', { class: 'stat-hero pop-in' },
         TI.h('b', { class: 'stat-besar' }, m.lvlDone + ' / ' + m.lvlTotal),
@@ -228,7 +229,8 @@
       TI.h('h3', { class: 'stat-h' }, 'Aktif 7 hari terakhir'),
       TI.h('div', { class: 'stat-week' }, m.last7.map((d) =>
         TI.h('span', { class: 'stat-day' + (d.n ? ' is-on' : ''), title: d.day + ': ' + d.n + ' kunjungan' }, d.day.slice(3)))),
-      TI.h('p', null, TI.Share ? TI.h('button', { type: 'button', class: 'ti-btn is-ghost', onclick: () => { TI.sfx('tap'); TI.Share.laporanMingguan(); } }, 'Bagikan ringkasan mingguan') : null),
+      TI.h('p', null, TI.Share ? TI.h('button', { type: 'button', class: 'ti-btn' + (jumat ? '' : ' is-ghost'), onclick: () => { TI.sfx('tap'); TI.Share.laporanMingguan(); } }, jumat ? 'Jumat: bagikan ringkasan mingguan' : 'Bagikan ringkasan mingguan') : null),
+      jumat ? TI.h('p', { class: 'stat-jumat' }, 'Hari ini Jumat, waktunya rekap seminggu main!') : null,
       TI.h('h3', { class: 'stat-h' }, 'Tantangan Kelas (untuk guru)'),
       TI.h('div', { class: 'stat-kelas' }, ['hijaiyah', 'wudhu', 'shalat'].map((gid) => {
         const g = byId(gid);
