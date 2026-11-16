@@ -115,10 +115,18 @@
     }, { lesson: 'Tanda > artinya lebih besar, < artinya lebih kecil, = artinya sama dengan.' });
   }
 
-  // Bacakan lalu beri jeda tetap (kalau suara mati, jeda tetap berjalan).
+  // Bacakan + jeda, tapi tombol Lanjut tampil bersamaan biar bisa skip.
   function bicara(ctx, teks, ms) {
     ctx.say(teks);
-    return ctx.wait(ms);
+    return new Promise((resolve) => {
+      let done = false;
+      const b = h('button', { type: 'button', class: 'ti-btn is-ghost pop-in' }, 'Lanjut', ' ➜');
+      const go = () => { if (!done) { done = true; b.remove(); resolve(); } };
+      b.addEventListener('click', () => { ctx.sfx('tap'); b.disabled = true; go(); });
+      ctx.el.append(b);
+      ctx.onExit(go);
+      ctx.wait(ms).then(go);
+    });
   }
 
   // ---------- SD ----------

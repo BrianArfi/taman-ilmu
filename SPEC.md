@@ -257,6 +257,7 @@ Arkade. Gelembung bulat berisi angka naik pelan dari bawah ke atas `.ti-scene` (
 - SD (8 soal): tampil "47 ⬜ 52", anak pilih tombol `>` `<` `=`. 4 soal angka sampai 100, 4 soal bentuk hitungan: "8 + 5 ⬜ 12", "20 - 7 ⬜ 13" (beberapa harus `=`). Kotak terisi simbol setelah benar.
 - Petunjuk SD sekali di awal (`ctx.note`): "Ujung lancip menunjuk angka yang lebih kecil. Mulut yang terbuka menghadap angka yang lebih besar." (tanpa gambar buaya).
 - lesson: "Tanda > artinya lebih besar, < artinya lebih kecil, = artinya sama dengan."
+- Tiap jawaban benar: narasi kalimat + tombol Lanjut tampil bersamaan (bisa skip, tanpa jeda paksa).
 
 ### 11 pola: Lanjutkan Pola
 Baris pola dengan kotak "?" di akhir, pilih yang tepat.
