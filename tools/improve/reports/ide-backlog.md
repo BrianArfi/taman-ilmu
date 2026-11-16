@@ -19,7 +19,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Loncat: panah ular SD.** Grid serpentine bikin garis bilangan patah. Panah arah kecil di ujung tiap baris. Lokasi: 29-loncat.js:123-127. Effort S, dampak 4, ustadz tidak.
 - **Raja: banner bos hidup.** 10 soal tanpa sosok Raja. Banner bos bergoyang saat damage + ejek kid-safe saat nyawa hilang. Lokasi: 100-raja-taman.js:144-173. Effort S, dampak 4, ustadz tidak.
 - **Preview kartu inline.** Momen streak/kategori/levelUp cuma tombol teks. Render thumbnail canvas sebelum tombol (reuse gambarKartu). Lokasi: core.js showResult + share.js:267-316. Effort S, dampak 4, ustadz tidak.
 - **Panduan pasang ke WA-ku.** Ortu non-teknis gagal pasang. Tombol kirim panduan pasang ke WA sendiri (teks per platform). Lokasi: core.js banner + ortu.js:35-44. Effort S, dampak 4, ustadz tidak.
@@ -38,6 +37,7 @@ dampak 1-5; ustadz ya/tidak.
 
 - **TPA: tombol Tantangan Kelas** (S116): preset 3 game islam + teks jujur best-0. Probe 5/5, ui 12/12, gami 61/61. Detail: cycle-20261116-s116.md.
 - **CTA Ajak level-up + bonus 3** (S115): CTA hasil + klaim ke-3 +35. Probe 7/7, ui 12/12, gami 61/61. Detail: cycle-20261116-s115.md.
+- **Loncat: panah ular SD** (S120): panah ujung baris selang-seling. Probe 4/4. Detail: cycle-20261116-s120.md.
 - **Wujud: bintang per tugas** (S119): chip Tugas i/n + ★/☆/·. Probe 6/6. Detail: cycle-20261116-s119.md.
 - **Puasa: adilkan babak urut** (S118): 2 item jadi bin "Lakukan saat puasa". Probe 5/5. Detail: cycle-20261116-s118.md.
 - **Puasa: strip langit** (S117): matahari 8→92% + aria tahap. Probe 4/4. Detail: cycle-20261116-s117.md.
