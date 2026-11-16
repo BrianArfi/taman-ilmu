@@ -173,6 +173,10 @@
   // Tantang sekelas: untuk diteruskan ke grup WA sekolah/kelas.
   function tantangKelas(game, stars) {
     try { if (TI.Stats) TI.Stats.track('challenge', {}); } catch (e) { /* abaikan */ }
+    if (!(stars > 0)) {
+      return bagikan('Tantangan Sekelas · Taman Ilmu',
+        'Tantangan Kelas: game ' + game.title + '! Untuk murid-murid yang berani coba: ' + challengeURL(game, 1));
+    }
     const nama = (TI.state.profile && TI.state.profile.nama) || '';
     const bintang = '⭐'.repeat(Math.max(1, stars)) + ' (' + stars + '/3)';
     const siapa = nama ? nama + ' dapat ' + bintang : 'Aku dapat ' + bintang;

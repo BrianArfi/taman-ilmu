@@ -216,6 +216,13 @@
       TI.h('div', { class: 'stat-week' }, m.last7.map((d) =>
         TI.h('span', { class: 'stat-day' + (d.n ? ' is-on' : ''), title: d.day + ': ' + d.n + ' kunjungan' }, d.day.slice(3)))),
       TI.h('p', null, TI.Share ? TI.h('button', { type: 'button', class: 'ti-btn is-ghost', onclick: () => { TI.sfx('tap'); TI.Share.laporanMingguan(); } }, 'Bagikan ringkasan mingguan') : null),
+      TI.h('h3', { class: 'stat-h' }, 'Tantangan Kelas (untuk guru)'),
+      TI.h('div', { class: 'stat-kelas' }, ['hijaiyah', 'wudhu', 'shalat'].map((gid) => {
+        const g = byId(gid);
+        if (!g || !TI.Share) return null;
+        const best = ((TI.state.stars[gid] || {})[lvl]) || 0;
+        return TI.h('button', { type: 'button', class: 'ti-btn is-ghost', onclick: () => { TI.sfx('tap'); TI.Share.tantangKelas(g, best); } }, '⚔️ ' + g.icon + ' ' + g.title);
+      })),
       TI.h('h3', { class: 'stat-h' }, 'Game paling sering dimainkan'),
       m.top.length ? TI.h('ol', { class: 'stat-top' }, m.top.map((t) => {
         const g = byId(t.gid);
