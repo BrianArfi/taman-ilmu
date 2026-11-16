@@ -1067,6 +1067,7 @@
             TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.duelCard(skey, { aku: seri.aku, dia: seri.dia }) }, 'Kartu Juara') : null,
             TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.challenge(ctx.game, stars, duel.dari) }, 'Duel Lagi') : null);
           TI.toast('🏆', 'Juara duel lawan ' + duel.dari + '!');
+          if (TI.Badges) TI.Badges.grant('juara-duel');
         } else {
           duelUi = h('div', { class: 'duel-result pop-in' },
             h('span', null, '🎉 Kamu menang lawan ' + duel.dari + '! (' + stars + ' vs ' + duel.skor + ') Duel: ' + skorTxt + '.'),
