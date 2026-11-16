@@ -266,6 +266,7 @@
       TI.h('div', { class: 'stat-bars' }, barisKat),
       rekapPekan(),
       TI.h('p', null, TI.Share ? TI.h('button', { type: 'button', class: 'ti-btn', onclick: () => { TI.sfx('tap'); TI.Share.laporan(); } }, 'Bagikan laporan ke pasangan') : null),
+      TI.h('p', { class: 'board-note' }, 'Tanpa iklan, bisa offline, tanpa akun. ', TI.h('a', { href: '#/orangtua', onclick: () => TI.sfx('tap') }, 'Kenapa aman untuk anak?')),
       TI.h('h3', { class: 'stat-h' }, 'Aktif 7 hari terakhir'),
       TI.h('div', { class: 'stat-week' }, m.last7.map((d) =>
         TI.h('span', { class: 'stat-day' + (d.n ? ' is-on' : ''), title: d.day + ': ' + d.n + ' kunjungan' }, d.day.slice(3)))),
