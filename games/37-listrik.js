@@ -426,8 +426,8 @@
           await ctx.correct(null, { say: 'Lampunya mati.' });
           const box = h('div', { class: 'ls-box' });
           ctx.el.append(box);
-          ctx.note('Lampu menyala kalau jalan listriknya tersambung. Kalau saklar dimatikan, jalannya terputus.', { title: 'Tahukah kamu?', into: box, speak: false });
-          await lanjutOtomatis(ctx, box, 'Lampu menyala kalau jalan listriknya tersambung. Kalau saklar dimatikan, jalannya terputus.');
+          ctx.note('Lampu menyala kalau jalan listriknya tersambung.', { title: 'Tahukah kamu?', into: box, speak: false });
+          await lanjutManual(ctx, box);
           box.remove();
           step++; progress();
           board.swBtn.hidden = true;
