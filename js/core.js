@@ -1027,14 +1027,14 @@
         saveState();
         try { if (TI.Board && TI.Board.report) TI.Board.report(level); } catch (e) { /* papan gagal diam saja */ }
         try { if (TI.Stats) TI.Stats.track('game_finish', { gid: game.id, jen: level, stars }); } catch (e) { /* abaikan */ }
-        showResult(ctx, stars, opts, els, gain);
+        showResult(ctx, stars, opts, els, gain, isBest && prevBest > 0);
       },
     };
     return ctx;
   }
 
   // ---------- layar hasil (jarang terjadi, di sini tempat perayaan) ----------
-  function showResult(ctx, stars, opts, els, gain) {
+  function showResult(ctx, stars, opts, els, gain, rekorBaru) {
     const msg = opts.message || (stars === 3 ? 'Masya Allah, hebat sekali!' : stars === 2 ? 'Bagus! Ayo main lagi biar dapat 3 bintang.' : 'Terus berlatih ya, kamu pasti bisa!');
     const big = h('div', { class: 'result-stars' });
     for (let i = 0; i < 3; i++) big.append(h('span', { class: 'rstar' + (i < stars ? ' is-on' : ''), style: '--i:' + i }, '★'));
@@ -1047,6 +1047,9 @@
     const serti = TI.Share && (ctx.game.id === 'shalat' || ctx.game.id === 'adab') && stars >= 3 ? h('button', { type: 'button', class: 'ti-btn', onclick: () => TI.Share.card(ctx.game, stars, 'sertifikat') }, '🎓 Sertifikat') : null;
     const menu = h('a', { class: 'ti-btn is-ghost', href: '#/', onclick: () => sfx('tap') }, 'Pilih Game');
     const sc = (state.streak && state.streak.count) || 0;
+    const rekor = rekorBaru && TI.Share ? h('div', { class: 'streak-party pop-in' },
+      h('span', { class: 'streak-chip' }, '🎉 Rekor Baru!'),
+      h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.card(ctx.game, stars) }, 'Pamerkan')) : null;
     const rayakan = (sc === 3 || sc === 7 || sc === 30) ? h('div', { class: 'streak-party pop-in' },
       h('span', { class: 'streak-chip' }, '🔥 ' + sc + ' hari beruntun!'),
       TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.streakCard() }, 'Pamerkan') : null) : null;
@@ -1122,6 +1125,7 @@
         gain && gain.levelUp ? h('p', { class: 'level-up pop-in' }, 'Naik ke Level ' + gain.level + '!') : null,
         gain && gain.levelUp ? h('div', { class: 'level-ajak pop-in' }, h('span', null, 'Momen menang! Ajak temanmu ikut main.'), TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.invite() }, '📣 Ajak') : null) : null,
         rayakan,
+        rekor,
         momenKat,
         gain && gain.challengeDone ? h('div', { class: 'challenge-done pop-in' }, h('span', null, 'Tantangan pekan selesai!'), TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.tantangPekan(ctx.game, stars) }, '⚔️ Ajak Teman') : null) : null,
         duelUi,
