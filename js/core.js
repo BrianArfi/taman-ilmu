@@ -1022,9 +1022,12 @@
       state.momenKat[cat] = 1; saveState();
       if (lain === 0) {
         const pseudo = { id: 'kategori-' + cat, title: 'Bintang 3 ' + infoKat.label, icon: infoKat.icon };
+        const momenPrev = h('span', { class: 'momen-pratinjau', role: 'img', 'aria-label': 'Pratinjau kartu ' + pseudo.title });
         momenKat = h('div', { class: 'streak-party pop-in momen-kat' },
           h('span', { class: 'streak-chip' }, '🌟 Bintang 3 pertamamu di ' + infoKat.label + '!'),
+          momenPrev,
           TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.card(pseudo, 3, 'kategori') }, 'Pamerkan') : null);
+        if (TI.Share && TI.Share.pratinjau) TI.Share.pratinjau(pseudo, 3).then((cv) => { if (cv && ctx.alive) momenPrev.append(cv); }).catch(() => {});
       }
     }
     const duel = state.duel && state.duel.gid === ctx.game.id ? state.duel : null;

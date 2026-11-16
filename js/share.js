@@ -371,6 +371,16 @@
     g.fillText(BASE.replace(/^https?:\/\//, ''), W / 2, 1220);
     return cv;
   }
+  // Pratinjau kartu skor (thumbnail) untuk momen pamer; gagal = null.
+  async function pratinjau(game, stars) {
+    try {
+      const cv = await gambarKartu(game, stars);
+      cv.style.width = '120px';
+      cv.style.height = 'auto';
+      cv.style.borderRadius = '12px';
+      return cv;
+    } catch (e) { return null; }
+  }
   async function card(game, stars, jenis) {
     let blob = null;
     try {
@@ -448,5 +458,5 @@
     }
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, laporanMingguan, infoOrtu, klaimURL, klaimBalik };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, laporanMingguan, infoOrtu, klaimURL, klaimBalik, pratinjau };
 })();
