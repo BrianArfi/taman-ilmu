@@ -3,22 +3,22 @@
  "version": "improve-v1.0",
  "rows": [
   {
-   "id": "banding",
-   "title": "Lebih Besar, Lebih Kecil",
+   "id": "loncat",
+   "title": "Loncat Angka",
    "cat": "mat",
-   "file": "10-banding.js",
-   "static100": 93,
-   "dyn100": 100,
+   "file": "29-loncat.js",
+   "static100": 86,
+   "dyn100": 99,
    "plays": 4,
    "finished": 4,
-   "avgActions": 26,
+   "avgActions": 43,
    "overflow": 0,
    "escFail": 0,
    "eng100": null,
-   "fun": 96,
+   "fun": 92,
    "cls": "A",
    "sug": [
-    "tambah variasi aksi kedua biar tidak monoton"
+    "naikkan kesulitan di dalam sesi (babak awal gampang, akhir menantang)"
    ]
   }
  ]
