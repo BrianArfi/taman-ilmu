@@ -14,13 +14,24 @@ Putaran 4 (14 Nov): 12 sintesis (5 ortu + 5 viral + 2 game) + 5 hidupkan parkir;
 Putaran 5 (15 Nov): 16 ide (6 game + 5 viral + 5 ortu), gabung manual jadi 12 TODO (sintesis kosong lagi); 1 TOLAK hijaiyah, 1 dupe TAHAN-sertifikat, 2 skip L, 6 parkir catatan.
 Putaran 6 (16 Nov): 16 ide (6 game + 5 viral + 5 ortu), gabung manual jadi 12 TODO (sintesis kosong lagi); 1 TOLAK hijaiyah, 1 TAHAN khatam, 1 skip L, 2 parkir, 4 dupe-drop.
 Putaran 7 (16 Nov): 16 ide (6 game + 5 viral + 5 ortu), gabung manual jadi 12 TODO (sintesis kosong lagi); 1 TOLAK hijaiyah, 0 TAHAN baru, 1 skip L, 2 parkir, 4 dupe-drop.
+Putaran 8 (16 Nov): 16 ide (6 game + 5 viral + 5 ortu), gabung manual jadi 12 TODO (sintesis notes saja); 1 TOLAK hijaiyah, 2 TAHAN, 1 skip L, 2 parkir, 3 dupe-drop.
 Format tiap ide: masalah 1 kalimat; usulan + lokasi pasang; effort S/M/L;
 dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
+- **Wujud: hampir-benar saat geser.** SD: jawaban dicek saat slider dilepas, digeser tanpa reaksi. Saat onInput capai goal: denyut label Wujud + tick. Lokasi: 19-wujud.js:262-267. Effort S, dampak 4, ustadz tidak.
+- **Kartu streak visual.** streak() teks saja. Varian gambarKartu (angka + 7 titik + nama) di streak-party + Pamer Rajin. Lokasi: share.js:267-331 + core.js:1005-1007. Effort S, dampak 4, ustadz tidak.
+- **Laporan guru TPA.** Dashboard tanpa angka untuk guru. Varian teks: Hijaiyah/Shalat/Wudhu + hari main, forward grup TPA. Lokasi: analytics.js:219-225 + share.js:199-231. Effort S, dampak 4, ustadz tidak.
+- **Lencana Juara Duel.** Juara best-of-3 tanpa lencana. Grant badge saat final dimenangkan. Lokasi: core.js duelUi + badges.js DEFS. Effort S, dampak 3, ustadz tidak.
+- **Jumat: tonjolkan ringkasan.** Laporan mingguan pasif menunggu dibuka. Tiap Jumat tonjolkan tombol ringkasan (bukan kirim otomatis). Lokasi: analytics.js + share laporanMingguan. Effort S, dampak 3, ustadz tidak (revive parkir P7).
+- **Tautkan ortu dari statistik.** Dashboard tak menautkan poin aman/pasang. Tautan + tombol ke #/orangtua. Lokasi: analytics.js render + ortu.js:8-14. Effort S, dampak 3, ustadz tidak (revive parkir P7).
 - **Rekap Nilai Islami pekanan.** Ortu tak tahu nilai apa masuk. Dashboard baris "Pekan ini: ..." dari lesson game selesai. Lokasi: analytics.js render(). Effort M, dampak 5, ustadz tidak (tampil ulang lesson; parkir putaran 3).
 - **Kartu prestasi dashboard.** Ortu tak bisa pamerkan kemajuan. Tombol "Buat kartu prestasi" di statistik via gambarKartu. Lokasi: analytics.js:191-250 + share.js:267+. Effort M, dampak 5, ustadz tidak.
+- **Loncat SD: demo terpandu.** 21 batu langsung tanpa pemanasan. Soal 1: bola tunjukkan jawaban via tunjukkan() sebelum ketuk. Lokasi: 29-loncat.js:389-416. Effort M, dampak 5, ustadz tidak.
+- **Badge pekan FOMO.** Badge tantangan sama tiap pekan. Badge unik per weekKey, koleksi terkunci permanen. Lokasi: badges.js + progress.js:28-55 + core.js:410-420. Effort M, dampak 4, ustadz tidak.
+- **Mode Ortu 1 menit.** Ortu tak pernah diajak setup. Kartu kunjungan pertama: jenjang + kunci keluar + kirim info. Lokasi: home/banner pemain baru + ortu. Effort M, dampak 4, ustadz tidak (revive parkir).
+- **Kartu pamer edisi ortu.** Kartu skor tak layak pajang grup pengajian. Varian NILAI + lesson + bingkai sertifikat. Lokasi: share.js gambarKartu + core.js NILAI. Effort M, dampak 4, ustadz tidak (revive parkir P5).
 
 ## GARAP
 
@@ -39,6 +50,7 @@ dampak 1-5; ustadz ya/tidak.
 - **Wujud: bintang per tugas** (S119): chip Tugas i/n + ★/☆/·. Probe 6/6. Detail: cycle-20261116-s119.md.
 - **Preview kartu inline** (S122): thumbnail kategori di momen (streak/levelUp teks dikecualikan jujur). Probe 3/3, ui 12/12, gami 61/61. Detail: cycle-20261116-s122.md.
 - **Raja: banner bos hidup** (S121): goyang damage + ejek nyawa. Probe 4/4. Detail: cycle-20261116-s121.md.
+- **Wujud timer ctx.after** (S128, batch B79→A92): regresi S113 diperbaiki. Probe 7/7. Detail: cycle-20261116-s128.md.
 - **Puasa: adilkan babak urut** (S118): 2 item jadi bin "Lakukan saat puasa". Probe 5/5. Detail: cycle-20261116-s118.md.
 - **Puasa: strip langit** (S117): matahari 8→92% + aria tahap. Probe 4/4. Detail: cycle-20261116-s117.md.
 - **Loncat SD: petunjuk arah** (S114): ucapan kebesaran/kekecilan + denyut 3 batu. Probe 6/6 (2x). Detail: cycle-20261116-s114.md.
@@ -103,3 +115,6 @@ dampak 1-5; ustadz ya/tidak.
 - **Hijaiyah ronde aksi 15 detik (16 Nov, putaran 6).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
 - **TAHAN ustadz: Sertifikat Khatam hijaiyah/wudhu (16 Nov, putaran 6).** Teks sertifikat agama baru + sentuh game hijaiyah; tahan sampai review ustadz, bukan tolak permanen.
 - **Hijaiyah kombo + ronde kilat (16 Nov, putaran 7).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
+- **Hijaiyah chip streak (16 Nov, putaran 8).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
+- **TAHAN ustadz: Puasa gabung Niat+Sahur (16 Nov, putaran 8).** Urutan Niat vs Sahur diperdebatkan fikih; tahan sampai review ustadz.
+- **TAHAN ustadz: Sertifikat Hijaiyah + Siap TPA (16 Nov, putaran 8).** Teks sertifikat agama baru; tahan sampai review ustadz.

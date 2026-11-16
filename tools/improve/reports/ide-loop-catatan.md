@@ -99,3 +99,10 @@
 - Dupe-drop 4: listrik-askGuess (TODO P5), sertifikat-massal (TAHAN P7),
   tantang-sepupu (DONE S88), senin-pengingat (parkir bareng Jumat).
 - Parkir 2: Jumat tonjolkan ringkasan, Tautkan ortu dari statistik.
+
+## Putaran 8 (16 Nov) — 3 anak OK, sintesis notes, GABUNG MANUAL
+- 16 ide jadi 12 TODO (2 lama + 8 baru + 2 revive Jumat/Taut).
+  1 TOLAK hijaiyah; 2 TAHAN (niat-sahur, sertifikat-hijaiyah).
+- Skip L: Papan Kelas (gabung catatan papan-lingkaran P7).
+- Dupe-drop: listrik-tap (DONE S126), progres-duta (DONE S109).
+- Konflik-parkir: raja hapus-intro (vs S108; revisit pakai data).
