@@ -208,6 +208,24 @@
       ' game selesai, rata-rata ★' + m.lvlAvg + '.' + rajin + ' Ayo main juga: ' + inviteURL());
   }
 
+  // Laporan mingguan siap-forward: tren 7 hari + total + ajakan pasang.
+  function laporanMingguan() {
+    const nama = (TI.state.profile && TI.state.profile.nama) || 'Anak';
+    const m = TI.Stats ? TI.Stats.summary() : null;
+    const aktif7 = m && m.last7 ? m.last7.filter((d) => d.n > 0).length : 0;
+    const fin = m ? m.finishes : 0;
+    let topCat = '', topF = 0;
+    for (const c of Object.keys((m && m.byCat) || {})) {
+      const f = m.byCat[c].f || 0;
+      if (f > topF) { topF = f; topCat = c; }
+    }
+    const catNama = { islam: 'Agama Islam', mat: 'Matematika', sains: 'Sains', logika: 'Logika' };
+    const rajin = topCat ? ' Sering main: ' + (catNama[topCat] || topCat) + '.' : '';
+    return bagikan('Laporan Mingguan · Taman Ilmu',
+      'Laporan mingguan ' + nama + ' di Taman Ilmu: minggu ini main ' + aktif7 + ' hari.' +
+      ' Total ' + fin + ' kali selesai main.' + rajin + ' Pasang gratis di HP: ' + inviteURL());
+  }
+
   // Kartu info ortu: teks alasan aman siap forward ke grup WA.
   function infoOrtu() {
     const poin = TI.OrtuPoin || [];
@@ -426,5 +444,5 @@
     }
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, infoOrtu, klaimURL, klaimBalik };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, laporanMingguan, infoOrtu, klaimURL, klaimBalik };
 })();

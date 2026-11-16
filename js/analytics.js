@@ -215,6 +215,7 @@
       TI.h('h3', { class: 'stat-h' }, 'Aktif 7 hari terakhir'),
       TI.h('div', { class: 'stat-week' }, m.last7.map((d) =>
         TI.h('span', { class: 'stat-day' + (d.n ? ' is-on' : ''), title: d.day + ': ' + d.n + ' kunjungan' }, d.day.slice(3)))),
+      TI.h('p', null, TI.Share ? TI.h('button', { type: 'button', class: 'ti-btn is-ghost', onclick: () => { TI.sfx('tap'); TI.Share.laporanMingguan(); } }, 'Bagikan ringkasan mingguan') : null),
       TI.h('h3', { class: 'stat-h' }, 'Game paling sering dimainkan'),
       m.top.length ? TI.h('ol', { class: 'stat-top' }, m.top.map((t) => {
         const g = byId(t.gid);
