@@ -20,7 +20,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Tautkan ortu dari statistik.** Dashboard tak menautkan poin aman/pasang. Tautan + tombol ke #/orangtua. Lokasi: analytics.js render + ortu.js:8-14. Effort S, dampak 3, ustadz tidak (revive parkir P7).
 - **Adu Rajin 7 Hari.** Duel sekali-putus, tak ada alasan balik harian. Duel konsistensi 7 hari via dayLog + kartu juara pola gambarDuel. Lokasi: share.js:121-144 + core.js:1056-1092. Effort M, dampak 5, ustadz tidak (P9).
 - **Kartu Jumat mingguan.** Momen Jumat belum bisa diforward sebagai gambar. Kartu 1 ketuk: 7 titik + game islam pekan ini + ajakan. Lokasi: core.js:555 + share.js gambarStreak + analytics.js:220-233. Effort M, dampak 5, ustadz tidak (P9, gabung 2 ide).
 - **Kartu prestasi dashboard.** Ortu tak bisa pamerkan kemajuan. Tombol "Buat kartu prestasi" di statistik via gambarKartu. Lokasi: analytics.js:191-250 + share.js:267+. Effort M, dampak 5, ustadz tidak.
@@ -35,6 +34,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Tautkan ortu dari statistik** (S142): baris kepercayaan + tautan #/orangtua di dasbor. Probe 1/1, ui 12/12, gami 62/62. Detail: cycle-20261117-s142.md.
 - **Wujud: afterNote hemat** (S141): ceramah hanya tugas pertama+terakhir, tengah cukup Hebat. Probe 3/3, A92 tetap. Detail: cycle-20261116-s141.md.
 - **Loncat: demo ulang hanya bila salah** (S137): buang qi%3==2 di TK+SD, demo hanya bila salah>0. Probe 2/2, statis 86 tetap, merge A92. Detail: cycle-20261116-s137.md.
 - **Banding: tombol Lanjut sejajar narasi** (S136): Lanjut tampil bersama narasi tiap soal, bisa skip. Probe 8/8, statis 86->93, merge A96. Detail: cycle-20261116-s136.md.
