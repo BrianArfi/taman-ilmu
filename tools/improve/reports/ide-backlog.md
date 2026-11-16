@@ -18,7 +18,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Raja: lolos ikut damage.** HP Raja praktis tak terkalahkan (butuh 10/10 firstTry). Revisi S105: hasil lolos ikut -1 HP + sfx tiap damage. Lokasi: 100-raja-taman.js gambarBos + loop. Effort S, dampak 5, ustadz tidak.
 - **Wujud: toast + Kok bisa.** afterNote wajib habis dibaca tiap tugas (3-4x). Ganti toast 1 kalimat hilang-sendiri + tombol opsional penjelasan penuh. Lokasi: 19-wujud.js:137-151,281. Effort S, dampak 4, ustadz tidak.
 - **Loncat SD: petunjuk arah.** Salah-1 di 21 batu cuma "Belum tepat" tanpa arah. Ucapkan kebesaran/kekecilan + denyutkan 3 batu arah benar. Lokasi: 29-loncat.js:423. Effort S, dampak 4, ustadz tidak.
 - **CTA Ajak saat level-up + bonus 3.** Momen menang tak dipakai ajak. Tombol Ajak di hasil saat levelUp + bonus XP klaim ke-3 (sisa ide P6; strip+tier DONE S109). Lokasi: core.js showResult + progress klaimBonus. Effort S, dampak 4, ustadz tidak.
@@ -37,6 +36,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Raja: lolos ikut damage** (S112): lolos -1 HP + pop tiap damage. Probe 6/6. Detail: cycle-20261116-s112.md.
 - **Laporan mingguan teks forward** (S111): ringkasan 7 hari + total + ajakan. Probe 4/4, ui 12/12, gami 60/60. Detail: cycle-20261116-s111.md.
 - **Tantang per baris papan** (S110): tombol duel rival di atasmu + best>0. Probe 7/7, ui 12/12, gami 60/60. Detail: cycle-20261116-s110.md.
 - **Progres Duta terlihat** (S109): strip Ajak N/5 + lencana Duta Emas ke-23. Probe 5/5, ui 12/12, gami 60/60. Detail: cycle-20261116-s109.md.
