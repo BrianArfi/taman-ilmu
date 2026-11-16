@@ -147,7 +147,7 @@
     await new Promise((resolve) => {
       let done = false;
       const lanjut = () => { if (!done) { done = true; resolve(); } };
-      const t = setTimeout(lanjut, 2800);
+      const t = ctx.after(2800, lanjut);
       toast.addEventListener('click', () => { TI.sfx('tap'); clearTimeout(t); lanjut(); });
       kok.addEventListener('click', async () => {
         TI.sfx('tap'); clearTimeout(t); kok.disabled = true; toast.disabled = true;
