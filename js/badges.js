@@ -125,7 +125,7 @@
       TI.h('div', { class: 'badge-grid' }, list.map((d) => {
         const when = got[d.id];
         return TI.h('div', { class: 'badge-card' + (when ? ' is-earned' : ''), 'aria-label': d.name + (when ? ', terkumpul' : ', belum terkumpul') },
-          TI.h('span', { class: 'badge-ic', 'aria-hidden': 'true' }, when ? d.icon : '🔒'),
+          TI.h('span', { class: 'badge-ic', 'aria-hidden': 'true' }, d.icon),
           TI.h('b', { class: 'badge-name' }, d.name),
           TI.h('span', { class: 'badge-how' }, d.how),
           TI.h('span', { class: 'badge-when' }, when ? 'Didapat ' + when : 'Belum terkumpul'),

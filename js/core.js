@@ -552,7 +552,7 @@
         h('div', { class: 'foot-links' },
           h('a', { class: 'foot-link', href: '#/statistik', onclick: () => sfx('tap') }, '📊 Laporan Anak'),
           h('a', { class: 'foot-link', href: '#/orangtua', onclick: () => sfx('tap') }, '🛡️ Orang Tua'),
-          h('button', { type: 'button', class: 'foot-link', onclick: () => { sfx('tap'); if (TI.Share) TI.Share.streak(); } }, '🔥 Pamer Rajin')),
+          h('button', { type: 'button', class: 'foot-link', onclick: () => { sfx('tap'); if (TI.Share) TI.Share.streakCard(); } }, '🔥 Pamer Rajin')),
         h('span', null, 'Dibuat untuk anak-anak. Tanpa iklan. Papan juara butuh internet, sisanya main offline.')));
     pwaPaint();
   }
@@ -1025,7 +1025,7 @@
     const sc = (state.streak && state.streak.count) || 0;
     const rayakan = (sc === 3 || sc === 7 || sc === 30) ? h('div', { class: 'streak-party pop-in' },
       h('span', { class: 'streak-chip' }, '🔥 ' + sc + ' hari beruntun!'),
-      TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.streak() }, 'Pamerkan') : null) : null;
+      TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.streakCard() }, 'Pamerkan') : null) : null;
     // Momen 3-bintang pertama per kategori: rayakan sekali per kategori + tawarkan kartu pamer.
     // Flag dicatat saat dicek supaya pemain lama yang sudah punya 3 tidak dapat rayaan palsu.
     const cat = ctx.game.cat;

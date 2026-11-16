@@ -197,6 +197,96 @@
         : 'Aku main Taman Ilmu! Sekarang ' + ringkas() + '. Ayo main juga: ' + inviteURL());
   }
 
+  // Aktif-tidaknya 7 hari terakhir (WIB) dari dayLog: titik kartu streak.
+  function tujuhHari() {
+    const log = TI.state.dayLog || {};
+    const base = Date.now() + 7 * 3600 * 1000;
+    const out = [];
+    for (let i = 6; i >= 0; i--) {
+      const k = new Date(base - i * 86400000).toISOString().slice(0, 10);
+      out.push(!!(log[k] && Object.keys(log[k]).length));
+    }
+    return out;
+  }
+
+  // Kartu streak visual: angka + 7 titik + nama (1080x1350, pola gambarKartu).
+  async function gambarStreak(n, aktif) {
+    const W = 1080, H = 1350;
+    const cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    const g = cv.getContext('2d');
+    try { await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1200))]); } catch (e) { /* font sistem */ }
+    const bg = g.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, '#fff8ec'); bg.addColorStop(1, '#ffe9c2');
+    g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    const cols = ['#ffd23f', '#0e9f6e', '#2f6fed', '#ff6b6b', '#9b4dde', '#ff9f1c'];
+    for (let i = 0; i < 90; i++) {
+      g.fillStyle = cols[i % cols.length]; g.globalAlpha = 0.45;
+      const s = 10 + ((i * 37) % 22);
+      g.fillRect((i * 167) % W, (i * 251) % H, s, s * 0.6);
+    }
+    g.globalAlpha = 1;
+    g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+    g.fillStyle = '#2b2d42';
+    g.font = '800 64px "Baloo 2", sans-serif';
+    g.fillText('🌙 Taman Ilmu', W / 2, 140);
+    g.font = '200px "Baloo 2", sans-serif';
+    g.fillText('🔥', W / 2, 400);
+    g.fillStyle = '#2b2d42';
+    g.font = '800 84px "Baloo 2", sans-serif';
+    wrapText(g, n + ' hari beruntun!', W / 2, 560, 920, 96);
+    g.fillStyle = '#6b6f86';
+    g.font = '700 44px "Baloo 2", sans-serif';
+    g.fillText('7 hari terakhir:', W / 2, 680);
+    for (let i = 0; i < 7; i++) {
+      g.beginPath();
+      g.arc(W / 2 - 390 + i * 130, 780, 52, 0, Math.PI * 2);
+      g.fillStyle = aktif[i] ? '#ff9f1c' : '#d9d2c3';
+      g.fill();
+      if (aktif[i]) {
+        g.fillStyle = '#ffffff';
+        g.font = '700 56px "Baloo 2", sans-serif';
+        g.fillText('★', W / 2 - 390 + i * 130, 800);
+      }
+    }
+    const nama = (TI.state.profile && TI.state.profile.nama) || '';
+    g.fillStyle = '#0e9f6e';
+    g.font = '800 62px "Baloo 2", sans-serif';
+    g.fillText(nama, W / 2, 920);
+    g.fillStyle = '#6b6f86';
+    g.font = '700 50px "Baloo 2", sans-serif';
+    g.fillText(ringkas(), W / 2, 990);
+    g.fillStyle = '#ffffff';
+    rr(g, 90, 1040, W - 180, 180, 36); g.fill();
+    g.fillStyle = '#2b2d42';
+    g.font = '700 44px "Baloo 2", sans-serif';
+    g.fillText('Ayo main juga, gratis!', W / 2, 1115);
+    g.fillStyle = '#2f6fed';
+    g.font = '700 38px monospace';
+    g.fillText(BASE.replace(/^https?:\/\//, ''), W / 2, 1175);
+    g.fillStyle = '#6b6f86';
+    g.font = '700 38px "Baloo 2", sans-serif';
+    g.fillText(totalGame() + ' game edukasi anak Islami', W / 2, 1290);
+    return cv;
+  }
+
+  // Pamer Rajin visual: kartu gambar; gagal/kanvas rusak = fallback teks streak().
+  async function streakCard() {
+    const n = (TI.state.streak && TI.state.streak.count) || 0;
+    if (n < 2) return streak();
+    let blob = null;
+    try {
+      const cv = await gambarStreak(n, tujuhHari());
+      blob = await new Promise((res) => cv.toBlob(res, 'image/png'));
+    } catch (e) { blob = null; }
+    if (!blob) return streak();
+    const nama = (TI.state.profile && TI.state.profile.nama) || '';
+    const file = new File([blob], 'taman-ilmu-streak-' + n + '.png', { type: 'image/png' });
+    const teks = (nama ? nama + ' sudah' : 'Aku sudah') + ' main Taman Ilmu ' + n +
+      ' hari berturut-turut! Sekarang ' + ringkas() + '. Ayo ikut: ' + inviteURL();
+    return kirimGambar(file, blob, 'Streak ' + n + ' Hari · Taman Ilmu', teks);
+  }
+
   // Laporan anak untuk pasangan/keluarga: ringkasan kemajuan jenjang aktif.
   function laporan() {
     const lvl = TI.state.level === 'sd' ? 'SD' : 'TK';
@@ -541,5 +631,5 @@
     }
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, laporanMingguan, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang, duelCard };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, streakCard, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, laporanMingguan, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang, duelCard };
 })();

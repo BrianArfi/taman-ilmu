@@ -66,7 +66,7 @@
   function pruneDayLog() {
     const st = TI.state;
     const keep = {};
-    for (const k of Object.keys(st.dayLog).sort().slice(-3)) keep[k] = st.dayLog[k];
+    for (const k of Object.keys(st.dayLog).sort().slice(-7)) keep[k] = st.dayLog[k]; // 7 hari: titik kartu streak
     st.dayLog = keep;
   }
 
