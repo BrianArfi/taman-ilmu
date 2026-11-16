@@ -218,6 +218,18 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
 .lapor-mini { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; margin: 0 0 10px; padding: 9px 16px; border: 0; border-radius: 999px; background: var(--card); box-shadow: 0 3px 0 var(--shadow); font-weight: 800; font-size: 0.95rem; color: inherit; cursor: pointer; }
 .lapor-mini b { color: var(--good); }
 
+/* ---------- populer pekan ini ---------- */
+.populer { margin: 0 0 14px; padding: 12px 14px; border-radius: var(--radius); background: var(--card); box-shadow: 0 5px 0 var(--shadow); border-top: 6px solid var(--sun); }
+.pop-judul { margin: 0 0 8px; font-size: 1.1rem; }
+.pop-row { display: flex; align-items: center; gap: 10px; padding: 7px 8px; border-radius: 12px; text-decoration: none; color: inherit; }
+.pop-row:active { background: var(--good-bg); }
+.pop-rank { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--sun); font-weight: 800; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; }
+.pop-icon { font-size: 1.5rem; line-height: 1; }
+.pop-title { flex: 1 1 auto; min-width: 0; font-weight: 800; }
+.pop-count { flex: none; font-size: 0.85rem; color: var(--muted); font-weight: 700; }
+.populer .ti-btn { width: 100%; margin-top: 8px; }
+.card-pop { position: absolute; top: 8px; right: 8px; padding: 2px 10px; border-radius: 999px; background: var(--sun); font-size: 0.75rem; font-weight: 800; }
+
 /* ---------- banner nama pertama kali ---------- */
 .nama-banner {
   display: flex; align-items: center; gap: 12px; flex-wrap: wrap;

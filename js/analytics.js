@@ -149,6 +149,23 @@
     };
   }
 
+  // Top game server (cache per jendela; offline = cache atau null).
+  const POP_STORE = 'tamanIlmu.populer.';
+  async function fetchPopuler(window) {
+    window = window === 'day' || window === 'all' ? window : 'week';
+    let cached = null;
+    try { cached = JSON.parse(localStorage.getItem(POP_STORE + window) || 'null'); } catch (e) { cached = null; }
+    if (!online()) return cached;
+    try {
+      const r = await fetch(CFG.BOARD_URL + '/stats/populer?window=' + window, { signal: AbortSignal.timeout(6000) });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const g = await r.json();
+      const out = { window, key: g.key || '', games: (g.games || []).slice(0, 10), at: Date.now() };
+      try { localStorage.setItem(POP_STORE + window, JSON.stringify(out)); } catch (e) { /* abaikan */ }
+      return out;
+    } catch (e) { return cached; }
+  }
+
   // ---------- dashboard #/statistik (milik perangkat ini + global kalau ada server) ----------
   async function fetchGlobal(host) {
     if (!CFG.STATS_UP) {
@@ -168,6 +185,14 @@
         TI.h('div', { class: 'stat-card' }, TI.h('b', null, String(g.plays ?? '-')), TI.h('span', null, 'Total main (global)')),
         TI.h('div', { class: 'stat-card' }, TI.h('b', null, String(g.finishes ?? '-')), TI.h('span', null, 'Selesai (global)')),
         TI.h('div', { class: 'stat-card' }, TI.h('b', null, String(g.shares ?? '-')), TI.h('span', null, 'Dibagikan (global)'))));
+      fetchPopuler('week').then((pop) => {
+        if (!pop || !pop.games || !pop.games.length) return;
+        const top = pop.games.slice(0, 3).map((p, i) => {
+          const gm = (TI.games || []).find((x) => x.id === p.gid);
+          return (i + 1) + '. ' + (gm ? gm.title : p.gid) + ' (' + p.plays + ' main)';
+        }).join(', ');
+        host.append(TI.h('p', { class: 'board-note' }, 'Terpopuler pekan ini: ' + top));
+      }).catch(() => {});
     } catch (e) {
       host.replaceChildren(TI.h('p', { class: 'board-note' }, 'Server statistik belum menjawab. Coba lagi nanti.'));
     }
@@ -280,7 +305,7 @@
     return app;
   }
 
-  TI.Stats = { track, summary };
+  TI.Stats = { track, summary, fetchPopuler };
   TI.VIEWS = TI.VIEWS || {};
   TI.VIEWS.statistik = render;
 })();

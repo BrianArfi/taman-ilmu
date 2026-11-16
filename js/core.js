@@ -546,6 +546,30 @@
     if (klaimBanner) app.append(klaimBanner);
     if (tantangBanner) app.append(tantangBanner);
     if (duelUlang) app.append(duelUlang);
+    if (TI.Stats && TI.Stats.fetchPopuler) {
+      const popHost = h('section', { class: 'populer', 'aria-label': 'Game populer pekan ini' });
+      app.append(popHost);
+      TI.Stats.fetchPopuler('week').then((pop) => {
+        const rows = ((pop && pop.games) || []).map((p) => ({ p, g: games.find((x) => x.id === p.gid) })).filter((r) => r.g).slice(0, 5);
+        if (!rows.length) { popHost.remove(); return; }
+        const wkNow = TI.Progression ? TI.Progression.weekKey() : '';
+        popHost.append(h('h2', { class: 'pop-judul' }, '🔥 ' + (pop.key && pop.key !== wkNow ? 'Populer pekan ' + pop.key : 'Populer pekan ini')));
+        rows.forEach((r, i) => {
+          popHost.append(h('a', { class: 'pop-row', href: '#/main/' + r.g.id, onclick: () => sfx('tap') },
+            h('span', { class: 'pop-rank' }, String(i + 1)),
+            h('span', { class: 'pop-icon', 'aria-hidden': 'true' }, r.g.icon || '🎮'),
+            h('span', { class: 'pop-title' }, r.g.title),
+            h('span', { class: 'pop-count' }, r.p.plays + ' main')));
+        });
+        const g1 = rows[0].g;
+        const best1 = (state.stars[g1.id] || {})[state.level] || 0;
+        if (TI.Share) popHost.append(h('button', { type: 'button', class: 'ti-btn tan-ajak', onclick: () => { sfx('tap'); TI.Share.tantangPopuler(g1, best1, 1); } }, '🏆 Tantang teman di ' + g1.title));
+        rows.slice(0, 3).forEach((r) => {
+          const card = grid.querySelector('a[href="#/main/' + r.g.id + '"]');
+          if (card && !card.querySelector('.card-pop')) card.append(h('span', { class: 'card-pop' }, 'Populer'));
+        });
+      }).catch(() => popHost.remove());
+    }
     app.append(grid,
       h('footer', { class: 'home-foot' },
         h('button', { type: 'button', class: 'ajak-btn', 'aria-label': 'Ajak teman main Taman Ilmu', onclick: () => { sfx('tap'); if (TI.Share) TI.Share.invite(); } }, '📣 Ajak teman main'),

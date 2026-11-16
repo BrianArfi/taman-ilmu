@@ -161,6 +161,15 @@
       : 'Tantangan Pekan Ini: game ' + game.title + '! Semua anak main game yang sama minggu ini.' + sr + ' Ikut main dan tantang aku: ' + challengeURL(game, 1);
     return bagikan('Tantangan Pekan · Taman Ilmu', teks);
   }
+  // Tantangan populer: adu skor di game terpopuler pekan ini (jujur ikut status main).
+  function tantangPopuler(game, best, rank) {
+    try { if (TI.Stats) TI.Stats.track('challenge', {}); } catch (e) { /* abaikan */ }
+    const bintang = '⭐'.repeat(Math.max(1, best)) + ' (' + Math.max(1, best) + '/3)';
+    const teks = best > 0
+      ? 'Aku dapat ' + bintang + ' di ' + game.title + ', game terpopuler #' + rank + ' pekan ini! Berani terima tantanganku? Kalahkan skorku di sini: ' + challengeURL(game, best)
+      : 'Game terpopuler #' + rank + ' pekan ini: ' + game.title + '! Ikut main dan tantang aku: ' + challengeURL(game, 1);
+    return bagikan('Tantangan Populer · Taman Ilmu', teks);
+  }
   // Tantang keluarga: dibagikan orang tua ke grup WA keluarga, sudut pandang nama anak.
   function tantangKeluarga(game, stars) {
     try { if (TI.Stats) TI.Stats.track('challenge', {}); } catch (e) { /* abaikan */ }
@@ -648,5 +657,5 @@
     }
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, streakCard, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, laporanMingguan, laporanTPA, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang, duelCard };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, streakCard, card, cetak, tantangKeluarga, tantangKelas, tantangPopuler, inviteOrtu, tantangPekan, laporan, laporanMingguan, laporanTPA, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang, duelCard };
 })();
