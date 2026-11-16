@@ -20,7 +20,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Laporan guru TPA.** Dashboard tanpa angka untuk guru. Varian teks: Hijaiyah/Shalat/Wudhu + hari main, forward grup TPA. Lokasi: analytics.js:219-225 + share.js:199-231. Effort S, dampak 4, ustadz tidak.
 - **Lencana Juara Duel.** Juara best-of-3 tanpa lencana. Grant badge saat final dimenangkan. Lokasi: core.js duelUi + badges.js DEFS. Effort S, dampak 3, ustadz tidak.
 - **Jumat: tonjolkan ringkasan.** Laporan mingguan pasif menunggu dibuka. Tiap Jumat tonjolkan tombol ringkasan (bukan kirim otomatis). Lokasi: analytics.js + share laporanMingguan. Effort S, dampak 3, ustadz tidak (revive parkir P7).
 - **Tautkan ortu dari statistik.** Dashboard tak menautkan poin aman/pasang. Tautan + tombol ke #/orangtua. Lokasi: analytics.js render + ortu.js:8-14. Effort S, dampak 3, ustadz tidak (revive parkir P7).
@@ -36,6 +35,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Laporan guru TPA** (S132): teks kualitatif tanpa skor (status 3 game islam + hari main) + tombol dasbor. Probe 1/1, ui 12/12, gami 62/62. Detail: cycle-20261116-s132.md.
 - **Kartu streak visual + unlock total terverifikasi** (S131): gambarStreak 1080x1350 (angka+7 titik+nama) di streak-party + Pamer Rajin, pruneDayLog 7 hari, gembok lencana jadi ikon abu-abu. Probe 2/2 + critic 0 major, ui 12/12, gami 62/62. Detail: cycle-20261116-s131.md.
 - **TPA: tombol Tantangan Kelas** (S116): preset 3 game islam + teks jujur best-0. Probe 5/5, ui 12/12, gami 61/61. Detail: cycle-20261116-s116.md.
 - **CTA Ajak level-up + bonus 3** (S115): CTA hasil + klaim ke-3 +35. Probe 7/7, ui 12/12, gami 61/61. Detail: cycle-20261116-s115.md.
