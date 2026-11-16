@@ -39,9 +39,12 @@
           if (TI.Stats) TI.Stats.track('promo_click', { id: 'orangtua-pasang' });
           TI.PWA.pasang();
         } }, '📲 Pasang ke Layar Utama'),
-        TI.h('span', { class: 'ortu-note', 'data-pwa': 'manual' }, '📲 ' + (TI.PWA.manual() || ''))) : null;
+        TI.h('span', { class: 'ortu-note', 'data-pwa': 'manual' }, '📲 ' + (TI.PWA.manual() || '')),
+        TI.Share ? TI.h('button', { type: 'button', class: 'ti-btn is-ghost ortu-cta', onclick: () => { TI.sfx('tap'); TI.Share.panduanPasang(); } }, '📖 Panduan pasang ke WA-ku') : null) : null;
     const pasangIos = TI.PWA && !TI.PWA.mandiri() && TI.PWA.ios()
-      ? TI.h('p', { class: 'ortu-note' }, '📲 Pasang ke Layar Utama: ketuk Bagikan di Safari, lalu Tambah ke Layar Utama.') : null;
+      ? TI.h('span', { class: 'ortu-pasang' },
+        TI.h('p', { class: 'ortu-note' }, '📲 Pasang ke Layar Utama: ketuk Bagikan di Safari, lalu Tambah ke Layar Utama.'),
+        TI.Share ? TI.h('button', { type: 'button', class: 'ti-btn is-ghost ortu-cta', onclick: () => { TI.sfx('tap'); TI.Share.panduanPasang(); } }, '📖 Panduan pasang ke WA-ku') : null) : null;
     const hal = TI.page('Untuk Orang Tua', 'Kenapa Taman Ilmu aman dipasang di HP anak.',
       TI.h('div', { class: 'ortu-hero pop-in' },
         TI.h('span', { class: 'ortu-icon', 'aria-hidden': 'true' }, '🛡️'),

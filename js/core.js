@@ -367,9 +367,11 @@
       ? h('div', { class: 'pwa-banner pop-in' },
         h('span', { class: 'pwa-txt' }, '📲 Pasang Taman Ilmu di layar utama biar gampang dibuka.'),
         h('button', { type: 'button', class: 'ti-btn pwa-go', 'data-pwa': 'pasang', hidden: true, onclick: () => { sfx('tap'); pwaPasang(); } }, 'Pasang'),
-        h('span', { class: 'pwa-manual', 'data-pwa': 'manual' }, pwaManual() || '')) : null;
+        h('span', { class: 'pwa-manual', 'data-pwa': 'manual' }, pwaManual() || ''),
+        TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost pwa-panduan', onclick: () => { sfx('tap'); TI.Share.panduanPasang(); } }, '📖 Panduan') : null) : null;
     const pwaIosEl = (!pwaStandalone() && pwaIos())
-      ? h('div', { class: 'pwa-banner pop-in' }, h('span', { class: 'pwa-txt' }, '📲 Pasang ke Layar Utama: ketuk Bagikan, lalu Tambah ke Layar Utama.')) : null;
+      ? h('div', { class: 'pwa-banner pop-in' }, h('span', { class: 'pwa-txt' }, '📲 Pasang ke Layar Utama: ketuk Bagikan, lalu Tambah ke Layar Utama.'),
+        TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost pwa-panduan', onclick: () => { sfx('tap'); TI.Share.panduanPasang(); } }, '📖 Panduan') : null) : null;
 
     // Strip kepercayaan: sinyal aman untuk orang tua dalam 10 detik pertama.
     const trustStrip = h('a', { class: 'trust-strip pop-in', href: '#/orangtua',

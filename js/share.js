@@ -230,6 +230,21 @@
       ' Total ' + fin + ' kali selesai main.' + rajin + ' Pasang gratis di HP: ' + inviteURL());
   }
 
+  // Panduan pasang ke WA sendiri: teks langkah per platform + tautan.
+  function panduanPasang() {
+    let plat = 'desktop';
+    try {
+      const ua = navigator.userAgent || '';
+      if (/iphone|ipad|ipod/i.test(ua)) plat = 'ios';
+      else if (/android/i.test(ua)) plat = 'android';
+    } catch (e) { /* abaikan */ }
+    const langkah = plat === 'ios'
+      ? '1. Buka tautan ini di Safari: ' + BASE + ' 2. Ketuk Bagikan (kotak panah ke atas). 3. Pilih Tambah ke Layar Utama. 4. Ketuk Tambah.'
+      : plat === 'android'
+        ? '1. Buka tautan ini di Chrome: ' + BASE + ' 2. Ketuk menu titik tiga. 3. Pilih Tambah ke Layar Utama / Install aplikasi.'
+        : '1. Buka tautan ini di Chrome/Edge: ' + BASE + ' 2. Klik menu titik tiga. 3. Pilih Install aplikasi.';
+    return bagikan('Panduan Pasang · Taman Ilmu', 'Cara pasang Taman Ilmu biar gampang dibuka: ' + langkah);
+  }
   // Kartu info ortu: teks alasan aman siap forward ke grup WA.
   function infoOrtu() {
     const poin = TI.OrtuPoin || [];
@@ -458,5 +473,5 @@
     }
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, laporanMingguan, infoOrtu, klaimURL, klaimBalik, pratinjau };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, card, cetak, tantangKeluarga, tantangKelas, inviteOrtu, tantangPekan, laporan, laporanMingguan, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang };
 })();
