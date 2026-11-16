@@ -20,6 +20,11 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
+- **Listrik: saklar note jadi toast.** Momen lampu menyala mati oleh ceramah dibacakan penuh. Note Tahukah-kamu jadi toast 1 kalimat tanpa sayWait. Lokasi: 37-listrik.js:429-430. Effort S, dampak 4, ustadz tidak (P10).
+- **Loncat: umpan kelebihan langsung.** Ketuk Loncat kelebihan tanpa umpan balik sampai tekan Sudah. Saat sudah>b: bola goyang + sfx + say Kebanyakan di ketukan itu. Lokasi: 29-loncat.js:262-273. Effort S, dampak 4, ustadz tidak (P10).
+- **Pamer Rekor Baru.** isBest dihitung tapi tak dipakai; momen menang terbuang. Chip Rekor Baru + tombol sekali-ketuk kirim kartu skor. Lokasi: core.js:1023 + 1117-1130 + share.js card. Effort S, dampak 4, ustadz tidak (P10).
+- **Pasang di statistik.** Momen yakin ortu tanpa CTA pasang. Banner Pasang di bawah hero + reuse pwaPaint. Lokasi: analytics.js:261-265 + core.js pwaPaint. Effort S, dampak 4, ustadz tidak (P10).
+- **Tangga Duta progresif.** Bonus ajak datar +20. Tangga 1/3/5/10 teman (XP 20/35/50/100) + progres di banner klaim. Lokasi: progress.js:197-215 + core.js:464-473. Effort S, dampak 4, ustadz tidak (P10).
 - **Adu Rajin 7 Hari.** Duel sekali-putus, tak ada alasan balik harian. Duel konsistensi 7 hari via dayLog + kartu juara pola gambarDuel. Lokasi: share.js:121-144 + core.js:1056-1092. Effort M, dampak 5, ustadz tidak (P9).
 - **Kartu Jumat mingguan.** Momen Jumat belum bisa diforward sebagai gambar. Kartu 1 ketuk: 7 titik + game islam pekan ini + ajakan. Lokasi: core.js:555 + share.js gambarStreak + analytics.js:220-233. Effort M, dampak 5, ustadz tidak (P9, gabung 2 ide).
 - **Kartu prestasi dashboard.** Ortu tak bisa pamerkan kemajuan. Tombol "Buat kartu prestasi" di statistik via gambarKartu. Lokasi: analytics.js:191-250 + share.js:267+. Effort M, dampak 5, ustadz tidak.
@@ -127,6 +132,11 @@ dampak 1-5; ustadz ya/tidak.
 - **Hijaiyah ronde aksi tiap 2 soal (16 Nov, putaran 9).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
 - **TAHAN ustadz: Sertifikat mini per game islam (16 Nov, putaran 9).** Teks capaian agama per game (mis. hafal urutan wudhu); tahan sampai review ustadz.
 
+- **Hijaiyah strip koleksi 28 huruf (17 Nov, putaran 10).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
+- **TAHAN ustadz: Puasa gabung gate babak (17 Nov, putaran 10).** Menggabung kalimat fakta puasa; tahan sampai review ustadz.
+- **TAHAN ustadz: Sertifikat Hijaiyah + Wudhu (17 Nov, putaran 10).** Perluasan pola sertifikat ke game hijaiyah; tahan sampai review ustadz.
+- **Kartu gambar Laporan Mingguan (P10).** SUDAH TERCakup TODO Kartu Jumat mingguan (P9); tidak diduplikat.
+
 ## PARKIR
 
 - **Balapan Duta (P9, S3).** Kartu Pamer Duta + Top Pengajak mingguan. Lokasi: share.js pola rank + board.js + badges.js. Parkir: kalah slot 12.
@@ -135,3 +145,11 @@ dampak 1-5; ustadz ya/tidak.
 - **Liga Sepupu (P9, L5).** Kode liga multipemain keluarga. Parkir: effort L dilewati watcher.
 - **Kunci Ortu PIN + batas waktu (P9, L5).** PIN + durasi harian + kunci papan. Parkir: effort L dilewati watcher.
 - **Pasang + panduan WA 1 ketuk (P9).** SUDAH DIBANGUN di S123; tidak masuk TODO.
+
+- **Kartu Tantangan bergambar (P10, M5).** Challenge teks-only jadi kartu gambar + tombol. Lokasi: share.js baru + core.js:1042-1047. Parkir: kalah slot 12.
+- **Trust home + angka global (P10, M5).** Trust-strip jadi kartu 3 poin + social proof server (STATS_UP sudah true). Lokasi: core.js:379-383. Parkir: kalah slot 12.
+- **Wujud toast pertama tunggu ketuk (P10, S3).** Tugas pertama tanpa timer 2800ms. Lokasi: 19-wujud.js:148-151. Parkir: kalah slot 12.
+- **Duel Streak antar teman (P10, M4).** Tautan adu streak + kartu. Lokasi: share.js + core.js banner. Parkir: kalah slot 12.
+- **Lapor ke grup kelas di finish (P10, M4).** Tombol lapor balik tutup loop Tantangan Kelas. Lokasi: core.js:1130 + share.js laporanTPA. Parkir: kalah slot 12.
+- **Raja-taman serangan balik perisai (P10, M4).** Tiap 2 benar: ketuk perisai 3x blokir. Lokasi: 100-raja-taman.js:147-184. Parkir: kalah slot 12.
+- **Tantangan Kelas berpapan (P10, L5).** Kode kelas + papan mini. Parkir: effort L dilewati watcher.
