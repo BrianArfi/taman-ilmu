@@ -313,7 +313,9 @@
           gambarTugas(i);
           ctl.hidden = true; msg.hidden = true;
           if (!auto) await ctx.correct(null, { say: 'Hebat!' });
-          await afterNote(ctx, task.note, ctx.isSD ? 'Istilah baru' : 'Hore!');
+          // Hemat: ceramah afterNote hanya tugas pertama + terakhir; tengah cukup Hebat.
+          const tengah = i > 0 && i < tasks.length - 1;
+          if (!tengah) await afterNote(ctx, task.note, ctx.isSD ? 'Istilah baru' : 'Hore!');
         }
         if (!ctx.alive) return;
         if (lab.stop) lab.stop(); if (ctx.alive) ctx.correct(null, { say: 'Bagus! Terus naik ke babak pilah!' });
