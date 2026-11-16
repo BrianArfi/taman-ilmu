@@ -88,13 +88,13 @@
           ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Ingat-ingat arti tiap ucapan ya!'));
           ctx.say('Ingat-ingat arti tiap ucapan ya!');
         }
-        // Ucapan: tampilkan dan bacakan artinya. Perbuatan: langsung lanjut.
+        // Ucapan: tampilkan dan bacakan artinya lalu lanjut sendiri. Perbuatan: langsung lanjut.
         const arti = ARTI[s.a];
         if (arti) {
           const pilihan = ctx.el.querySelector('.ti-choices');
           if (pilihan) pilihan.classList.add('is-done'); // sembunyikan pilihan yang salah supaya artinya muat di layar
-          ctx.note('"' + s.a + '" berarti ' + kecil(arti) + '.', { title: 'Artinya:' });
-          ctx.sfx('pop'); await ctx.next();
+          const kalimat = '"' + s.a + '" berarti ' + kecil(arti) + '.'; ctx.note(kalimat, { title: 'Artinya:', speak: false });
+          ctx.sfx('pop'); await ctx.sayWait(kalimat);
         }
       }, {
         message: TI.cobaMode ? 'Gratis, offline, tanpa iklan, pasang di HP anak!' : undefined,
