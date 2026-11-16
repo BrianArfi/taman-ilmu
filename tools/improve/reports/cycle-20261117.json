@@ -1,0 +1,25 @@
+{
+ "date": "20261117",
+ "version": "improve-v1.0",
+ "rows": [
+  {
+   "id": "listrik",
+   "title": "Rangkaian Listrik",
+   "cat": "sains",
+   "file": "37-listrik.js",
+   "static100": 86,
+   "dyn100": 99,
+   "plays": 4,
+   "finished": 4,
+   "avgActions": 84,
+   "overflow": 0,
+   "escFail": 0,
+   "eng100": null,
+   "fun": 92,
+   "cls": "A",
+   "sug": [
+    "sesi 2 soal: ideal 6-10 soal (2-4 menit)"
+   ]
+  }
+ ]
+}

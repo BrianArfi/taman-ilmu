@@ -20,7 +20,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Listrik: saklar note jadi toast.** Momen lampu menyala mati oleh ceramah dibacakan penuh. Note Tahukah-kamu jadi toast 1 kalimat tanpa sayWait. Lokasi: 37-listrik.js:429-430. Effort S, dampak 4, ustadz tidak (P10).
 - **Loncat: umpan kelebihan langsung.** Ketuk Loncat kelebihan tanpa umpan balik sampai tekan Sudah. Saat sudah>b: bola goyang + sfx + say Kebanyakan di ketukan itu. Lokasi: 29-loncat.js:262-273. Effort S, dampak 4, ustadz tidak (P10).
 - **Pamer Rekor Baru.** isBest dihitung tapi tak dipakai; momen menang terbuang. Chip Rekor Baru + tombol sekali-ketuk kirim kartu skor. Lokasi: core.js:1023 + 1117-1130 + share.js card. Effort S, dampak 4, ustadz tidak (P10).
 - **Pasang di statistik.** Momen yakin ortu tanpa CTA pasang. Banner Pasang di bawah hero + reuse pwaPaint. Lokasi: analytics.js:261-265 + core.js pwaPaint. Effort S, dampak 4, ustadz tidak (P10).
@@ -39,6 +38,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Listrik: saklar note jadi toast** (S143): note intro 1 kalimat + lanjut manual. Probe 3/3, A92 tetap. Detail: cycle-20261117-s143.md.
 - **Tautkan ortu dari statistik** (S142): baris kepercayaan + tautan #/orangtua di dasbor. Probe 1/1, ui 12/12, gami 62/62. Detail: cycle-20261117-s142.md.
 - **Wujud: afterNote hemat** (S141): ceramah hanya tugas pertama+terakhir, tengah cukup Hebat. Probe 3/3, A92 tetap. Detail: cycle-20261116-s141.md.
 - **Loncat: demo ulang hanya bila salah** (S137): buang qi%3==2 di TK+SD, demo hanya bila salah>0. Probe 2/2, statis 86 tetap, merge A92. Detail: cycle-20261116-s137.md.
