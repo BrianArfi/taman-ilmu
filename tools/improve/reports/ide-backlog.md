@@ -18,7 +18,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Wujud: toast + Kok bisa.** afterNote wajib habis dibaca tiap tugas (3-4x). Ganti toast 1 kalimat hilang-sendiri + tombol opsional penjelasan penuh. Lokasi: 19-wujud.js:137-151,281. Effort S, dampak 4, ustadz tidak.
 - **Loncat SD: petunjuk arah.** Salah-1 di 21 batu cuma "Belum tepat" tanpa arah. Ucapkan kebesaran/kekecilan + denyutkan 3 batu arah benar. Lokasi: 29-loncat.js:423. Effort S, dampak 4, ustadz tidak.
 - **CTA Ajak saat level-up + bonus 3.** Momen menang tak dipakai ajak. Tombol Ajak di hasil saat levelUp + bonus XP klaim ke-3 (sisa ide P6; strip+tier DONE S109). Lokasi: core.js showResult + progress klaimBonus. Effort S, dampak 4, ustadz tidak.
 - **TPA: tombol Tantangan Kelas.** tantangKelas tersembunyi di kode. Tombol di statistik + preset game islam buat guru sebar ke grup WA. Lokasi: analytics.js render + share.js:174-183. Effort S, dampak 4, ustadz tidak.
@@ -36,6 +35,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Wujud: toast + Kok bisa** (S113): toast 1 kalimat 2,8 dtk + Kok bisa penuh. Probe 7/7. Detail: cycle-20261116-s113.md.
 - **Raja: lolos ikut damage** (S112): lolos -1 HP + pop tiap damage. Probe 6/6. Detail: cycle-20261116-s112.md.
 - **Laporan mingguan teks forward** (S111): ringkasan 7 hari + total + ajakan. Probe 4/4, ui 12/12, gami 60/60. Detail: cycle-20261116-s111.md.
 - **Tantang per baris papan** (S110): tombol duel rival di atasmu + best>0. Probe 7/7, ui 12/12, gami 60/60. Detail: cycle-20261116-s110.md.
