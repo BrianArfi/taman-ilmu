@@ -133,19 +133,32 @@
     return lab;
   }
 
-  // Satu kotak "lanjut" di bawah lab: dibacakan lalu jalan sendiri; tombol cuma pemercepat.
+  // Toast 1 kalimat yang hilang sendiri; "Kok bisa?" membuka penjelasan penuh.
   async function afterNote(ctx, text, title) {
     const box = h('div', { class: 'wj-after' });
     ctx.el.append(box);
-    ctx.note(text, { title, into: box, speak: false });
+    const m = String(text).match(/^.*?[.!?](\s|$)/);
+    const singkat = m ? m[0].trim() : String(text);
+    const toast = h('button', { type: 'button', class: 'wj-toast pop-in', 'aria-label': singkat + ' Ketuk untuk lanjut' },
+      (title ? title + ': ' : '') + singkat);
+    const kok = h('button', { type: 'button', class: 'ti-btn is-ghost' }, 'Kok bisa?');
+    box.append(toast, kok);
+    ctx.say(singkat);
     await new Promise((resolve) => {
       let done = false;
       const lanjut = () => { if (!done) { done = true; resolve(); } };
-      const b = h('button', { type: 'button', class: 'ti-btn is-ghost pop-in' }, 'Lanjut ➜');
-      b.addEventListener('click', () => { TI.sfx('tap'); b.disabled = true; lanjut(); });
-      box.append(b);
-      ctx.onExit(lanjut);
-      ctx.sayWait(text).then(lanjut);
+      const t = setTimeout(lanjut, 2800);
+      toast.addEventListener('click', () => { TI.sfx('tap'); clearTimeout(t); lanjut(); });
+      kok.addEventListener('click', async () => {
+        TI.sfx('tap'); clearTimeout(t); kok.disabled = true; toast.disabled = true;
+        ctx.note(text, { title, into: box, speak: false });
+        const b = h('button', { type: 'button', class: 'ti-btn is-ghost pop-in' }, 'Lanjut ➜');
+        b.addEventListener('click', () => { TI.sfx('tap'); b.disabled = true; lanjut(); });
+        box.append(b);
+        await ctx.sayWait(text);
+        lanjut();
+      });
+      ctx.onExit(() => { clearTimeout(t); lanjut(); });
     });
     box.remove();
   }
@@ -169,6 +182,7 @@
 .play[data-game="wujud"] .wj-slide .ti-slider { width: 100%; }
 .play[data-game="wujud"] .wj-msg { margin: 0; min-height: 1.5em; width: 100%; max-width: 560px; text-align: center; font-weight: 800; color: var(--muted); }
 .play[data-game="wujud"] .wj-after { display: grid; justify-items: center; gap: 14px; width: 100%; max-width: 760px; }
+.play[data-game="wujud"] .wj-toast { border: 0; border-radius: 999px; background: var(--card); box-shadow: 0 4px 0 var(--shadow); padding: 10px 18px; font: inherit; font-weight: 800; max-width: 100%; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) { .play[data-game="wujud"] .wj-ctl .ti-btn.is-hint { animation: none; outline: 4px solid var(--sun); } }
 `);
       const tasks = ctx.isTK ? TK_TASKS : SD_TASKS;
