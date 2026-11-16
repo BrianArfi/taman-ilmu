@@ -203,6 +203,7 @@
     const levelUp = lv > st.profile.level;
     st.profile.level = lv;
     if (TI.Badges) TI.Badges.grant('duta');
+    if (TI.Badges) TI.Badges.evaluate(true);
     if (TI.save) TI.save();
     return { xp: 20, levelUp, level: lv };
   }

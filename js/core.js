@@ -398,6 +398,8 @@
         h('div', { class: 'xp-bar', role: 'progressbar', 'aria-label': 'XP pemain', 'aria-valuenow': String(prof.xp || 0), 'aria-valuemax': String(info.next) },
           h('i', { class: 'xp-fill', style: { transform: 'scaleX(' + frac + ')' } })),
         h('span', { class: 'xp-txt' }, (prof.xp || 0) + ' / ' + info.next + ' XP'),
+        h('span', { class: 'duta-prog', 'aria-label': 'Teman yang diajak ' + Object.keys(state.klaimDari || {}).length + ' dari 5' },
+          '🎖️ Ajak ' + Object.keys(state.klaimDari || {}).length + '/5 teman'),
         h('button', { type: 'button', class: 'strip-badges', 'aria-label': 'Lihat lencana', onclick: () => { sfx('tap'); location.hash = '#/lencana'; } },
           tea.icons.map((ic) => h('span', { class: 'tea-ic', 'aria-hidden': 'true' }, ic)),
           h('span', { class: 'strip-more' }, tea.icons.length ? '+' + tea.more + ' lagi' : '0 / ' + tea.total))),
