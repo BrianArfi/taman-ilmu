@@ -181,6 +181,7 @@
 .play[data-game="wujud"] .wj-slide { display: grid; gap: 2px; width: 100%; max-width: 520px; }
 .play[data-game="wujud"] .wj-slide .ti-slider { width: 100%; }
 .play[data-game="wujud"] .wj-msg { margin: 0; min-height: 1.5em; width: 100%; max-width: 560px; text-align: center; font-weight: 800; color: var(--muted); }
+.play[data-game="wujud"] .wj-tugas { margin: 0; width: 100%; max-width: 560px; text-align: center; font-weight: 800; color: var(--muted); }
 .play[data-game="wujud"] .wj-after { display: grid; justify-items: center; gap: 14px; width: 100%; max-width: 760px; }
 .play[data-game="wujud"] .wj-toast { border: 0; border-radius: 999px; background: var(--card); box-shadow: 0 4px 0 var(--shadow); padding: 10px 18px; font: inherit; font-weight: 800; max-width: 100%; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) { .play[data-game="wujud"] .wj-ctl .ti-btn.is-hint { animation: none; outline: 4px solid var(--sun); } }
@@ -202,7 +203,14 @@
         const lab = makeLab(ctx);
         const msg = h('p', { class: 'wj-msg', 'aria-live': 'polite' });
         const ctl = h('div', { class: 'wj-ctl' });
-        ctx.el.append(lab.box, msg, ctl);
+        // Baris tugas: chip Tugas i/n + bintang per tugas (penuh tanpa auto-fill).
+        const tugasBar = h('p', { class: 'wj-tugas', 'aria-live': 'polite' });
+        const bintangTugas = [];
+        const gambarTugas = (i) => {
+          const ikon = tasks.map((t, k) => k < bintangTugas.length ? (bintangTugas[k] ? '★' : '☆') : '·').join(' ');
+          tugasBar.textContent = 'Tugas ' + Math.min(i + 1, tasks.length) + ' dari ' + tasks.length + '  ' + ikon;
+        };
+        ctx.el.append(lab.box, msg, tugasBar, ctl);
 
         // kontrol TK: dua tombol besar
         const heat = h('button', { type: 'button', class: 'ti-btn', style: '--c:#ef6a2e' }, '🔥 Panaskan');
@@ -289,7 +297,10 @@
           heat.classList.remove('is-hint'); cool.classList.remove('is-hint');
           if (ctx.isSD) { slider.value = String(task.start); tempVal.textContent = String(task.start); }
           ctx.ask(task.text, task.say ? { say: task.say } : undefined);
+          gambarTugas(i);
           const auto = await (ctx.isTK ? solveTK(task) : solveSD(task));
+          bintangTugas.push(!auto);
+          gambarTugas(i);
           ctl.hidden = true; msg.hidden = true;
           if (!auto) await ctx.correct(null, { say: 'Hebat!' });
           await afterNote(ctx, task.note, ctx.isSD ? 'Istilah baru' : 'Hore!');
