@@ -479,7 +479,15 @@
     let tantangBanner = null;
     try {
       const tc = TI.Share ? TI.Share.parseChallenge() : null;
-      if (tc && state.tantangSeen !== tc.key) {
+      if (tc && tc.mode === 'rajin' && state.tantangSeen !== tc.key) {
+        const hariKu = TI.Share.hariPekan ? TI.Share.hariPekan() : 0;
+        tantangBanner = h('div', { class: 'tantang-banner pop-in', role: 'status' },
+          h('span', { class: 'tantang-txt' }, '🔥 ', h('b', null, tc.dari), ' adu rajin: dia ' + tc.hari + ' hari, kamu ' + hariKu + ' hari minggu ini! Siapa paling rajin?'),
+          h('button', { type: 'button', class: 'ti-btn tantang-go', onclick: () => { sfx('tap'); TI.Share.aduRajin(); } }, 'Balas'),
+          h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => { sfx('tap'); TI.Share.rajinCard(tc.dari, tc.hari); } }, 'Kartu Adu'),
+          h('button', { type: 'button', class: 'nama-later', 'aria-label': 'Tutup',
+            onclick: () => { state.tantangSeen = tc.key; saveState(); showHome(); } }, 'Tutup'));
+      } else if (tc && state.tantangSeen !== tc.key) {
         const seriBalasan = tc.lawan && tc.seri ? tc.seri.split('-') : null;
         const ajakTxt = seriBalasan
           ? ['🔥 ', h('b', null, tc.dari), ' membalas tantanganmu di ' + tc.game.title + '! Skor duel: kamu ' + seriBalasan[1] + ' - ' + seriBalasan[0] + ' ' + tc.dari + '. Berani balas?']
@@ -587,7 +595,8 @@
         h('div', { class: 'foot-links' },
           h('a', { class: 'foot-link', href: '#/statistik', onclick: () => sfx('tap') }, '📊 Laporan Anak'),
           h('a', { class: 'foot-link', href: '#/orangtua', onclick: () => sfx('tap') }, '🛡️ Orang Tua'),
-          h('button', { type: 'button', class: 'foot-link', onclick: () => { sfx('tap'); if (TI.Share) TI.Share.streakCard(); } }, '🔥 Pamer Rajin')),
+          h('button', { type: 'button', class: 'foot-link', onclick: () => { sfx('tap'); if (TI.Share) TI.Share.streakCard(); } }, '🔥 Pamer Rajin'),
+          h('button', { type: 'button', class: 'foot-link', onclick: () => { sfx('tap'); if (TI.Share) TI.Share.aduRajin(); } }, '⚔️ Adu Rajin')),
         h('span', null, 'Dibuat untuk anak-anak. Tanpa iklan. Papan juara butuh internet, sisanya main offline.')));
     pwaPaint();
   }

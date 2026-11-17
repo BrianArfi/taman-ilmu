@@ -126,12 +126,31 @@
     if (seri) u += '&seri=' + encodeURIComponent(seri);
     return u;
   }
+  // Hari aktif pekan ISO berjalan (WIB) dari dayLog.
+  function hariPekan() {
+    const log = TI.state.dayLog || {};
+    if (!TI.Progression) return 0;
+    const wkNow = TI.Progression.weekKey();
+    let n = 0;
+    for (const k of Object.keys(log)) {
+      if (!log[k] || !Object.keys(log[k]).length) continue;
+      let w = '';
+      try { w = TI.Progression.weekKey(new Date(k + 'T12:00:00+07:00')); } catch (e) { continue; }
+      if (w === wkNow) n++;
+    }
+    return n;
+  }
   // Baca tantangan dari URL. null kalau tidak ada atau gamenya tidak dikenal.
   function parseChallenge() {
     try {
       const q = new URLSearchParams(location.search);
       const gid = q.get('tantang');
       if (!gid) return null;
+      const dari0 = String(q.get('dari') || 'Temanmu').slice(0, 16);
+      if (gid === 'rajin') {
+        const hari = Math.max(0, Math.min(7, parseInt(q.get('hari') || '0', 10) || 0));
+        return { mode: 'rajin', hari, dari: dari0, key: 'rajin:' + hari + ':' + dari0 };
+      }
       const game = TI.games.find((g) => g.id === gid);
       if (!game) return null;
       const dari = String(q.get('dari') || 'Temanmu').slice(0, 16);
@@ -169,6 +188,31 @@
       ? 'Aku dapat ' + bintang + ' di ' + game.title + ', game terpopuler #' + rank + ' pekan ini! Berani terima tantanganku? Kalahkan skorku di sini: ' + challengeURL(game, best)
       : 'Game terpopuler #' + rank + ' pekan ini: ' + game.title + '! Ikut main dan tantang aku: ' + challengeURL(game, 1);
     return bagikan('Tantangan Populer · Taman Ilmu', teks);
+  }
+  // Adu Rajin 7 Hari: adu hari aktif pekan ini (jujur: tanpa penentu menang otomatis).
+  function rajinURL(n) {
+    const nama = (TI.state.profile && TI.state.profile.nama) || '';
+    return BASE + '?tantang=rajin&hari=' + n + '&dari=' + encodeURIComponent(nama);
+  }
+  function aduRajin() {
+    try { if (TI.Stats) TI.Stats.track('challenge', {}); } catch (e) { /* abaikan */ }
+    const n = hariPekan();
+    const teks = n > 0
+      ? 'Adu Rajin 7 Hari! Aku sudah main ' + n + ' hari minggu ini. Berani adu rajin denganku? Balas di sini: ' + rajinURL(n)
+      : 'Adu Rajin 7 Hari! Siapa paling rajin main minggu ini? Ikut di sini: ' + rajinURL(0);
+    return bagikan('Adu Rajin · Taman Ilmu', teks);
+  }
+  async function rajinCard(lawan, dia) {
+    const aku = hariPekan();
+    let blob = null;
+    try {
+      const cv = await gambarRajin(aku, dia, lawan);
+      blob = await new Promise((res) => cv.toBlob(res, 'image/png'));
+    } catch (e) { blob = null; }
+    if (!blob) { TI.toast('🖼️', 'Gagal bikin gambar, coba lagi ya'); TI.sfx('salah'); return 'gagal'; }
+    const file = new File([blob], 'taman-ilmu-rajin.png', { type: 'image/png' });
+    const teks = 'Adu Rajin 7 Hari: aku ' + aku + ' hari, ' + lawan + ' ' + dia + ' hari! Ikut adu: ' + rajinURL(aku);
+    return kirimGambar(file, blob, 'Adu Rajin · Taman Ilmu', teks);
   }
   // Tantang keluarga: dibagikan orang tua ke grup WA keluarga, sudut pandang nama anak.
   function tantangKeluarga(game, stars) {
@@ -551,6 +595,53 @@
     return cv;
   }
 
+  // Kartu Adu Rajin: dua angka hari aktif pekan ini + pemimpin sementara.
+  async function gambarRajin(aku, dia, lawan) {
+    const W = 1080, H = 1350;
+    const cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    const g = cv.getContext('2d');
+    try { await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1200))]); } catch (e) { /* font sistem */ }
+    const bg = g.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, '#fff8ec'); bg.addColorStop(1, '#ffe9c2');
+    g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    const cols = ['#ffd23f', '#0e9f6e', '#2f6fed', '#ff6b6b', '#9b4dde', '#ff9f1c'];
+    for (let i = 0; i < 90; i++) {
+      g.fillStyle = cols[i % cols.length]; g.globalAlpha = 0.45;
+      const s = 10 + ((i * 37) % 22);
+      g.fillRect((i * 167) % W, (i * 251) % H, s, s * 0.6);
+    }
+    g.globalAlpha = 1;
+    g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+    g.fillStyle = '#2b2d42';
+    g.font = '800 64px "Baloo 2", sans-serif';
+    g.fillText('🔥 Adu Rajin 7 Hari', W / 2, 140);
+    g.font = '160px "Baloo 2", sans-serif';
+    g.fillText('📅', W / 2, 360);
+    const namaAku = (TI.state.profile && TI.state.profile.nama) || 'Aku';
+    g.fillStyle = '#c92a2a';
+    g.font = '800 230px "Baloo 2", sans-serif';
+    g.fillText(aku + ' - ' + dia, W / 2, 700);
+    g.fillStyle = '#6b6f86';
+    g.font = '700 50px "Baloo 2", sans-serif';
+    g.fillText('hari minggu ini', W / 2, 790);
+    g.fillStyle = '#0e9f6e';
+    g.font = '800 58px "Baloo 2", sans-serif';
+    wrapText(g, namaAku + ' lawan ' + lawan, W / 2, 900, 920, 70);
+    g.fillStyle = '#9a6b00';
+    g.font = '800 54px "Baloo 2", sans-serif';
+    g.fillText(aku > dia ? '🏆 ' + namaAku + ' memimpin!' : dia > aku ? lawan + ' memimpin!' : 'Seri minggu ini!', W / 2, 990);
+    g.fillStyle = '#ffffff';
+    rr(g, 90, 1050, W - 180, 170, 36); g.fill();
+    g.fillStyle = '#2b2d42';
+    g.font = '700 44px "Baloo 2", sans-serif';
+    g.fillText('Ayo main juga, gratis!', W / 2, 1125);
+    g.fillStyle = '#2f6fed';
+    g.font = '700 38px monospace';
+    g.fillText(BASE.replace(/^https?:\/\//, ''), W / 2, 1180);
+    return cv;
+  }
+
   const SERTIFIKAT = {
     shalat: { judul: 'Hafal 5 Waktu Shalat', lesson: 'Shalat wajib ada 5 waktu: Subuh, Zuhur, Ashar, Maghrib, Isya. Jumlahnya 17 rakaat sehari.' },
     adab: { judul: 'Adab Baik', lesson: 'Anak shalih membiasakan ucapan baik dan adab yang baik setiap hari.' },
@@ -725,5 +816,5 @@
     }
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, streakCard, card, story, cetak, tantangKeluarga, tantangKelas, tantangPopuler, inviteOrtu, tantangPekan, laporan, laporanMingguan, laporanTPA, ingatkanJumat, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang, duelCard };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, streakCard, card, story, cetak, tantangKeluarga, tantangKelas, tantangPopuler, aduRajin, rajinCard, hariPekan, inviteOrtu, tantangPekan, laporan, laporanMingguan, laporanTPA, ingatkanJumat, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang, duelCard };
 })();
