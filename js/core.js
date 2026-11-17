@@ -518,6 +518,19 @@
           h('button', { type: 'button', class: 'ti-btn is-ghost', onclick: () => TI.Share.duelCard(skey) }, '🖼️ Kartu'));
       }
     } catch (e) { /* abaikan */ }
+    // Balas dendam: kalah duel seri lalu → banner rematch + kartu.
+    let dendam = null;
+    try {
+      const dk = state.duelKalah;
+      const g = dk && byId(dk.gid);
+      if (dk && g && TI.Share) {
+        dendam = h('div', { class: 'duel-ulang pop-in', role: 'status' },
+          h('span', { class: 'tantang-txt' }, '😔 Kalah duel lawan ', h('b', null, dk.dari), ' (' + dk.aku + '-' + dk.dia + '). Balas dendam?'),
+          h('button', { type: 'button', class: 'ti-btn tantang-go', onclick: () => { sfx('tap'); state.duel = { gid: dk.gid, skor: dk.skor, dari: dk.dari }; state.duelKalah = null; saveState(); location.hash = '#/main/' + dk.gid; } }, 'Balas Sekarang'),
+          h('button', { type: 'button', class: 'ti-btn is-ghost', onclick: () => TI.Share.duelCard(dk.gid + ':' + dk.dari, { aku: dk.aku, dia: dk.dia }) }, '🖼️ Kartu'),
+          h('button', { type: 'button', class: 'nama-later', 'aria-label': 'Tutup', onclick: () => { state.duelKalah = null; saveState(); showHome(); } }, 'Tutup'));
+      }
+    } catch (e) { /* abaikan */ }
     const grid = h('section', { class: 'grid', 'aria-label': 'Daftar game' });
     list.forEach((g, i) => {
       const c = catOf(g);
@@ -567,6 +580,7 @@
     if (klaimBanner) app.append(klaimBanner);
     if (tantangBanner) app.append(tantangBanner);
     if (duelUlang) app.append(duelUlang);
+    if (dendam) app.append(dendam);
     if (TI.Stats && TI.Stats.fetchPopuler) {
       const popHost = h('section', { class: 'populer', 'aria-label': 'Game populer pekan ini' });
       app.append(popHost);
@@ -1131,7 +1145,7 @@
           duelUi = h('div', { class: 'duel-result pop-in' },
             h('span', null, '🏆 Kamu juara duel lawan ' + duel.dari + '! (' + skorTxt + ') Seri baru dimulai lagi.'),
             TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.duelCard(skey, { aku: seri.aku, dia: seri.dia }) }, 'Kartu Juara') : null,
-            TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.challenge(ctx.game, stars, duel.dari) }, 'Duel Lagi') : null);
+            TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.challenge(ctx.game, stars, duel.dari, skorTxt) }, 'Duel Lagi') : null);
           TI.toast('🏆', 'Juara duel lawan ' + duel.dari + '!');
           if (TI.Badges) TI.Badges.grant('juara-duel');
         } else {
@@ -1145,13 +1159,18 @@
       } else {
         seri.dia++;
         if (seri.dia >= 2) {
+          const skorAkhir = seri.aku + '-' + seri.dia;
+          const snap = { aku: seri.aku, dia: seri.dia };
           duelUi = h('div', { class: 'duel-result pop-in' },
-            h('span', null, '😔 ' + duel.dari + ' juara duel (' + seri.aku + '-' + seri.dia + '). Ayo tantang duel baru!'),
-            TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.challenge(ctx.game, stars) }, 'Duel Baru') : null);
+            h('span', null, '😔 ' + duel.dari + ' juara duel (' + skorAkhir + '). Ayo balas dendam!'),
+            TI.Share ? h('button', { type: 'button', class: 'ti-btn tan-ajak', onclick: () => TI.Share.challenge(ctx.game, stars, duel.dari) }, 'Balas Sekarang') : null,
+            TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.duelCard(skey, snap) }, 'Kartu Duel') : null);
+          state.duelKalah = { gid: duel.gid, dari: duel.dari, skor: duel.skor, aku: seri.aku, dia: seri.dia };
           delete state.duelSeri[skey];
         } else {
           duelUi = h('div', { class: 'duel-result pop-in' },
-            h('span', null, duel.dari + ' masih menang (' + duel.skor + ' vs ' + stars + '). Duel: ' + seri.aku + '-' + seri.dia + '. Main lagi untuk balas!'));
+            h('span', null, duel.dari + ' masih menang (' + duel.skor + ' vs ' + stars + '). Duel: ' + seri.aku + '-' + seri.dia + '. Main lagi untuk balas!'),
+            h('button', { type: 'button', class: 'ti-btn tan-ajak', onclick: () => { sfx('tap'); openGame(ctx.game); } }, 'Balas Sekarang'));
         }
         saveState();
       }
