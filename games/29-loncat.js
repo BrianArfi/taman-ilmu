@@ -243,6 +243,7 @@
     ctx.on(window, 'resize', sg.layout);
 
     let sudah = 0, antre = 0, salah = 0, kunci = false, jalan = null, rencana = a, selesai = false; // rencana = batu tujuan setelah semua lompatan dalam antrean
+    let ketuk = []; // waktu ketuk terakhir (kombo)
     const kunciUI = (ya) => { kunci = ya; bLoncat.disabled = ya; bSudah.disabled = ya; };
     // Nilai otomatis: hitungan pas = benar tanpa perlu ketuk Sudah (Sudah untuk koreksi).
     async function rayakanBenar() {
@@ -259,14 +260,27 @@
       done();
     }
     // Antrean lompatan: ketukan cepat tidak hilang, bola melompat satu per satu.
+    // Kombo: 3 ketuk dalam 1 detik = 1 lompatan besar 3 langkah (tak melewati target).
     async function proses() {
       while (antre > 0 && ctx.alive && !selesai) {
-        antre--;
         const dari = sg.cur;
-        await sg.hop(dari, dari + 1, 300);
-        sudah++;
-        hitung.textContent = sudah + ' dari ' + b;
-        ctx.say(kata(sudah));
+        const now = Date.now();
+        ketuk = ketuk.filter((t) => now - t < 1000);
+        if (ketuk.length >= 3 && antre >= 3 && dari + 3 <= 10 && sudah + 3 <= b) {
+          antre -= 3;
+          ketuk = [];
+          await sg.hop(dari, dari + 3, 450);
+          sudah += 3;
+          hitung.textContent = sudah + ' dari ' + b;
+          ctx.sfx('whoosh');
+          ctx.say('Kombo!');
+        } else {
+          antre--;
+          await sg.hop(dari, dari + 1, 300);
+          sudah++;
+          hitung.textContent = sudah + ' dari ' + b;
+          ctx.say(kata(sudah));
+        }
         if (sudah === b && !selesai) rayakanBenar();
       }
       jalan = null;
@@ -275,7 +289,9 @@
       if (kunci) return;
       if (rencana >= 10) { ctx.sfx('salah'); ctx.say('Sudah di ujung. Coba hitung lagi.'); return; }
       rencana++; antre++;
-      if (!jalan) jalan = proses();
+      ketuk.push(Date.now());
+      // Settle 200ms supaya ketukan beruntun sempat terkumpul jadi kombo.
+      if (!jalan) jalan = (async () => { await ctx.wait(200); await proses(); })();
     });
 
     function selesaiBenar() {

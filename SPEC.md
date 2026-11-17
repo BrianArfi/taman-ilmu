@@ -499,7 +499,7 @@ Fakta (persis): Tahun baru Islam tanggal 1 Muharram. Nabi Muhammad Shallallahu '
 
 ### 29 loncat: Loncat Angka
 Garis bilangan berupa batu bundar bernomor di atas sungai (SVG/DOM), bola (pemain) melompat dengan lintasan busur (`ctx.loop`, transform; sfx tap tiap mendarat, percikan kecil).
-- TK (8 soal): batu 0-10. "Bola di angka 2. Loncat 3 kali!" Anak mengetuk tombol besar "Loncat!" (bola melompat satu batu tiap ketuk, angka hitungan diucapkan "satu, dua, tiga"), lalu "Sudah!". Jumlah lompatan pas = benar ("2 tambah 3 sama dengan 5"). Kurang/lebih = "Coba hitung lagi", bola kembali ke awal. 3 kali salah = bola melompat sendiri sambil menghitung, lalu lanjut.
+- TK (8 soal): batu 0-10. "Bola di angka 2. Loncat 3 kali!" Anak mengetuk tombol besar "Loncat!" (bola melompat satu batu tiap ketuk, angka hitungan diucapkan "satu, dua, tiga"), lalu "Sudah!". Jumlah lompatan pas = benar ("2 tambah 3 sama dengan 5"). 3 ketuk dalam 1 detik = kombo: 1 lompatan besar 3 langkah (tak melewati target). Kurang/lebih = "Coba hitung lagi", bola kembali ke awal. 3 kali salah = bola melompat sendiri sambil menghitung, lalu lanjut.
 - SD (8 soal): batu 0-20. Soal penjumlahan, pengurangan (lompat mundur), dan perkalian sebagai lompatan berulang dari 0 ("3 x 4": tiga lompatan besar masing-masing 4). Anak mengetuk batu tempat bola akan mendarat (batu = tombol); setelah benar, bola menunjukkan caranya dengan melompat hanya bila anak sempat salah (bila langsung benar cukup "Hebat!"). Salah = batu goyang, coba lagi.
 - lesson: "Menambah artinya maju di garis bilangan, mengurangi artinya mundur."
 
