@@ -34,6 +34,29 @@
     return node;
   };
 
+  // Rayakan benar: klon balok terpilih terbang menyusut ke lubang (300ms).
+  function terbangMasuk(btn, lubang) {
+    try {
+      if (!btn || !btn.isConnected) return Promise.resolve();
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return Promise.resolve();
+      const svgAsli = btn.querySelector('svg');
+      if (!svgAsli) return Promise.resolve();
+      const r1 = svgAsli.getBoundingClientRect(), r2 = lubang.getBoundingClientRect();
+      if (!r1.width || !r2.width) return Promise.resolve();
+      const klon = svgAsli.cloneNode(true);
+      Object.assign(klon.style, { position: 'fixed', left: r1.left + 'px', top: r1.top + 'px', width: r1.width + 'px', height: r1.height + 'px', margin: '0', zIndex: '60', pointerEvents: 'none' });
+      document.body.append(klon);
+      const dx = r2.left + r2.width / 2 - (r1.left + r1.width / 2);
+      const dy = r2.top + r2.height / 2 - (r1.top + r1.height / 2);
+      const s = Math.min(1, (r2.width * 0.7) / r1.width);
+      const anim = klon.animate([
+        { transform: 'translate(0px,0px) scale(1)', opacity: 1 },
+        { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(' + s + ')', opacity: 0.9 },
+      ], { duration: 300, easing: 'cubic-bezier(0.23,1,0.32,1)' });
+      return anim.finished.catch(() => {}).then(() => klon.remove());
+    } catch (e) { return Promise.resolve(); }
+  }
+
   TI.register({
     id: 'balok-pas',
     title: 'Balok yang Pas',
@@ -83,7 +106,7 @@
           return { node, value: k.benar ? 'ya' : 'tidak' + i, say: ucap, aria: ucap, cls: 'is-big' };
         });
         const m0 = ctx.mistakes;
-        await ctx.choose({
+        const hasil = await ctx.choose({
           options: opsi,
           answer: 'ya',
           speakLabel: true,
@@ -93,10 +116,11 @@
           ctx.el.append(h('p', { class: 'ti-label' }, 'Kamu salah ' + salah + ' kali, tidak apa. Tips: putar bentuknya dalam bayanganmu!'));
           ctx.say('Tips. Putar bentuknya dalam bayanganmu!');
         }
-        // Balok masuk lubang: lubang ikut berwarna.
+        // Balok masuk lubang: terbangkan dulu, lalu lubang ikut berwarna.
+        await terbangMasuk(hasil && hasil.button, lubang);
         lsvg.querySelectorAll('[fill]').forEach((el) => el.setAttribute('fill', warna));
         ctx.sfx('pop');
-        await ctx.wait(350);
+        await ctx.wait(150);
       }, {
         lesson: 'Bentuk yang sama pasti pas. Balok yang miring harus diputar dulu dalam bayanganmu.',
       });
