@@ -20,7 +20,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Tangga Duta progresif.** Bonus ajak datar +20. Tangga 1/3/5/10 teman (XP 20/35/50/100) + progres di banner klaim. Lokasi: progress.js:197-215 + core.js:464-473. Effort S, dampak 4, ustadz tidak (P10).
 - **Adu Rajin 7 Hari.** Duel sekali-putus, tak ada alasan balik harian. Duel konsistensi 7 hari via dayLog + kartu juara pola gambarDuel. Lokasi: share.js:121-144 + core.js:1056-1092. Effort M, dampak 5, ustadz tidak (P9).
 - **Kartu Jumat mingguan.** Momen Jumat belum bisa diforward sebagai gambar. Kartu 1 ketuk: 7 titik + game islam pekan ini + ajakan. Lokasi: core.js:555 + share.js gambarStreak + analytics.js:220-233. Effort M, dampak 5, ustadz tidak (P9, gabung 2 ide).
 - **Kartu prestasi dashboard.** Ortu tak bisa pamerkan kemajuan. Tombol "Buat kartu prestasi" di statistik via gambarKartu. Lokasi: analytics.js:191-250 + share.js:267+. Effort M, dampak 5, ustadz tidak.
@@ -35,6 +34,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Tangga Duta progresif** (S146): tier 1/3/5/10 XP 20/35/50/100 + progres banner (tanpa kartu tier). Probe tangga exact, ui 12/12, gami 62/62. Detail: cycle-20261117-s146.md.
 - **Pasang di statistik** (S145): banner PWA bawah hero + Pasang/Panduan reuse paint. Probe 3/3, ui 12/12, gami 62/62. Detail: cycle-20261117-s145.md.
 - **Pamer Rekor Baru** (S144): chip + tombol kartu saat rekor pecah (bukan main pertama). Probe 2/2, ui 12/12, gami 62/62. Detail: cycle-20261117-s144.md.
 - **Listrik: saklar note jadi toast** (S143): note intro 1 kalimat + lanjut manual. Probe 3/3, A92 tetap. Detail: cycle-20261117-s143.md.
