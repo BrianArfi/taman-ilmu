@@ -316,10 +316,12 @@
     for (let i = 0; i < 3; i++) w.append(h('span', { class: 'star' + (i < n ? ' is-on' : '') }, '★'));
     return w;
   }
-  // pips kemahiran: 4 berlian kecil, terisi sesuai tier (0 baru, 1 perunggu, 2 perak, 3 emas, 4 jago)
+  // Level game: 4 pips + label Lv (0 baru, 1 perunggu, 2 perak, 3 emas, 4 berlian).
   function pips(t) {
-    const w = h('span', { class: 'pips', 'aria-label': 'Kemahiran ' + t + ' dari 4' });
+    const nama = (TI.Progression && TI.Progression.TIER_NAMA && TI.Progression.TIER_NAMA[t]) || '';
+    const w = h('span', { class: 'pips', 'aria-label': 'Level ' + (t ? nama + ' ' + t + ' dari 4' : 'baru') });
     for (let i = 0; i < 4; i++) w.append(h('i', { class: i < t ? 'is-on' : '' }));
+    if (t) w.append(h('span', { class: 'pips-lv', 'aria-hidden': 'true' }, 'Lv' + t));
     return w;
   }
   function showHome() {
@@ -1040,6 +1042,8 @@
           : ctx.mistakes === 0 ? 3 : ctx.mistakes <= Math.max(1, Math.round(tot * 0.34)) ? 2 : 1;
         const rec = state.stars[game.id] || (state.stars[game.id] = {});
         const prevBest = rec[level] || 0;
+        const prevPlays = ((state.plays[game.id] || {})[level]) || 0;
+        const prevTier = TI.Progression ? TI.Progression.tierNilai(prevBest, prevPlays) : 0;
         const isBest = stars > prevBest;
         if (isBest) { rec[level] = stars; }
         let gain = null;
@@ -1047,14 +1051,28 @@
         saveState();
         try { if (TI.Board && TI.Board.report) TI.Board.report(level); } catch (e) { /* papan gagal diam saja */ }
         try { if (TI.Stats) TI.Stats.track('game_finish', { gid: game.id, jen: level, stars }); } catch (e) { /* abaikan */ }
-        showResult(ctx, stars, opts, els, gain, isBest && prevBest > 0);
+        const nowTier = TI.Progression ? TI.Progression.tier(game.id, level) : 0;
+        showResult(ctx, stars, opts, els, gain, isBest && prevBest > 0, { prev: prevTier, now: nowTier });
       },
     };
     return ctx;
   }
 
   // ---------- layar hasil (jarang terjadi, di sini tempat perayaan) ----------
-  function showResult(ctx, stars, opts, els, gain, rekorBaru) {
+  function showResult(ctx, stars, opts, els, gain, rekorBaru, tierInfo) {
+    const Pr = TI.Progression;
+    const tPrev = (tierInfo && tierInfo.prev) || 0;
+    const tNow = (tierInfo && tierInfo.now) || 0;
+    const tNama = (Pr && Pr.TIER_NAMA) || ['Baru', 'Perunggu', 'Perak', 'Emas', 'Berlian'];
+    const tTantang = (Pr && Pr.TIER_TANTANG) || [];
+    const lvlChip = h('p', { class: 'lvl-chip pop-in' }, '🏅 Level ' + tNama[tNow] + (tNow ? ' (' + tNow + '/4)' : ''));
+    let lvlNaik = null;
+    if (tNow > tPrev) {
+      lvlNaik = h('p', { class: 'lvl-naik pop-in' }, 'Naik Level: ' + tNama[tPrev] + ' ke ' + tNama[tNow] + '! 🎉');
+    } else if (tNow < 4 && tTantang[tNow]) {
+      const mainKe = tNow === 3 ? ' (main ' + ((((state.plays || {})[ctx.game.id] || {})[state.level]) || 0) + '/5)' : '';
+      lvlNaik = h('p', { class: 'lvl-tantang pop-in' }, '⚔️ Tantangan: ' + tTantang[tNow].replace('!', '') + mainKe + '!');
+    }
     const msg = opts.message || (stars === 3 ? 'Masya Allah, hebat sekali!' : stars === 2 ? 'Bagus! Ayo main lagi biar dapat 3 bintang.' : 'Terus berlatih ya, kamu pasti bisa!');
     const big = h('div', { class: 'result-stars' });
     for (let i = 0; i < 3; i++) big.append(h('span', { class: 'rstar' + (i < stars ? ' is-on' : ''), style: '--i:' + i }, '★'));
@@ -1141,10 +1159,12 @@
     const dlg = h('div', { class: 'result', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Hasil' },
       h('div', { class: 'result-card' },
         big,
+        lvlChip,
         gain && gain.xp > 0 ? h('p', { class: 'xp-chip pop-in' }, '+' + gain.xp + ' XP') : null,
         gain && gain.bonusTeman ? h('p', { class: 'teman-bonus pop-in' }, '🎁 Bonus Teman +10 XP!') : null,
         gain && gain.levelUp ? h('p', { class: 'level-up pop-in' }, 'Naik ke Level ' + gain.level + '!') : null,
         gain && gain.levelUp ? h('div', { class: 'level-ajak pop-in' }, h('span', null, 'Momen menang! Ajak temanmu ikut main.'), TI.Share ? h('button', { type: 'button', class: 'ti-btn is-ghost tan-ajak', onclick: () => TI.Share.invite() }, '📣 Ajak') : null) : null,
+        lvlNaik,
         rayakan,
         rekor,
         momenKat,

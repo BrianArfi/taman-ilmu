@@ -83,15 +83,26 @@
   // (gratis harian + teks cara membuka dicabut 15 Nov 2026 bersama sistem kunci)
 
   // ---------- mastery per (game, jenjang): 0 baru, 1 perunggu, 2 perak, 3 emas, 4 berlian ----------
-  function tier(gid, jen) {
-    const st = TI.state;
-    const s = (st.stars[gid] || {})[jen] || 0;
-    const p = ((st.plays || {})[gid] || {})[jen] || 0;
+  const TIER_NAMA = ['Baru', 'Perunggu', 'Perak', 'Emas', 'Berlian'];
+  const TIER_TANTANG = [
+    'Dapat 1 bintang untuk naik ke Perunggu!',
+    'Dapat 2 bintang untuk naik ke Perak!',
+    'Dapat 3 bintang untuk naik ke Emas!',
+    'Dapat 3 bintang dan main 5 kali untuk naik ke Berlian!',
+    '',
+  ];
+  function tierNilai(s, p) {
     if (s === 3 && p >= 5) return 4;
     if (s === 3) return 3;
     if (s >= 2) return 2;
     if (s >= 1) return 1;
     return 0;
+  }
+  function tier(gid, jen) {
+    const st = TI.state;
+    const s = (st.stars[gid] || {})[jen] || 0;
+    const p = ((st.plays || {})[gid] || {})[jen] || 0;
+    return tierNilai(s, p);
   }
 
   // ---------- nama panggilan ----------
@@ -274,7 +285,7 @@
   TI.Progression = {
     XP_LEVELS, LEVEL_NAMES, levelOf, levelInfo, dayKey, weekKey, nextWeekStart,
     challengeGame, ensureWeekly,
-    tier, cleanName, nameValid,
+    tier, tierNilai, TIER_NAMA, TIER_TANTANG, cleanName, nameValid,
     onFinish, totals, onShare, klaimBonus, dutaBonus, dutaNext, init,
   };
   TI.VIEWS = TI.VIEWS || {};

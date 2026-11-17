@@ -248,6 +248,8 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
 .pips { display: inline-flex; gap: 3px; }
 .pips i { width: 9px; height: 9px; background: #e6dfcf; transform: rotate(45deg) scale(0.85); border-radius: 2px; }
 .pips i.is-on { background: var(--c); }
+.pips { align-items: center; }
+.pips-lv { font-size: 0.75rem; font-weight: 800; color: var(--muted); margin-left: 2px; }
 .card-best { font-size: 0.85rem; color: var(--muted); font-weight: 800; }
 
 /* ---------- layar dalam (papan, lencana, nama) ---------- */
@@ -318,6 +320,9 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
   border-radius: 999px; background: var(--good-bg); color: var(--good); font-weight: 800; font-size: 1.2rem;
 }
 .result-card { display: flex; flex-direction: column; align-items: center; }
+.lvl-chip { margin: 2px 0 0; display: inline-block; align-self: center; padding: 4px 18px; border-radius: 999px; background: #fff4d6; color: #9a6b00; font-weight: 800; font-size: 1.1rem; }
+.lvl-naik { margin: 6px 0 0; font-weight: 800; color: var(--good); font-size: 1.15rem; }
+.lvl-tantang { margin: 6px 0 0; font-weight: 800; color: #9a6b00; font-size: 1rem; }
 .level-up { margin: 6px 0 0; font-weight: 800; color: var(--good); font-size: 1.15rem; }
 .teman-bonus { margin: 6px 0 0; font-weight: 800; color: #9a6b00; font-size: 1rem; }
 .streak-party { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 6px 0 0; }
