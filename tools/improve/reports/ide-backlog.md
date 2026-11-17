@@ -20,7 +20,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Kunci Orang Tua.** Anak TK bisa kepencet kirim WA sendiri. Gerbang tahan-2-detik/teka-teki sebelum TI.Share.* + tombol pasang. Lokasi: share.js gerbang + analytics.js:272-288 + ortu.js:20-39 + core.js:594-599. Effort S, dampak 5, ustadz tidak (P12).
 - **Balok-pas animasi masuk.** Menang cuma lubang ganti warna. Balok terpilih terbang/menyusut masuk lubang ~400ms. Lokasi: 96-balok-pas.js:86-97. Effort S, dampak 4, ustadz tidak (P12).
 - **Bukti sosial ortu.** Halaman ortu klaim tanpa bukti. Angka global pekan ini reuse fetchPopuler. Lokasi: ortu.js:53-64 + analytics.js fetchPopuler. Effort S, dampak 4, ustadz tidak (P12).
 - **Listrik lewati kartu.** Tebakan benar masih kena kartu + tombol. Bila benar: suara Betul + lanjut otomatis ~900ms. Lokasi: 37-listrik.js:384-393 sesudahTebak. Effort S, dampak 4, ustadz tidak (P12).
@@ -39,6 +38,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Kunci Orang Tua** (S152): dialog tahan-2-detik di bagikan/kirimGambar/pasang. Probe 5/5 + visual, ui 12/12, gami 62/62. Detail: cycle-20261117-s152.md.
 - **Kartu Jumat mingguan** (S151): gambarJumat 7 titik + islam pekan ini + tombol Jumat. Probe 2/2 + visual, ui 12/12, gami 62/62. Detail: cycle-20261117-s151.md.
 - **Adu Rajin 7 Hari** (S150): link rajin + banner banding + kartu adu, tanpa penentu menang. Probe 5/5 + visual, ui 12/12, gami 62/62. Detail: cycle-20261117-s150.md.
 - **Selamatkan Streak** (S149): banner Minta Semangat bila streak terancam hangus. Probe 3/3, ui 12/12, gami 62/62. Detail: cycle-20261117-s149.md.
