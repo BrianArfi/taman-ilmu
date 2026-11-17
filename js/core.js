@@ -545,6 +545,14 @@
       nav);
     if (banner) app.append(banner);
     if (ajakBanner) app.append(ajakBanner);
+    // Selamatkan streak: main kemarin tapi belum hari ini = hangus tengah malam.
+    const streakYest = new Date(Date.now() + 7 * 3600 * 1000 - 86400000).toISOString().slice(0, 10);
+    const streakN = (state.streak && state.streak.count) || 0;
+    if (streakN >= 2 && state.streak.last === streakYest && TI.Share) {
+      app.append(h('div', { class: 'ajak-banner pop-in', role: 'status' },
+        h('span', { class: 'ajak-txt' }, '🔥 Streak ' + streakN + ' harimu hangus tengah malam! Minta semangat ke keluarga.'),
+        h('button', { type: 'button', class: 'ti-btn tantang-go', onclick: () => { sfx('tap'); TI.Share.streakCard(); } }, 'Minta Semangat')));
+    }
     if (klaimKirim) app.append(klaimKirim);
     if (klaimBanner) app.append(klaimBanner);
     if (tantangBanner) app.append(tantangBanner);
