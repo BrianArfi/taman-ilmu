@@ -20,7 +20,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Balas Dendam 1 Ketuk.** Kalah duel tanpa balas sekali ketuk, loop putus. Tombol Balas Sekarang di banner + hasil kalah + kartu duel + teks pemenang. Lokasi: core.js:483-489 + 1145-1157 + share.js duelCard. Effort S, dampak 5, ustadz tidak (P13).
 - **Listrik acak murni.** Konduktor selalu dulu, tebakan awal ditebak. Hapus sort, acak murni tiap soal. Lokasi: 37-listrik.js:360. Effort S, dampak 4, ustadz tidak (P13).
 - **Loncat penanda baris.** Papan ular disangka kiri-ke-kanan. Badge mulai + denyut tiap awal baris + perbesar panah. Lokasi: 29-loncat.js:119-140. Effort S, dampak 4, ustadz tidak (P13).
 - **Pratinjau kartu menang.** Thumbnail cuma di momen kategori. Pratinjau di Rekor Baru, streak, juara duel. Lokasi: core.js:1089-1094 + 1130-1134 + share.js pratinjau. Effort S, dampak 4, ustadz tidak (P13).
@@ -39,6 +38,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Balas Dendam 1 Ketuk** (S158): balas+kartu di hasil kalah + banner dendam + taunt pemenang. Probe 8/8, ui 12/12, gami 62/62. Detail: cycle-20261118-s158.md.
 - **Loncat kombo** (S157): 3 ketuk cepat = lompatan 3 langkah + whoosh, tanpa overshoot. Probe 1/1, A92 tetap. Detail: cycle-20261117-s157.md.
 - **Listrik lewati kartu** (S156): benar = otomatis tanpa kartu, salah = ceramah. Probe 4/4, A92 tetap. Detail: cycle-20261117-s156.md.
 - **Bukti sosial ortu** (S154): angka pekan + top game di hero ortu, sembunyi bila nol. Probe 3/3, ui 12/12, gami 62/62. Detail: cycle-20261117-s154.md.
