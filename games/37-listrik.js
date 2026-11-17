@@ -357,7 +357,7 @@
 
       const tk = ctx.isTK;
       const conductors = sample(CONDUCT, tk ? 2 : 3), insulators = sample(INSUL, tk ? 2 : 3);
-      const items = shuffle([...conductors, ...insulators]); items.sort((a, b) => (a.ok ? 0 : 1) - (b.ok ? 0 : 1)); // contoh menyala dulu
+      const items = shuffle([...conductors, ...insulators]); // acak murni: tiap soal kejutan
       const total = tk ? 2 + items.length : items.length + 2;
       let step = 0;
       const lc = tk ? ['Menyala', 'Tidak menyala'] : ['Konduktor', 'Isolator'];
