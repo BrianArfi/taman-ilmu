@@ -50,10 +50,25 @@
       ? TI.h('span', { class: 'ortu-pasang' },
         TI.h('p', { class: 'ortu-note' }, '📲 Pasang ke Layar Utama: ketuk Bagikan di Safari, lalu Tambah ke Layar Utama.'),
         TI.Share ? TI.h('button', { type: 'button', class: 'ti-btn is-ghost ortu-cta', onclick: () => { TI.sfx('tap'); TI.Share.panduanPasang(); } }, '📖 Panduan pasang ke WA-ku') : null) : null;
+    const bukti = TI.h('p', { class: 'ortu-note' });
+    if (TI.Stats && TI.Stats.fetchRingkasan) {
+      Promise.all([TI.Stats.fetchRingkasan(), TI.Stats.fetchPopuler ? TI.Stats.fetchPopuler('week') : null]).then(([g, pop]) => {
+        const wk = g && g.week;
+        if (!wk || !(wk.players > 0)) { bukti.remove(); return; }
+        let teks = 'Pekan ini ' + wk.players + ' anak main ' + wk.plays + ' kali di Taman Ilmu.';
+        const top = pop && pop.games && pop.games[0];
+        if (top) {
+          const gm = (TI.games || []).find((x) => x.id === top.gid);
+          teks += ' Terpopuler: ' + (gm ? gm.title : top.gid) + '.';
+        }
+        bukti.textContent = teks;
+      }).catch(() => bukti.remove());
+    } else bukti.remove();
     const hal = TI.page('Untuk Orang Tua', 'Kenapa Taman Ilmu aman dipasang di HP anak.',
       TI.h('div', { class: 'ortu-hero pop-in' },
         TI.h('span', { class: 'ortu-icon', 'aria-hidden': 'true' }, '🛡️'),
         TI.h('p', { class: 'ortu-lead' }, 'Taman Ilmu dibuat supaya anak main sambil belajar dan orang tua tetap tenang. Tanpa jebakan klik, tanpa tagihan kaget.'),
+        bukti,
         TI.h('ul', { class: 'ortu-list' }, POIN.map((p) => TI.h('li', null, p))),
         ajak,
         ajakOrtu,

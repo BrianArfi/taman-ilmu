@@ -166,6 +166,16 @@
     } catch (e) { return cached; }
   }
 
+  // Ringkasan global server (null bila offline/gagal); dipakai dasbor + ortu.
+  async function fetchRingkasan() {
+    if (!online()) return null;
+    try {
+      const r = await fetch(CFG.BOARD_URL + '/stats/summary', { signal: AbortSignal.timeout(6000) });
+      if (!r.ok) return null;
+      return await r.json();
+    } catch (e) { return null; }
+  }
+
   // ---------- dashboard #/statistik (milik perangkat ini + global kalau ada server) ----------
   async function fetchGlobal(host) {
     if (!CFG.STATS_UP) {
@@ -177,9 +187,8 @@
       return;
     }
     try {
-      const r = await fetch(CFG.BOARD_URL + '/stats/summary', { signal: AbortSignal.timeout(6000) });
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      const g = await r.json();
+      const g = await fetchRingkasan();
+      if (!g) throw new Error('HTTP kosong');
       host.replaceChildren(TI.h('div', { class: 'stat-grid' },
         TI.h('div', { class: 'stat-card' }, TI.h('b', null, String(g.visitors ?? '-')), TI.h('span', null, 'Anak main (global)')),
         TI.h('div', { class: 'stat-card' }, TI.h('b', null, String(g.plays ?? '-')), TI.h('span', null, 'Total main (global)')),
@@ -313,7 +322,7 @@
     return app;
   }
 
-  TI.Stats = { track, summary, fetchPopuler };
+  TI.Stats = { track, summary, fetchPopuler, fetchRingkasan };
   TI.VIEWS = TI.VIEWS || {};
   TI.VIEWS.statistik = render;
 })();
