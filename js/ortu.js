@@ -32,6 +32,11 @@
       if (TI.Stats) TI.Stats.track('promo_click', { id: 'orangtua-salin' });
       if (TI.Share) TI.Share.infoOrtu();
     } }, 'Salin info buat grup WA');
+    const jumat = TI.h('button', { type: 'button', class: 'ti-btn is-ghost ortu-cta', onclick: () => {
+      TI.sfx('tap');
+      if (TI.Stats) TI.Stats.track('promo_click', { id: 'orangtua-jumat' });
+      if (TI.Share) TI.Share.ingatkanJumat();
+    } }, '🔔 Pengingat Jumat ke WA-ku');
     const pasang = TI.PWA && !TI.PWA.mandiri() && !TI.PWA.ios()
       ? TI.h('span', { class: 'ortu-pasang' },
         TI.h('button', { type: 'button', class: 'ti-btn ortu-cta', 'data-pwa': 'pasang', hidden: true, onclick: () => {
@@ -53,6 +58,7 @@
         ajak,
         ajakOrtu,
         salin,
+        jumat,
         pasang,
         pasangIos,
         TI.h('p', { class: 'ortu-note' }, 'Ada ' + total + ' game untuk jenjang TK dan SD: agama Islam, matematika, sains, dan logika.')));

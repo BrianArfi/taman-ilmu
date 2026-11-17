@@ -344,10 +344,15 @@
     const catNama = { islam: 'Agama Islam', mat: 'Matematika', sains: 'Sains', logika: 'Logika' };
     const rajin = topCat ? ' Sering main: ' + (catNama[topCat] || topCat) + '.' : '';
     return bagikan('Laporan Mingguan · Taman Ilmu',
-      'Laporan mingguan ' + nama + ' di Taman Ilmu: minggu ini main ' + aktif7 + ' hari.' +
+      'Assalamu\'alaikum Ayah/Bunda! Laporan mingguan ' + nama + ' di Taman Ilmu: minggu ini main ' + aktif7 + ' hari.' +
       ' Total ' + fin + ' kali selesai main.' + rajin + ' Pasang gratis di HP: ' + inviteURL());
   }
 
+  // Pengingat Jumat ke WA sendiri: catatan rekap mingguan sekali pasang.
+  function ingatkanJumat() {
+    return bagikan('Pengingat Jumat · Taman Ilmu',
+      'Pengingat Jumat: rekap seminggu main Taman Ilmu anak yuk. Buka Laporan Anak: ' + BASE + '#/statistik');
+  }
   // Panduan pasang ke WA sendiri: teks langkah per platform + tautan.
   function panduanPasang() {
     let plat = 'desktop';
@@ -720,5 +725,5 @@
     }
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, streakCard, card, story, cetak, tantangKeluarga, tantangKelas, tantangPopuler, inviteOrtu, tantangPekan, laporan, laporanMingguan, laporanTPA, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang, duelCard };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, streakCard, card, story, cetak, tantangKeluarga, tantangKelas, tantangPopuler, inviteOrtu, tantangPekan, laporan, laporanMingguan, laporanTPA, ingatkanJumat, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang, duelCard };
 })();
