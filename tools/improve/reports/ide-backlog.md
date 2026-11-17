@@ -20,7 +20,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Adu Rajin 7 Hari.** Duel sekali-putus, tak ada alasan balik harian. Duel konsistensi 7 hari via dayLog + kartu juara pola gambarDuel. Lokasi: share.js:121-144 + core.js:1056-1092. Effort M, dampak 5, ustadz tidak (P9).
 - **Kartu Jumat mingguan.** Momen Jumat belum bisa diforward sebagai gambar. Kartu 1 ketuk: 7 titik + game islam pekan ini + ajakan. Lokasi: core.js:555 + share.js gambarStreak + analytics.js:220-233. Effort M, dampak 5, ustadz tidak (P9, gabung 2 ide).
 - **Kartu prestasi dashboard.** Ortu tak bisa pamerkan kemajuan. Tombol "Buat kartu prestasi" di statistik via gambarKartu. Lokasi: analytics.js:191-250 + share.js:267+. Effort M, dampak 5, ustadz tidak.
 - **Kode Ajak Offline.** Ajak butuh WA + 2 langkah. Kode 4 huruf dari playerId, ketik di beranda, XP dua arah. Lokasi: core.js:446-450 + progress.js klaimBonus. Effort M, dampak 5, ustadz tidak (P11).
@@ -36,6 +35,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Adu Rajin 7 Hari** (S150): link rajin + banner banding + kartu adu, tanpa penentu menang. Probe 5/5 + visual, ui 12/12, gami 62/62. Detail: cycle-20261117-s150.md.
 - **Selamatkan Streak** (S149): banner Minta Semangat bila streak terancam hangus. Probe 3/3, ui 12/12, gami 62/62. Detail: cycle-20261117-s149.md.
 - **Jumat Hari Rekap** (S148): ingatkanJumat + salam laporan + tombol dasbor/ortu. Probe 3/3, ui 12/12, gami 62/62. Detail: cycle-20261117-s148.md.
 - **Kartu Story 9:16** (S147): gambarStory 1080x1920 + tombol hasil + tagar. Probe 1/1 + visual, gami 62/62. Detail: cycle-20261117-s147.md.
