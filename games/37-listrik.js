@@ -380,12 +380,11 @@
           try { localStorage.setItem('tamanIlmu.listrik.aman', '1'); } catch (e) { /* abaikan */ }
         }
 
-        // Sesudah tebak: benar = 1 kalimat + tombol manual; salah = ceramah penuh dibacakan.
+        // Sesudah tebak: benar = langsung lanjut otomatis; salah = ceramah penuh dibacakan.
         async function sesudahTebak(box, it, right, tail) {
           const judul = it.ok ? 'Menyala!' : 'Tidak menyala.';
           if (right) {
-            ctx.note(it.why.split('. ')[0] + '.' + tail, { title: judul, into: box, speak: false });
-            await lanjutManual(ctx, box);
+            await ctx.wait(900);
           } else {
             ctx.note(it.why + tail, { title: judul, into: box, speak: false });
             await lanjutOtomatis(ctx, box, it.why + tail);
