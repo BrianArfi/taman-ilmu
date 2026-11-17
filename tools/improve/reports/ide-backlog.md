@@ -20,7 +20,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Balok-pas animasi masuk.** Menang cuma lubang ganti warna. Balok terpilih terbang/menyusut masuk lubang ~400ms. Lokasi: 96-balok-pas.js:86-97. Effort S, dampak 4, ustadz tidak (P12).
 - **Bukti sosial ortu.** Halaman ortu klaim tanpa bukti. Angka global pekan ini reuse fetchPopuler. Lokasi: ortu.js:53-64 + analytics.js fetchPopuler. Effort S, dampak 4, ustadz tidak (P12).
 - **Listrik lewati kartu.** Tebakan benar masih kena kartu + tombol. Bila benar: suara Betul + lanjut otomatis ~900ms. Lokasi: 37-listrik.js:384-393 sesudahTebak. Effort S, dampak 4, ustadz tidak (P12).
 - **Loncat kombo.** Ketukan pasif ditonton satu per satu. 3 ketuk <1 detik = lompatan besar 3 langkah + sfx spesial. Lokasi: 29-loncat.js:262-279. Effort S, dampak 3, ustadz tidak (P12).
@@ -38,6 +37,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Balok-pas animasi masuk** (S153): klon balok terbang 300ms ke lubang. Probe 2/2, A92. Detail: cycle-20261117-s153.md.
 - **Kunci Orang Tua** (S152): dialog tahan-2-detik di bagikan/kirimGambar/pasang. Probe 5/5 + visual, ui 12/12, gami 62/62. Detail: cycle-20261117-s152.md.
 - **Kartu Jumat mingguan** (S151): gambarJumat 7 titik + islam pekan ini + tombol Jumat. Probe 2/2 + visual, ui 12/12, gami 62/62. Detail: cycle-20261117-s151.md.
 - **Adu Rajin 7 Hari** (S150): link rajin + banner banding + kartu adu, tanpa penentu menang. Probe 5/5 + visual, ui 12/12, gami 62/62. Detail: cycle-20261117-s150.md.
