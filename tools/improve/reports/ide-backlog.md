@@ -20,6 +20,11 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
+- **Kunci Orang Tua.** Anak TK bisa kepencet kirim WA sendiri. Gerbang tahan-2-detik/teka-teki sebelum TI.Share.* + tombol pasang. Lokasi: share.js gerbang + analytics.js:272-288 + ortu.js:20-39 + core.js:594-599. Effort S, dampak 5, ustadz tidak (P12).
+- **Balok-pas animasi masuk.** Menang cuma lubang ganti warna. Balok terpilih terbang/menyusut masuk lubang ~400ms. Lokasi: 96-balok-pas.js:86-97. Effort S, dampak 4, ustadz tidak (P12).
+- **Bukti sosial ortu.** Halaman ortu klaim tanpa bukti. Angka global pekan ini reuse fetchPopuler. Lokasi: ortu.js:53-64 + analytics.js fetchPopuler. Effort S, dampak 4, ustadz tidak (P12).
+- **Listrik lewati kartu.** Tebakan benar masih kena kartu + tombol. Bila benar: suara Betul + lanjut otomatis ~900ms. Lokasi: 37-listrik.js:384-393 sesudahTebak. Effort S, dampak 4, ustadz tidak (P12).
+- **Loncat kombo.** Ketukan pasif ditonton satu per satu. 3 ketuk <1 detik = lompatan besar 3 langkah + sfx spesial. Lokasi: 29-loncat.js:262-279. Effort S, dampak 3, ustadz tidak (P12).
 - **Kartu prestasi dashboard.** Ortu tak bisa pamerkan kemajuan. Tombol "Buat kartu prestasi" di statistik via gambarKartu. Lokasi: analytics.js:191-250 + share.js:267+. Effort M, dampak 5, ustadz tidak.
 - **Kode Ajak Offline.** Ajak butuh WA + 2 langkah. Kode 4 huruf dari playerId, ketik di beranda, XP dua arah. Lokasi: core.js:446-450 + progress.js klaimBonus. Effort M, dampak 5, ustadz tidak (P11).
 - **Loncat SD: demo terpandu.** 21 batu langsung tanpa pemanasan. Soal 1: bola tunjukkan jawaban via tunjukkan() sebelum ketuk. Lokasi: 29-loncat.js:389-416. Effort M, dampak 5, ustadz tidak.
@@ -150,6 +155,9 @@ dampak 1-5; ustadz ya/tidak.
 - **Kartu Laporan Visual (P11).** TERCakup Kartu prestasi + Kartu Jumat; tidak diduplikat.
 - **Pangkas friksi ceramah (P11).** Wujud/listrik SUDAH DONE (S135/S141/S143); raja-taman tetap parkir.
 
+- **Hijaiyah tangkap-huruf (17 Nov, putaran 12).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
+- **Banner challenge tanpa Balas (P12).** BUKAN IDE: asimetri beralasan, skor duel baru ada sesudah main sehingga balas dari banner tak jujur.
+
 ## PARKIR
 
 - **Balapan Duta (P9, S3).** Kartu Pamer Duta + Top Pengajak mingguan. Lokasi: share.js pola rank + board.js + badges.js. Parkir: kalah slot 12.
@@ -168,3 +176,8 @@ dampak 1-5; ustadz ya/tidak.
 - **Tantangan Kelas berpapan (P10, L5).** Kode kelas + papan mini. Parkir: effort L dilewati watcher.
 
 - **Papan Kelas Offline (P11, L5).** Kode kelas + papan lokal + ekspor rekap. Parkir: effort L dilewati watcher.
+
+- **Batas waktu + durasi (P12, M5).** Limit harian + tampil durasi di Laporan Anak. Lokasi: analytics.js summary/render/track. Parkir: kalah slot 12.
+- **Pamer ke Ayah/Bunda (P12, M4).** Tombol kartu di finish tiap game islam. Lokasi: after-lesson hook. Parkir: kalah slot 12.
+- **Wujud pita zona-tujuan (P12, M4).** Pita goal di termometer per tugas. Lokasi: 19-wujud.js:79-84 + 112-122. Parkir: kalah slot 12.
+- **Profil per anak (P12, L4).** Switcher progres per anak. Parkir: effort L dilewati watcher.
