@@ -263,6 +263,10 @@
         TI.h('b', { class: 'stat-besar' }, m.lvlDone + ' / ' + m.lvlTotal),
         TI.h('span', { class: 'stat-herosub' }, 'game selesai di jenjang ' + lvl.toUpperCase()),
         TI.h('span', { class: 'stat-herosub' }, '★' + m.lvlAvg + ' rata-rata · ' + m.daysActive + ' hari aktif')),
+      (TI.PWA && !TI.PWA.mandiri()) ? TI.h('div', { class: 'pwa-banner pop-in' },
+        TI.h('span', { class: 'pwa-txt' }, '📲 Pasang biar progres anak kesimpan di HP ini.'),
+        TI.h('button', { type: 'button', class: 'ti-btn pwa-go', 'data-pwa': 'pasang', hidden: true, onclick: () => { TI.sfx('tap'); TI.PWA.pasang(); } }, 'Pasang'),
+        TI.Share ? TI.h('button', { type: 'button', class: 'ti-btn is-ghost pwa-panduan', onclick: () => { TI.sfx('tap'); TI.Share.panduanPasang(); } }, '📖 Panduan') : null) : null,
       TI.h('div', { class: 'stat-bars' }, barisKat),
       rekapPekan(),
       TI.h('p', null, TI.Share ? TI.h('button', { type: 'button', class: 'ti-btn', onclick: () => { TI.sfx('tap'); TI.Share.laporan(); } }, 'Bagikan laporan ke pasangan') : null),
@@ -303,6 +307,7 @@
       TI.h('h3', { class: 'stat-h' }, 'Seluruh pemain'),
       TI.h('div', { class: 'stat-global', id: 'stat-global' }, TI.h('p', { class: 'board-note' }, 'Mengambil data global...')));
     fetchGlobal(app.querySelector('#stat-global'));
+    try { if (TI.PWA) TI.PWA.paint(); } catch (e) { /* abaikan */ }
     return app;
   }
 
