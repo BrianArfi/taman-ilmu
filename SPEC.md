@@ -550,11 +550,12 @@ Penggaris SVG kuning kayu (cm, garis tiap cm, angka tiap cm, 0-15). Benda digamb
 - lesson: "Saat mengukur, mulai dari angka 0 pada penggaris."
 
 ### 37 listrik: Rangkaian Listrik
-Papan rangkaian (SVG): baterai, kabel, lampu bohlam, dan satu celah (slot). Tiap benda: tanya dulu "Kalau [benda] dipasang, lampu menyala?" (Menyala / Tidak menyala) lalu benda dipasang ke celah (`ctx.place` dengan satu keping dan slot celah SVG, `move:false`, gambar benda di celah lewat `onPlace`; atau langsung otomatis setelah tebakan). Konduktor: arus mengalir (titik-titik bergerak di kabel lewat `ctx.loop`), lampu menyala kuning dengan glow, sfx klik. Isolator: lampu tetap mati. Tebakan salah = `ctx.wrong` tapi hasil tetap ditunjukkan dan dijelaskan, lalu `await ctx.next()`. Penjelasan penuh dibacakan hanya bila tebakan salah; bila benar langsung lanjut otomatis tanpa kartu.
+Papan rangkaian (SVG): baterai, kabel, lampu bohlam, dan satu celah (slot). Tiap benda: tanya dulu "Kalau [benda] dipasang, lampu menyala?" (Menyala / Tidak menyala) lalu benda dipasang ke celah (`ctx.place` dengan satu keping dan slot celah SVG, `move:false`, gambar benda di celah lewat `onPlace`; atau langsung otomatis setelah tebakan). Konduktor: arus mengalir (titik-titik bergerak di kabel lewat `ctx.loop`), lampu menyala kuning dengan glow, sfx klik. Isolator: lampu tetap mati. Tebakan salah = `ctx.wrong` tapi hasil tetap ditunjukkan dan dijelaskan, lalu `await ctx.next()`. Penjelasan penuh dibacakan hanya bila tebakan salah; bila benar di ronde latihan cukup 1 kalimat + tombol, di ronde mandiri langsung lanjut otomatis tanpa kartu.
 Benda (pakai persis): Paku besi (menghantar listrik) · Sendok logam (menghantar) · Kawat tembaga (menghantar) · Klip kertas besi, gambar SVG (menghantar) · Kunci besi (menghantar) · Penghapus karet (tidak) · Pensil kayu (tidak) · Sedotan plastik (tidak) · Kertas (tidak) · Gelas kaca (tidak) · Kain (tidak).
 - WAJIB di awal, sekali: `ctx.note` "Ingat ya, jangan pernah memasukkan benda ke stop kontak di rumah. Listrik rumah berbahaya! Di sini kita hanya memakai baterai kecil." (title "Hati-hati!").
 - TK: babak saklar: "Nyalakan lampunya!" tekan saklar besar (rangkaian tertutup, lampu menyala), lalu "Matikan lampunya!"; lalu 4 benda (2 menghantar, 2 tidak).
 - SD: 6 benda, lalu 2 soal: "Lampu menyala jika rangkaiannya?" (Tertutup; Terbuka), "Benda yang bisa dialiri listrik disebut?" (Konduktor; Isolator).
+- Ronde 1-2 latihan (celah berdenyut + catatan 1 kalimat saat benar), ronde 3+ mandiri (benar langsung lanjut).
 - lesson: "Listrik mengalir lewat logam (konduktor), dan tidak mengalir lewat karet, kayu, dan plastik (isolator)."
 
 ### 38 bayangan: Cahaya & Bayangan

@@ -380,10 +380,14 @@
           try { localStorage.setItem('tamanIlmu.listrik.aman', '1'); } catch (e) { /* abaikan */ }
         }
 
-        // Sesudah tebak: benar = langsung lanjut otomatis; salah = ceramah penuh dibacakan.
-        async function sesudahTebak(box, it, right, tail) {
+        // Sesudah tebak: ronde latihan = 1 kalimat + tombol; ronde mandiri benar =
+        // langsung lanjut otomatis; salah selalu ceramah penuh dibacakan.
+        async function sesudahTebak(box, it, right, tail, latihan) {
           const judul = it.ok ? 'Menyala!' : 'Tidak menyala.';
-          if (right) {
+          if (right && latihan) {
+            ctx.note(it.why.split('. ')[0] + '.' + tail, { title: judul, into: box, speak: false });
+            await lanjutManual(ctx, box);
+          } else if (right) {
             await ctx.wait(900);
           } else {
             ctx.note(it.why + tail, { title: judul, into: box, speak: false });
@@ -463,13 +467,16 @@
             bump(it.ok ? 0 : 1);
             await ctx.correct(null, { say: (guess0 === it.ok ? 'Tebakanmu benar! ' : 'Lihat hasilnya! ') + (it.ok ? 'Lampunya menyala.' : 'Lampunya tidak menyala.') });
             const tail0 = tk ? '' : (it.ok ? ' Benda yang menghantarkan listrik disebut konduktor.' : ' Benda yang tidak menghantarkan listrik disebut isolator.');
-            await sesudahTebak(box, it, guess0 === it.ok, tail0);
+            await sesudahTebak(box, it, guess0 === it.ok, tail0, true);
             box.remove();
             step++; progress();
             await tunjukAman();
             if (!ctx.alive) return;
             continue;
           }
+          // Ronde 1-2 latihan (bantuan penuh), ronde 3+ mandiri (tanjakan nyata).
+          const rondeLatihan = ke <= 2;
+          if (ke === 3) ctx.say('Ronde mandiri! Kamu pasti bisa!');
           ctx.ask('Kalau ' + it.name.toLowerCase() + ' dipasang di celah, lampu menyala?');
           const card = itemCard(it);
           box.append(card);
@@ -481,6 +488,7 @@
           const tray = h('div', { class: 'ti-tray ls-tray' });
           box.append(tray);
           const gapEl = board.newGap();
+          if (rondeLatihan) gapEl.classList.add('is-hint');
           await ctx.place({
             pieces: [{ id: it.id, label: it.name, node: itemSvg(it, 112), target: 'gap', say: it.name }],
             slots: [{ id: 'gap', el: gapEl, label: 'Celah rangkaian' }],
@@ -496,7 +504,7 @@
           bump(it.ok ? 0 : 1);
 
           const tail = tk ? '' : (it.ok ? ' Benda yang menghantarkan listrik disebut konduktor.' : ' Benda yang tidak menghantarkan listrik disebut isolator.');
-          await sesudahTebak(box, it, right, tail);
+          await sesudahTebak(box, it, right, tail, rondeLatihan);
           box.remove();
           step++; progress();
         }
