@@ -20,13 +20,18 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
+- **Kartu Story 9:16.** Kartu 1080x1350 terpotong di Status WA. Varian gambarStory 1080x1920 + tombol Story + teks siap-tempel. Lokasi: share.js gambarKartu + core.js:1049 + kirimGambar. Effort S, dampak 5, ustadz tidak (P11).
+- **Jumat Hari Rekap.** Share laporan sekali tanpa ritual. Pengingat pasang-sekali + teks laporanMingguan siap-forward TPA. Lokasi: share.js:334-349 + analytics.js:277-278. Effort S, dampak 4, ustadz tidak (P11).
+- **Selamatkan Streak.** Streak hangus tengah malam tanpa peringatan. Banner minta-semangat + bagikan streakCard bila hari ini belum main. Lokasi: core.js:446-457 + share.js tujuhHari/streakCard. Effort S, dampak 4, ustadz tidak (P11).
 - **Adu Rajin 7 Hari.** Duel sekali-putus, tak ada alasan balik harian. Duel konsistensi 7 hari via dayLog + kartu juara pola gambarDuel. Lokasi: share.js:121-144 + core.js:1056-1092. Effort M, dampak 5, ustadz tidak (P9).
 - **Kartu Jumat mingguan.** Momen Jumat belum bisa diforward sebagai gambar. Kartu 1 ketuk: 7 titik + game islam pekan ini + ajakan. Lokasi: core.js:555 + share.js gambarStreak + analytics.js:220-233. Effort M, dampak 5, ustadz tidak (P9, gabung 2 ide).
 - **Kartu prestasi dashboard.** Ortu tak bisa pamerkan kemajuan. Tombol "Buat kartu prestasi" di statistik via gambarKartu. Lokasi: analytics.js:191-250 + share.js:267+. Effort M, dampak 5, ustadz tidak.
+- **Kode Ajak Offline.** Ajak butuh WA + 2 langkah. Kode 4 huruf dari playerId, ketik di beranda, XP dua arah. Lokasi: core.js:446-450 + progress.js klaimBonus. Effort M, dampak 5, ustadz tidak (P11).
 - **Loncat SD: demo terpandu.** 21 batu langsung tanpa pemanasan. Soal 1: bola tunjukkan jawaban via tunjukkan() sebelum ketuk. Lokasi: 29-loncat.js:389-416. Effort M, dampak 5, ustadz tidak.
-- **Badge pekan FOMO.** Badge tantangan sama tiap pekan. Badge unik per weekKey, koleksi terkunci permanen. Lokasi: badges.js + progress.js:28-55 + core.js:410-420. Effort M, dampak 4, ustadz tidak.
+- **Badge pekan FOMO.** Badge tantangan sama tiap pekan. Badge unik per weekKey, koleksi permanen. Lokasi: badges.js + progress.js:28-55 + core.js:410-420. Effort M, dampak 4, ustadz tidak.
 - **Kartu pamer edisi ortu.** Kartu skor tak layak pajang grup pengajian. Varian NILAI + lesson + bingkai sertifikat. Lokasi: share.js gambarKartu + core.js NILAI. Effort M, dampak 4, ustadz tidak (revive parkir P5).
 - **Mode Ortu 1 menit.** Ortu tak pernah diajak setup. Kartu kunjungan pertama: jenjang + kunci keluar + kirim info. Lokasi: home/banner pemain baru + ortu. Effort M, dampak 4, ustadz tidak (revive parkir).
+- **Timer beda-satu + variasi loncat.** Ketuk cepat tanpa timer; loncat monoton. Timer + kombo per ronde beda-satu + variasi ketukan loncat. Lokasi: 99-beda-satu.js:51-67 + 29-loncat.js:262-273. Effort M, dampak 4, ustadz tidak (P11).
 
 ## GARAP
 
@@ -138,6 +143,13 @@ dampak 1-5; ustadz ya/tidak.
 
 - **Loncat umpan kelebihan langsung (17 Nov, S144).** Premis gugur: sudah tak pernah > b (rayakanBenar mengunci sinkron); terbukti probe. Bukan tolak kualitas.
 
+- **Hijaiyah hidup (17 Nov, putaran 11).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
+- **TAHAN ustadz: Prompt Pendamping 1 kalimat (17 Nov, putaran 11).** Praktik ibadah per game islam; tahan sampai review ustadz.
+- **TAHAN ustadz: Sertifikat Islam semua game + Lulus Taman (17 Nov, putaran 11).** Nilai amalan + lesson agama; tahan sampai review ustadz.
+- **Trust home + Pasang (P11).** SUDAH ADA (trust-strip + pwa-banner home); tidak masuk TODO.
+- **Kartu Laporan Visual (P11).** TERCakup Kartu prestasi + Kartu Jumat; tidak diduplikat.
+- **Pangkas friksi ceramah (P11).** Wujud/listrik SUDAH DONE (S135/S141/S143); raja-taman tetap parkir.
+
 ## PARKIR
 
 - **Balapan Duta (P9, S3).** Kartu Pamer Duta + Top Pengajak mingguan. Lokasi: share.js pola rank + board.js + badges.js. Parkir: kalah slot 12.
@@ -154,3 +166,5 @@ dampak 1-5; ustadz ya/tidak.
 - **Lapor ke grup kelas di finish (P10, M4).** Tombol lapor balik tutup loop Tantangan Kelas. Lokasi: core.js:1130 + share.js laporanTPA. Parkir: kalah slot 12.
 - **Raja-taman serangan balik perisai (P10, M4).** Tiap 2 benar: ketuk perisai 3x blokir. Lokasi: 100-raja-taman.js:147-184. Parkir: kalah slot 12.
 - **Tantangan Kelas berpapan (P10, L5).** Kode kelas + papan mini. Parkir: effort L dilewati watcher.
+
+- **Papan Kelas Offline (P11, L5).** Kode kelas + papan lokal + ekspor rekap. Parkir: effort L dilewati watcher.
