@@ -192,7 +192,17 @@
     return { xp: 5, levelUp, level: lv };
   }
 
-  // Klaim balik pengundang: +20 XP sekali per nama yang diajak main.
+  // Tangga Duta: bonus naik di klaim ke-1/3/5/10, selainnya +20.
+  const DUTA_TIERS = [[1, 20], [3, 35], [5, 50], [10, 100]];
+  function dutaBonus(n) {
+    for (const [t, xp] of DUTA_TIERS) if (n === t) return { tier: t, xp };
+    return { tier: 0, xp: 20 };
+  }
+  function dutaNext(n) {
+    for (const [t, xp] of DUTA_TIERS) if (t > n) return { n: t, xp, kurang: t - n };
+    return null;
+  }
+  // Klaim balik pengundang: tangga Duta sekali per nama yang diajak main.
   // Nolak nama kosong, nama sendiri, dan klaim ganda.
   function klaimBonus(nama) {
     const st = TI.state;
@@ -203,15 +213,16 @@
     const m = (st.klaimDari = st.klaimDari || {});
     if (m[k.toLowerCase()]) return { xp: 0 };
     m[k.toLowerCase()] = dayKey();
-    const bonus3 = Object.keys(m).length === 3;
-    st.profile.xp += bonus3 ? 35 : 20;
+    const n = Object.keys(m).length;
+    const { tier, xp } = dutaBonus(n);
+    st.profile.xp += xp;
     const lv = levelOf(st.profile.xp);
     const levelUp = lv > st.profile.level;
     st.profile.level = lv;
     if (TI.Badges) TI.Badges.grant('duta');
     if (TI.Badges) TI.Badges.evaluate(true);
     if (TI.save) TI.save();
-    return { xp: bonus3 ? 35 : 20, bonus3, levelUp, level: lv };
+    return { xp, tier, bonus3: tier === 3, count: n, next: dutaNext(n), levelUp, level: lv };
   }
 
   function init() {
@@ -264,7 +275,7 @@
     XP_LEVELS, LEVEL_NAMES, levelOf, levelInfo, dayKey, weekKey, nextWeekStart,
     challengeGame, ensureWeekly,
     tier, cleanName, nameValid,
-    onFinish, totals, onShare, klaimBonus, init,
+    onFinish, totals, onShare, klaimBonus, dutaBonus, dutaNext, init,
   };
   TI.VIEWS = TI.VIEWS || {};
   TI.VIEWS.nama = nameScreen;

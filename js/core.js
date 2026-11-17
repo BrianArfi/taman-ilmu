@@ -461,15 +461,18 @@
     const klaimNama = klaim ? klaim.trim() : '';
     const klaimSdh = klaimNama && state.klaimDari && state.klaimDari[klaimNama.toLowerCase()];
     const klaimSendiri = klaimNama && klaimNama.toLowerCase() === ((prof.nama || '').trim().toLowerCase());
+    const klaimCount = Object.keys(state.klaimDari || {}).length;
+    const klaimHadiah = Pr.dutaBonus ? Pr.dutaBonus(klaimCount + 1).xp : 20;
+    const klaimLanjut = Pr.dutaNext ? Pr.dutaNext(klaimCount + 1) : null;
     const klaimBanner = (klaimNama && !klaimSdh && !klaimSendiri)
       ? h('div', { class: 'klaim-banner pop-in', role: 'status' },
-        h('span', { class: 'ajak-txt' }, '🎉 ', h('b', null, klaimNama), ' sudah main berkat ajakanmu! Tebus +20 XP dan lencana Duta.'),
+        h('span', { class: 'ajak-txt' }, '🎉 ', h('b', null, klaimNama), ' sudah main berkat ajakanmu! Tebus +' + klaimHadiah + ' XP dan lencana Duta.' + (klaimLanjut ? ' ' + klaimLanjut.kurang + ' lagi menuju bonus ' + klaimLanjut.xp + ' XP!' : '')),
         h('button', { type: 'button', class: 'ti-btn tantang-go', onclick: () => {
           const g = Pr.klaimBonus(klaimNama);
-          if (g.xp) { sfx('menang'); TI.toast('🎁', '+' + g.xp + ' XP! ' + klaimNama + ' main berkat kamu.' + (g.bonus3 ? ' Bonus 3 teman!' : ' Lencana Duta kebuka!')); }
+          if (g.xp) { sfx('menang'); TI.toast('🎁', '+' + g.xp + ' XP! ' + klaimNama + ' main berkat kamu.' + (g.tier >= 3 ? ' Tangga Duta: bonus ' + g.xp + ' XP!' : ' Lencana Duta kebuka!')); }
           else sfx('tap');
           showHome();
-        } }, 'Klaim +20 XP'))
+        } }, 'Klaim +' + klaimHadiah + ' XP'))
       : null;
 
     const list = games.filter((g) => state.tab === 'semua' || g.cat === state.tab);
