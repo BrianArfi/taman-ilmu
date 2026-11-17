@@ -20,7 +20,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Listrik acak murni.** Konduktor selalu dulu, tebakan awal ditebak. Hapus sort, acak murni tiap soal. Lokasi: 37-listrik.js:360. Effort S, dampak 4, ustadz tidak (P13).
 - **Loncat penanda baris.** Papan ular disangka kiri-ke-kanan. Badge mulai + denyut tiap awal baris + perbesar panah. Lokasi: 29-loncat.js:119-140. Effort S, dampak 4, ustadz tidak (P13).
 - **Pratinjau kartu menang.** Thumbnail cuma di momen kategori. Pratinjau di Rekor Baru, streak, juara duel. Lokasi: core.js:1089-1094 + 1130-1134 + share.js pratinjau. Effort S, dampak 4, ustadz tidak (P13).
 - **Wujud nilai saat geser.** Slider SD dinilai saat dilepas. Nilai saat digeser; 600ms di zona goal = selesai. Lokasi: 19-wujud.js:267-277. Effort S, dampak 4, ustadz tidak (P13).
@@ -38,6 +37,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Listrik acak murni** (S159): hapus sort konduktor-dulu. Probe 8 run campur, A92 tetap. Detail: cycle-20261118-s159.md.
 - **Balas Dendam 1 Ketuk** (S158): balas+kartu di hasil kalah + banner dendam + taunt pemenang. Probe 8/8, ui 12/12, gami 62/62. Detail: cycle-20261118-s158.md.
 - **Loncat kombo** (S157): 3 ketuk cepat = lompatan 3 langkah + whoosh, tanpa overshoot. Probe 1/1, A92 tetap. Detail: cycle-20261117-s157.md.
 - **Listrik lewati kartu** (S156): benar = otomatis tanpa kartu, salah = ceramah. Probe 4/4, A92 tetap. Detail: cycle-20261117-s156.md.
