@@ -1215,6 +1215,10 @@
   async function pwaPasang() {
     const p = PWA.prompt;
     if (!p) return 'tidak';
+    if (TI.OrtuGate) {
+      const ok = await TI.OrtuGate.jalankan('Minta orang tua menahan tombol ini untuk memasang.');
+      if (!ok) return 'batal';
+    }
     try {
       p.prompt();
       const c = await p.userChoice;

@@ -590,3 +590,13 @@ button, a, [role="button"], .choice, input[type="range"] { touch-action: manipul
 .ortu-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; text-align: left; font-size: 1.05rem; }
 .ortu-cta { margin-top: 6px; }
 .ortu-note { margin: 0; color: var(--muted); font-size: 0.9rem; }
+
+/* ---------- kunci orang tua ---------- */
+.gate-overlay { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(43, 45, 66, 0.55); }
+.gate-card { display: grid; justify-items: center; gap: 12px; width: min(100%, 420px); padding: 22px 20px; border-radius: var(--radius); background: var(--card); box-shadow: 0 8px 0 var(--shadow); text-align: center; }
+.gate-judul { font-size: 1.25rem; }
+.gate-teks { margin: 0; color: var(--muted); font-weight: 700; }
+.gate-tahan { position: relative; overflow: hidden; width: 100%; min-height: 64px; border: 0; border-radius: var(--radius); background: var(--good); color: #fff; font: inherit; font-weight: 800; font-size: 1.1rem; cursor: pointer; touch-action: none; user-select: none; }
+.gate-tahan span { position: relative; }
+.gate-isi { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.35); transform: scaleX(0); transform-origin: left; transition: transform linear; }
+.gate-isi.is-jalan { transform: scaleX(1); }

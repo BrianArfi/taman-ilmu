@@ -60,6 +60,10 @@
   // Satu gerbang untuk semua tombol bagikan: kirim, beri bonus XP sekali sehari
   // kalau benar dibagikan, lalu kasih tahu anak lewat toast.
   async function bagikan(title, text) {
+    if (TI.OrtuGate) {
+      const ok = await TI.OrtuGate.jalankan('Minta orang tua menahan tombol ini untuk mengirim.');
+      if (!ok) return 'batal';
+    }
     const hasil = await kirim(title, text);
     let bonus = { xp: 0, levelUp: false, level: (TI.state.profile && TI.state.profile.level) || 1 };
     if (hasil === 'share' || hasil === 'salin') {
@@ -826,6 +830,10 @@
     return kirimGambar(file, blob, 'Story ' + game.title + ' · Taman Ilmu', teks);
   }
   async function kirimGambar(file, blob, judul, teks) {
+    if (TI.OrtuGate) {
+      const ok = await TI.OrtuGate.jalankan('Minta orang tua menahan tombol ini untuk berbagi gambar.');
+      if (!ok) return 'batal';
+    }
     let hasil = 'gagal';
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
       try {

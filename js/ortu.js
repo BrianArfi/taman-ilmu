@@ -66,6 +66,52 @@
     return hal;
   }
 
+  // ---------- Kunci Orang Tua: tahan tombol 2 detik sebelum kirim/pasang ----------
+  const OrtuGate = { tahanMs: 2000 };
+  OrtuGate.jalankan = function (teks) {
+    return new Promise((resolve) => {
+      let selesai = false;
+      const isi = TI.h('i', { class: 'gate-isi' });
+      const tahan = TI.h('button', { type: 'button', class: 'gate-tahan' }, isi, TI.h('span', null, 'Tahan 2 detik'));
+      const overlay = TI.h('div', { class: 'gate-overlay', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Kunci Orang Tua' },
+        TI.h('div', { class: 'gate-card pop-in' },
+          TI.h('b', { class: 'gate-judul' }, '🔒 Kunci Orang Tua'),
+          TI.h('p', { class: 'gate-teks' }, teks),
+          tahan,
+          TI.h('button', { type: 'button', class: 'ti-btn is-ghost' }, 'Batal')));
+      const tutup = (hasil) => {
+        if (selesai) return;
+        selesai = true;
+        clearTimeout(timer);
+        document.removeEventListener('keydown', esc);
+        overlay.remove();
+        resolve(hasil);
+      };
+      const esc = (ev) => { if (ev.key === 'Escape') tutup(false); };
+      let timer = 0;
+      const mulai = () => {
+        if (selesai) return;
+        isi.style.transitionDuration = OrtuGate.tahanMs + 'ms';
+        isi.classList.add('is-jalan');
+        timer = setTimeout(() => tutup(true), OrtuGate.tahanMs);
+      };
+      const batal = () => {
+        if (selesai) return;
+        clearTimeout(timer);
+        isi.classList.remove('is-jalan');
+      };
+      tahan.addEventListener('pointerdown', mulai);
+      tahan.addEventListener('pointerup', batal);
+      tahan.addEventListener('pointerleave', batal);
+      tahan.addEventListener('pointercancel', batal);
+      overlay.querySelector('.ti-btn').addEventListener('click', () => tutup(false));
+      document.addEventListener('keydown', esc);
+      document.body.append(overlay);
+      tahan.focus({ preventScroll: true });
+    });
+  };
+
   TI.VIEWS = TI.VIEWS || {};
   TI.VIEWS.orangtua = ortuScreen;
+  TI.OrtuGate = OrtuGate;
 })();
