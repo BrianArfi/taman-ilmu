@@ -323,6 +323,96 @@
     return cv;
   }
 
+  // Game islam selesai pekan berjalan (dari weekly.games).
+  function islamPekan() {
+    const wg = (TI.state.weekly && TI.state.weekly.games) || {};
+    return (TI.games || []).filter((g) => g.cat === 'islam' && wg[g.id] > 0);
+  }
+  // Kartu Jumat: 7 titik + game islam pekan ini (1080x1350, pola gambarStreak).
+  async function gambarJumat(aktif, daftar) {
+    const W = 1080, H = 1350;
+    const cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    const g = cv.getContext('2d');
+    try { await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1200))]); } catch (e) { /* font sistem */ }
+    const bg = g.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, '#fff8ec'); bg.addColorStop(1, '#ffe9c2');
+    g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    const cols = ['#ffd23f', '#0e9f6e', '#2f6fed', '#ff6b6b', '#9b4dde', '#ff9f1c'];
+    for (let i = 0; i < 90; i++) {
+      g.fillStyle = cols[i % cols.length]; g.globalAlpha = 0.45;
+      const s = 10 + ((i * 37) % 22);
+      g.fillRect((i * 167) % W, (i * 251) % H, s, s * 0.6);
+    }
+    g.globalAlpha = 1;
+    g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+    g.fillStyle = '#2b2d42';
+    g.font = '800 60px "Baloo 2", sans-serif';
+    g.fillText('🌙 Taman Ilmu', W / 2, 130);
+    g.font = '170px "Baloo 2", sans-serif';
+    g.fillText('🕌', W / 2, 340);
+    g.fillStyle = '#2b2d42';
+    g.font = '800 80px "Baloo 2", sans-serif';
+    g.fillText('Rekap Jumatku', W / 2, 490);
+    const nama = (TI.state.profile && TI.state.profile.nama) || '';
+    g.fillStyle = '#0e9f6e';
+    g.font = '800 54px "Baloo 2", sans-serif';
+    g.fillText(nama, W / 2, 565);
+    g.fillStyle = '#6b6f86';
+    g.font = '700 42px "Baloo 2", sans-serif';
+    g.fillText('7 hari terakhir:', W / 2, 650);
+    for (let i = 0; i < 7; i++) {
+      g.beginPath();
+      g.arc(W / 2 - 384 + i * 128, 750, 46, 0, Math.PI * 2);
+      g.fillStyle = aktif[i] ? '#ff9f1c' : '#d9d2c3';
+      g.fill();
+      if (aktif[i]) {
+        g.fillStyle = '#ffffff';
+        g.font = '700 50px "Baloo 2", sans-serif';
+        g.fillText('★', W / 2 - 384 + i * 128, 768);
+      }
+    }
+    g.fillStyle = '#6b6f86';
+    g.font = '700 42px "Baloo 2", sans-serif';
+    g.fillText('Game islam pekan ini:', W / 2, 880);
+    g.fillStyle = '#2b2d42';
+    g.font = '700 46px "Baloo 2", sans-serif';
+    if (!daftar.length) g.fillText('Belum ada, ayo main!', W / 2, 960);
+    else {
+      const tampil = daftar.slice(0, 3).map((x) => x.title);
+      if (daftar.length > 3) tampil[2] = tampil[2].slice(0, 18) + ' +' + (daftar.length - 2) + ' lainnya';
+      tampil.forEach((t, i) => g.fillText(t, W / 2, 940 + i * 60));
+    }
+    g.fillStyle = '#ffffff';
+    rr(g, 90, 1110, W - 180, 140, 36); g.fill();
+    g.fillStyle = '#2b2d42';
+    g.font = '700 42px "Baloo 2", sans-serif';
+    g.fillText('Ayo main juga, gratis!', W / 2, 1170);
+    g.fillStyle = '#2f6fed';
+    g.font = '700 36px monospace';
+    g.fillText(BASE.replace(/^https?:\/\//, ''), W / 2, 1222);
+    g.fillStyle = '#6b6f86';
+    g.font = '700 36px "Baloo 2", sans-serif';
+    g.fillText(totalGame() + ' game edukasi anak Islami', W / 2, 1305);
+    return cv;
+  }
+  // Kartu Jumat 1 ketuk; gagal = fallback teks laporanMingguan().
+  async function jumatCard() {
+    const m = TI.Stats ? TI.Stats.summary() : null;
+    const aktif7 = m && m.last7 ? m.last7.filter((d) => d.n > 0).length : 0;
+    const daftar = islamPekan();
+    let blob = null;
+    try {
+      const cv = await gambarJumat(tujuhHari(), daftar);
+      blob = await new Promise((res) => cv.toBlob(res, 'image/png'));
+    } catch (e) { blob = null; }
+    if (!blob) return laporanMingguan();
+    const nama = (TI.state.profile && TI.state.profile.nama) || 'Anak';
+    const file = new File([blob], 'taman-ilmu-jumat.png', { type: 'image/png' });
+    const islam = daftar.length ? daftar.slice(0, 3).map((g) => g.title).join(', ') + (daftar.length > 3 ? ' dan ' + (daftar.length - 3) + ' lainnya' : '') : 'belum ada game islam selesai';
+    const teks = 'Rekap Jumatku ' + nama + ' di Taman Ilmu: main ' + aktif7 + ' hari minggu ini. Game islam: ' + islam + '. Ayo ikut: ' + inviteURL();
+    return kirimGambar(file, blob, 'Rekap Jumat · Taman Ilmu', teks);
+  }
   // Pamer Rajin visual: kartu gambar; gagal/kanvas rusak = fallback teks streak().
   async function streakCard() {
     const n = (TI.state.streak && TI.state.streak.count) || 0;
@@ -816,5 +906,5 @@
     }
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, streakCard, card, story, cetak, tantangKeluarga, tantangKelas, tantangPopuler, aduRajin, rajinCard, hariPekan, inviteOrtu, tantangPekan, laporan, laporanMingguan, laporanTPA, ingatkanJumat, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang, duelCard };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, streakCard, card, story, cetak, tantangKeluarga, tantangKelas, tantangPopuler, aduRajin, rajinCard, hariPekan, inviteOrtu, tantangPekan, laporan, laporanMingguan, laporanTPA, ingatkanJumat, jumatCard, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang, duelCard };
 })();

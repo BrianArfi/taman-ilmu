@@ -277,6 +277,7 @@
       TI.h('p', null, TI.Share ? TI.h('button', { type: 'button', class: 'ti-btn' + (jumat ? '' : ' is-ghost'), onclick: () => { TI.sfx('tap'); TI.Share.laporanMingguan(); } }, jumat ? 'Jumat: bagikan ringkasan mingguan' : 'Bagikan ringkasan mingguan') : null),
       jumat ? TI.h('p', { class: 'stat-jumat' }, 'Hari ini Jumat, waktunya rekap seminggu main!') : null,
       TI.h('p', null, TI.Share ? TI.h('button', { type: 'button', class: 'ti-btn is-ghost', onclick: () => { TI.sfx('tap'); TI.Share.ingatkanJumat(); } }, '🔔 Kirim pengingat ke WA-ku') : null),
+      jumat && TI.Share ? TI.h('p', null, TI.h('button', { type: 'button', class: 'ti-btn is-ghost', onclick: () => { TI.sfx('tap'); TI.Share.jumatCard(); } }, '🖼️ Kartu Jumat')) : null,
       TI.h('h3', { class: 'stat-h' }, 'Tantangan Kelas (untuk guru)'),
       TI.h('div', { class: 'stat-kelas' }, ['hijaiyah', 'wudhu', 'shalat'].map((gid) => {
         const g = byId(gid);
