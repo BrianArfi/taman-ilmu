@@ -448,6 +448,58 @@
     return cv;
   }
 
+  // Kartu Story 9:16 (1080x1920) untuk Status WA/TikTok/Reels; margin aman UI story.
+  async function gambarStory(game, stars) {
+    const W = 1080, H = 1920;
+    const cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    const g = cv.getContext('2d');
+    try { await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1200))]); } catch (e) { /* font sistem */ }
+    const bg = g.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, '#fff8ec'); bg.addColorStop(1, '#ffe9c2');
+    g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    const cols = ['#ffd23f', '#0e9f6e', '#2f6fed', '#ff6b6b', '#9b4dde', '#ff9f1c'];
+    for (let i = 0; i < 130; i++) {
+      g.fillStyle = cols[i % cols.length]; g.globalAlpha = 0.45;
+      const s = 10 + ((i * 37) % 22);
+      g.fillRect((i * 167) % W, (i * 251) % H, s, s * 0.6);
+    }
+    g.globalAlpha = 1;
+    g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+    g.fillStyle = '#2b2d42';
+    g.font = '800 64px "Baloo 2", sans-serif';
+    g.fillText('🌙 Taman Ilmu', W / 2, 280);
+    g.font = '220px "Baloo 2", "Noto Naskh Arabic", sans-serif';
+    g.fillText(game.icon || '⭐', W / 2, 560);
+    g.fillStyle = '#2b2d42';
+    g.font = '800 84px "Baloo 2", sans-serif';
+    wrapText(g, game.title, W / 2, 740, 920, 98);
+    g.font = '170px "Baloo 2", sans-serif';
+    for (let i = 0; i < 3; i++) {
+      g.fillStyle = i < stars ? '#ffc93c' : '#d9d2c3';
+      g.fillText('★', W / 2 - 210 + i * 210, 1000);
+    }
+    const nama = (TI.state.profile && TI.state.profile.nama) || '';
+    g.fillStyle = '#0e9f6e';
+    g.font = '800 66px "Baloo 2", sans-serif';
+    g.fillText(nama, W / 2, 1180);
+    g.fillStyle = '#6b6f86';
+    g.font = '700 52px "Baloo 2", sans-serif';
+    g.fillText(ringkas(), W / 2, 1260);
+    g.fillStyle = '#ffffff';
+    rr(g, 90, 1400, W - 180, 220, 36); g.fill();
+    g.fillStyle = '#2b2d42';
+    g.font = '700 46px "Baloo 2", sans-serif';
+    g.fillText('Ayo main juga, gratis!', W / 2, 1485);
+    g.fillStyle = '#2f6fed';
+    g.font = '700 38px monospace';
+    g.fillText(BASE.replace(/^https?:\/\//, ''), W / 2, 1555);
+    g.fillStyle = '#6b6f86';
+    g.font = '700 38px "Baloo 2", sans-serif';
+    g.fillText(totalGame() + ' game edukasi anak Islami', W / 2, 1700);
+    return cv;
+  }
+
   async function gambarDuel(game, aku, dia, lawan) {
     const W = 1080, H = 1350;
     const cv = document.createElement('canvas');
@@ -576,6 +628,17 @@
         : teksScore(game, stars, false, (TI.state.profile && TI.state.profile.level) || 1);
     return kirimGambar(file, blob, (isSerti ? 'Sertifikat ' : '') + game.title + ' · Taman Ilmu', teks);
   }
+  async function story(game, stars) {
+    let blob = null;
+    try {
+      const cv = await gambarStory(game, stars);
+      blob = await new Promise((res) => cv.toBlob(res, 'image/png'));
+    } catch (e) { blob = null; }
+    if (!blob) { TI.toast('🖼️', 'Gagal bikin gambar, coba lagi ya'); TI.sfx('salah'); return 'gagal'; }
+    const file = new File([blob], 'taman-ilmu-story-' + game.id + '.png', { type: 'image/png' });
+    const teks = teksScore(game, stars, false, (TI.state.profile && TI.state.profile.level) || 1) + ' #TamanIlmu';
+    return kirimGambar(file, blob, 'Story ' + game.title + ' · Taman Ilmu', teks);
+  }
   async function kirimGambar(file, blob, judul, teks) {
     let hasil = 'gagal';
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
@@ -657,5 +720,5 @@
     }
   }
 
-  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, streakCard, card, cetak, tantangKeluarga, tantangKelas, tantangPopuler, inviteOrtu, tantangPekan, laporan, laporanMingguan, laporanTPA, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang, duelCard };
+  TI.Share = { scoreResult, badge, rank, invite, inviteURL, teksScore, challenge, challengeURL, parseChallenge, streak, streakCard, card, story, cetak, tantangKeluarga, tantangKelas, tantangPopuler, inviteOrtu, tantangPekan, laporan, laporanMingguan, laporanTPA, infoOrtu, klaimURL, klaimBalik, pratinjau, panduanPasang, duelCard };
 })();

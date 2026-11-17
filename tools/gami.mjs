@@ -116,7 +116,7 @@ async function makePage(v1 = {}) {
     // (rantai unlock dicabut; semua game selalu terbuka)
     check('finish: API kunci tidak ada', r.noApi);
     check('finish: chip XP tampil di layar hasil', !!r.chip && /\+\d+ XP/.test(r.chip), `(${r.chip})`);
-    check('finish: hasil punya 7 tombol (lagi, bagikan, tantang, keluarga, sekelas, kartu, pilih)', JSON.stringify(r.acts) === JSON.stringify(['Main Lagi', '📣 Bagikan', '🏆 Tantang', '🏠 Tantang Keluarga', '🏫 Tantang Sekelas', '🖼️ Kartu', 'Pilih Game']), `(${r.acts.join('|')})`);
+    check('finish: hasil punya 8 tombol (lagi, bagikan, tantang, keluarga, sekelas, kartu, story, pilih)', JSON.stringify(r.acts) === JSON.stringify(['Main Lagi', '📣 Bagikan', '🏆 Tantang', '🏠 Tantang Keluarga', '🏫 Tantang Sekelas', '🖼️ Kartu', '📱 Story', 'Pilih Game']), `(${r.acts.join('|')})`);
   }
   check('main: tanpa error JS', page.errors.length === 0, page.errors.join(' | '));
   await ctx.close();
