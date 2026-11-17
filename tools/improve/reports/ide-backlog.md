@@ -20,7 +20,6 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
-- **Loncat kombo.** Ketukan pasif ditonton satu per satu. 3 ketuk <1 detik = lompatan besar 3 langkah + sfx spesial. Lokasi: 29-loncat.js:262-279. Effort S, dampak 3, ustadz tidak (P12).
 - **Kartu prestasi dashboard.** Ortu tak bisa pamerkan kemajuan. Tombol "Buat kartu prestasi" di statistik via gambarKartu. Lokasi: analytics.js:191-250 + share.js:267+. Effort M, dampak 5, ustadz tidak.
 - **Kode Ajak Offline.** Ajak butuh WA + 2 langkah. Kode 4 huruf dari playerId, ketik di beranda, XP dua arah. Lokasi: core.js:446-450 + progress.js klaimBonus. Effort M, dampak 5, ustadz tidak (P11).
 - **Loncat SD: demo terpandu.** 21 batu langsung tanpa pemanasan. Soal 1: bola tunjukkan jawaban via tunjukkan() sebelum ketuk. Lokasi: 29-loncat.js:389-416. Effort M, dampak 5, ustadz tidak.
@@ -35,6 +34,7 @@ dampak 1-5; ustadz ya/tidak.
 
 ## DONE
 
+- **Loncat kombo** (S157): 3 ketuk cepat = lompatan 3 langkah + whoosh, tanpa overshoot. Probe 1/1, A92 tetap. Detail: cycle-20261117-s157.md.
 - **Listrik lewati kartu** (S156): benar = otomatis tanpa kartu, salah = ceramah. Probe 4/4, A92 tetap. Detail: cycle-20261117-s156.md.
 - **Bukti sosial ortu** (S154): angka pekan + top game di hero ortu, sembunyi bila nol. Probe 3/3, ui 12/12, gami 62/62. Detail: cycle-20261117-s154.md.
 - **Balok-pas animasi masuk** (S153): klon balok terbang 300ms ke lubang. Probe 2/2, A92. Detail: cycle-20261117-s153.md.
