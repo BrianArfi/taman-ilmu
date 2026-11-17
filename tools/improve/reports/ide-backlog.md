@@ -20,6 +20,11 @@ dampak 1-5; ustadz ya/tidak.
 
 ## TODO
 
+- **Balas Dendam 1 Ketuk.** Kalah duel tanpa balas sekali ketuk, loop putus. Tombol Balas Sekarang di banner + hasil kalah + kartu duel + teks pemenang. Lokasi: core.js:483-489 + 1145-1157 + share.js duelCard. Effort S, dampak 5, ustadz tidak (P13).
+- **Listrik acak murni.** Konduktor selalu dulu, tebakan awal ditebak. Hapus sort, acak murni tiap soal. Lokasi: 37-listrik.js:360. Effort S, dampak 4, ustadz tidak (P13).
+- **Loncat penanda baris.** Papan ular disangka kiri-ke-kanan. Badge mulai + denyut tiap awal baris + perbesar panah. Lokasi: 29-loncat.js:119-140. Effort S, dampak 4, ustadz tidak (P13).
+- **Pratinjau kartu menang.** Thumbnail cuma di momen kategori. Pratinjau di Rekor Baru, streak, juara duel. Lokasi: core.js:1089-1094 + 1130-1134 + share.js pratinjau. Effort S, dampak 4, ustadz tidak (P13).
+- **Wujud nilai saat geser.** Slider SD dinilai saat dilepas. Nilai saat digeser; 600ms di zona goal = selesai. Lokasi: 19-wujud.js:267-277. Effort S, dampak 4, ustadz tidak (P13).
 - **Kartu prestasi dashboard.** Ortu tak bisa pamerkan kemajuan. Tombol "Buat kartu prestasi" di statistik via gambarKartu. Lokasi: analytics.js:191-250 + share.js:267+. Effort M, dampak 5, ustadz tidak.
 - **Kode Ajak Offline.** Ajak butuh WA + 2 langkah. Kode 4 huruf dari playerId, ketik di beranda, XP dua arah. Lokasi: core.js:446-450 + progress.js klaimBonus. Effort M, dampak 5, ustadz tidak (P11).
 - **Loncat SD: demo terpandu.** 21 batu langsung tanpa pemanasan. Soal 1: bola tunjukkan jawaban via tunjukkan() sebelum ketuk. Lokasi: 29-loncat.js:389-416. Effort M, dampak 5, ustadz tidak.
@@ -158,6 +163,9 @@ dampak 1-5; ustadz ya/tidak.
 - **Hijaiyah tangkap-huruf (17 Nov, putaran 12).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
 - **Banner challenge tanpa Balas (P12).** BUKAN IDE: asimetri beralasan, skor duel baru ada sesudah main sehingga balas dari banner tak jujur.
 
+- **Hijaiyah streak bintang (17 Nov, putaran 13).** Game 01-hijaiyah contoh SPEC, dilewati permanen oleh loop.
+- **TAHAN ustadz: Adab tombol Lanjut (17 Nov, putaran 13).** Ucapan + arti dibacakan; skip TTS pun tahan ikut preseden.
+
 ## PARKIR
 
 - **Balapan Duta (P9, S3).** Kartu Pamer Duta + Top Pengajak mingguan. Lokasi: share.js pola rank + board.js + badges.js. Parkir: kalah slot 12.
@@ -181,3 +189,9 @@ dampak 1-5; ustadz ya/tidak.
 - **Pamer ke Ayah/Bunda (P12, M4).** Tombol kartu di finish tiap game islam. Lokasi: after-lesson hook. Parkir: kalah slot 12.
 - **Wujud pita zona-tujuan (P12, M4).** Pita goal di termometer per tugas. Lokasi: 19-wujud.js:79-84 + 112-122. Parkir: kalah slot 12.
 - **Profil per anak (P12, L4).** Switcher progres per anak. Parkir: effort L dilewati watcher.
+
+- **Album Koleksi Kartuku (P13, M4).** Album stiker kartu + bingkai emas 4 kategori. Lokasi: share.js kirimGambar + core.js momenKat. Parkir: kalah slot 12.
+- **Papan Reguku (P13, M4).** Tab papan se-regu via kode. Lokasi: board.js + share.js inviteURL. Parkir: kalah slot 12.
+- **Misi Regu Keluarga (P13, L5).** Link misi + setor bintang + progres. Parkir: effort L dilewati watcher.
+- **Raja-taman hapus intro (P13, S3).** Sudah parkir sejak P9; tetap parkir (duplikat).
+- **Anak ortu P13 zonk.** Hanya pointer evidence, 0 ide; backlog dari 2 laporan lain.
